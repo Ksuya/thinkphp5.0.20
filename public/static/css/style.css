@@ -1,0 +1,169 @@
+﻿@charset "utf-8";
+/****
+guopc
+后台管理系统
+2015-10-10
+****/
+html,body,h1,h2,h3,h4,h5,h6,hr,p,iframe,dl,dt,dd,ul,ol,li,pre,form,button,input,textarea,th,td,fieldset{margin:0;padding:0}
+ul,ol,dl{list-style-type:none}
+html,body{*position:static}
+html{font-family: sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:400}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit}
+input,button{overflow: visible;vertical-align:middle;outline:none}
+body,th,td,button,input,select,textarea{font-family:"Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,Verdana,sans-serif,"\5B8B\4F53";font-size:14px;color:#333;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{line-height:18px}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+a,area{outline:none;blr:expression(this.onFocus=this.blur())}
+a{text-decoration:none;color:#333;cursor:pointer}
+a:hover{text-decoration:none;outline:none}
+a:focus{outline:none}
+a:hover,a:active{outline:none}:focus{outline:none}
+sub,sup{vertical-align:baseline}
+button,input[type="button"], input[type="submit"] {line-height:normal !important;}
+img{border:0;vertical-align:middle}
+a img,img{-ms-interpolation-mode:bicubic}
+.clearfix:after{visibility: hidden;display:block;font-size:0;content:"";clear:both;height:0;}
+.clearfix{zoom:1}/*早日舍弃IE6*/
+/*HTML5 新增reset*/
+header,footer,section,aside,details,menu,article,section,address,hgroup,figure,figcaption,legend{display:block;margin:0;padding:0}
+time{display:inline}
+audio,canvas,video{display:inline-block;*display:inline;*zoom:1}
+audio:not([controls]){display:none}
+legend{width:100%;margin-bottom:20px;font-size:21px;line-height:40px;border:0;border-bottom:1px solid #e5e5e5}
+legend small{font-size:15px;color:#999}
+svg:not(:root) {overflow: hidden}
+fieldset {border-width:0;padding: 0.35em 0.625em 0.75em;margin: 0 2px;border: 1px solid #c0c0c0}
+
+/*====font icon===*/
+.font_lager{font-size:32px;}
+.f_left{float:left;}
+.f_right{float:right;}
+/*top*/
+html,body{width:100%;height:100%;overflow:hidden;}
+.top-header{width:100%;height:100px;overflow:hidden;background:#30adef;color:#fff;}
+.top-header .logo{padding:0 30px;float:left;}
+.top-header .logo img{width:160px;height:100px;}
+.top-nav{height:100px;float:left;font-size:14px;text-align:center;overflow:hidden;position:relative;}
+.top-nav ul{position:absolute;top:0;left:0;}
+.top-nav li{float:left;width:100px;height:100px;padding:20px 15px;cursor:pointer;}
+.top-nav li:hover,.top-nav li.curr{background-color:#1d73a0;}
+.top-nav li p{margin-top:10px;}
+.login_msg{float:right;line-height:100px;}
+.login_msg li{float:left;font-size:14px;margin-right:15px;max-width:115px;}
+.login_msg li a{color:#fff;}
+.top-nav_roll{width:61px;height:100px;line-height:100px;text-align:center;background-color:#26a2e2;cursor:pointer;}
+.top-nav_roll div{width:30px;}
+.top-nav_roll div:first-child{border-right:1px solid #2491cc;}
+/*left*/
+.main_left{width:200px;height:100%;background:#354052;float:left;color:#fff;display:none;}
+.main_left h2{width:100%;line-height:42px;font-size:16px;text-align:center;background-color:#2a3b4c;box-shadow:-2px 0 5px #000;color:#6e7f9b;cursor:pointer;}
+.main_left h2 i{font-size:20px;}
+.main_left .left-menu{font-size:14px;}
+.left-menu li{border-bottom:1px solid #27303d;position:relative;cursor:pointer;}
+.left-menu li i{position:absolute;left:15px;top:15px;}
+.left-menu li.curr{background-color:#171c24;}
+.left-menu a{display:block;line-height:46px;color:#fff;text-indent:3em;}
+/*min left*/
+.min_w{width:50px;}
+.min_w h2 i{transform:rotate(90deg);-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);}
+.min_w i{font-size:18px;margin:0;}
+.min_w li{width:50px;height:46px;}
+.min_w li a{display:none;}
+.min_w .out_txt{position:absolute;padding:6px 12px;top:6px;left:56px;z-index:19861105;background-color:rgba(51,72,92,0.8);color:#fff;white-space:nowrap;font-size:14px;line-height:normal;}
+.min_w .out_txt i{position:absolute;left:-6px;top:6px;color:#5b6c7c;}
+.min_w .out_txt span{display:initial;}
+/*right*/
+.main_right{float:left;width:calc(100% - 40px);height:100%;overflow:hidden;background-color:#FFFFFF;}
+
+/*=====Hello=====*/
+.hello_box{border-radius:10px;background-color:#fff;box-shadow:0 0 10px 2px #ddd;min-height:500px;margin:20px 0 20px 5%;padding:15px;float:left;}
+.hello_box h2{font-size:16px;line-height:26px;}
+.hello_box .hello_info{width:100%;max-height:calc(100% - 230px);overflow:auto;}
+.hello_box table{width:100%;min-width:540px;}
+.hello_box .hello_one{margin-bottom:15px;padding-bottom:15px;border-bottom:1px solid #ccc;}
+.hello_info{border-top:1px dashed #ddd;margin-top:15px;padding-top:5px;}
+.hello_info li{overflow:hidden;line-height:36px;}
+.hello_info li span{margin-right:10px;}
+.hello_info th{font-weight:600;text-align:left;}
+.hello_info th,.hello_info td{line-height:32px;padding:5px 8px;border-bottom:1px solid #eee;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
+
+
+.panel-info{
+    margin-top: 2%;
+}
+.in-frame{
+    padding: 20px;
+}
+
+/**bootstrap 右侧弹窗*/
+.modal.left .modal-dialog,
+.modal.right .modal-dialog {
+    position: fixed;
+    margin: auto;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+}
+
+.modal.left .modal-content,
+.modal.right .modal-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modal.left .modal-body,
+.modal.right .modal-body {
+    padding: 15px 15px 80px;
+}
+
+/*Left*/
+.modal.left.fade .modal-dialog {
+    left: -320px;
+    -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+    transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.in .modal-dialog {
+    left: 0;
+}
+
+/*Right*/
+.modal.right.fade .modal-dialog {
+    right: -320px;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+    transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+    right: 0;
+}
+
+/* ----- MODAL STYLE ----- */
+.modal-content {
+    border-radius: 0;
+    border: none;
+}
+
+.modal-header {
+    border-bottom-color: #EEEEEE;
+    background-color: #FAFAFA;
+}
+
+.modal-footer{
+    position: fixed;
+    width: 100%;
+    bottom: 60px;
+}
+
+.cxselect-list select{
+    float: left;
+    width:33%;
+}
+
