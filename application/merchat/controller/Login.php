@@ -49,4 +49,11 @@ class Login extends Controller{
         session('userId',null);
         $this->redirect(url('login'));
     }
+
+    public function ajaxUpload()
+    {
+        $url = 'https://img-bss.csdn.net/201887185026554_48184.jpg';
+        $cb = input('CKEditorFuncNum'); //获得ck的回调id
+        echo "<script>window.parent.CKEDITOR.tools.callFunction($cb,\"$url\", '');</script>" ;//图片上传成功，通知ck图片的url
+    }
 }

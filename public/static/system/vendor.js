@@ -15,7 +15,7 @@ $(function () {
     $("iframe[name='cont_box']").on("load", function () {
         setTimeout(function () {
             $("iframe[name='cont_box']").css("opacity", "1");
-        },1);
+        }, 1);
     });
     // 退出登陆
     $(".logout").click(function () {
@@ -27,14 +27,14 @@ $(function () {
         var btn = $(this);
         var formNode = $(this).closest('form');
         if (formNode.length > 0) {
-            $(formNode).bootstrapValidator('validate',{
+            $(formNode).bootstrapValidator('validate', {
                 feedbackIcons: {
                     required: 'glyphicon glyphicon-asterisk requiredStar',
                     valid: 'glyphicon glyphicon-ok',
                     invalid: 'glyphicon glyphicon-remove',
                     validating: 'glyphicon glyphicon-refresh'
                 }
-            }).on('success.form.bv', function(e) {
+            }).on('success.form.bv', function (e) {
                 // Prevent form submission
                 e.preventDefault();
                 // Get the form instance
@@ -60,11 +60,17 @@ $(function () {
 
         }
     });
+
+    // checkbox  radio
     $('input').iCheck({
         checkboxClass: 'icheckbox_flat-green',
         radioClass: 'iradio_flat-green',
     });
+
+
 });
+
+
 
 /**
  * 退出登陆
