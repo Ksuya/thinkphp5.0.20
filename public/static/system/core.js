@@ -377,3 +377,19 @@
      $("body").append(html);
      $("#"+dom).modal('show');
  }
+
+ /**
+  * 渲染ckeditor
+  * @param box
+  * @param content
+  */
+ function rendorCkeditor(box,content)
+ {
+     var content = content ? content : '';
+     var editor = CKEDITOR.instances[box]; //你的编辑器的"name"属性的值
+     $("#"+box).val(content);
+     if (editor) {
+         editor.destroy(true);//销毁编辑器
+     }
+     CKEDITOR.replace('detail'); //替换编辑器，editorID为ckeditor的"id"属性的值
+ }

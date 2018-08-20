@@ -55,62 +55,9 @@
                         <h4 class="modal-title" id="myModalLabel">修改详细信息</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="firstname" class="col-sm-2 control-label">必填</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control " id="firstname" name="username" required
-                                       data-bv-notempty-message="XXX不能为空" placeholder="请输入名字">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastname" class="col-sm-2 control-label">必填+长度</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="lastname" name="ddsdsds" required
-                                       data-bv-notempty-message="XXX不dsdsds能为空" data-bv-stringlength="true"
-                                       data-bv-stringlength-min="6" data-bv-stringlength-max="30"
-                                       data-bv-stringlength-message="这个字段长度不得小于6，不得超过30 " placeholder="请输入姓">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">必填+两次一致</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="ddsdsds22" required
-                                       data-bv-notempty-message="必填+大小值不dsdsds能为空" data-bv-identical="true"
-                                       data-bv-identical-field="username" data-bv-identical-message="这个字段比一样"
-                                       placeholder="请输入姓">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">邮箱</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" name="ssssss" required
-                                       data-bv-notempty-message="XXX不dsdsds能为空"
-                                       data-bv-emailaddress-message="The input is not a valid email address">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">日期</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="454212" required
-                                       data-bv-notempty-message="XXX不dsdsds能为空" data-bv-date="true"
-                                       data-bv-date-format="YYYY/MM/DD"
-                                       data-bv-date-message="The birthday is not valid">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">数字</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" required data-bv-notempty-message="数字不能为空"
-                                       name="45421245454" data-bv-digits="true" data-bv-digits-message="its digits">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">金额</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" required data-bv-notempty-message="金额不能为空"
-                                       name="454212454545555" data-bv-decimal="true" data-bv-decimal-message="输入正确金额">
-                            </div>
-                        </div>
+                        {:formInput('真实姓名','real_name',$detail.real_name,'text',[['rule'=>'notempty'],['rule'=>'digits']])}
+                        {:formInput('身份证号','id_number',$detail.id_number,'text',[])}
+                        {:formSelect('性别','gender',[['id'=>2,'name'=>'测试1']],'id','name')}
                         <div class="form-group" id="company_region">
                             <label class="col-sm-2 control-label">公司省市</label>
                             <div class="col-sm-10 cxselect-list">
@@ -123,85 +70,10 @@
                                         disabled="disabled" required data-required-msg="选择地区"></select>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="lastname" class="col-sm-2 control-label">单选框</label>
-                            <div class="col-sm-10">
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosinline" required id="optionsRadios4"
-                                           value="option2" checked="checked">选项 2
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosinline" required id="optionsRadios5"
-                                           value="option2">选项 2
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="lastname" class="col-sm-2 control-label">复选框</label>
-                            <div class="col-sm-10">
-                                <label class="radio-inline">
-                                    <input type="checkbox" name="diosinline" data-bv-choice="true"
-                                           data-bv-choice-min="1" data-bv-choice-max="3"
-                                           data-bv-choice-field="diosinline" data-bv-choice-message="checkbox1-3"
-                                           value="option2" checked="checked">选项 2
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="checkbox" name="diosinline" data-bv-choice="true"
-                                           data-bv-choice-min="1" data-bv-choice-max="3"
-                                           data-bv-choice-field="diosinline" data-bv-choice-message="checkbox1-3"
-                                           value="option25">选项 2
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="lastname" class="col-sm-2 control-label">多选下拉框</label>
-                            <div class="col-sm-10">
-                                <select class=" form-control" name="favor" multiple="multiple" data-bv-choice="true"
-                                        data-bv-choice-min="1" data-bv-choice-max="3" data-bv-choice-field="favor"
-                                        data-bv-choice-message="1-3ge">
-                                    <option>请选择</option>
-                                    <option value="dsds">111</option>
-                                    <option value="dsds45">222</option>
-                                    <option value="333">333</option>
-                                    <option value="444">444</option>
-                                    <option value="555">555</option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="lastname" class="col-sm-2 control-label">下拉框</label>
-                            <div class="col-sm-10">
-                                <select class=" form-control" name="favor2" required data-bv-notempty-message="下拉框1">
-                                    <option value="">请选择</option>
-                                    <option value="dsds">111</option>
-                                    <option value="dsds45">222</option>
-                                    <option value="333">333</option>
-                                    <option value="444">444</option>
-                                    <option value="555">555</option>
-                                </select>
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">ckeditor</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="editor1"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin-bottom: 100px;">
-                            <label class="col-sm-2 control-label">datepicker</label>
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control datepicker"  />
-                            </div>
-                        </div>
+                        {:formCheck('radio','单选框','uniqj',[['id'=>2,'name'=>'测试1'],['id'=>3,'name'=>'测试2']],'id','name','3')}
+                        {:formCheck('checkbox','您的爱好','habits',[['id'=>2,'name'=>'爱好1'],['id'=>3,'name'=>'爱好2'],['id'=>4,'name'=>'爱好4']],'id','name','3,4')}
+                        {:formEditor('文章内容','content')}
+                        {:formInput('开始时间','start_time','','date',[['rule'=>'notempty'],['rule'=>'date']])}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -214,35 +86,15 @@
 </div>
 <!--javascript include-->
 {include file="common@public/admin-script"}
-<script type="text/javascript" src="__STATIC__/js/vendor/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="__STATIC__/js/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="__STATIC__/js/vendor/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
-<link rel="stylesheet" href="__STATIC__/js/vendor/datepicker/css/bootstrap-datepicker.min.css">
+
+
 <script>
     $(function () {
-        //$('#myTab li:eq(0) a').tab('show');
-        $.cxSelect.defaults.url = '__STATIC__/js/vendor/cxselect/cityData.min.json';
+        // 全国省市区
         $('#company_region').cxSelect({
             selects: ['province', 'city', 'area'],
-            nodata: 'none'
-        });
-        // ckeditor 冲突
-
-        /*var $modalElement = this.$element;
-        $(document).on('focusin.modal', function (e) {
-            var $parent = $(e.target.parentNode);
-            if ($modalElement[0] !== e.target && !$modalElement.has(e.target).length && !$parent.hasClass('cke_dialog_ui_input_select') && !$parent.hasClass('cke_dialog_ui_input_text')) {
-                $modalElement.focus()
-            }
-        })*/
-        CKEDITOR.replace('editor1',{
-            filebrowserImageUploadUrl : '{:url("Login/ajaxUpload")}',
-            language : 'zh-cn',
-        });
-
-        // datepicker
-        $('.datepicker').datepicker({
-            "autoclose":true,"format":"yyyy-mm-dd","language":"zh-CN"
+            nodata: 'none',
+            url:'__STATIC__/js/vendor/cxselect/cityData.min.json',
         });
     });
 </script>

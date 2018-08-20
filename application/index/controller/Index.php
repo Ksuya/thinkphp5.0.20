@@ -2,55 +2,18 @@
 namespace app\index\controller;
 use quickCard180818\Pay as qkPay;
 use think\Request;
+use bootstrap\Form;
 class Index
 {
     public function index()
     {
-        return '<style type="text/css">*{ padding: 0; margin: 0; } .think_default_text{ padding: 4px 48px;} a{color:#2E5CD5;cursor: pointer;text-decoration: none} a:hover{text-decoration:underline; } body{ background: #fff; font-family: "Century Gothic","Microsoft yahei"; color: #333;font-size:18px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.6em; font-size: 42px }</style><div style="padding: 24px 48px;"> <h1>:)</h1><p> ThinkPHP V5<br/><span style="font-size:30px">十年磨一剑 - 为API开发设计的高性能框架</span></p><span style="font-size:22px;">[ V5.0 版本由 <a href="http://www.qiniu.com" target="qiniu">七牛云</a> 独家赞助发布 ]</span></div><script type="text/javascript" src="https://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script><script type="text/javascript" src="https://e.topthink.com/Public/static/client.js"></script><think id="ad_bd568ce7058a1091"></think>';
-    }
-
-    public function qkPay()
-    {
-
-        try{
-            /***************************  对方的文档 */
-            $md5Key = '810756464508379';
-            $data = Request::instance()->only(['pickupUrl','receiveUrl','signType','orderNo','orderAmount','orderCurrency','customerId','sign']);
-            /*
-            if(empty($data['orderNo'])){
-                throw new \Exception('请输入订单编号');
-            }
-            if(empty($data['orderAmount'])){
-                throw new \Exception('请输入订单金额');
-            }
-            if($data['orderAmount'] < 0.1){
-                throw new \Exception('金额最少为0.1元');
-            }
-            $trueSign = md5($data['pickupUrl'].$data['receiveUrl'].$data['signType'].$data['orderNo'].$data['orderAmount'].$data['orderCurrency'].$data['customerId'].$md5Key);
-            if($trueSign != $data['sign']){
-                throw new \Exception('签名校验失败');
-            }
-            */
-            $data['orderNo'] = date('YmdHis').mt_rand(999,99999);
-            $data['orderAmount'] = 1;
-            // 插入crm过来订单
-           /* $orderRes = model('Crmorderqkpay')->saveData($data,'Crmorderqkpay180818','CRM订单-Crmorderqkpay180818','180818');
-            if($orderRes['code'] == 0){
-                throw new \Exception('订单保存失败'.$orderRes['msg']);
-            }*/
-
-            //}
-            $domain = Request::instance()->domain();
-            $order['orderNo'] = $data['orderNo'];
-            $order['orderAmount'] = $data['orderAmount'];
-            $order['notify'] = $domain.url('/pcshop/Pay/qkpayNotify');
-            $order['pickUrl'] = 'http://www.baidu.com';
-            $qkPay = new qkPay();
-            $result = $qkPay->submitOrder($order);
-            dump($result);
-        }catch(\Exception $e){
-            echo $e->getMessage();
-        }
-
+        Form::input('姓名','name','text',[
+            ['rule'=>'notempty'],
+            ['rule'=>'stringlength','min'=>10,'max'=>'20'],
+            ['rule'=>'identical','name'=>'不知奥','field'=>'userrss'],
+            ['rule'=>'emailaddress'],
+            ['rule'=>'date'],
+            ['rule'=>'digits'],
+        ]);
     }
 }

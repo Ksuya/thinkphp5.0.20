@@ -28,12 +28,6 @@ $(function () {
         var formNode = $(this).closest('form');
         if (formNode.length > 0) {
             $(formNode).bootstrapValidator('validate', {
-                feedbackIcons: {
-                    required: 'glyphicon glyphicon-asterisk requiredStar',
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                }
             }).on('success.form.bv', function (e) {
                 // Prevent form submission
                 e.preventDefault();
@@ -67,7 +61,23 @@ $(function () {
         radioClass: 'iradio_flat-green',
     });
 
+    // datepicker
+    $('.datepicker').datepicker({
+        "autoclose":true,"format":"yyyy-mm-dd","language":"zh-CN"
+    });
 
+    // ckeditor 冲突
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {
+        modal_this = this
+        $(document).on('focusin.modal', function (e) {
+            if (modal_this.$element[0] !== e.target
+                && !modal_this.$element.has(e.target).length
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+                modal_this.$element.focus()
+            }
+        })
+    };
 });
 
 

@@ -1601,7 +1601,7 @@
         // 3) [':disabled', ':hidden', function($field) {
         //        return !$field.is(':visible');
         //    }]
-        excluded: [':disabled', ':hidden', ':not(:visible)'],
+        excluded: [':disabled'],//, ':hidden', ':not(:visible)'
 
         // Shows ok/error/loading icons based on the field validity.
         // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).

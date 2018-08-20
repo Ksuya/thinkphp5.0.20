@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:98:"E:\phpstudy2018\PHPTutorial\WWW\payment-system\public/../application/merchat\view\index\index.html";i:1534670558;s:95:"E:\phpstudy2018\PHPTutorial\WWW\payment-system\application\common\view\public\admin-header.html";i:1534684867;s:96:"E:\phpstudy2018\PHPTutorial\WWW\payment-system\application\common\view\public\admin-top-nav.html";i:1534656832;s:98:"E:\phpstudy2018\PHPTutorial\WWW\payment-system\application\common\view\public\admin-left-menu.html";i:1534653796;s:95:"E:\phpstudy2018\PHPTutorial\WWW\payment-system\application\common\view\public\admin-script.html";i:1534688156;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\index\index.html";i:1534739653;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1534751787;s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-top-nav.html";i:1534739653;s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-left-menu.html";i:1534739653;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534751777;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +6,10 @@
     <title>商户后台管理</title>
     <link type="text/css" rel="stylesheet" href="/static/js/vendor/bootstrap/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="/static/fontsawesome/css/font-awesome.css"/>
-    <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
     <link rel="stylesheet" href="/static/js/vendor/bootstrap-validate/css/bootstrapValidator.css">
     <link rel="stylesheet" href="/static/js/vendor/icheck/skins/flat/green.css">
+    <link rel="stylesheet" href="/static/js/vendor/datepicker/css/bootstrap-datepicker.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
 </head>
 <body>
 
@@ -107,6 +108,8 @@
 <script src="/static/js/vendor/bootstrap-validate/js/language/zh_CN.js"></script>
 <script src="/static/js/vendor/cxselect/jquery.cxselect.min.js"></script>
 <script src="/static/js/vendor/icheck/icheck.min.js"></script>
+<script type="text/javascript" src="/static/js/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/static/js/vendor/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="/static/js/tipSuppliers.js"></script>
 <script src="/static/system/core.js"></script>
 <script src="/static/system/vendor.js"></script>

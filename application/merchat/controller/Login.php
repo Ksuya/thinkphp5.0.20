@@ -52,7 +52,7 @@ class Login extends Controller{
 
     public function ajaxUpload()
     {
-        $url = 'https://img-bss.csdn.net/201887185026554_48184.jpg';
+        $url = Request::instance()->domain().'/resource/default/2018-08-20/logo.png';
         $cb = input('CKEditorFuncNum'); //获得ck的回调id
         echo "<script>window.parent.CKEDITOR.tools.callFunction($cb,\"$url\", '');</script>" ;//图片上传成功，通知ck图片的url
     }
