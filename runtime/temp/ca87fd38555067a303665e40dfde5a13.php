@@ -1,20 +1,34 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:90:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\account\info.html";i:1534766801;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1534751787;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534751777;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:90:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\account\info.html";i:1534853598;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1534853416;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>商户后台管理</title>
-    <link type="text/css" rel="stylesheet" href="/static/js/vendor/bootstrap/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="/static/fontsawesome/css/font-awesome.css"/>
-    <link rel="stylesheet" href="/static/js/vendor/bootstrap-validate/css/bootstrapValidator.css">
-    <link rel="stylesheet" href="/static/js/vendor/icheck/skins/flat/green.css">
-    <link rel="stylesheet" href="/static/js/vendor/datepicker/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="/static/vendor/bootstrap-validate/css/bootstrapValidator.css">
+    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/green.css">
+    <link rel="stylesheet" href="/static/vendor/datepicker/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="/static/vendor/select/css/bootstrap-select.min.css">
     <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
+    <script src="/static/js/jquery-2.2.1.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="/static/vendor/layer/layer.js"></script>
+    <script src="/static/vendor/bootstrap-validate/js/bootstrapValidator.js"></script>
+    <script src="/static/vendor/bootstrap-validate/js/language/zh_CN.js"></script>
+    <script src="/static/vendor/cxselect/jquery.cxselect.min.js"></script>
+    <script src="/static/vendor/icheck/icheck.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/select/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="/static/js/tipSuppliers.js"></script>
+    <script src="/static/system/core.js"></script>
+    <script src="/static/system/vendor.js"></script>
 </head>
 <body>
 
-<body class="in-frame">
-<div class="row">
+<body >
+<div class="panel-body">
     <ol class="breadcrumb">
         <li><a>首页</a></li>
         <li><a>账户管理</a></li>
@@ -43,51 +57,66 @@
         <div class="tab-pane fade" id="detail">
             <div class="panel panel-default" style="margin-top:30px;">
                 <div class="panel-heading">
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#merchatDetail">修改信息
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myFormModal">修改信息
                     </button>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item">真实姓名：<?php echo $detail['real_name']; ?></li>
                     <li class="list-group-item">身份证号：<?php echo $detail['id_number']; ?></li>
-                    <li class="list-group-item">公司地址：<?php echo $detail['region']; ?></li>
+                    <li class="list-group-item">公司地址：<?php echo $detail['region']['0']; ?> <?php echo $detail['region']['1']; ?> <?php echo $detail['region']['2']; ?></li>
                     <li class="list-group-item">详细地址：<?php echo $detail['address']; ?></li>
                     <li class="list-group-item">营业执照：<?php echo $detail['business']; ?></li>
-                    <li class="list-group-item">法人姓名：<?php echo $detail['legal_name']; ?></li>
+                    <li class="list-group-item">营业执照副本：<?php if($detail['business_card']): ?> <button class="btn btn-sm btn-info" onclick="modal_image('营业执照副本','<?php echo $detail['business_card']; ?>');">预览</button> <?php endif; ?></li>
+                    <li class="list-group-item">法人身份证A&nbsp;：<?php if($detail['legal_card_a']): ?> <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证A','<?php echo $detail['legal_card_a']; ?>');">预览</button> <?php endif; ?></li>
+                    <li class="list-group-item">法人身份证B&nbsp;：<?php if($detail['legal_card_b']): ?> <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证B','<?php echo $detail['legal_card_b']; ?>');">预览</button> <?php endif; ?></li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <div class="modal fade right" id="merchatDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade right" id="myFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" id="merchatInfoForm" action="<?php echo url('saveDetail'); ?>">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title" id="myModalLabel">修改详细信息</h4>
                     </div>
                     <div class="modal-body">
-                        <?php echo formInput('真实姓名','real_name',$detail['real_name'],'text',[['rule'=>'notempty'],['rule'=>'digits']]); ?>
-                        <?php echo formInput('身份证号','id_number',$detail['id_number'],'text',[]); ?>
-                        <?php echo formSelect('性别','gender',[['id'=>2,'name'=>'测试1']],'id','name'); ?>
+                        <input type="hidden" name="id" value="<?php echo $detail['id']; ?>">
+                        <?php echo formInput('真实姓名:','real_name',$detail['real_name'],'text',[['rule'=>'notempty']],true); ?>
+                        <?php echo formInput('身份证号:','id_number',$detail['id_number'],'text',[['rule'=>'notempty']],true); ?>
                         <div class="form-group" id="company_region">
-                            <label class="col-sm-2 control-label">公司省市</label>
+                            <label class="col-sm-2 control-label">公司地区:</label>
                             <div class="col-sm-10 cxselect-list">
-                                <select class="province form-control" name="region" data-value="浙江省"
+                                <select class="province form-control " name="region" data-value="<?php echo $detail['region']['0']; ?>"
                                         data-first-title="选择省" disabled="disabled" required
                                         data-required-msg="选择省"></select>
-                                <select class="city form-control" name="region" data-value="杭州市" data-first-title="选择市"
+                                <select class="city form-control" name="region" data-value="<?php echo $detail['region']['1']; ?>" data-first-title="选择市"
                                         disabled="disabled" required data-required-msg="选择市"></select>
-                                <select class="area form-control" name="region" data-value="西湖区" data-first-title="选择地区"
+                                <select class="area form-control" name="region" data-value="<?php echo $detail['region']['2']; ?>" data-first-title="选择地区"
                                         disabled="disabled" required data-required-msg="选择地区"></select>
                             </div>
                         </div>
-                        <?php echo formCheck('radio','单选框','uniqj',[['id'=>2,'name'=>'测试1'],['id'=>3,'name'=>'测试2']],'id','name','3'); ?>
-                        <?php echo formCheck('checkbox','您的爱好','habits',[['id'=>2,'name'=>'爱好1'],['id'=>3,'name'=>'爱好2'],['id'=>4,'name'=>'爱好4']],'id','name','3,4'); ?>
-                        <?php echo formEditor('文章内容','content'); ?>
-                        <?php echo formInput('开始时间','start_time','','date',[['rule'=>'notempty'],['rule'=>'date']]); ?>
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">公司地区:</label>
+                            <div class="col-sm-4 cxselect-list">
+                                <select class="form-control selectpicker">
+                                    <option value="">dsadsa</option>
+                                    <option value="">sadsa</option>
+                                    <option value="">dasdsa</option>
+                                    <option value="">dsasadsad</option>
+                                </select>
+                            </div>
+                        </div>
+                        <?php echo formInput('详细地址:','address',$detail['address'],'text',[['rule'=>'notempty']]); ?>
+                        <?php echo formInput('营业执照:','business',$detail['business'],'text',[['rule'=>'notempty']]); ?>
+                        <?php echo formInput('法人名称:','legal_name',$detail['business'],'text',[['rule'=>'notempty']]); ?>
+                        <?php echo formFile(true,'法人身份证A:','legal_card_a',$detail['legal_card_a'],$detail['legal_card_a']); ?>
+                        <?php echo formFile(false,'法人身份证B:','legal_card_b',$detail['legal_card_b'],$detail['legal_card_b']); ?>
+                        <?php echo formFile(false,'营业执照副本:','business_card',$detail['business_card'],$detail['business_card']); ?>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -98,30 +127,21 @@
         </div>
     </div>
 </div>
-<!--javascript include-->
-<script src="/static/js/jquery-2.2.1.min.js"></script>
-<script src="/static/js/vendor/bootstrap/js/bootstrap.js"></script>
-<script src="/static/js/vendor/layer/layer.js"></script>
-<script src="/static/js/vendor/bootstrap-validate/js/bootstrapValidator.js"></script>
-<script src="/static/js/vendor/bootstrap-validate/js/language/zh_CN.js"></script>
-<script src="/static/js/vendor/cxselect/jquery.cxselect.min.js"></script>
-<script src="/static/js/vendor/icheck/icheck.min.js"></script>
-<script type="text/javascript" src="/static/js/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="/static/js/vendor/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
-<script src="/static/js/tipSuppliers.js"></script>
-<script src="/static/system/core.js"></script>
-<script src="/static/system/vendor.js"></script>
-
-
 <script>
     $(function () {
         // 全国省市区
         $('#company_region').cxSelect({
             selects: ['province', 'city', 'area'],
             nodata: 'none',
-            url:'/static/js/vendor/cxselect/cityData.min.json',
+            url:'/static/vendor/cxselect/cityData.min.json',
         });
+        $('.selectpicker').selectpicker({
+            style: 'btn-primary',
+            size: 4
+        });
+
     });
+
 </script>
 </body>
 </html>

@@ -59,13 +59,7 @@
                  // 请求成功
                  case '0':
                      callback(response);
-                     parent.layer.closeAll("loading");
-                     break;
-                 // 没有权限
-                 case '111':
-                     if (response.errmsg != '' && response.errmsg != undefined) {
-                         parent.layer.msg(response.errmsg, {icon: 0});
-                     }
+                     hideLoading();
                      break;
                  default:
                      hideLoading();
@@ -87,11 +81,12 @@
              if (btnDom) {
                  btnDom.removeAttr("disabled");
              }
+             parent.layer.closeAll("loading");
          },
          error: function () {
-             parent.layer.closeAll("loading");
              //请求出错处理
              parent.layer.msg('404 not found', {icon: 0});
+             hideLoading();
          }
      });
  }
@@ -369,6 +364,26 @@
      func();
  });
 
+ function modal_image(title,url) {
+     var image_html = '<div class="modal fade" id="modalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+         <div class="modal-dialog">\
+         <div class="modal-content">\
+         <div class="modal-header">\
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+     <h4 class="modal-title" id="myModalLabel">'+title+'</h4>\
+     </div>\
+     <div class="modal-body"><img src="'+url+'" class="img-responsive"'+url+'</div>\
+         </div>\
+     </div>\
+     </div>';
+     appendModal('modalImage',image_html);
+ }
+
+ /**
+  * append modal 并且弹出
+  * @param dom
+  * @param html
+  */
  function appendModal(dom,html) {
      var domLength = $("body").find("#"+dom).length;
      if(domLength > 0){

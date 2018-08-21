@@ -1,6 +1,6 @@
 {include file="common@public/admin-header"}
-<body class="in-frame">
-<div class="row">
+<body >
+<div class="panel-body">
     <ol class="breadcrumb">
         <li><a>首页</a></li>
         <li><a>账户管理</a></li>
@@ -35,10 +35,12 @@
                 <ul class="list-group">
                     <li class="list-group-item">真实姓名：{$detail.real_name}</li>
                     <li class="list-group-item">身份证号：{$detail.id_number}</li>
-                    <li class="list-group-item">公司地址：{$detail.region}</li>
+                    <li class="list-group-item">公司地址：{$detail.region.0} {$detail.region.1} {$detail.region.2}</li>
                     <li class="list-group-item">详细地址：{$detail.address}</li>
                     <li class="list-group-item">营业执照：{$detail.business}</li>
-                    <li class="list-group-item">法人姓名：{$detail.legal_name}</li>
+                    <li class="list-group-item">营业执照副本：{if $detail.business_card} <button class="btn btn-sm btn-info" onclick="modal_image('营业执照副本','{$detail.business_card}');">预览</button> {/if}</li>
+                    <li class="list-group-item">法人身份证A&nbsp;：{if $detail.legal_card_a} <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证A','{$detail.legal_card_a}');">预览</button> {/if}</li>
+                    <li class="list-group-item">法人身份证B&nbsp;：{if $detail.legal_card_b} <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证B','{$detail.legal_card_b}');">预览</button> {/if}</li>
                 </ul>
             </div>
         </div>
@@ -49,31 +51,44 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
-                <form class="form-horizontal" role="form" id="merchatInfoForm">
+                <form class="form-horizontal" role="form" id="merchatInfoForm" action="{:url('saveDetail')}">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title" id="myModalLabel">修改详细信息</h4>
                     </div>
                     <div class="modal-body">
-                        {:formInput('真实姓名','real_name',$detail.real_name,'text',[['rule'=>'notempty']])}
-                        {:formInput('身份证号','id_number',$detail.id_number,'text',[['rule'=>'notempty']])}
-                        {:formSelect('性别','gender',[['id'=>2,'name'=>'测试1']],'id','name')}
+                        <input type="hidden" name="id" value="{$detail.id}">
+                        {:formInput('真实姓名:','real_name',$detail.real_name,'text',[['rule'=>'notempty']],true)}
+                        {:formInput('身份证号:','id_number',$detail.id_number,'text',[['rule'=>'notempty']],true)}
                         <div class="form-group" id="company_region">
-                            <label class="col-sm-2 control-label">公司省市</label>
+                            <label class="col-sm-2 control-label">公司地区:</label>
                             <div class="col-sm-10 cxselect-list">
-                                <select class="province form-control" name="region" data-value="浙江省"
+                                <select class="province form-control " name="region" data-value="{$detail.region.0}"
                                         data-first-title="选择省" disabled="disabled" required
                                         data-required-msg="选择省"></select>
-                                <select class="city form-control" name="region" data-value="杭州市" data-first-title="选择市"
+                                <select class="city form-control" name="region" data-value="{$detail.region.1}" data-first-title="选择市"
                                         disabled="disabled" required data-required-msg="选择市"></select>
-                                <select class="area form-control" name="region" data-value="西湖区" data-first-title="选择地区"
+                                <select class="area form-control" name="region" data-value="{$detail.region.2}" data-first-title="选择地区"
                                         disabled="disabled" required data-required-msg="选择地区"></select>
                             </div>
                         </div>
-                        {:formCheck('radio','单选框','uniqj',[['id'=>2,'name'=>'测试1'],['id'=>3,'name'=>'测试2']],'id','name','3')}
-                        {:formCheck('checkbox','您的爱好','habits',[['id'=>2,'name'=>'爱好1'],['id'=>3,'name'=>'爱好2'],['id'=>4,'name'=>'爱好4']],'id','name','3,4')}
-                        {:formEditor('文章内容','content')}
-                        {:formInput('开始时间','start_time','','date',[['rule'=>'notempty'],['rule'=>'date']])}
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">公司地区:</label>
+                            <div class="col-sm-4 cxselect-list">
+                                <select class="form-control selectpicker">
+                                    <option value="">dsadsa</option>
+                                    <option value="">sadsa</option>
+                                    <option value="">dasdsa</option>
+                                    <option value="">dsasadsad</option>
+                                </select>
+                            </div>
+                        </div>
+                        {:formInput('详细地址:','address',$detail.address,'text',[['rule'=>'notempty']])}
+                        {:formInput('营业执照:','business',$detail.business,'text',[['rule'=>'notempty']])}
+                        {:formInput('法人名称:','legal_name',$detail.business,'text',[['rule'=>'notempty']])}
+                        {:formFile(true,'法人身份证A:','legal_card_a',$detail.legal_card_a,$detail.legal_card_a)}
+                        {:formFile(false,'法人身份证B:','legal_card_b',$detail.legal_card_b,$detail.legal_card_b)}
+                        {:formFile(false,'营业执照副本:','business_card',$detail.business_card,$detail.business_card)}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -84,27 +99,21 @@
         </div>
     </div>
 </div>
-<!--javascript include-->
-{include file="common@public/admin-script"}
-
-
 <script>
     $(function () {
         // 全国省市区
         $('#company_region').cxSelect({
             selects: ['province', 'city', 'area'],
             nodata: 'none',
-            url:'__STATIC__/js/vendor/cxselect/cityData.min.json',
+            url:'__STATIC__/vendor/cxselect/cityData.min.json',
         });
+        $('.selectpicker').selectpicker({
+            style: 'btn-primary',
+            size: 4
+        });
+
     });
-    /**
-     * ckedior 同步内容到texarea
-     */
-    function sendPost() {
-        for (instance in CKEDITOR.instances) {
-            CKEDITOR.instances[instance].updateElement();
-        }
-    }
+
 </script>
 </body>
 </html>

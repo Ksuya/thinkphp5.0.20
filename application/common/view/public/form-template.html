@@ -1,0 +1,26 @@
+<div class="modal-body">
+    {:formInput('真实姓名','real_name',$detail.real_name,'text',[['rule'=>'notempty']])}
+    {:formInput('身份证号','id_number',$detail.id_number,'text',[['rule'=>'notempty']])}
+    {:formSelect('性别','gender',[['id'=>2,'name'=>'测试1']],'id','name')}
+    <div class="form-group" id="company_region">
+        <label class="col-sm-2 control-label">公司省市</label>
+        <div class="col-sm-10 cxselect-list">
+            <select class="province form-control" name="region" data-value="浙江省"
+                    data-first-title="选择省" disabled="disabled" required
+                    data-required-msg="选择省"></select>
+            <select class="city form-control" name="region" data-value="杭州市" data-first-title="选择市"
+                    disabled="disabled" required data-required-msg="选择市"></select>
+            <select class="area form-control" name="region" data-value="西湖区" data-first-title="选择地区"
+                    disabled="disabled" required data-required-msg="选择地区"></select>
+        </div>
+    </div>
+    {:formCheck('radio','单选框','uniqj',[['id'=>2,'name'=>'测试1'],['id'=>3,'name'=>'测试2']],'id','name','3')}
+    {:formCheck('checkbox','您的爱好','habits',[['id'=>2,'name'=>'爱好1'],['id'=>3,'name'=>'爱好2'],['id'=>4,'name'=>'爱好4']],'id','name','3,4')}
+    {:formEditor('文章内容','content')}
+    {:formInput('开始时间','start_time','','date',[['rule'=>'notempty'],['rule'=>'date']])}
+    {:formCheck('radio','单选框','uniqj',[['id'=>2,'name'=>'测试1'],['id'=>3,'name'=>'测试2']],'id','name','3')}
+    {:formCheck('checkbox','您的爱好','habits',[['id'=>2,'name'=>'爱好1'],['id'=>3,'name'=>'爱好2'],['id'=>4,'name'=>'爱好4']],'id','name','3,4')}
+    {:formEditor('文章内容','content')}
+    {:formFile('身份证A','id_card_pic',['http://zhibo.iubofx.com/upload/a80337d377bb61fb5e58b91480aec960.jpg',],'2522')}
+    {:formInput('开始时间','start_time','','date',[['rule'=>'notempty'],['rule'=>'date']])}
+</div>

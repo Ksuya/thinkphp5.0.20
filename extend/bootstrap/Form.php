@@ -128,7 +128,7 @@ class Form
                                 <textarea class="form-control" name="'.$field.'" '.$valiHtml.'></textarea>
                             </div>
                         </div>';
-        $html .= '<script type="text/javascript" src="/static/js/vendor/ckeditor/ckeditor.js"></script>';
+        $html .= '<script type="text/javascript" src="/static/vendor/ckeditor/ckeditor.js"></script>';
         $url = url('Login/ajaxUpload');
         $html .= '<script type="text/javascript">CKEDITOR.replace("'.$field.'",{
             filebrowserImageUploadUrl : "'.$url.'",
@@ -186,4 +186,26 @@ class Form
         }
         return $html;
     }
+
+    public static function file($isLoad,$name,$field,$list=[],$values='',$rules=[['rule' => 'notempty']])
+    {
+        $valiHtml = self::vendor($rules);
+        $html = '<div class="form-group">
+                            <label class="col-sm-2 control-label">'.$name.'</label>
+                            <div class="col-sm-10">
+                                <input type="file" id="'.md5($field).'"  class="file-loading" />
+                                <input type="hidden" name="'.$field.'" id="'.md5($field).'_value" '.$valiHtml.' data-bv-trigger="change" />
+                            </div>
+                        </div>';
+        if($isLoad){
+            $html .= '<script src="/static/vendor/fileinput/js/fileinput.js"></script>';
+            $html .= '<script src="/static/vendor/fileinput/js/locales/zh.js"></script>';
+            $html .= '<link rel="stylesheet" href="/static/vendor/fileinput/css/fileinput.css">';
+        }
+        $url = url('Login/fileInputUpload');
+        $html .= '<script>var oFileInput = new FileInput();oFileInput.Init("'.md5($field).'", "'.$url.'",'.json_encode($list).',"'.$values.'");</script>';
+        echo $html;
+    }
+
+
 }

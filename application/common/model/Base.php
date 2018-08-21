@@ -13,6 +13,7 @@ use think\Model;
 class Base extends Model{
 
     public $pk = 'id';
+    public $record = false;
 
     /**
      * 更新数据  add/update
@@ -22,7 +23,7 @@ class Base extends Model{
      * @param bool $scene
      * @return array
      */
-    public function saveData($action='save-data',$data,$condition=[],$scene=false)
+    public function saveData($action='保存',$data,$condition=[],$scene=false)
     {
         try{
             $scene = false;
@@ -77,7 +78,7 @@ class Base extends Model{
      * @param $condition
      * @return array
      */
-    public function deleteData($action='delete-data',$condition)
+    public function deleteData($action='删除',$condition)
     {
         try{
             if(empty($condition)){

@@ -17,6 +17,9 @@ $(function () {
             $("iframe[name='cont_box']").css("opacity", "1");
         }, 1);
     });
+
+
+
     // 退出登陆
     $(".logout").click(function () {
         bootstrapConfirm('信息确认', '确定退出登陆吗?', 'out');
@@ -26,46 +29,37 @@ $(function () {
     $(".form-ajax-submit").click(function () {
         var btn = $(this);
         var formNode = $(this).closest('form');
-
         if (formNode.length > 0) {
-            for ( instance in CKEDITOR.instances )
-            {
-                CKEDITOR.instances[instance].updateElement();
-            }
-
-            $(formNode).bootstrapValidator('validate', {
-            }).on('success.form.bv', function (e) {
-                // Prevent form submission
-                e.preventDefault();
-                // Get the form instance
-                var $form = $(e.target);
-                // Get the BootstrapValidator instance
-                var bv = $form.data('bootstrapValidator');
-                // Use Ajax to submit form data
+            $(formNode).bootstrapValidator({ excluded:[":disabled"]});
+            $(formNode).bootstrapValidator('validate');
+            var flag = $(formNode).data('bootstrapValidator').isValid()//验证是否通过true/false
+            if(flag){
                 // 获取表单数据
                 var formData = pbFormJson($(formNode));
-                console.log(formData)
-                return
                 // 表单地址
                 var action = $(formNode).attr("action");
                 // 回调函数
                 var callback = $(formNode).attr("callback");
                 var callback = callback ? eval(callback) : function (res) {
                     parent.layer.msg(res.errmsg, {icon: 1});
-                    console.log(res)
+                    setTimeout(function () {
+                        $('#myFormModal').modal('hide');
+                        reloadIframe();
+                    },1000)
+
                 };
                 pbAjax(btn, action, formData, callback);
-            });
-
-
+            }
         }
     });
 
     // 表单modal关闭重置表单
     $('#myFormModal').on('hide.bs.modal',function(e) {
-           var obj = $(e.target);
-           var formId = obj.find("form");
-           $(formId).bootstrapValidator('resetForm');
+        var obj = $(e.target);
+        var formId = obj.find("form");
+        $(formId).bootstrapValidator('resetForm');
+        $(formId)[0].reset();
+        //reloadIframe();
     })
 
     // checkbox  radio
@@ -94,6 +88,90 @@ $(function () {
 });
 
 
+// filkeinput
+//初始化fileinput
+var FileInput = function () {
+    var oFile = new Object();
+    //初始化fileinput控件
+    oFile.Init = function(ctrlName, uploadUrl,initIMmgs,initValues) {
+        var initIMmgs = initIMmgs ? initIMmgs : [];
+        var initValues = initValues ? initValues : '';
+        var initPreview = [];
+        var block = $("#"+ctrlName+'_value').parent("div").find(".help-block");
+        var bdiv = $("#"+ctrlName+'_value').parent("div").parent("div");
+        for(var i=0;i<initIMmgs.length;i++){
+            initPreview.push("<img src='"+initIMmgs[i]+"' class='file-preview-image img-responsive' style='width: 100%;height: 100%'>" );
+        }
+        var control = $('#' + ctrlName);
+        $("#"+ctrlName+'_value').val(initValues).change();
+        //初始化上传控件的样式
+        control.fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: uploadUrl, //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+            showUpload: true, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            dropZoneEnabled: false,//是否显示拖拽区域
+            //minImageWidth: 50, //图片的最小宽度
+            //minImageHeight: 50,//图片的最小高度
+            //maxImageWidth: 200,//图片的最大宽度
+            //maxImageHeight: 200,//图片的最大高度
+            maxFileSize: 600,//单位为kb，如果为0表示不限制文件大小
+            maxFileCount: 1, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            multiple: false,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            initialPreview: initPreview,
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            //向后台传递参数
+            /*
+            uploadExtraData:function(){
+                var data={
+                    apkName:'aaa',
+                    versionNum:'bbb',
+                    description:'ccc',
+                };
+                return data;
+            },*/
+            layoutTemplates :{
+                actionDelete:'', //去除上传预览的缩略图中的删除图标
+                actionUpload:'',//去除上传预览缩略图中的上传图片；
+                //actionZoom:''   //去除上传预览缩略图中的查看详情预览的缩略图标。
+            },
+        });
+        // 导入文件上传完成之后的事件
+        $("#"+ctrlName).on("fileuploaded", function (event, data) {
+            var response = data.response;
+            if(response.errcode == '0'){
+                var old = $("#"+ctrlName+'_value').val();
+                if(old == ''){
+                    var old = [];
+                }else{
+                    var old = old.split(',');
+                }
+                old.push(response.path);
+                $("#"+ctrlName+'_value').val(old.join(',')).change();
+            }else{
+                alert(response.errmsg);
+            }
+
+        });
+        // 删除事件
+        $('#'+ctrlName).on('filesuccessremove', function(event, data, previewId, index) {
+            $("#"+ctrlName+'_value').val('').change();
+        });
+        // 清空控件
+        $('#'+ctrlName).on('fileclear', function(event, data, msg) {
+            $("#"+ctrlName+'_value').val('').change();
+        });
+
+    }
+    return oFile;
+};
+
+
 
 /**
  * 退出登陆
@@ -111,6 +189,15 @@ function box() {
 };
 
 function reloadIframe() {
-    $("iframe[name='cont_box']").prop("src", $("iframe[name='cont_box']").attr('src'));
+    parent.$("iframe[name='cont_box']").prop("src", parent.$("iframe[name='cont_box']").attr('src')+'?time_'+new Date());
+    $("iframe[name='cont_box']").prop("src", $("iframe[name='cont_box']").attr('src')+'?time_'+new Date());
 }
 
+/**
+ * ckedior 同步内容到texarea
+ */
+function sendPost() {
+    for (instance in CKEDITOR.instances) {
+        CKEDITOR.instances[instance].updateElement();
+    }
+}

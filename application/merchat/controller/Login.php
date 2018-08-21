@@ -50,10 +50,23 @@ class Login extends Controller{
         $this->redirect(url('login'));
     }
 
+    /**
+     * Ckeditor 上传图片
+     */
     public function ajaxUpload()
     {
-        $url = Request::instance()->domain().'/resource/default/2018-08-20/logo.png';
+        $url = Request::instance()->domain();
+        $file = upload();
+        $url .= $file['path'];
         $cb = input('CKEditorFuncNum'); //获得ck的回调id
         echo "<script>window.parent.CKEDITOR.tools.callFunction($cb,\"$url\", '');</script>" ;//图片上传成功，通知ck图片的url
+    }
+
+    /**
+     * Fileinput 上传接口
+     */
+    public function fileInputUpload()
+    {
+        return upload();
     }
 }

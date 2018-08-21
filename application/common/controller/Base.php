@@ -28,4 +28,6 @@ class Base extends Controller{
     {
         return view();
     }
+
+
 }
