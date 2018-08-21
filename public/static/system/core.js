@@ -391,5 +391,7 @@
      if (editor) {
          editor.destroy(true);//销毁编辑器
      }
-     CKEDITOR.replace('detail'); //替换编辑器，editorID为ckeditor的"id"属性的值
+     CKEDITOR.replace(box); //替换编辑器，editorID为ckeditor的"id"属性的值
  }
+
+

@@ -26,7 +26,13 @@ $(function () {
     $(".form-ajax-submit").click(function () {
         var btn = $(this);
         var formNode = $(this).closest('form');
+
         if (formNode.length > 0) {
+            for ( instance in CKEDITOR.instances )
+            {
+                CKEDITOR.instances[instance].updateElement();
+            }
+
             $(formNode).bootstrapValidator('validate', {
             }).on('success.form.bv', function (e) {
                 // Prevent form submission
@@ -54,6 +60,13 @@ $(function () {
 
         }
     });
+
+    // 表单modal关闭重置表单
+    $('#myFormModal').on('hide.bs.modal',function(e) {
+           var obj = $(e.target);
+           var formId = obj.find("form");
+           $(formId).bootstrapValidator('resetForm');
+    })
 
     // checkbox  radio
     $('input').iCheck({

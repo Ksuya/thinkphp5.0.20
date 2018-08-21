@@ -132,7 +132,7 @@ class Form
         $url = url('Login/ajaxUpload');
         $html .= '<script type="text/javascript">CKEDITOR.replace("'.$field.'",{
             filebrowserImageUploadUrl : "'.$url.'",
-        });</script>';
+        });setInterval("sendPost()",100);</script>';
         echo $html;
     }
 
