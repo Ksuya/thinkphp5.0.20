@@ -127,8 +127,27 @@ class Base extends Model{
             $limit = $post['limit'];
             $sort = $post['sort'];
             $order = $post['order'];
+            if($sort){
+                $order = $sort.' '.$order;
+            }
+            unset($post['offset']);
+            unset($post['limit']);
+            unset($post['sort']);
+            unset($post['order']);
+            if(isset($post['_time'])){unset($post['_time']);};
+            if(isset($post['start'])){unset($post['start']);};
+            if(isset($post['end'])){unset($post['end']);};
+            // 处理搜索项
+            foreach ($post as $k=>$v)
+            {
+                if(is_numeric($v)){
+                    $condition[$k] = $v;
+                }else{
+                    $condition[$k] = ['like',"%$v%"];
+                }
+            }
             $total = $this->alias('a')->field($field)->join($join)->where($condition)->group($group)->having($having)->count();
-            $data = $this->alias('a')->field($field)->join($join)->where($condition)->group($group)->having($having)->order($sort.' '.$order)->limit($offset.','.$limit)->select();
+            $data = $this->alias('a')->field($field)->join($join)->where($condition)->group($group)->having($having)->order($order)->limit($offset.','.$limit)->select();
             return ['total'=>$total,'rows'=>$data];
         }catch(Exception $e){
             appLog($e);

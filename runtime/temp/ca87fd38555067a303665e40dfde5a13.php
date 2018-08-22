@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:90:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\account\info.html";i:1534853598;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1534853416;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:90:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\account\info.html";i:1534938466;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1534853416;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,8 +67,8 @@
                     <li class="list-group-item">详细地址：<?php echo $detail['address']; ?></li>
                     <li class="list-group-item">营业执照：<?php echo $detail['business']; ?></li>
                     <li class="list-group-item">营业执照副本：<?php if($detail['business_card']): ?> <button class="btn btn-sm btn-info" onclick="modal_image('营业执照副本','<?php echo $detail['business_card']; ?>');">预览</button> <?php endif; ?></li>
-                    <li class="list-group-item">法人身份证A&nbsp;：<?php if($detail['legal_card_a']): ?> <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证A','<?php echo $detail['legal_card_a']; ?>');">预览</button> <?php endif; ?></li>
-                    <li class="list-group-item">法人身份证B&nbsp;：<?php if($detail['legal_card_b']): ?> <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证B','<?php echo $detail['legal_card_b']; ?>');">预览</button> <?php endif; ?></li>
+                    <li class="list-group-item">法人身份证A&nbsp;：<?php if($detail['legal_card_a']): ?>  <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证A','<?php echo $detail['legal_card_a']; ?>');">预览</button> <?php endif; ?></li>
+                    <li class="list-group-item">法人身份证B&nbsp;：<?php if($detail['legal_card_b']): ?>  <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证B','<?php echo $detail['legal_card_b']; ?>');">预览</button> <?php endif; ?></li>
                 </ul>
             </div>
         </div>
@@ -100,17 +100,6 @@
                                         disabled="disabled" required data-required-msg="选择地区"></select>
                             </div>
                         </div>
-                        <div class="form-group" >
-                            <label class="col-sm-2 control-label">公司地区:</label>
-                            <div class="col-sm-4 cxselect-list">
-                                <select class="form-control selectpicker">
-                                    <option value="">dsadsa</option>
-                                    <option value="">sadsa</option>
-                                    <option value="">dasdsa</option>
-                                    <option value="">dsasadsad</option>
-                                </select>
-                            </div>
-                        </div>
                         <?php echo formInput('详细地址:','address',$detail['address'],'text',[['rule'=>'notempty']]); ?>
                         <?php echo formInput('营业执照:','business',$detail['business'],'text',[['rule'=>'notempty']]); ?>
                         <?php echo formInput('法人名称:','legal_name',$detail['business'],'text',[['rule'=>'notempty']]); ?>
@@ -135,11 +124,6 @@
             nodata: 'none',
             url:'/static/vendor/cxselect/cityData.min.json',
         });
-        $('.selectpicker').selectpicker({
-            style: 'btn-primary',
-            size: 4
-        });
-
     });
 
 </script>

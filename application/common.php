@@ -98,3 +98,23 @@ function upload($folder = "default", $extType = "image", $defaultSize = 1)
         }
     }
 }
+
+function timeRange($start,$end,$field)
+{
+    $con = [];
+    $start = input($start);
+    $end = input($end);
+    if($start){
+        if($end){
+            if(strtotime($start) < strtotime($end)){
+                $end = date('Y-m-d H:i:s',strtotime('+1 day',strtotime($end))-1);
+                $con[$field] = ['between',$start.','.$end];
+            }else{
+                $con[$field] = ['>',$start];
+            }
+        }else{
+            $con[$field] = ['>',$start];
+        }
+    }
+    return $con;
+}

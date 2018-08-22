@@ -19,6 +19,7 @@ class Account extends MerchatBase{
         $this->model['merchat'] = model('Merchat');
         $this->model['merchatDetail'] = model('MerchatDetail');
         $this->model['merchatWithdraw'] = model('MerchatWithdraw');
+        $this->model['merchatBank'] = model('MerchatBank');
     }
 
     /*
@@ -32,19 +33,42 @@ class Account extends MerchatBase{
         return view('',$assign);
     }
 
+    /*
+     * 商户提现
+     */
+    public function withdraw()
+    {
+        // 获取商户银行卡信息
+        $merBanks = $this->model['merchatBank']->where('merchat_id',$this->merchatId)->select();
+        $assign = compact('merBanks');
+        return view('',$assign);
+    }
+
+    /*
+     * 更新商户详情
+     */
     public function saveDetail()
     {
         return $this->model['merchatDetail']->saveData('更新详细信息',$this->request->post(),[]);
     }
 
+    /*
+     * 商户提现数据
+     */
     public function btData()
     {
-        return $this->model['merchatWithdraw']->bootstrapTable('a.*,b.name as merchat',[],[['merchat b','a.merchat_id = b.id','left']]);
+        $dateCon = timeRange('start','end','a.created_time');
+        $con = array_merge($dateCon,['merchat_id'=>$this->merchatId]);
+        return $this->model['merchatWithdraw']->bootstrapTable('a.*,b.name as merchat',$con,[['merchat b','a.merchat_id = b.id','left']]);
     }
 
+    /**
+     * 处理商户提现
+     * @return mixed
+     */
     public function changeWithdrawStatus()
     {
         $data = $this->request->only(['id','status']);
-        return $this->model['merchatWithdraw']->saveData('处理商户流水',$data,['id'=>['in',$data['id']]],'chstatus');
+        return $this->model['merchatWithdraw']->saveData('处理商户提现流水',$data,['id'=>['in',$data['id']]],'chstatus');
     }
 }

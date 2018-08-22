@@ -180,3 +180,27 @@ html,body{width:100%;height:100%;overflow:hidden;}
 .extra-table{
 
 }
+
+/**
+表格搜索区域样式
+ */
+.my-container {
+    float: left;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.myLabel-content, .myText-content, .myBtn-content {
+    float: left;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+    height: 30px;
+    font-size: 12px;
+}
+
+.myBtn-content .btn {
+    margin-bottom: 10px;
+}

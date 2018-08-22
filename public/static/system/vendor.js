@@ -98,13 +98,34 @@ $(function () {
         var callback = eval(obj.attr("data-callback"));
         var rowData = obj.attr("data-row");
         var status = obj.attr("data-status");
-        if(rowData){
-            var row = $.parseJSON();
+        if(rowData != undefined && rowData != ''){
+            var row = $.parseJSON(rowData);
         }else{
             var row = false;
         }
         var tableId = obj.attr("data-table");
         callback(row,tableId,status);
+    });
+
+    // table search
+    $(".table-btn-search").click(function () {
+        var tableId = $(this).attr("data-table");
+        var curForm = $(this).closest('form');
+        var data = pbFormJson(curForm);
+        data._time = Math.random();
+        showLoadding();
+        $("#"+tableId).bootstrapTable('refresh',{query:data});
+        hideLoading();
+    });
+
+    // table reset
+    $(".table-btn-reset").click(function () {
+        var tableId = $(this).attr("data-table");
+        var curForm = $(this).closest('form');
+        $(curForm)[0].reset();
+        showLoadding();
+        $("#"+tableId).bootstrapTable('refresh',{query:{}});
+        hideLoading();
     });
 });
 
