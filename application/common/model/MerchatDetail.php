@@ -15,9 +15,9 @@ class MerchatDetail extends Base{
     public function getRegionAttr($value)
     {
         $city = explode(',',$value);
-        if(!isset($city[2])){
-            $city[2] = '';
-        }
+        $city[0] = isset($city[0]) ? $city[0] : '';
+        $city[1] = isset($city[1]) ? $city[1] : '';
+        $city[2] = isset($city[2]) ? $city[2] : '';
         return $city;
     }
 

@@ -18,6 +18,7 @@ class Account extends MerchatBase{
         parent::__construct($request);
         $this->model['merchat'] = model('Merchat');
         $this->model['merchatDetail'] = model('MerchatDetail');
+        $this->model['merchatWithdraw'] = model('MerchatWithdraw');
     }
 
     /*
@@ -38,6 +39,12 @@ class Account extends MerchatBase{
 
     public function btData()
     {
-        return ['rows'=>[['name'=>'aa','age'=>20,'hh'=>'dsdsdsd'],['name'=>'aa','age'=>20,'hh'=>'dsdsdsd'],['name'=>'aa','age'=>20,'hh'=>'dsdsdsd']],'total'=>2];
+        return $this->model['merchatWithdraw']->bootstrapTable('a.*,b.name as merchat',[],[['merchat b','a.merchat_id = b.id','left']]);
+    }
+
+    public function changeWithdrawStatus()
+    {
+        $data = $this->request->only(['id','status']);
+        return $this->model['merchatWithdraw']->saveData('处理商户流水',$data,['id'=>['in',$data['id']]],'chstatus');
     }
 }

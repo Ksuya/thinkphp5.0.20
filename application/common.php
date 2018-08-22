@@ -19,7 +19,12 @@ function appLog($e)
     $code = $e->getCode();
     $msgs = $e->getMessage();
     $time = date('Y-m-d H:i:s');
-    $message = '请求时间：' . $time . '；\n 文件：' . $file . '；\n 行号：' . $line . '；\n 错误信息：' . $msgs;
+    $message['file'] = $file;
+    $message['line'] = $line;
+    $message['code'] = $code;
+    $message['msg'] = $msgs;
+    $message['time'] = $time;
+    //$message = '请求时间：' . $time . '；\n 文件：' . $file . '；\n 行号：' . $line . '；\n 错误信息：' . $msgs;
     trace($message, 'notice');
 }
 

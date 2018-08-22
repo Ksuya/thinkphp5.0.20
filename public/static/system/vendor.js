@@ -85,10 +85,104 @@ $(function () {
             }
         })
     };
+
+    // bootstrap select
+    $('.selectpicker').selectpicker({
+        style: '',
+        size: 4
+    });
+
+    // table row action
+    $(document).on('click','.table-row-action,.table-more-action',function (e) {
+        var obj = $(e.target);
+        var callback = eval(obj.attr("data-callback"));
+        var rowData = obj.attr("data-row");
+        var status = obj.attr("data-status");
+        if(rowData){
+            var row = $.parseJSON();
+        }else{
+            var row = false;
+        }
+        var tableId = obj.attr("data-table");
+        callback(row,tableId,status);
+    });
 });
 
+/**
+ * 商户流水-行操作
+ * @param row
+ */
+function merchatWithdraw(row,tableId,status) {
+    if(row){
+        switch (row.status['value']){
+            case 0:
+                bootstrapConfirm('提现记录-信息确认', '确定处理此提现记录吗?操作后不可更改,请谨慎操作','passMerchatWithdraw('+row.id+',\''+tableId+'\');');
+                break;
+            case 2:
+                bootstrapConfirm('提现记录-信息确认', '确定处理此提现记录吗?操作后不可更改,请谨慎操作','passMerchatWithdraw('+row.id+',\''+tableId+'\');');
+                break;
+            default:
+                break;
+        }
+    }else{
+        var selectedData = getBtableAllselect(tableId,'id');
+        bootstrapConfirm('提现记录-信息确认', '确定批量处理此提现记录吗?操作后不可更改,请谨慎操作','passMerchatWithdraw(\''+selectedData+'\',\''+tableId+'\','+status+');');
+    }
+}
 
-// filkeinput
+function passMerchatWithdraw(id,tableId,status) {
+    var status = status ? status : 1;
+    var url = '/merchat/Account/changeWithdrawStatus';
+    pbAjax(false,url,{id:id,status:status},function (res) {
+        layer.msg(res.errmsg,{icon:6});
+        setTimeout(function () {
+            if(tableId){
+                $("#"+tableId).bootstrapTable('refresh');
+                $("#table-btn-list").show();
+                $("#table-btn-moreaction-list").hide();
+            }
+            $("#confirm_Modal").modal("hide");
+        },1000);
+    });
+}
+
+
+/**
+ * 退出登陆
+ */
+function out() {
+    window.location.href = '/merchat/Login/logout';
+}
+
+/*
+框架函数
+ */
+function box() {
+    var bodyH = $("body").height(),
+        bodyW = $("body").width(),
+        boxL = parseInt($(".hello_box").css("margin-left"));
+    $(".hello_order").css({"width": (parseInt(bodyW) - (boxL * 3) - 505), "height": parseInt(bodyH) - 70});
+    $(".hello_opera").css({"width": "445px", "height": (parseInt(bodyH) - 210) / 3});
+};
+
+/*
+重载Irame
+ */
+function reloadIframe() {
+    parent.$("iframe[name='cont_box']").prop("src", parent.$("iframe[name='cont_box']").attr('src')+'?time_'+new Date());
+    $("iframe[name='cont_box']").prop("src", $("iframe[name='cont_box']").attr('src')+'?time_'+new Date());
+}
+
+/**
+ * ckedior 同步内容到texarea
+ */
+function sendPost() {
+    for (instance in CKEDITOR.instances) {
+        CKEDITOR.instances[instance].updateElement();
+    }
+}
+
+
 //初始化fileinput
 var FileInput = function () {
     var oFile = new Object();
@@ -109,8 +203,9 @@ var FileInput = function () {
             language: 'zh', //设置语言
             uploadUrl: uploadUrl, //上传的地址
             allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
-            showUpload: true, //是否显示上传按钮
+            showUpload: false, //是否显示上传按钮
             showCaption: false,//是否显示标题
+            showPreview:false,
             browseClass: "btn btn-primary", //按钮样式
             dropZoneEnabled: false,//是否显示拖拽区域
             //minImageWidth: 50, //图片的最小宽度
@@ -140,6 +235,9 @@ var FileInput = function () {
                 actionUpload:'',//去除上传预览缩略图中的上传图片；
                 //actionZoom:''   //去除上传预览缩略图中的查看详情预览的缩略图标。
             },
+        });
+        $("#"+ctrlName).on("filebatchselected", function(event, files) {
+            $("#"+ctrlName).fileinput("upload");
         });
         // 导入文件上传完成之后的事件
         $("#"+ctrlName).on("fileuploaded", function (event, data) {
@@ -172,32 +270,81 @@ var FileInput = function () {
 };
 
 
+//初始化bootstrap table
+var TableInit = function () {
+    var oTableInit = new Object();
+    //初始化Table
+    oTableInit.Init = function (id,url,field,sort,order) {
+        var field = field ? field : [];
+        var sort = sort ? sort : '';
+        var order = order ? order : '';
+        $('#'+id).bootstrapTable({
+            url: url,         //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            striped: false,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: true,                     //是否启用排序
+            sortName:sort,
+            sortOrder: order,                   //排序方式
+            //queryParams: oTableInit.queryParams,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber:1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: true,
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: false,                //是否启用点击选中行
+            height: '',                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "",                     //每一行的唯一标识，一般为主键列
+            showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            columns: field,
+        });
 
-/**
- * 退出登陆
- */
-function out() {
-    window.location.href = '/merchat/Login/logout';
-}
-
-function box() {
-    var bodyH = $("body").height(),
-        bodyW = $("body").width(),
-        boxL = parseInt($(".hello_box").css("margin-left"));
-    $(".hello_order").css({"width": (parseInt(bodyW) - (boxL * 3) - 505), "height": parseInt(bodyH) - 70});
-    $(".hello_opera").css({"width": "445px", "height": (parseInt(bodyH) - 210) / 3});
+        $('#'+id).on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function (row) {
+            var length = getBtableAllselect(id).length;
+            handlerToobar(length);
+        });
+    };
+    return oTableInit;
 };
 
-function reloadIframe() {
-    parent.$("iframe[name='cont_box']").prop("src", parent.$("iframe[name='cont_box']").attr('src')+'?time_'+new Date());
-    $("iframe[name='cont_box']").prop("src", $("iframe[name='cont_box']").attr('src')+'?time_'+new Date());
+/**
+ * 获取表格选中的数据
+ * @param id
+ * @returns {jQuery}
+ */
+function getBtableAllselect(id,ids) {
+    var ids = ids ? ids :false;
+    var data = $('#'+id).bootstrapTable('getAllSelections');
+    if(!ids){
+        return data;
+    }
+    var list = [];
+    for(var i=0;i<data.length;i++){
+        list.push(data[i][ids]);
+    }
+    return list.join(',');
 }
 
 /**
- * ckedior 同步内容到texarea
+ * 表格头事件与批量操作事件渲染
+ * @param length
  */
-function sendPost() {
-    for (instance in CKEDITOR.instances) {
-        CKEDITOR.instances[instance].updateElement();
+function handlerToobar(length) {
+    if(length > 0){
+        $("#table-btn-list").hide();
+        $("#table-btn-moreaction-list").show();
+        $("#row-select-total").text(length);
+    }else{
+        $("#table-btn-list").show();
+        $("#table-btn-moreaction-list").hide();
     }
 }
+

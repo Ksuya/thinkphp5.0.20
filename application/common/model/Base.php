@@ -9,6 +9,7 @@
 namespace app\common\model;
 use think\Exception;
 use think\Model;
+use think\Request;
 
 class Base extends Model{
 
@@ -26,20 +27,23 @@ class Base extends Model{
     public function saveData($action='保存',$data,$condition=[],$scene=false)
     {
         try{
-            $scene = false;
             if(empty($condition)){
                 if(!empty($data[$this->pk])){
-                    $condition = array_merge($condition,[$this->pk=>$data[$this->pk]]);
+                    $condition = [$this->pk=>$data[$this->pk]];
+                }
+            }else{
+                if(isset($condition[$this->pk]) && isset($data[$this->pk])){
+                    unset($data[$this->pk]);
                 }
             }
             if($scene){
-                $scene = $this->name.$scene;
+                $scene = $this->name.'.'.$scene;
                 $result = $this->validate($scene)->save($data,$condition);
             }else{
                 $result = $this->save($data,$condition);
             }
             if(false === $result){
-                throw new Exception($action.'失败；');
+                throw new Exception($this->getError());
             }
             return ['errcode'=>'0','errmsg'=>$action.'成功'];
         }catch(Exception $e){
@@ -112,6 +116,23 @@ class Base extends Model{
         }catch(Exception $e){
             appLog($e);
             return ['errcode'=>'1004','errmsg'=>'list error'];
+        }
+    }
+
+    public function bootstrapTable($field,$condition=[],$join=[],$group='',$having='')
+    {
+        try{
+            $post = Request::instance()->post();
+            $offset = $post['offset'];
+            $limit = $post['limit'];
+            $sort = $post['sort'];
+            $order = $post['order'];
+            $total = $this->alias('a')->field($field)->join($join)->where($condition)->group($group)->having($having)->count();
+            $data = $this->alias('a')->field($field)->join($join)->where($condition)->group($group)->having($having)->order($sort.' '.$order)->limit($offset.','.$limit)->select();
+            return ['total'=>$total,'rows'=>$data];
+        }catch(Exception $e){
+            appLog($e);
+            return ['total'=>0,'rows'=>[],'message'=>'请求数据失败'];
         }
     }
 

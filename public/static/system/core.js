@@ -338,7 +338,7 @@
      });
  }
  
- function bootstrapConfirm(title,msg,callback) {
+ function bootstrapConfirm(title,msg,callback,tableId) {
      var confirm_html = '<div class="modal fade" id="confirm_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
          <div class="modal-dialog">\
          <div class="modal-content">\
@@ -349,7 +349,7 @@
      <div class="modal-body">'+msg+'</div>\
          <div class="modal-footer">\
          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>\
-         <button type="button" class="btn btn-primary btn-confirm" callback="'+callback+'">确认</button>\
+         <button type="button" class="btn btn-primary btn-confirm" onclick="'+callback+'">确认</button>\
          </div>\
          </div>\
      </div>\
@@ -357,12 +357,12 @@
      appendModal('confirm_Modal',confirm_html);
  }
 
- $(document).on('click','.btn-confirm',function (e) {
+/* $(document).on('click','.btn-confirm',function (e) {
      var obj = $(e.target);
      var callback = obj.attr("callback");
      var func = eval(callback);
      func();
- });
+ });*/
 
  function modal_image(title,url) {
      var image_html = '<div class="modal fade" id="modalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
