@@ -28,19 +28,8 @@ class Account extends MerchatBase{
     public function info()
     {
         $base = $this->model['merchat']->where('id',$this->merchatId)->find();
-        $detail = $this->model['merchatDetail']->where('merchat_id',$this->merchatId)->find();
+        $detail = $this->model['merchatDetail']->where('merchatId',$this->merchatId)->find();
         $assign = compact('base','detail');
-        return view('',$assign);
-    }
-
-    /*
-     * 商户提现
-     */
-    public function withdraw()
-    {
-        // 获取商户银行卡信息
-        $merBanks = $this->model['merchatBank']->where('merchat_id',$this->merchatId)->select();
-        $assign = compact('merBanks');
         return view('',$assign);
     }
 
@@ -53,17 +42,40 @@ class Account extends MerchatBase{
     }
 
     /*
+    * 商户提现
+    */
+    public function withdraw()
+    {
+        // 获取商户银行卡信息
+        $merBanks = $this->model['merchatBank']->where('merchatId',$this->merchatId)->select();
+        $assign = compact('merBanks');
+        return view('',$assign);
+    }
+
+    /*
+     * 获取商户银行卡详情
+     */
+    public function getBankInfo()
+    {
+        $id = input("post.id");
+        if(empty($id)){
+            return ['errcode'=>'0','errmsg'=>'无效的银行卡'];
+        }
+        return $this->model['merchatBank']->findData('id as bankId,cardByName,cardByNo,openBank',['id'=>$id]);
+    }
+
+    /*
      * 商户提现数据
      */
     public function btData()
     {
         $dateCon = timeRange('start','end','a.created_time');
-        $con = array_merge($dateCon,['merchat_id'=>$this->merchatId]);
-        return $this->model['merchatWithdraw']->bootstrapTable('a.*,b.name as merchat',$con,[['merchat b','a.merchat_id = b.id','left']]);
+        $con = array_merge($dateCon,['merchatId'=>$this->merchatId]);
+        return $this->model['merchatWithdraw']->bootstrapTable('a.*,b.name as merchat',$con,[['merchat b','a.merchatId = b.id','left']]);
     }
 
     /**
-     * 处理商户提现
+     * 处理提现状态
      * @return mixed
      */
     public function changeWithdrawStatus()
@@ -71,4 +83,17 @@ class Account extends MerchatBase{
         $data = $this->request->only(['id','status']);
         return $this->model['merchatWithdraw']->saveData('处理商户提现流水',$data,['id'=>['in',$data['id']]],'chstatus');
     }
+
+    /*
+     * 保存提现胡数据
+     */
+    public function saveWithdraw()
+    {
+        $data = $this->request->only(['orderAmount','bankId','cardByName','cardByNo','openBank','openProvinve','openCity','accType']);
+        $orderNo = $this->randomNumber();
+        $data['merchatId'] = $this->merchatId;
+        $data['transaction'] = $orderNo;
+        return $this->model['merchat']->withdraw($data);
+    }
+
 }

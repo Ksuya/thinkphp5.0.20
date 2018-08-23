@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:99:"E:\phpstudy2018\PHPTutorial\WWW\payment-system\public/../application/merchat\view\account\info.html";i:1534901783;s:95:"E:\phpstudy2018\PHPTutorial\WWW\payment-system\application\common\view\public\admin-header.html";i:1534855457;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:99:"E:\phpstudy2018\PHPTutorial\WWW\payment-system\public/../application/merchat\view\account\info.html";i:1534949849;s:95:"E:\phpstudy2018\PHPTutorial\WWW\payment-system\application\common\view\public\admin-header.html";i:1534855457;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,12 +44,12 @@
             <div class="panel panel-default" style="margin-top:30px;">
                 <ul class="list-group">
                     <li class="list-group-item">商户名称：<?php echo $base['name']; ?></li>
-                    <li class="list-group-item">商户编号：<?php echo $base['sign_number']; ?></li>
+                    <li class="list-group-item">商户编号：<?php echo $base['signNumber']; ?></li>
                     <li class="list-group-item">商户余额：<?php echo (isset($base['balance']) && ($base['balance'] !== '')?$base['balance']:0); ?></li>
                     <li class="list-group-item">保&nbsp;证&nbsp;&nbsp;金：<?php echo (isset($base['bond']) && ($base['bond'] !== '')?$base['bond']:0); ?></li>
-                    <li class="list-group-item">时用状态：<?php echo $base['status']; ?></li>
+                    <li class="list-group-item">时用状态：<?php echo $base['status']['text']; ?></li>
                     <li class="list-group-item">联系邮箱：<?php echo (isset($base['email']) && ($base['email'] !== '')?$base['email']:''); ?></li>
-                    <li class="list-group-item">开通时间：<?php echo (isset($base['created_time']) && ($base['created_time'] !== '')?$base['created_time']:''); ?></li>
+                    <li class="list-group-item">开通时间：<?php echo (isset($base['createdTime']) && ($base['createdTime'] !== '')?$base['createdTime']:''); ?></li>
                 </ul>
 
             </div>
@@ -61,14 +61,14 @@
                     </button>
                 </div>
                 <ul class="list-group">
-                    <li class="list-group-item">真实姓名：<?php echo $detail['real_name']; ?></li>
-                    <li class="list-group-item">身份证号：<?php echo $detail['id_number']; ?></li>
+                    <li class="list-group-item">真实姓名：<?php echo $detail['realName']; ?></li>
+                    <li class="list-group-item">身份证号：<?php echo $detail['idNumber']; ?></li>
                     <li class="list-group-item">公司地址：<?php echo $detail['region']['0']; ?> <?php echo $detail['region']['1']; ?> <?php echo $detail['region']['2']; ?></li>
                     <li class="list-group-item">详细地址：<?php echo $detail['address']; ?></li>
                     <li class="list-group-item">营业执照：<?php echo $detail['business']; ?></li>
-                    <li class="list-group-item">营业执照副本：<?php if($detail['business_card']): ?> <button class="btn btn-sm btn-info" onclick="modal_image('营业执照副本','<?php echo $detail['business_card']; ?>');">预览</button> <?php endif; ?></li>
-                    <li class="list-group-item">法人身份证A&nbsp;：<?php if($detail['legal_card_a']): ?> <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证A','<?php echo $detail['legal_card_a']; ?>');">预览</button> <?php endif; ?></li>
-                    <li class="list-group-item">法人身份证B&nbsp;：<?php if($detail['legal_card_b']): ?> <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证B','<?php echo $detail['legal_card_b']; ?>');">预览</button> <?php endif; ?></li>
+                    <li class="list-group-item">营业执照副本：<?php if($detail['businessCard']): ?> <button class="btn btn-sm btn-info" onclick="modal_image('营业执照副本','<?php echo $detail['businessCard']; ?>');">预览</button> <?php endif; ?></li>
+                    <li class="list-group-item">法人身份证A&nbsp;：<?php if($detail['legalCarda']): ?>  <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证A','<?php echo $detail['legalCarda']; ?>');">预览</button> <?php endif; ?></li>
+                    <li class="list-group-item">法人身份证B&nbsp;：<?php if($detail['legalCardb']): ?>  <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证B','<?php echo $detail['legalCardb']; ?>');">预览</button> <?php endif; ?></li>
                 </ul>
             </div>
         </div>
@@ -86,8 +86,8 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" value="<?php echo $detail['id']; ?>">
-                        <?php echo formInput('真实姓名:','real_name',$detail['real_name'],'text',[['rule'=>'notempty']],true); ?>
-                        <?php echo formInput('身份证号:','id_number',$detail['id_number'],'text',[['rule'=>'notempty']],true); ?>
+                        <?php echo formInput('真实姓名:','realName',$detail['realName'],'text',[['rule'=>'notempty']],true); ?>
+                        <?php echo formInput('身份证号:','idNumber',$detail['idNumber'],'text',[['rule'=>'notempty']],true); ?>
                         <div class="form-group" id="company_region">
                             <label class="col-sm-2 control-label">公司地区:</label>
                             <div class="col-sm-10 cxselect-list">
@@ -102,10 +102,10 @@
                         </div>
                         <?php echo formInput('详细地址:','address',$detail['address'],'text',[['rule'=>'notempty']]); ?>
                         <?php echo formInput('营业执照:','business',$detail['business'],'text',[['rule'=>'notempty']]); ?>
-                        <?php echo formInput('法人名称:','legal_name',$detail['business'],'text',[['rule'=>'notempty']]); ?>
-                        <?php echo formFile(true,'法人身份证A:','legal_card_a',$detail['legal_card_a'],$detail['legal_card_a']); ?>
-                        <?php echo formFile(false,'法人身份证B:','legal_card_b',$detail['legal_card_b'],$detail['legal_card_b']); ?>
-                        <?php echo formFile(false,'营业执照副本:','business_card',$detail['business_card'],$detail['business_card']); ?>
+                        <?php echo formInput('法人名称:','legalName',$detail['legalName'],'text',[['rule'=>'notempty']]); ?>
+                        <?php echo formFile(true,'法人身份证A:','legalCarda',$detail['legalCarda'],$detail['legalCarda']); ?>
+                        <?php echo formFile(false,'法人身份证B:','legalCardb',$detail['legalCardb'],$detail['legalCardb']); ?>
+                        <?php echo formFile(false,'营业执照副本:','businessCard',$detail['businessCard'],$detail['businessCard']); ?>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

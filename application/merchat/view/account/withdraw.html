@@ -67,24 +67,28 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <form class="form-horizontal" role="form" id="merchatWithdrawForm" action="{:url('withdraw')}">
+            <form class="form-horizontal" role="form" id="merchatWithdrawForm" action="{:url('saveWithdraw')}">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">提现申请</h4>
                 </div>
                 <div class="modal-body">
-                    {:formInput('提现金额:','order_amount','','text',[['rule'=>'notempty']])}
-                    {:formSelect('选择银行卡:','bank_id',$merBanks,'id','openBank')}
+                    {:formInput('提现金额:','orderAmount','','text')}
+                    {:formSelect('选择银行卡:','bankId',$merBanks,'id','openBank')}
+                    {:formInput('持卡人姓名:','cardByName','','text')}
+                    {:formInput('持卡人卡号:','cardByNo','','text')}
+                    {:formInput('开户行:','openBank','','text')}
                     <div class="form-group" id="company_region">
                         <label class="col-sm-2 control-label">开户行省市:</label>
                         <div class="col-sm-10 cxselect-list">
-                            <select class="province form-control " name="openProvinve" data-value=""
+                            <select class="province form-control " name="openProvinve" id="openProvinve" data-value=""
                                     data-first-title="选择省" disabled="disabled" required
                                     data-required-msg="选择省"></select>
-                            <select class="city form-control" name="openCity" data-value="" data-first-title="选择市"
+                            <select class="city form-control" name="openCity" id="openCity" data-value="" data-first-title="选择市"
                                     disabled="disabled" required data-required-msg="选择市"></select>
                         </div>
                     </div>
+                    {:formSelect('结算类型:','accType',[['id'=>0,'value'=>'对私'],['id'=>1,'value'=>'对公']],'id','value')}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -110,15 +114,15 @@
             {checkbox: true},
             {field: 'merchat', title: '商户名称'},
             {field: 'transaction', title: '提现流水号', sortable: true},
-            {field: 'order_amount', title: '提现金额', sortable: true},
-            {field: 'service_charge', title: '提现手续费', sortable: true},
+            {field: 'orderAmount', title: '提现金额', sortable: true},
+            {field: 'serviceCharge', title: '提现手续费', sortable: true},
             {
                 field: 'status', title: '状态', formatter: function (value) {
                     return value.text;
                 }
             },
-            {field: 'created_time', title: '创建时间', sortable: true},
-            {field: 'deal_user', title: '处理人'},
+            {field: 'createdTime', title: '创建时间', sortable: true},
+            {field: 'dealUser', title: '处理人'},
             {
                 field: '', title: '操作', formatter: function (value, row) {
                     var action = '';
@@ -138,7 +142,7 @@
             },
         ];
         var oTable = new TableInit();
-        oTable.Init(tableId, url, fields, 'created_time', 'desc');
+        oTable.Init(tableId, url, fields, 'createdTime', 'desc');
     });
 </script>
 </body>

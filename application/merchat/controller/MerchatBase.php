@@ -30,4 +30,18 @@ class MerchatBase extends Base{
         $this->userId = $userId;
         $this->merchatInfo = $merchatInfo;
     }
+
+    public function randomNumber($leng=24)
+    {
+        $number = date('YmdHis').mt_rand(999,9999);
+        $timeLength = strlen($number);
+        if($leng <= $timeLength){
+            return $number;
+        }
+        $diff = $leng - $timeLength;
+        for($i=0;$i<$diff;$i++){
+            $number .= mt_rand(0,9);
+        }
+        return $number;
+    }
 }

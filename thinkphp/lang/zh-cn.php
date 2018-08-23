@@ -86,6 +86,9 @@ return [
     'directory {:path} creation failed'                         => '目录 {:path} 创建失败！',
 
     // Validate Error Message
+    ':attribute not a valid mobile'                                        => ':attribute不是一个有效的手机号',
+    ':attribute not a valid decimal'                                        => ':attribute不是一个有效的金额',
+    ':attribute not a valid captcha'                                        => '无效的验证码',
     ':attribute require'                                        => ':attribute不能为空',
     ':attribute must be numeric'                                => ':attribute必须是数字',
     ':attribute must be integer'                                => ':attribute必须是整数',

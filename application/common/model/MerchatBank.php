@@ -11,5 +11,4 @@ class MerchatBank extends Base{
 
 
 
-
 }

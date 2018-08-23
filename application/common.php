@@ -31,6 +31,9 @@ function appLog($e)
 
 function formInput($name, $field, $value, $type = 'text', $rule = [], $readonly = false)
 {
+    if(empty($rule)){
+        $rule = [['rule'=>'notempty']];
+    }
     Form::input($name, $field, $value, $type, $rule, $readonly);
 }
 

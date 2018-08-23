@@ -44,7 +44,7 @@ class Validate
         'email'       => ':attribute not a valid email address',
         /**********************************************/
         'mobile'      => ':attribute not a valid mobile', //手机号
-        'decimal'      => ':attribute not a valid mobile',//金额
+        'decimal'      => ':attribute not a valid decimal',//金额
         'idCard'      => ':attribute not a valid idCard',//身份证
         'captcha'      => ':attribute not a valid captcha',//验证码
         'commastring'      => ':attribute not a valid commastring',//逗号隔开的数字

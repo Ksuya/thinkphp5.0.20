@@ -48,7 +48,7 @@ class Base extends Model{
             return ['errcode'=>'0','errmsg'=>$action.'成功'];
         }catch(Exception $e){
             appLog($e);
-            return ['errcode'=>'1001','errmsg'=>$action.'失败；'];
+            return ['errcode'=>'1001','errmsg'=>$e->getMessage()];//$action.'失败；'
         }
     }
 

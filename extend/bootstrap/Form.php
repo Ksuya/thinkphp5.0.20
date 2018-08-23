@@ -28,7 +28,7 @@ class Form
         }else{
             $class = '';
         }
-        $footer = '<input type="' . $type . '" class="form-control '.$class.'" id="' . md5($field) . '" name="' . $field . '" ' . $valiHtml . ' ' . $read . ' value="' . $value . '" placeholder="请填写' . $name . '"  /></div></div>';
+        $footer = '<input type="' . $type . '" class="form-control '.$class.'" data-bv-trigger="change" id="' . md5($field) . '" name="' . $field . '" ' . $valiHtml . ' ' . $read . ' value="' . $value . '" placeholder="请填写' . $name . '"  /></div></div>';
         echo $header . $footer;
     }
 
@@ -41,7 +41,7 @@ class Form
         } else {
             $read = '';
         }
-        $footer = '<select  class="form-control" id="' . md5($field) . '" name="' . $field . '" ' . $valiHtml . ' ' . $read . '>';
+        $footer = '<select  class="form-control" data-bv-trigger="change" id="' . md5($field) . '" name="' . $field . '" ' . $valiHtml . ' ' . $read . '>';
         $footer .= '<option value="">请选择</option>';
         if ($key && $keyname) {
             foreach ($values as $v) {

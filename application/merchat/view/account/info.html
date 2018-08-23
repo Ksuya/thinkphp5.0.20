@@ -6,6 +6,9 @@
         <li><a>账户管理</a></li>
         <li class="active">账户信息</li>
     </ol>
+    <div class="row col-lg-12">
+        <div class="col-lg-3"></div>
+    </div>
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#base" data-toggle="tab">基本信息</a>
         </li>
@@ -16,12 +19,12 @@
             <div class="panel panel-default" style="margin-top:30px;">
                 <ul class="list-group">
                     <li class="list-group-item">商户名称：{$base.name}</li>
-                    <li class="list-group-item">商户编号：{$base.sign_number}</li>
+                    <li class="list-group-item">商户编号：{$base.signNumber}</li>
                     <li class="list-group-item">商户余额：{$base.balance|default=0}</li>
                     <li class="list-group-item">保&nbsp;证&nbsp;&nbsp;金：{$base.bond|default=0}</li>
-                    <li class="list-group-item">时用状态：{$base.status}</li>
+                    <li class="list-group-item">时用状态：{$base.status.text}</li>
                     <li class="list-group-item">联系邮箱：{$base.email|default=''}</li>
-                    <li class="list-group-item">开通时间：{$base.created_time|default=''}</li>
+                    <li class="list-group-item">开通时间：{$base.createdTime|default=''}</li>
                 </ul>
 
             </div>
@@ -33,14 +36,14 @@
                     </button>
                 </div>
                 <ul class="list-group">
-                    <li class="list-group-item">真实姓名：{$detail.real_name}</li>
-                    <li class="list-group-item">身份证号：{$detail.id_number}</li>
+                    <li class="list-group-item">真实姓名：{$detail.realName}</li>
+                    <li class="list-group-item">身份证号：{$detail.idNumber}</li>
                     <li class="list-group-item">公司地址：{$detail.region.0} {$detail.region.1} {$detail.region.2}</li>
                     <li class="list-group-item">详细地址：{$detail.address}</li>
                     <li class="list-group-item">营业执照：{$detail.business}</li>
-                    <li class="list-group-item">营业执照副本：{if $detail.business_card} <button class="btn btn-sm btn-info" onclick="modal_image('营业执照副本','{$detail.business_card}');">预览</button> {/if}</li>
-                    <li class="list-group-item">法人身份证A&nbsp;：{if $detail.legal_card_a}  <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证A','{$detail.legal_card_a}');">预览</button> {/if}</li>
-                    <li class="list-group-item">法人身份证B&nbsp;：{if $detail.legal_card_b}  <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证B','{$detail.legal_card_b}');">预览</button> {/if}</li>
+                    <li class="list-group-item">营业执照副本：{if $detail.businessCard} <button class="btn btn-sm btn-info" onclick="modal_image('营业执照副本','{$detail.businessCard}');">预览</button> {/if}</li>
+                    <li class="list-group-item">法人身份证A&nbsp;：{if $detail.legalCarda}  <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证A','{$detail.legalCarda}');">预览</button> {/if}</li>
+                    <li class="list-group-item">法人身份证B&nbsp;：{if $detail.legalCardb}  <button class="btn btn-sm btn-info" onclick="modal_image('法人身份证B','{$detail.legalCardb}');">预览</button> {/if}</li>
                 </ul>
             </div>
         </div>
@@ -58,8 +61,8 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" value="{$detail.id}">
-                        {:formInput('真实姓名:','real_name',$detail.real_name,'text',[['rule'=>'notempty']],true)}
-                        {:formInput('身份证号:','id_number',$detail.id_number,'text',[['rule'=>'notempty']],true)}
+                        {:formInput('真实姓名:','realName',$detail.realName,'text',[['rule'=>'notempty']],true)}
+                        {:formInput('身份证号:','idNumber',$detail.idNumber,'text',[['rule'=>'notempty']],true)}
                         <div class="form-group" id="company_region">
                             <label class="col-sm-2 control-label">公司地区:</label>
                             <div class="col-sm-10 cxselect-list">
@@ -74,10 +77,10 @@
                         </div>
                         {:formInput('详细地址:','address',$detail.address,'text',[['rule'=>'notempty']])}
                         {:formInput('营业执照:','business',$detail.business,'text',[['rule'=>'notempty']])}
-                        {:formInput('法人名称:','legal_name',$detail.business,'text',[['rule'=>'notempty']])}
-                        {:formFile(true,'法人身份证A:','legal_card_a',$detail.legal_card_a,$detail.legal_card_a)}
-                        {:formFile(false,'法人身份证B:','legal_card_b',$detail.legal_card_b,$detail.legal_card_b)}
-                        {:formFile(false,'营业执照副本:','business_card',$detail.business_card,$detail.business_card)}
+                        {:formInput('法人名称:','legalName',$detail.legalName,'text',[['rule'=>'notempty']])}
+                        {:formFile(true,'法人身份证A:','legalCarda',$detail.legalCarda,$detail.legalCarda)}
+                        {:formFile(false,'法人身份证B:','legalCardb',$detail.legalCardb,$detail.legalCardb)}
+                        {:formFile(false,'营业执照副本:','businessCard',$detail.businessCard,$detail.businessCard)}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

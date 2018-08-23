@@ -127,8 +127,44 @@ $(function () {
         $("#"+tableId).bootstrapTable('refresh',{query:{}});
         hideLoading();
     });
+
+    // 提现申请银行change事件
+    $("#e78cbbe1114af26550a6322904a07657").change(function () {
+        var obj = $(this);
+        var curVal = obj.val();
+        var form = obj.closest('form');
+        if(curVal){
+            pbAjax(false,'/merchat/Account/getBankInfo',{id:curVal},function (res) {
+                renderForm(form,res.data);
+                hideLoading();
+            });
+        }else{
+            renderForm(form,{});
+        }
+    });
 });
 
+function renderForm(formobj,data) {
+    var numtest = /^[0-9]*$/;
+    for(var i=0;i<formobj[0].length;i++){
+        if(numtest.test(i)){
+            var curElem = $(formobj[0][i]);
+            var type = curElem[0].tagName;
+            var name = curElem[0].name;
+            // id 在下拉框用到
+            var id = curElem[0].id;
+            var dataName = data[name] ? data[name] : '';
+            switch (type){
+                case 'INPUT':
+                    $("body").find("input[name=\'"+name+"\']").val(dataName).change();
+                    break;
+                case 'SELECT':
+                    $("#"+id).find("option[value=\'"+dataName+"\']").attr("selected",true);
+                    break;
+            }
+        }
+    }
+}
 /**
  * 商户流水-行操作
  * @param row
@@ -368,4 +404,76 @@ function handlerToobar(length) {
         $("#table-btn-moreaction-list").hide();
     }
 }
+
+function bootstrapConfirm(title,msg,callback,tableId) {
+    var confirm_html = '<div class="modal fade" id="confirm_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+         <div class="modal-dialog">\
+         <div class="modal-content">\
+         <div class="modal-header">\
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+     <h4 class="modal-title" id="myModalLabel">'+title+'</h4>\
+     </div>\
+     <div class="modal-body">'+msg+'</div>\
+         <div class="modal-footer">\
+         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>\
+         <button type="button" class="btn btn-primary btn-confirm" onclick="'+callback+'">确认</button>\
+         </div>\
+         </div>\
+     </div>\
+     </div>';
+    appendModal('confirm_Modal',confirm_html);
+}
+
+/* $(document).on('click','.btn-confirm',function (e) {
+ var obj = $(e.target);
+ var callback = obj.attr("callback");
+ var func = eval(callback);
+ func();
+ });*/
+
+function modal_image(title,url) {
+    var image_html = '<div class="modal fade" id="modalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+         <div class="modal-dialog">\
+         <div class="modal-content">\
+         <div class="modal-header">\
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+     <h4 class="modal-title" id="myModalLabel">'+title+'</h4>\
+     </div>\
+     <div class="modal-body"><img src="'+url+'" class="img-responsive"'+url+'</div>\
+         </div>\
+     </div>\
+     </div>';
+    appendModal('modalImage',image_html);
+}
+
+/**
+ * append modal 并且弹出
+ * @param dom
+ * @param html
+ */
+function appendModal(dom,html) {
+    var domLength = $("body").find("#"+dom).length;
+    if(domLength > 0){
+        $("#"+dom).remove();
+    }
+    $("body").append(html);
+    $("#"+dom).modal('show');
+}
+
+/**
+ * 渲染ckeditor
+ * @param box
+ * @param content
+ */
+function rendorCkeditor(box,content)
+{
+    var content = content ? content : '';
+    var editor = CKEDITOR.instances[box]; //你的编辑器的"name"属性的值
+    $("#"+box).val(content);
+    if (editor) {
+        editor.destroy(true);//销毁编辑器
+    }
+    CKEDITOR.replace(box); //替换编辑器，editorID为ckeditor的"id"属性的值
+}
+
 
