@@ -31,8 +31,8 @@ function appLog($e)
 
 function formInput($name, $field, $value, $type = 'text', $rule = [], $readonly = false)
 {
-    if(empty($rule)){
-        $rule = [['rule'=>'notempty']];
+    if (empty($rule)) {
+        $rule = [['rule' => 'notempty']];
     }
     Form::input($name, $field, $value, $type, $rule, $readonly);
 }
@@ -52,13 +52,13 @@ function formEditor($name, $field)
     Form::editor($name, $field);
 }
 
-function formFile($isLoad=true,$name, $field, $list = '', $values = '')
+function formFile($isLoad = true, $name, $field, $list = '', $values = '')
 {
     $new = [];
-    if($list){
+    if ($list) {
         $new[] = $list;
     }
-    Form::file($isLoad,$name, $field, $new, $values);
+    Form::file($isLoad, $name, $field, $new, $values);
 }
 
 /**
@@ -80,44 +80,51 @@ function upload($folder = "default", $extType = "image", $defaultSize = 1)
             $accept = 'jpg,jpeg,png,gif';
     }
     $files = request()->file();
-    foreach ($files as $file){
+    foreach ($files as $file) {
         $fileInfo = $file->getInfo();
         $fileData['name'] = $fileInfo['name'];
         $fileData['size'] = $fileInfo['size'];
         $fileData['time'] = date('Y-m-d H:i:s');
-        $info = $file->validate(['size'=>$defaultSize*1024*1024,'ext'=>$accept])->move(ROOT_PATH . '/public/resource' . DS . 'uploads'.DS.$folder);
-        if($info){
+        $info = $file->validate(['size' => $defaultSize * 1024 * 1024, 'ext' => $accept])->move(ROOT_PATH . '/public/resource' . DS . 'uploads' . DS . $folder);
+        if ($info) {
             // 成功上传后 获取上传信息
             $fileData['type'] = $info->getExtension();
             // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
-            $fileData['path'] = '/resource/uploads/'.$folder.'/'.str_replace('\\','/',$info->getSaveName());
+            $fileData['path'] = '/resource/uploads/' . $folder . '/' . str_replace('\\', '/', $info->getSaveName());
             $upId = model('SystemFile')->insertGetId($fileData);
-            return ['errcode'=>'0','id'=>$upId,'path'=>$fileData['path']];
+            return ['errcode' => '0', 'id' => $upId, 'path' => $fileData['path']];
             // 输出 42a79759f284b767dfcb2a0197904287.jpg
             // echo $info->getFilename();
-        }else{
+        } else {
             // 上传失败获取错误信息
-            return ['errcode'=>'20012','errmsg'=>$file->getError()];
+            return ['errcode' => '20012', 'errmsg' => $file->getError()];
         }
     }
 }
 
-function timeRange($start,$end,$field)
+/**
+ * 时间字段范围
+ * @param $start   input 字段
+ * @param $end     input 字段
+ * @param $field   表field
+ * @return array
+ */
+function timeRange($start, $end, $field)
 {
     $con = [];
     $start = input($start);
     $end = input($end);
-    if($start){
-        if($end){
-            if(strtotime($start) < strtotime($end)){
-                $end = date('Y-m-d H:i:s',strtotime('+1 day',strtotime($end))-1);
-                $con[$field] = ['between',$start.','.$end];
-            }else{
-                $con[$field] = ['>',$start];
-            }
-        }else{
-            $con[$field] = ['>',$start];
+    if ($start && $end) {
+        if (strtotime($start) <= strtotime($end)) {
+            $end = date('Y-m-d H:i:s', strtotime('+1 day', strtotime($end)) - 1);
+            $con[$field] = ['between', $start . ',' . $end];
+        } else {
+            $con[$field] = ['>', $start];
         }
+    }elseif ($start && !$end){
+        $con[$field] = ['>', $start];
+    }elseif(!$start && $end){
+        $con[$field] = ['<', date('Y-m-d H:i:s', strtotime('+1 day', strtotime($end)) - 1)];
     }
     return $con;
 }

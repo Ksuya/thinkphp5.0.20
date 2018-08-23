@@ -157,12 +157,12 @@ html,body{width:100%;height:100%;overflow:hidden;}
     border-radius: 5px;
 }
 
-/*.modal-footer{
+.modal-my-bottom{
     position: fixed;
     width: 100%;
     bottom: 60px;
     background-color: #eee;
-}*/
+}
 
 .cxselect-list select{
     float: left;
@@ -203,4 +203,14 @@ html,body{width:100%;height:100%;overflow:hidden;}
 
 .myBtn-content .btn {
     margin-bottom: 10px;
+}
+
+/**
+商户信息 图标页面
+ */
+.info-header-bar{
+    padding: 40px;
+    height: 100%;
+    margin-bottom: 20px;
+    font-size: 30px;
 }

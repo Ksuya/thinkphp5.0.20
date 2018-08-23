@@ -22,7 +22,7 @@ $(function () {
 
     // 退出登陆
     $(".logout").click(function () {
-        bootstrapConfirm('信息确认', '确定退出登陆吗?', 'out');
+        bootstrapConfirm('信息确认', '确定退出登陆吗?', 'out();');
     });
 
     // 表单提交
@@ -54,12 +54,11 @@ $(function () {
     });
 
     // 表单modal关闭重置表单
-    $('#myFormModal').on('hide.bs.modal',function(e) {
+    $('#myFormModal,#withdrawFormModal').on('hide.bs.modal',function(e) {
         var obj = $(e.target);
         var formId = obj.find("form");
         $(formId).bootstrapValidator('resetForm');
         $(formId)[0].reset();
-        //reloadIframe();
     })
 
     // checkbox  radio

@@ -1,10 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{include file="common@public/admin-header"}
 <body>
+<div class="panel-body">
+    <ol class="breadcrumb">
+        <li><a>首页</a></li>
+        <li><a>安全设置</a></li>
+        <li class="active">安全设置</li>
+    </ol>
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#modifyPwd" data-toggle="tab">修改登录密码</a>
+        </li>
+        <li><a href="#withdrawPwd" data-toggle="tab">提现口令</a></li>
+        <li><a href="#developData" data-toggle="tab">开发资料</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="modifyPwd">
+            <div class="panel panel-default" style="margin-top:30px;">
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" action="{:url('modifyPwd')}">
+                        {:token('token_mod_pwd', 'sha1')}
+                        {:formInput('旧密码:','oldPassword','','password')}
+                        {:formInput('新密码:','newPassword','','password')}
+                        {:formInput('确认密码:','renewPassword','','password',[['rule'=>'identical','name'=>'新密码','field'=>'newPassword'],['rule'=>'notempty']])}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-primary form-ajax-submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="withdrawPwd">
+            <div class="panel panel-default" style="margin-top:30px;">
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" action="{:url('modifyWithdrawPwd')}">.
+                        {:token('token_mod_withpwd', 'md5')}
+                        {:formInput('旧口令:','oldCommand','','password')}
+                        {:formInput('新口令:','newCommand','','password')}
+                        {:formInput('确认口令:','renewCommand','','password',[['rule'=>'identical','name'=>'新口令','field'=>'newCommand'],['rule'=>'notempty']])}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-primary form-ajax-submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="developData">
+            <div class="panel panel-default" style="margin-top:30px;">
+                <ul class="list-group">
+                    <li class="list-group-item">商户编码：{$base.signNumber}</li>
+                    <li class="list-group-item">商户密钥：{$base.signKey}</li>
+                    <li class="list-group-item">文档下载：<a href="__ROOT__/resource/demo/api/4ds4dsdslkdls.zip"><button type="button" class="btn btn-info">下载</button></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade right" id="myFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form class="form-horizontal" role="form" id="merchatInfoForm" action="{:url('saveDetail')}">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">修改详细信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        {:formInput('真实姓名:','realName','','text')}
+                        {:formInput('身份证号:','idNumber','','text')}
 
+                    </div>
+                    <div class="modal-footer modal-my-bottom">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary form-ajax-submit">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
 </body>
 </html>

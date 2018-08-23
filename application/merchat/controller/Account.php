@@ -20,6 +20,7 @@ class Account extends MerchatBase{
         $this->model['merchatDetail'] = model('MerchatDetail');
         $this->model['merchatWithdraw'] = model('MerchatWithdraw');
         $this->model['merchatBank'] = model('MerchatBank');
+        $this->model['systemGateway'] = model('SystemGateway');
     }
 
     /*
@@ -27,10 +28,9 @@ class Account extends MerchatBase{
      */
     public function info()
     {
-        $base = $this->model['merchat']->where('id',$this->merchatId)->find();
-        $detail = $this->model['merchatDetail']->where('merchatId',$this->merchatId)->find();
-        $assign = compact('base','detail');
-        return view('',$assign);
+        // 获取商户信息
+        $result = $this->model['merchat']->detail($this->merchatId);
+        return view('',$result['data']);
     }
 
     /*
@@ -69,7 +69,7 @@ class Account extends MerchatBase{
      */
     public function btData()
     {
-        $dateCon = timeRange('start','end','a.created_time');
+        $dateCon = timeRange('start','end','a.createdTime');
         $con = array_merge($dateCon,['merchatId'=>$this->merchatId]);
         return $this->model['merchatWithdraw']->bootstrapTable('a.*,b.name as merchat',$con,[['merchat b','a.merchatId = b.id','left']]);
     }
@@ -93,7 +93,7 @@ class Account extends MerchatBase{
         $orderNo = $this->randomNumber();
         $data['merchatId'] = $this->merchatId;
         $data['transaction'] = $orderNo;
-        return $this->model['merchat']->withdraw($data);
+        return $this->model['merchat']->withdraw($data,3);
     }
 
 }

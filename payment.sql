@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
+Source Server         : localhost
 Source Server Version : 50553
 Source Host           : localhost:3306
-Source Database       : payment
+Source Database       : test2
 
 Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-08-23 10:39:42
+Date: 2018-08-23 20:16:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,10 +23,10 @@ CREATE TABLE `merchat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '商户名称',
   `signNumber` int(11) NOT NULL COMMENT '商户编号',
+  `signKey` varchar(255) COLLATE utf8_bin NOT NULL COMMENT '商户支付密钥',
+  `withdrawKey` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `balance` decimal(10,2) DEFAULT NULL COMMENT '商户余额',
   `bond` decimal(10,2) DEFAULT NULL COMMENT '保证金',
-  `widthRate` double NOT NULL COMMENT '出金税率',
-  `depositRate` double NOT NULL COMMENT '入金税率',
   `gateway` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '使用通道',
   `status` tinyint(4) DEFAULT '1' COMMENT '商户状态 1-有效  2-冻结',
   `email` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '登陆邮箱',
@@ -40,7 +40,7 @@ CREATE TABLE `merchat` (
 -- ----------------------------
 -- Records of merchat
 -- ----------------------------
-INSERT INTO `merchat` VALUES ('1', '测试商户名称', '902152144', '899.40', '100.00', '0.006', '0.006', '1,2,3', '1', '761243073@qq.com', '15369197307', '2018-08-19 19:07:50', null);
+INSERT INTO `merchat` VALUES ('1', '测试商户名称', '902152144', '2e5d85f8fs8f5f8g', '19940618', '849.10', '100.00', '1,2,3', '1', '761243073@qq.com', '15369197307', '2018-08-19 19:07:50', null);
 
 -- ----------------------------
 -- Table structure for merchat_bank
@@ -109,15 +109,17 @@ CREATE TABLE `merchat_withdraw` (
   `accType` tinyint(4) DEFAULT '0' COMMENT '0-对私 1-对公',
   `status` tinyint(4) DEFAULT '0' COMMENT '0-处理中 1-处理成功 2-处理失败 ',
   `createdTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `createdUser` int(255) NOT NULL,
   `dealUser` int(11) DEFAULT NULL COMMENT '处理人',
   PRIMARY KEY (`id`),
   KEY `merchatId` (`merchatId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of merchat_withdraw
 -- ----------------------------
-INSERT INTO `merchat_withdraw` VALUES ('12', '1', '1', '201808222302477918076355', '100.00', '测试持卡人', '621226854521', '建设银行', '河北省', '邯郸市', '0.60', '0', '0', null, null);
+INSERT INTO `merchat_withdraw` VALUES ('12', '1', '1', '201808222302477918076355', '100.00', '测试持卡人', '621226854521', '建设银行', '河北省', '邯郸市', '0.60', '0', '0', '2018-08-22 13:35:00', '2', null);
+INSERT INTO `merchat_withdraw` VALUES ('13', '1', '1', '201808231332328739650216', '50.00', '测试持卡人', '621226854521', '建设银行', '河北省', '秦皇岛市', '0.30', '0', '0', '2018-08-23 13:35:05', '2', null);
 
 -- ----------------------------
 -- Table structure for system_file
@@ -156,10 +158,10 @@ INSERT INTO `system_file` VALUES ('16', '201806151415585979614.jpg', '5383', 'jp
 INSERT INTO `system_file` VALUES ('17', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180822/54f13b624cc0b2049b2b0327f33dda56.png', '2018-08-22 12:26:55', null);
 
 -- ----------------------------
--- Table structure for system_getway
+-- Table structure for system_gateway
 -- ----------------------------
-DROP TABLE IF EXISTS `system_getway`;
-CREATE TABLE `system_getway` (
+DROP TABLE IF EXISTS `system_gateway`;
+CREATE TABLE `system_gateway` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) COLLATE utf8_bin NOT NULL COMMENT '通道名称',
   `code` varchar(20) COLLATE utf8_bin NOT NULL COMMENT '通道标识',
@@ -168,15 +170,49 @@ CREATE TABLE `system_getway` (
   `withdrawRate` double DEFAULT '0.006' COMMENT '出金- 通道费率 默认千6',
   `minAmount` decimal(10,2) DEFAULT '10.00' COMMENT '最低限额',
   `maxAmount` decimal(10,2) DEFAULT '100000.00' COMMENT '最高限额',
+  `statementsRate` varchar(20) COLLATE utf8_bin DEFAULT 'T0' COMMENT '结算方式',
+  `comment` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of system_getway
+-- Records of system_gateway
 -- ----------------------------
-INSERT INTO `system_getway` VALUES ('1', 'h5快捷&支付宝h5&微信h5', 'MINGFU561', '1', '0.006', '0.006', '10.00', '100000.00');
-INSERT INTO `system_getway` VALUES ('2', '银联扫码&QQ扫码&微信&支付宝', 'MINGFU591', '1', '0.006', '0.006', '10.00', '100000.00');
-INSERT INTO `system_getway` VALUES ('3', '手动提现', 'PLATFORM999', '-1', '0.006', '0.006', '10.00', '100000.00');
+INSERT INTO `system_gateway` VALUES ('1', 'h5快捷&支付宝h5&微信h5', 'MINGFU561', '1', '0.006', '0.006', '10.00', '100000.00', 'T0', null);
+INSERT INTO `system_gateway` VALUES ('2', '银联扫码&QQ扫码&微信&支付宝', 'MINGFU591', '1', '0.006', '0.006', '10.00', '100000.00', 'T0', null);
+INSERT INTO `system_gateway` VALUES ('3', '手动提现', 'PLATFORM999', '-1', '0.006', '0.006', '10.00', '100000.00', 'T0', '此通道请勿删除,否则无法手动提现');
+
+-- ----------------------------
+-- Table structure for system_order
+-- ----------------------------
+DROP TABLE IF EXISTS `system_order`;
+CREATE TABLE `system_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `merchatId` int(11) NOT NULL,
+  `gatewayId` int(11) NOT NULL COMMENT '交易通道ID',
+  `merCode` varchar(50) NOT NULL COMMENT '商户号',
+  `orderNo` varchar(50) NOT NULL COMMENT '商户订单号',
+  `transaction` varchar(50) NOT NULL COMMENT '平台流水号',
+  `orderAmount` double NOT NULL COMMENT '订单金额 单位元',
+  `serviceCharge` double NOT NULL COMMENT '手续费',
+  `status` varchar(20) DEFAULT '0001' COMMENT '0000-支付成功  0001-提交，尚未支付  0002-支付失败   0003-通知失败  0004-已退款  0005-订单关闭',
+  `notifyNumber` int(11) DEFAULT '0' COMMENT '通知次数 指导通知完毕  要求商户返回 success 不区别大小写',
+  `returnAddress` varchar(255) DEFAULT NULL COMMENT '同步回调地址',
+  `backAddress` varchar(255) DEFAULT NULL COMMENT '后台通知地址,通知5次，通知后关闭订单',
+  `dateTime` varchar(20) DEFAULT NULL COMMENT '发起时间（YYYYmmddHHiiss）',
+  `payType` varchar(50) DEFAULT NULL COMMENT '支付方式 这个暂时留着,要用的,',
+  `bankCardType` tinyint(4) DEFAULT '1' COMMENT '1-借记卡 2-信用卡',
+  `bankCode` varchar(50) DEFAULT NULL COMMENT '银行编码，具体支付具体编码',
+  `sign` varchar(255) NOT NULL COMMENT '签名',
+  `createdTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `merCode` (`merCode`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of system_order
+-- ----------------------------
+INSERT INTO `system_order` VALUES ('1', '1', '1', '', '20180823170765451', '201808231708541285542214', '159.99', '0', '0001', '0', 'http://www.baidu.com', 'http://www.baidu.com', '20180823170752', null, '1', 'CCB', 'd45s4d5s4d545', '2018-08-23 17:19:02');
 
 -- ----------------------------
 -- Table structure for system_supplire
@@ -207,9 +243,10 @@ CREATE TABLE `users` (
   `create_time` datetime DEFAULT NULL,
   `last_login` datetime DEFAULT NULL COMMENT '上次登陆时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '1', 'test01', '0e698a8ffc1a0af622c7b4db3cb750cc', '2018-08-19 16:56:03', '2018-08-19 16:56:06');
+INSERT INTO `users` VALUES ('2', '1', 'test01', 'f46ef81f2464441ba58aeecbf654ee41', '2018-08-19 16:56:03', '2018-08-19 16:56:06');
+INSERT INTO `users` VALUES ('1', '-1', 'whlphper', '9b0dae2d1d76cc9afb3f339e69506f68', '2018-08-01 13:35:36', '2018-08-06 13:35:41');

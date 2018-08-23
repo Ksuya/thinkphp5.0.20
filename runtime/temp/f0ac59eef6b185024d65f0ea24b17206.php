@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\index\index.html";i:1534739653;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1534853416;s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-top-nav.html";i:1534739653;s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-left-menu.html";i:1534739653;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534835935;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\index\index.html";i:1534739653;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1534853416;s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-top-nav.html";i:1535016564;s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-left-menu.html";i:1535016304;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534835935;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +35,7 @@
     <ul class="clearfix">
         <li>
             <i class="fa fa-user-circle-o font_lager"></i>
-            <p data-id="merchat">账户管理</p>
+            <p data-id="merchat">商户管理</p>
         </li>
         <li>
             <i class="fa fa-user-plus font_lager"></i>
@@ -43,17 +43,16 @@
         </li>
         <li>
             <i class="fa fa-file-text font_lager"></i>
-            <p data-id="order">订单信息</p>
+            <p data-id="trader">交易查询</p>
         </li>
-        <li>
+        <!--<li>
             <i class="fa fa-users font_lager"></i>
             <p data-id="product">产品信息</p>
         </li>
         <li>
             <i class="fa fa-users font_lager"></i>
             <p data-id="checkout">结算信息</p>
-        </li>
-
+        </li>-->
     </ul>
 </div>
     <div class="top-nav_roll f_left" style="display:none;">
@@ -73,39 +72,36 @@
 <div class="main_left">
     <h2><i class="menu_icon fa fa-reorder"></i></h2>
     <ul class="left-menu">
-        <!--账户管理-->
         <li>
             <i class="menu_icon fa fa-commenting-o"></i>
             <a href="javascript:void(0);" data-id="merchat" data-href="<?php echo url('/merchat/Account/info'); ?>">账户信息</a>
         </li>
+        <?php if($handWithdraw): ?>
         <li>
             <i class="menu_icon fa fa-commenting-o"></i>
             <a href="javascript:void(0);" data-id="merchat" data-href="<?php echo url('/merchat/Account/withdraw'); ?>">提现记录</a>
         </li>
-        <!--安全设置-->
+        <?php endif; ?>
         <li>
             <i class="menu_icon fa fa-list"></i>
             <a href="javascript:void(0);" data-id="security" data-href="<?php echo url('/merchat/Security/index'); ?>">安全设置</a>
         </li>
-
-        <!--订单信息-->
         <li>
             <i class="menu_icon fa fa-file-text-o"></i>
-            <a href="javascript:void(0);" data-id="order" data-href="<?php echo url('/merchat/Order/index'); ?>">订单信息</a>
+            <a href="javascript:void(0);" data-id="trader" data-href="<?php echo url('/merchat/Order/index'); ?>">订单查询</a>
         </li>
-        <!--产品信息-->
+        <!--<li>
+            <i class="menu_icon fa fa-file-text-o"></i>
+            <a href="javascript:void(0);" data-id="trader" data-href="<?php echo url('/merchat/Order/index'); ?>">代付查询</a>
+        </li>-->
         <li>
             <i class="menu_icon fa fa-users"></i>
             <a href="javascript:void(0);" data-id="product" data-href="<?php echo url('/merchat/Product/index'); ?>">产品信息</a>
         </li>
-
-        <!--结算信息-->
         <li>
             <i class="menu_icon fa fa-users"></i>
             <a href="javascript:void(0);" data-id="checkout" data-href="<?php echo url('/mechat/Checkout/index'); ?>">结算信息</a>
         </li>
-
-
     </ul>
 </div>
 <!--left end-->

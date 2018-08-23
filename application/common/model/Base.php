@@ -38,9 +38,9 @@ class Base extends Model{
             }
             if($scene){
                 $scene = $this->name.'.'.$scene;
-                $result = $this->validate($scene)->save($data,$condition);
+                $result = $this->validate($scene)->allowField(true)->save($data,$condition);
             }else{
-                $result = $this->save($data,$condition);
+                $result = $this->allowField(true)->save($data,$condition);
             }
             if(false === $result){
                 throw new Exception($this->getError());

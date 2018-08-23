@@ -160,7 +160,7 @@ class Form
                     $name = $type['name'];
                     $field = $type['field'];
                     $cur .= self::$prefix . $valiType . '-field=' . $field;
-                    $msg = '-message="和' . $name . '不一样"';
+                    $msg = '和' . $name . '不一样';
                     break;
                 case 'emailaddress':
                     $msg = '请填写有效电子邮箱';
