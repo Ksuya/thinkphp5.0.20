@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:94:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\account\withdraw.html";i:1535002485;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1534853416;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:94:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\account\withdraw.html";i:1535366861;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535361155;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="/static/fontsawesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="/static/vendor/bootstrap-validate/css/bootstrapValidator.css">
-    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/green.css">
+    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/grey.css">
     <link rel="stylesheet" href="/static/vendor/datepicker/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/static/vendor/select/css/bootstrap-select.min.css">
     <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
@@ -80,15 +80,15 @@
         </div>
         <div id="table-btn-moreaction-list" style="display: none;">
             <span>您选中了 <span id="row-select-total"></span> 行 </span>
-            <button type="button" class="btn btn-danger"
+            <button type="button" class="btn btn-danger table-more-action"
                     data-callback="merchatWithdraw" data-table="tb_departments" data-status="-1">批量拒绝
             </button>
-            <button type="button" class="btn btn-success"
+            <button type="button" class="btn btn-success table-more-action"
                     data-callback="merchatWithdraw" data-table="tb_departments" data-status="1">批量处理
             </button>
         </div>
     </div>
-    <table id="tb_departments" class="extra-table"></table>
+    <table id="tb_departments" class="table table-hover table-striped table-extra"></table>
 </div>
 <div class="modal fade right" id="withdrawFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">

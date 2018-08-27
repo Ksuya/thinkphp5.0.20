@@ -16,7 +16,7 @@ class Form
     public static function input($name, $field, $value = '', $type = 'text', $rules = [], $readonly = false)
     {
         $header = '<div class="form-group"><label for="' . md5($field) . '" class="col-sm-2 control-label">' . $name . '</label><div class="col-sm-4">';
-        $valiHtml = self::vendor($rules);
+        $valiHtml = self::vendor($rules,$name);
         if ($readonly) {
             $read = 'readonly="readonly"';
         } else {
@@ -35,7 +35,7 @@ class Form
     public static function select($name, $field, $values = [], $key, $keyname, $default = '',  $rules = [['rule' => 'notempty']], $readonly = false)
     {
         $header = '<div class="form-group"><label for="' . md5($field) . '" class="col-sm-2 control-label">' . $name . '</label><div class="col-sm-4">';
-        $valiHtml = self::vendor($rules);
+        $valiHtml = self::vendor($rules,$name);
         if ($readonly) {
             $read = 'disabled="disabled"';
         } else {
@@ -69,7 +69,7 @@ class Form
     public static function check($type='radio',$name, $field, $values = [], $key, $keyname, $default = '',  $rules = [['rule' => 'notempty']], $readonly = false)
     {
         $header = '<div class="form-group"><label  class="col-sm-2 control-label">' . $name . '</label><div class="col-sm-3">';
-        $valiHtml = self::vendor($rules);
+        $valiHtml = self::vendor($rules,$name);
         if ($readonly) {
             $read = 'disabled="disabled"';
         } else {
@@ -121,7 +121,7 @@ class Form
 
     public static function editor($name, $field,$rules = [['rule' => 'notempty']])
     {
-        $valiHtml = self::vendor($rules);
+        $valiHtml = self::vendor($rules,$name);
         $html = '<div class="form-group">
                             <label class="col-sm-2 control-label">'.$name.'</label>
                             <div class="col-sm-10">
@@ -136,7 +136,7 @@ class Form
         echo $html;
     }
 
-    public static function vendor(array $rules)
+    public static function vendor(array $rules,$fName='')
     {
         if (empty($rules)) {
             return;
@@ -148,7 +148,7 @@ class Form
             $cur .= self::$prefix . $valiType . '="true" ';
             switch ($valiType) {
                 case 'notempty':
-                    $msg = '请填写此信息';
+                    $msg = '请填写'.$fName;
                     break;
                 case 'stringlength':
                     $min = empty($type['min']) ? 6 : $type['min'];

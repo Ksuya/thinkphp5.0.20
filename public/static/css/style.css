@@ -174,13 +174,6 @@ html,body{width:100%;height:100%;overflow:hidden;}
 }
 
 
-/*
-表格样式
- */
-.extra-table{
-
-}
-
 /**
 表格搜索区域样式
  */
@@ -188,18 +181,16 @@ html,body{width:100%;height:100%;overflow:hidden;}
     float: left;
     display: inline-block;
     margin-right: 30px;
+    font-size: 13px;
 }
 
 .myLabel-content, .myText-content, .myBtn-content {
     float: left;
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
-.myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
-    height: 30px;
-    font-size: 12px;
-}
+
 
 .myBtn-content .btn {
     margin-bottom: 10px;
@@ -214,3 +205,11 @@ html,body{width:100%;height:100%;overflow:hidden;}
     margin-bottom: 20px;
     font-size: 30px;
 }
+
+
+/**
+表格样式
+ */
+.table-extra thead tr{border-bottom: 1px solid #3b3b1f;}
+.table-extra th{font-weight: bold;font-size: 13px;border: none;}
+.table-extra tbody td{font-size: 13px;border: none;}

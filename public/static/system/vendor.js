@@ -19,7 +19,6 @@ $(function () {
     });
 
 
-
     // 退出登陆
     $(".logout").click(function () {
         bootstrapConfirm('信息确认', '确定退出登陆吗?', 'out();');
@@ -30,10 +29,10 @@ $(function () {
         var btn = $(this);
         var formNode = $(this).closest('form');
         if (formNode.length > 0) {
-            $(formNode).bootstrapValidator({ excluded:[":disabled"]});
+            $(formNode).bootstrapValidator({excluded: [":disabled"]});
             $(formNode).bootstrapValidator('validate');
             var flag = $(formNode).data('bootstrapValidator').isValid()//验证是否通过true/false
-            if(flag){
+            if (flag) {
                 // 获取表单数据
                 var formData = pbFormJson($(formNode));
                 // 表单地址
@@ -45,7 +44,7 @@ $(function () {
                     setTimeout(function () {
                         $('#myFormModal').modal('hide');
                         reloadIframe();
-                    },1000)
+                    }, 1000)
 
                 };
                 pbAjax(btn, action, formData, callback);
@@ -54,7 +53,7 @@ $(function () {
     });
 
     // 表单modal关闭重置表单
-    $('#myFormModal,#withdrawFormModal').on('hide.bs.modal',function(e) {
+    $('#myFormModal,#withdrawFormModal').on('hide.bs.modal', function (e) {
         var obj = $(e.target);
         var formId = obj.find("form");
         $(formId).bootstrapValidator('resetForm');
@@ -63,13 +62,13 @@ $(function () {
 
     // checkbox  radio
     $('input').iCheck({
-        checkboxClass: 'icheckbox_flat-green',
-        radioClass: 'iradio_flat-green',
+        checkboxClass: 'icheckbox_flat-grey',
+        radioClass: 'iradio_flat-grey',
     });
 
     // datepicker
     $('.datepicker').datepicker({
-        "autoclose":true,"format":"yyyy-mm-dd","language":"zh-CN"
+        "autoclose": true, "format": "yyyy-mm-dd", "language": "zh-CN"
     });
 
     // ckeditor 冲突
@@ -92,18 +91,18 @@ $(function () {
     });
 
     // table row action
-    $(document).on('click','.table-row-action,.table-more-action',function (e) {
+    $(document).on('click', '.table-row-action,.table-more-action', function (e) {
         var obj = $(e.target);
         var callback = eval(obj.attr("data-callback"));
         var rowData = obj.attr("data-row");
         var status = obj.attr("data-status");
-        if(rowData != undefined && rowData != ''){
+        if (rowData != undefined && rowData != '') {
             var row = $.parseJSON(rowData);
-        }else{
+        } else {
             var row = false;
         }
         var tableId = obj.attr("data-table");
-        callback(row,tableId,status);
+        callback(row, tableId, status);
     });
 
     // table search
@@ -113,7 +112,7 @@ $(function () {
         var data = pbFormJson(curForm);
         data._time = Math.random();
         showLoadding();
-        $("#"+tableId).bootstrapTable('refresh',{query:data});
+        $("#" + tableId).bootstrapTable('refresh', {query: data});
         hideLoading();
     });
 
@@ -123,7 +122,7 @@ $(function () {
         var curForm = $(this).closest('form');
         $(curForm)[0].reset();
         showLoadding();
-        $("#"+tableId).bootstrapTable('refresh',{query:{}});
+        $("#" + tableId).bootstrapTable('refresh', {query: {}});
         hideLoading();
     });
 
@@ -132,73 +131,74 @@ $(function () {
         var obj = $(this);
         var curVal = obj.val();
         var form = obj.closest('form');
-        if(curVal){
-            pbAjax(false,'/merchat/Account/getBankInfo',{id:curVal},function (res) {
-                renderForm(form,res.data);
+        if (curVal) {
+            pbAjax(false, '/merchat/Account/getBankInfo', {id: curVal}, function (res) {
+                renderForm(form, res.data);
                 hideLoading();
             });
-        }else{
-            renderForm(form,{});
+        } else {
+            renderForm(form, {});
         }
     });
 });
 
-function renderForm(formobj,data) {
+function renderForm(formobj, data) {
     var numtest = /^[0-9]*$/;
-    for(var i=0;i<formobj[0].length;i++){
-        if(numtest.test(i)){
+    for (var i = 0; i < formobj[0].length; i++) {
+        if (numtest.test(i)) {
             var curElem = $(formobj[0][i]);
             var type = curElem[0].tagName;
             var name = curElem[0].name;
             // id 在下拉框用到
             var id = curElem[0].id;
             var dataName = data[name] ? data[name] : '';
-            switch (type){
+            switch (type) {
                 case 'INPUT':
-                    $("body").find("input[name=\'"+name+"\']").val(dataName).change();
+                    $("body").find("input[name=\'" + name + "\']").val(dataName).change();
                     break;
                 case 'SELECT':
-                    $("#"+id).find("option[value=\'"+dataName+"\']").attr("selected",true);
+                    $("#" + id).find("option[value=\'" + dataName + "\']").attr("selected", true);
                     break;
             }
         }
     }
 }
+
 /**
  * 商户流水-行操作
  * @param row
  */
-function merchatWithdraw(row,tableId,status) {
-    if(row){
-        switch (row.status['value']){
+function merchatWithdraw(row, tableId, status) {
+    if (row) {
+        switch (row.status['value']) {
             case 0:
-                bootstrapConfirm('提现记录-信息确认', '确定处理此提现记录吗?操作后不可更改,请谨慎操作','passMerchatWithdraw('+row.id+',\''+tableId+'\');');
+                bootstrapConfirm('提现记录-信息确认', '确定处理此提现记录吗?操作后不可更改,请谨慎操作', 'passMerchatWithdraw(' + row.id + ',\'' + tableId + '\');');
                 break;
             case 2:
-                bootstrapConfirm('提现记录-信息确认', '确定处理此提现记录吗?操作后不可更改,请谨慎操作','passMerchatWithdraw('+row.id+',\''+tableId+'\');');
+                bootstrapConfirm('提现记录-信息确认', '确定处理此提现记录吗?操作后不可更改,请谨慎操作', 'passMerchatWithdraw(' + row.id + ',\'' + tableId + '\');');
                 break;
             default:
                 break;
         }
-    }else{
-        var selectedData = getBtableAllselect(tableId,'id');
-        bootstrapConfirm('提现记录-信息确认', '确定批量处理此提现记录吗?操作后不可更改,请谨慎操作','passMerchatWithdraw(\''+selectedData+'\',\''+tableId+'\','+status+');');
+    } else {
+        var selectedData = getBtableAllselect(tableId, 'id');
+        bootstrapConfirm('提现记录-信息确认', '确定批量处理此提现记录吗?操作后不可更改,请谨慎操作', 'passMerchatWithdraw(\'' + selectedData + '\',\'' + tableId + '\',' + status + ');');
     }
 }
 
-function passMerchatWithdraw(id,tableId,status) {
+function passMerchatWithdraw(id, tableId, status) {
     var status = status ? status : 1;
     var url = '/merchat/Account/changeWithdrawStatus';
-    pbAjax(false,url,{id:id,status:status},function (res) {
-        layer.msg(res.errmsg,{icon:6});
+    pbAjax(false, url, {id: id, status: status}, function (res) {
+        layer.msg(res.errmsg, {icon: 6});
         setTimeout(function () {
-            if(tableId){
-                $("#"+tableId).bootstrapTable('refresh');
+            if (tableId) {
+                $("#" + tableId).bootstrapTable('refresh');
                 $("#table-btn-list").show();
                 $("#table-btn-moreaction-list").hide();
             }
             $("#confirm_Modal").modal("hide");
-        },1000);
+        }, 1000);
     });
 }
 
@@ -225,8 +225,8 @@ function box() {
 重载Irame
  */
 function reloadIframe() {
-    parent.$("iframe[name='cont_box']").prop("src", parent.$("iframe[name='cont_box']").attr('src')+'?time_'+new Date());
-    $("iframe[name='cont_box']").prop("src", $("iframe[name='cont_box']").attr('src')+'?time_'+new Date());
+    parent.$("iframe[name='cont_box']").prop("src", parent.$("iframe[name='cont_box']").attr('src') + '?time_' + new Date());
+    $("iframe[name='cont_box']").prop("src", $("iframe[name='cont_box']").attr('src') + '?time_' + new Date());
 }
 
 /**
@@ -243,17 +243,17 @@ function sendPost() {
 var FileInput = function () {
     var oFile = new Object();
     //初始化fileinput控件
-    oFile.Init = function(ctrlName, uploadUrl,initIMmgs,initValues) {
+    oFile.Init = function (ctrlName, uploadUrl, initIMmgs, initValues) {
         var initIMmgs = initIMmgs ? initIMmgs : [];
         var initValues = initValues ? initValues : '';
         var initPreview = [];
-        var block = $("#"+ctrlName+'_value').parent("div").find(".help-block");
-        var bdiv = $("#"+ctrlName+'_value').parent("div").parent("div");
-        for(var i=0;i<initIMmgs.length;i++){
-            initPreview.push("<img src='"+initIMmgs[i]+"' class='file-preview-image img-responsive' style='width: 100%;height: 100%'>" );
+        var block = $("#" + ctrlName + '_value').parent("div").find(".help-block");
+        var bdiv = $("#" + ctrlName + '_value').parent("div").parent("div");
+        for (var i = 0; i < initIMmgs.length; i++) {
+            initPreview.push("<img src='" + initIMmgs[i] + "' class='file-preview-image img-responsive' style='width: 100%;height: 100%'>");
         }
         var control = $('#' + ctrlName);
-        $("#"+ctrlName+'_value').val(initValues).change();
+        $("#" + ctrlName + '_value').val(initValues).change();
         //初始化上传控件的样式
         control.fileinput({
             language: 'zh', //设置语言
@@ -261,7 +261,7 @@ var FileInput = function () {
             allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
             showUpload: false, //是否显示上传按钮
             showCaption: false,//是否显示标题
-            showPreview:false,
+            showPreview: false,
             browseClass: "btn btn-primary", //按钮样式
             dropZoneEnabled: false,//是否显示拖拽区域
             //minImageWidth: 50, //图片的最小宽度
@@ -271,7 +271,7 @@ var FileInput = function () {
             maxFileSize: 600,//单位为kb，如果为0表示不限制文件大小
             maxFileCount: 1, //表示允许同时上传的最大文件个数
             enctype: 'multipart/form-data',
-            validateInitialCount:true,
+            validateInitialCount: true,
             multiple: false,
             previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
             initialPreview: initPreview,
@@ -286,39 +286,39 @@ var FileInput = function () {
                 };
                 return data;
             },*/
-            layoutTemplates :{
-                actionDelete:'', //去除上传预览的缩略图中的删除图标
-                actionUpload:'',//去除上传预览缩略图中的上传图片；
+            layoutTemplates: {
+                actionDelete: '', //去除上传预览的缩略图中的删除图标
+                actionUpload: '',//去除上传预览缩略图中的上传图片；
                 //actionZoom:''   //去除上传预览缩略图中的查看详情预览的缩略图标。
             },
         });
-        $("#"+ctrlName).on("filebatchselected", function(event, files) {
-            $("#"+ctrlName).fileinput("upload");
+        $("#" + ctrlName).on("filebatchselected", function (event, files) {
+            $("#" + ctrlName).fileinput("upload");
         });
         // 导入文件上传完成之后的事件
-        $("#"+ctrlName).on("fileuploaded", function (event, data) {
+        $("#" + ctrlName).on("fileuploaded", function (event, data) {
             var response = data.response;
-            if(response.errcode == '0'){
-                var old = $("#"+ctrlName+'_value').val();
-                if(old == ''){
+            if (response.errcode == '0') {
+                var old = $("#" + ctrlName + '_value').val();
+                if (old == '') {
                     var old = [];
-                }else{
+                } else {
                     var old = old.split(',');
                 }
                 old.push(response.path);
-                $("#"+ctrlName+'_value').val(old.join(',')).change();
-            }else{
+                $("#" + ctrlName + '_value').val(old.join(',')).change();
+            } else {
                 alert(response.errmsg);
             }
 
         });
         // 删除事件
-        $('#'+ctrlName).on('filesuccessremove', function(event, data, previewId, index) {
-            $("#"+ctrlName+'_value').val('').change();
+        $('#' + ctrlName).on('filesuccessremove', function (event, data, previewId, index) {
+            $("#" + ctrlName + '_value').val('').change();
         });
         // 清空控件
-        $('#'+ctrlName).on('fileclear', function(event, data, msg) {
-            $("#"+ctrlName+'_value').val('').change();
+        $('#' + ctrlName).on('fileclear', function (event, data, msg) {
+            $("#" + ctrlName + '_value').val('').change();
         });
 
     }
@@ -330,11 +330,11 @@ var FileInput = function () {
 var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
-    oTableInit.Init = function (id,url,field,sort,order) {
+    oTableInit.Init = function (id, url, field, sort, order) {
         var field = field ? field : [];
         var sort = sort ? sort : '';
         var order = order ? order : '';
-        $('#'+id).bootstrapTable({
+        $('#' + id).bootstrapTable({
             url: url,         //请求后台的URL（*）
             method: 'post',                      //请求方式（*）
             toolbar: '#toolbar',                //工具按钮用哪个容器
@@ -342,11 +342,11 @@ var TableInit = function () {
             cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             pagination: true,                   //是否显示分页（*）
             sortable: true,                     //是否启用排序
-            sortName:sort,
+            sortName: sort,
             sortOrder: order,                   //排序方式
             //queryParams: oTableInit.queryParams,//传递参数（*）
             sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
-            pageNumber:1,                       //初始化加载第一页，默认第一页
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
             pageSize: 10,                       //每页的记录行数（*）
             pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
             search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
@@ -357,13 +357,13 @@ var TableInit = function () {
             clickToSelect: false,                //是否启用点击选中行
             height: '',                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
             uniqueId: "",                     //每一行的唯一标识，一般为主键列
-            showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
+            showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
             columns: field,
         });
 
-        $('#'+id).on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function (row) {
+        $('#' + id).on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function (row) {
             var length = getBtableAllselect(id).length;
             handlerToobar(length);
         });
@@ -371,19 +371,36 @@ var TableInit = function () {
     return oTableInit;
 };
 
+
+function base64Encode(input) {
+    var rv;
+    rv = encodeURIComponent(input);
+    rv = unescape(rv);
+    rv = window.btoa(rv);
+    return rv;
+}
+
+function base64Decode(input) {
+    rv = window.atob(input);
+    rv = escape(rv);
+    rv = decodeURIComponent(rv);
+    return rv;
+}
+
+
 /**
  * 获取表格选中的数据
  * @param id
  * @returns {jQuery}
  */
-function getBtableAllselect(id,ids) {
-    var ids = ids ? ids :false;
-    var data = $('#'+id).bootstrapTable('getAllSelections');
-    if(!ids){
+function getBtableAllselect(id, ids) {
+    var ids = ids ? ids : false;
+    var data = $('#' + id).bootstrapTable('getAllSelections');
+    if (!ids) {
         return data;
     }
     var list = [];
-    for(var i=0;i<data.length;i++){
+    for (var i = 0; i < data.length; i++) {
         list.push(data[i][ids]);
     }
     return list.join(',');
@@ -394,33 +411,33 @@ function getBtableAllselect(id,ids) {
  * @param length
  */
 function handlerToobar(length) {
-    if(length > 0){
+    if (length > 0) {
         $("#table-btn-list").hide();
         $("#table-btn-moreaction-list").show();
         $("#row-select-total").text(length);
-    }else{
+    } else {
         $("#table-btn-list").show();
         $("#table-btn-moreaction-list").hide();
     }
 }
 
-function bootstrapConfirm(title,msg,callback,tableId) {
+function bootstrapConfirm(title, msg, callback, tableId) {
     var confirm_html = '<div class="modal fade" id="confirm_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
          <div class="modal-dialog">\
          <div class="modal-content">\
          <div class="modal-header">\
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
-     <h4 class="modal-title" id="myModalLabel">'+title+'</h4>\
+     <h4 class="modal-title" id="myModalLabel">' + title + '</h4>\
      </div>\
-     <div class="modal-body">'+msg+'</div>\
+     <div class="modal-body">' + msg + '</div>\
          <div class="modal-footer">\
          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>\
-         <button type="button" class="btn btn-primary btn-confirm" onclick="'+callback+'">确认</button>\
+         <button type="button" class="btn btn-primary btn-confirm" onclick="' + callback + '">确认</button>\
          </div>\
          </div>\
      </div>\
      </div>';
-    appendModal('confirm_Modal',confirm_html);
+    appendModal('confirm_Modal', confirm_html);
 }
 
 /* $(document).on('click','.btn-confirm',function (e) {
@@ -430,19 +447,19 @@ function bootstrapConfirm(title,msg,callback,tableId) {
  func();
  });*/
 
-function modal_image(title,url) {
+function modal_image(title, url) {
     var image_html = '<div class="modal fade" id="modalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
          <div class="modal-dialog">\
          <div class="modal-content">\
          <div class="modal-header">\
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
-     <h4 class="modal-title" id="myModalLabel">'+title+'</h4>\
+     <h4 class="modal-title" id="myModalLabel">' + title + '</h4>\
      </div>\
-     <div class="modal-body"><img src="'+url+'" class="img-responsive"'+url+'</div>\
+     <div class="modal-body"><img src="' + url + '" class="img-responsive"' + url + '</div>\
          </div>\
      </div>\
      </div>';
-    appendModal('modalImage',image_html);
+    appendModal('modalImage', image_html);
 }
 
 /**
@@ -450,13 +467,13 @@ function modal_image(title,url) {
  * @param dom
  * @param html
  */
-function appendModal(dom,html) {
-    var domLength = $("body").find("#"+dom).length;
-    if(domLength > 0){
-        $("#"+dom).remove();
+function appendModal(dom, html) {
+    var domLength = $("body").find("#" + dom).length;
+    if (domLength > 0) {
+        $("#" + dom).remove();
     }
     $("body").append(html);
-    $("#"+dom).modal('show');
+    $("#" + dom).modal('show');
 }
 
 /**
@@ -464,11 +481,10 @@ function appendModal(dom,html) {
  * @param box
  * @param content
  */
-function rendorCkeditor(box,content)
-{
+function rendorCkeditor(box, content) {
     var content = content ? content : '';
     var editor = CKEDITOR.instances[box]; //你的编辑器的"name"属性的值
-    $("#"+box).val(content);
+    $("#" + box).val(content);
     if (editor) {
         editor.destroy(true);//销毁编辑器
     }

@@ -10,6 +10,8 @@
 // +----------------------------------------------------------------------
 use bootstrap\Form;
 use think\Request;
+use think\Captcha;
+use think\Db;
 
 // 应用公共文件
 function appLog($e)
@@ -127,4 +129,30 @@ function timeRange($start, $end, $field)
         $con[$field] = ['<', date('Y-m-d H:i:s', strtotime('+1 day', strtotime($end)) - 1)];
     }
     return $con;
+}
+
+
+
+function getCaptChar($type="num",$fontSize=30,$length=6,$useNoise=false)
+{
+    switch($type){
+        case 'num':
+            $rType = '0123456789';
+            break;
+        case 'string':
+            $rType = '';
+            break;
+    }
+    $config =    [
+        'codeSet'=> $rType,
+        'useZh'=>   false,
+        // 验证码字体大小
+        'fontSize'    =>    $fontSize,
+        // 验证码位数
+        'length'      =>    $length,
+        // 关闭验证码杂点
+        'useNoise'    =>    $useNoise,
+    ];
+    $captcha = new Captcha($config);
+    return $captcha->entry();
 }

@@ -875,7 +875,7 @@
                     sprintf(' style="%s"', halign + style),
                     sprintf(' rowspan="%s"', column.rowspan),
                     sprintf(' colspan="%s"', column.colspan),
-                    sprintf(' data-field="%s"', column.field),
+                    //sprintf(' data-field="%s"', column.field),
                     j === 0 && column.fieldIndex ? ' data-not-first-th' : '',
                     '>');
 
@@ -2130,8 +2130,9 @@
             contentType: this.options.contentType,
             dataType: this.options.dataType,
             success: function (res) {
+                var res = base64Decode(res);
+                res = $.parseJSON(res);
                 res = calculateObjectValue(that.options, that.options.responseHandler, [res], res);
-
                 that.load(res);
                 that.trigger('load-success', res);
                 if (!silent) that.$tableLoading.hide();

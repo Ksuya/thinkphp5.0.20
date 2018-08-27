@@ -52,15 +52,15 @@
         </div>
         <div id="table-btn-moreaction-list" style="display: none;">
             <span>您选中了 <span id="row-select-total"></span> 行 </span>
-            <button type="button" class="btn btn-danger"
+            <button type="button" class="btn btn-danger table-more-action"
                     data-callback="merchatWithdraw" data-table="tb_departments" data-status="-1">批量拒绝
             </button>
-            <button type="button" class="btn btn-success"
+            <button type="button" class="btn btn-success table-more-action"
                     data-callback="merchatWithdraw" data-table="tb_departments" data-status="1">批量处理
             </button>
         </div>
     </div>
-    <table id="tb_departments" class="extra-table"></table>
+    <table id="tb_departments" class="table table-hover table-striped table-extra"></table>
 </div>
 <div class="modal fade right" id="withdrawFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">

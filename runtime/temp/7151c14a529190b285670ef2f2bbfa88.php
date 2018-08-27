@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\order\index.html";i:1535017504;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1534853416;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\order\index.html";i:1535363593;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535361155;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="/static/fontsawesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="/static/vendor/bootstrap-validate/css/bootstrapValidator.css">
-    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/green.css">
+    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/grey.css">
     <link rel="stylesheet" href="/static/vendor/datepicker/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/static/vendor/select/css/bootstrap-select.min.css">
     <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
@@ -49,7 +49,7 @@
                 <div class="my-container">
                     <label class="myLabel-content">商户订单号：</label>
                     <div class="myText-content">
-                        <input type="text" name="merCode" class="form-control" placeholder="输入商户订单号">
+                        <input type="text" name="orderNo" class="form-control" placeholder="输入商户订单号">
                     </div>
                 </div>
                 <div class="my-container">

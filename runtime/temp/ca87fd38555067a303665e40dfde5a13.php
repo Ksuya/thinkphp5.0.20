@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:90:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\account\info.html";i:1535011831;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1534853416;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:90:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\account\info.html";i:1535357592;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535361155;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="/static/fontsawesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="/static/vendor/bootstrap-validate/css/bootstrapValidator.css">
-    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/green.css">
+    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/grey.css">
     <link rel="stylesheet" href="/static/vendor/datepicker/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/static/vendor/select/css/bootstrap-select.min.css">
     <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
@@ -74,7 +74,7 @@
                     <h3>商户通道</h3>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-condensed">
+                    <table class="table table-condensed fixed-table-body">
                         <thead>
                         <tr>
                             <th>通道名称</th>
