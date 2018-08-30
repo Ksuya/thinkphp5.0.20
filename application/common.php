@@ -113,9 +113,11 @@ function upload($folder = "default", $extType = "image", $defaultSize = 1)
  */
 function timeRange($start, $end, $field)
 {
+    $post = file_get_contents("php://input");
+    $post = json_decode(base64_decode($post),true);
     $con = [];
-    $start = input($start);
-    $end = input($end);
+    $start = !empty($post[$start]) ? $post[$start] : false;
+    $end = !empty($post[$end]) ? $post[$end] : false;
     if ($start && $end) {
         if (strtotime($start) <= strtotime($end)) {
             $end = date('Y-m-d H:i:s', strtotime('+1 day', strtotime($end)) - 1);

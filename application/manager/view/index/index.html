@@ -1,0 +1,31 @@
+{include file="common@public/admin-header"}
+<div class="top-header">
+    <div class="logo" data-url="{:url('Index/welcome')}">
+        <a href="#"><img src="__STATIC__/images/logo.png" class="img-responsive" /></a>
+    </div>
+    {include file="common@public/admin-top-nav"}
+    <div class="top-nav_roll f_left" style="display:none;">
+        <div class="f_left">
+            <i class="fa fa-caret-left fa-1x"></i>
+        </div>
+        <div class="f_right">
+            <i class="fa fa-caret-right fa-1x"></i>
+        </div>
+    </div>
+    <ul class="login_msg">
+        <li title="{$Think.session.merchatInfo.username}"></li>
+        <li><a href="#" class="logout">退出</a></li>
+    </ul>
+</div>
+<!--top end-->
+{include file="common@public/admin-left-menu"}
+<!--left end-->
+<div class="main_right">
+    <iframe src="{:url('welcome')}" name="cont_box" style="float: left;" frameborder="0" width="100%" height="100%" seamless></iframe>
+</div>
+<!--desktop end-->
+<!--javascript include-->
+
+{include file="common@public/admin-script"}
+</body>
+</html>

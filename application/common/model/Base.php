@@ -7,7 +7,9 @@
 |
 */
 namespace app\common\model;
+use app\index\controller\Redis;
 use think\Exception;
+use think\Log;
 use think\Model;
 use think\Request;
 use think\Db;
@@ -275,7 +277,10 @@ class Base extends Model{
     public function bootstrapTable($field,$condition=[],$join=[],$group='',$having='')
     {
         try{
-            $post = Request::instance()->post();
+            // 获取PHP input数据流
+            $post = file_get_contents("php://input");
+            $post = json_decode(base64_decode($post),true);
+            Log::notice($post);
             $offset = $post['offset'];
             $limit = $post['limit'];
             $sort = $post['sort'];
@@ -299,7 +304,7 @@ class Base extends Model{
                     $condition[$k] = ['like',"%$v%"];
                 }
             }
-            $total = $this->alias('a')->field($field)->join($join)->where($condition)->group($group)->having($having)->count();
+            $total = $this->alias('a')->field($field)->join($join)->where($condition)->group($group)->having($having)->count('a.'.$this->pk);
             $data = $this->alias('a')->field($field)->join($join)->where($condition)->group($group)->having($having)->order($order)->limit($offset.','.$limit)->select();
             return base64_encode(json_encode(['total'=>$total,'rows'=>$data],true));
         }catch(Exception $e){

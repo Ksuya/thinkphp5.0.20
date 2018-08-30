@@ -2125,7 +2125,7 @@
             type: this.options.method,
             url:  url || this.options.url,
             data: this.options.contentType === 'application/json' && this.options.method === 'post' ?
-                JSON.stringify(data) : data,
+                base64Encode(JSON.stringify(data)) : base64Encode(data),//JSON.stringify(data)
             cache: this.options.cache,
             contentType: this.options.contentType,
             dataType: this.options.dataType,

@@ -1,0 +1,127 @@
+{include file="common@public/admin-header"}
+<script src="__STATIC__/vendor/table/bootstrap-table.js"></script>
+<link href="__STATIC__/vendor/table/bootstrap-table.css" rel="stylesheet"/>
+<script src="__STATIC__/vendor/table/locale/bootstrap-table-zh-CN.js"></script>
+<body>
+<div class="panel-body">
+    <ol class="breadcrumb">
+        <li><a>首页</a></li>
+        <li><a>博客管理</a></li>
+        <li class="active">栏目管理</li>
+    </ol>
+    <div class="row">
+        <div class="col-sm-2">
+            <ul class="nav nav-pills nav-stacked" style="height: 100%;background-color: #f5f5f5">
+                <li class="active"><a href="">Home</a></li>
+                <li><a href="">SVN</a></li>
+                <li><a href="">iOS</a></li>
+                <li><a href="">VB.Net</a></li>
+                <li><a href="">Java</a></li>
+                <li><a href="">PHP</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-10">
+            <div id="toolbar" class="btn-group">
+                <div id="table-btn-list">
+                    <form action="" id="searchTableForm">
+                        <div class="my-container">
+                            <label class="myLabel-content">流水号：</label>
+                            <div class="myText-content">
+                                <input type="text" name="transaction" class="form-control" placeholder="输入流水号">
+                            </div>
+                        </div>
+                        <div class="my-container">
+                            <label class="myLabel-content">提现状态：</label>
+                            <div class="myText-content">
+                                <select class="form-control" name="a.status">
+                                    <option value="">请选择</option>
+                                    <option value="-1">拒绝</option>
+                                    <option value="0">处理中</option>
+                                    <option value="1">处理成功</option>
+                                    <option value="2">处理失败</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="my-container">
+                            <label class="myLabel-content">开始：</label>
+                            <div class="myText-content">
+                                <input  type="text" name="start" class="form-control datepicker" placeholder="输入开始时间">
+                            </div>
+                        </div>
+                        <div class="my-container">
+                            <label class="myLabel-content">结束：</label>
+                            <div class="myText-content">
+                                <input  type="text" name="end" class="form-control datepicker" placeholder="输入结束时间">
+                            </div>
+                        </div>
+                        <div class="myBtn-content">
+                            <button type="button" class="btn btn-primary table-btn-search" data-table="tb_departments">搜索</button>
+                            <button type="button" class="btn btn-default table-btn-reset" data-table="tb_departments">重置</button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#withdrawFormModal">申请提现</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="table-btn-moreaction-list" style="display: none;">
+                    <span>您选中了 <span id="row-select-total"></span> 行 </span>
+                    <button type="button" class="btn btn-danger table-more-action"
+                            data-callback="merchatWithdraw" data-table="tb_departments" data-status="-1">批量拒绝
+                    </button>
+                    <button type="button" class="btn btn-success table-more-action"
+                            data-callback="merchatWithdraw" data-table="tb_departments" data-status="1">批量处理
+                    </button>
+                </div>
+            </div>
+            <table id="tb_departments" class="table table-hover table-striped table-extra"></table>
+        </div>
+    </div>
+</div>
+<div class="modal fade right" id="withdrawFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <form class="form-horizontal" role="form" id="merchatWithdrawForm" action="{:url('saveWithdraw')}">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">提现申请</h4>
+                </div>
+                <div class="modal-body">
+                    {:formInput('栏目名称:','name','','text')}
+                    {:formSelect('上级栏目:','parent_id',$menus,'id','name')}
+                    {:formInput('栏目描述:','description','','text')}
+                    {:formInput('栏目排序:','sort','','number')}
+                    {:formCheck('radio','导航显示','is_menu',[['id'=>0,'name'=>'否'],['id'=>1,'name'=>'是']],'id','name')}
+                    {:formInput('添加时间','create_time','','date',[['rule'=>'notempty'],['rule'=>'date']])}
+                </div>
+                <div class="modal-footer modal-my-bottom">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary form-ajax-submit">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        //1.初始化Table
+        var url = "{:url('categoryList')}";
+        var tableId = 'tb_departments';
+        var fields = [
+            {checkbox: true},
+            {field: 'name', title: '栏目名称'},
+            {field: 'parent_name', title: '上级栏目', sortable: true},
+            {field: 'description', title: '栏目描述', sortable: true},
+            {field: 'sort', title: '栏目排序', sortable: true},
+            {
+                field: 'is_menu', title: '导航显示', formatter: function (value) {
+                    return value.text;
+                }
+            },
+            {field: 'create_time', title: '添加时间', sortable: true},
+        ];
+        var oTable = new TableInit();
+        oTable.Init(tableId, url, fields, 'a.create_time', 'desc','searchTableForm');
+    });
+</script>
+</body>
+</html>
