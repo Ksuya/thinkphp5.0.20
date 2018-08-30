@@ -41,12 +41,12 @@ fieldset {border-width:0;padding: 0.35em 0.625em 0.75em;margin: 0 2px;border: 1p
 .f_right{float:right;}
 /*top*/
 html,body{width:100%;height:100%;overflow:hidden;}
-.top-header{width:100%;height:100px;overflow:hidden;background:#30adef;color:#fff;}
-.top-header .logo{padding:0 30px;float:left;}
-.top-header .logo img{width:160px;height:100px;}
-.top-nav{height:100px;float:left;font-size:14px;text-align:center;overflow:hidden;position:relative;}
+.top-header{width:100%;height:80px;overflow:hidden;background:#30adef;color:#fff;box-shadow:-2px 0 5px #000;}
+.top-header .logo{float:left;}
+.top-header .logo img{width:200px;height:80px;}
+.top-nav{height:80px;float:left;font-size:14px;text-align:center;overflow:hidden;position:relative;}
 .top-nav ul{position:absolute;top:0;left:0;}
-.top-nav li{float:left;width:100px;height:100px;padding:20px 15px;cursor:pointer;}
+.top-nav li{float:left;width:100px;height:80px;padding:10px 15px;cursor:pointer;}
 .top-nav li:hover,.top-nav li.curr{background-color:#1d73a0;}
 .top-nav li p{margin-top:10px;}
 .login_msg{float:right;line-height:100px;}
@@ -56,8 +56,8 @@ html,body{width:100%;height:100%;overflow:hidden;}
 .top-nav_roll div{width:30px;}
 .top-nav_roll div:first-child{border-right:1px solid #2491cc;}
 /*left*/
-.main_left{width:200px;height:100%;background:#354052;float:left;color:#fff;display:none;}
-.main_left h2{width:100%;line-height:42px;font-size:16px;text-align:center;background-color:#2a3b4c;box-shadow:-2px 0 5px #000;color:#6e7f9b;cursor:pointer;}
+.main_left{width:200px;height:100%;background:#323339;float:left;color:#fff;display:none;}
+.main_left h2{width:100%;line-height:42px;font-size:16px;text-align:center;background-color:#2a3b4c;color:#6e7f9b;cursor:pointer;}
 .main_left h2 i{font-size:20px;}
 .main_left .left-menu{font-size:14px;}
 .left-menu li{border-bottom:1px solid #27303d;position:relative;cursor:pointer;}
@@ -117,6 +117,7 @@ html,body{width:100%;height:100%;overflow:hidden;}
 .modal.left .modal-body,
 .modal.right .modal-body {
     padding: 15px 15px 80px;
+    font-size: 12px;
 }
 
 /*Left*/

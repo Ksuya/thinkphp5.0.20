@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\index\index.html";i:1535439410;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535439553;s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-top-nav.html";i:1535622489;s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-left-menu.html";i:1535623326;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534835935;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\index\index.html";i:1535439410;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535439553;s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-top-nav.html";i:1535622489;s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-left-menu.html";i:1535627188;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534835935;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,31 +63,31 @@
         <!--payment-->
         <li>
             <i class="menu_icon fa fa-commenting-o"></i>
-            <a href="javascript:void(0);" data-id="payment-manager" data-href="<?php echo url('/merchat/Account/info'); ?>">账户信息</a>
+            <a href="javascript:void(0);" data-id="payment-manager" data-href="<?php echo url('/manager/Account/info'); ?>">账户信息</a>
         </li>
         <?php if($handWithdraw): ?>
         <li>
             <i class="menu_icon fa fa-commenting-o"></i>
-            <a href="javascript:void(0);" data-id="payment-manager" data-href="<?php echo url('/merchat/Account/withdraw'); ?>">提现记录</a>
+            <a href="javascript:void(0);" data-id="payment-manager" data-href="<?php echo url('/manager/Account/withdraw'); ?>">提现记录</a>
         </li>
         <?php endif; ?>
         <li>
             <i class="menu_icon fa fa-list"></i>
-            <a href="javascript:void(0);" data-id="payment-manager" data-href="<?php echo url('/merchat/Security/index'); ?>">安全设置</a>
+            <a href="javascript:void(0);" data-id="payment-manager" data-href="<?php echo url('/manager/Security/index'); ?>">安全设置</a>
         </li>
         <li>
             <i class="menu_icon fa fa-file-text-o"></i>
-            <a href="javascript:void(0);" data-id="payment-manager" data-href="<?php echo url('/merchat/Order/index'); ?>">订单查询</a>
+            <a href="javascript:void(0);" data-id="payment-manager" data-href="<?php echo url('/manager/Order/index'); ?>">订单查询</a>
         </li>
         <!--payment-->
         <!--blog-->
         <li>
             <i class="menu_icon fa fa-users"></i>
-            <a href="javascript:void(0);" data-id="blog-manager" data-href="<?php echo url('/merchat/Account/info'); ?>">栏目管理</a>
+            <a href="javascript:void(0);" data-id="blog-manager" data-href="<?php echo url('/manager/Blog/category'); ?>">栏目管理</a>
         </li>
         <li>
             <i class="menu_icon fa fa-users"></i>
-            <a href="javascript:void(0);" data-id="blog-manager" data-href="<?php echo url('/mechat/Checkout/index'); ?>">文章管理</a>
+            <a href="javascript:void(0);" data-id="blog-manager" data-href="<?php echo url('/manager/Blog/article'); ?>">文章管理</a>
         </li>
         <!--blog-->
     </ul>

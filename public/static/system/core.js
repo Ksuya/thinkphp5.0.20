@@ -36,9 +36,9 @@
      $.ajax({
          url: url+'?_time='+timestamp,    //请求的url地址
          dataType: responseType,   //返回格式为json
-         //contentType:"text/json;charset=UTF-8", //也就是 request payload
+         contentType:"application/json", //也就是 request payload
          async: true,//请求是否异步，默认为异步，这也是ajax重要特性
-         data: data,    //参数值
+         data: JSON.stringify(data),    //参数值
          type: method,   //请求方式
          headers : {'ApiToken':"mytoken"},
          beforeSend: function () {

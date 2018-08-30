@@ -330,7 +330,8 @@ var FileInput = function () {
 var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
-    oTableInit.Init = function (id, url, field, sort, order) {
+    oTableInit.Init = function (id, url, field, sort, order,shFormId) {
+        var shFormId = shFormId ? shFormId : false;
         var field = field ? field : [];
         var sort = sort ? sort : '';
         var order = order ? order : '';
@@ -344,7 +345,7 @@ var TableInit = function () {
             sortable: true,                     //是否启用排序
             sortName: sort,
             sortOrder: order,                   //排序方式
-            //queryParams: oTableInit.queryParams,//传递参数（*）
+            queryParams: queryParams,//传递参数（*）
             sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             pageNumber: 1,                       //初始化加载第一页，默认第一页
             pageSize: 10,                       //每页的记录行数（*）
@@ -371,6 +372,15 @@ var TableInit = function () {
     return oTableInit;
 };
 
+function queryParams(params) {
+    var temp = {
+        limit: params.limit,
+        offset: params.offset,
+        order: params.order,
+        sort: params.sort,
+    };
+    return temp;
+}
 
 function base64Encode(input) {
     var rv;
@@ -386,6 +396,8 @@ function base64Decode(input) {
     rv = decodeURIComponent(rv);
     return rv;
 }
+
+
 
 
 /**

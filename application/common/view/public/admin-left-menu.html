@@ -1,35 +1,35 @@
-<div class="main_left">
+<div class="main_left" >
     <h2><i class="menu_icon fa fa-reorder"></i></h2>
     <ul class="left-menu">
+        <!--payment-->
         <li>
             <i class="menu_icon fa fa-commenting-o"></i>
-            <a href="javascript:void(0);" data-id="merchat" data-href="{:url('/merchat/Account/info')}">账户信息</a>
+            <a href="javascript:void(0);" data-id="payment-manager" data-href="{:url('/manager/Account/info')}">账户信息</a>
         </li>
         {if condition="$handWithdraw"}
         <li>
             <i class="menu_icon fa fa-commenting-o"></i>
-            <a href="javascript:void(0);" data-id="merchat" data-href="{:url('/merchat/Account/withdraw')}">提现记录</a>
+            <a href="javascript:void(0);" data-id="payment-manager" data-href="{:url('/manager/Account/withdraw')}">提现记录</a>
         </li>
         {/if}
         <li>
             <i class="menu_icon fa fa-list"></i>
-            <a href="javascript:void(0);" data-id="security" data-href="{:url('/merchat/Security/index')}">安全设置</a>
+            <a href="javascript:void(0);" data-id="payment-manager" data-href="{:url('/manager/Security/index')}">安全设置</a>
         </li>
         <li>
             <i class="menu_icon fa fa-file-text-o"></i>
-            <a href="javascript:void(0);" data-id="trader" data-href="{:url('/merchat/Order/index')}">订单查询</a>
+            <a href="javascript:void(0);" data-id="payment-manager" data-href="{:url('/manager/Order/index')}">订单查询</a>
         </li>
-        <!--<li>
-            <i class="menu_icon fa fa-file-text-o"></i>
-            <a href="javascript:void(0);" data-id="trader" data-href="{:url('/merchat/Order/index')}">代付查询</a>
-        </li>-->
+        <!--payment-->
+        <!--blog-->
         <li>
             <i class="menu_icon fa fa-users"></i>
-            <a href="javascript:void(0);" data-id="product" data-href="{:url('/merchat/Product/index')}">产品信息</a>
+            <a href="javascript:void(0);" data-id="blog-manager" data-href="{:url('/manager/Blog/category')}">栏目管理</a>
         </li>
         <li>
             <i class="menu_icon fa fa-users"></i>
-            <a href="javascript:void(0);" data-id="checkout" data-href="{:url('/mechat/Checkout/index')}">结算信息</a>
+            <a href="javascript:void(0);" data-id="blog-manager" data-href="{:url('/manager/Blog/article')}">文章管理</a>
         </li>
+        <!--blog-->
     </ul>
 </div>

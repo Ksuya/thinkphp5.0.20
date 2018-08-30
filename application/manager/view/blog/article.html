@@ -1,35 +1,7 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:94:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\account\withdraw.html";i:1535532172;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535439553;}*/ ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>商户后台管理</title>
-    <link type="text/css" rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
-    <link type="text/css" rel="stylesheet" href="/static/fontsawesome/css/font-awesome.css"/>
-    <link rel="stylesheet" href="/static/vendor/bootstrap-validate/css/bootstrapValidator.css">
-    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/grey.css">
-    <link rel="stylesheet" href="/static/vendor/datepicker/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="/static/vendor/select/css/bootstrap-select.min.css">
-    <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
-    <script src="/static/js/jquery-2.2.1.min.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.js"></script>
-    <script src="/static/vendor/layer/layer.js"></script>
-    <script src="/static/vendor/bootstrap-validate/js/bootstrapValidator.js"></script>
-    <script src="/static/vendor/bootstrap-validate/js/language/zh_CN.js"></script>
-    <script src="/static/vendor/cxselect/jquery.cxselect.min.js"></script>
-    <script src="/static/vendor/icheck/icheck.min.js"></script>
-    <script type="text/javascript" src="/static/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="/static/vendor/select/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="/static/vendor/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
-    <script src="/static/js/tipSuppliers.js"></script>
-    <script src="/static/system/core.js"></script>
-    <script src="/static/system/vendor.js"></script>
-</head>
-<body>
-
-<script src="/static/vendor/table/bootstrap-table.js"></script>
-<link href="/static/vendor/table/bootstrap-table.css" rel="stylesheet"/>
-<script src="/static/vendor/table/locale/bootstrap-table-zh-CN.js"></script>
+{include file="common@public/admin-header"}
+<script src="__STATIC__/vendor/table/bootstrap-table.js"></script>
+<link href="__STATIC__/vendor/table/bootstrap-table.css" rel="stylesheet"/>
+<script src="__STATIC__/vendor/table/locale/bootstrap-table-zh-CN.js"></script>
 <body>
 <div class="panel-body">
     <ol class="breadcrumb">
@@ -95,17 +67,17 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <form class="form-horizontal" role="form" id="merchatWithdrawForm" action="<?php echo url('saveWithdraw'); ?>">
+            <form class="form-horizontal" role="form" id="merchatWithdrawForm" action="{:url('saveWithdraw')}">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">提现申请</h4>
                 </div>
                 <div class="modal-body">
-                    <?php echo formInput('提现金额:','orderAmount','','text'); ?>
-                    <?php echo formSelect('选择银行卡:','bankId',$merBanks,'id','openBank'); ?>
-                    <?php echo formInput('持卡人姓名:','cardByName','','text'); ?>
-                    <?php echo formInput('持卡人卡号:','cardByNo','','text'); ?>
-                    <?php echo formInput('开户行:','openBank','','text'); ?>
+                    {:formInput('提现金额:','orderAmount','','text')}
+                    {:formSelect('选择银行卡:','bankId',$merBanks,'id','openBank')}
+                    {:formInput('持卡人姓名:','cardByName','','text')}
+                    {:formInput('持卡人卡号:','cardByNo','','text')}
+                    {:formInput('开户行:','openBank','','text')}
                     <div class="form-group" id="company_region">
                         <label class="col-sm-2 control-label">开户行省市:</label>
                         <div class="col-sm-10 cxselect-list">
@@ -116,7 +88,7 @@
                                     disabled="disabled" required data-required-msg="选择市"></select>
                         </div>
                     </div>
-                    <?php echo formSelect('结算类型:','accType',[['id'=>0,'value'=>'对私'],['id'=>1,'value'=>'对公']],'id','value'); ?>
+                    {:formSelect('结算类型:','accType',[['id'=>0,'value'=>'对私'],['id'=>1,'value'=>'对公']],'id','value')}
                 </div>
                 <div class="modal-footer modal-my-bottom">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -132,11 +104,11 @@
         $('#company_region').cxSelect({
             selects: ['province', 'city'],
             nodata: 'none',
-            url:'/static/vendor/cxselect/cityData.min.json',
+            url:'__STATIC__/vendor/cxselect/cityData.min.json',
             required:true,
         });
         //1.初始化Table
-        var url = "<?php echo url('btData'); ?>";
+        var url = "{:url('btData')}";
         var tableId = 'tb_departments';
         var fields = [
             {checkbox: true},

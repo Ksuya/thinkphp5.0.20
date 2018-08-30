@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:94:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/merchat\view\account\withdraw.html";i:1535532172;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535439553;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:94:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\account\withdraw.html";i:1535532172;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535439553;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
