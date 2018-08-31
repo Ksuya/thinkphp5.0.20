@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-08-30 20:11:00
+Date: 2018-08-31 20:14:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -289,11 +289,14 @@ CREATE TABLE `record` (
   KEY `tableName` (`tableName`),
   KEY `user` (`user`),
   KEY `dataId` (`dataId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据变更记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='数据变更记录表';
 
 -- ----------------------------
 -- Records of record
 -- ----------------------------
+INSERT INTO `record` VALUES ('1', '1', '分类更新', '5944', '127.0.0.1', null, 'ShopCategory', '1', '2018-08-31 16:55:14', null, null);
+INSERT INTO `record` VALUES ('2', '1', '分类更新', '71189', '127.0.0.1', null, 'ShopCategory', '2', '2018-08-31 17:10:43', null, null);
+INSERT INTO `record` VALUES ('3', '1', '分类更新', '79031', '127.0.0.1', null, 'ShopCategory', '3', '2018-08-31 17:33:03', null, null);
 
 -- ----------------------------
 -- Table structure for record_detail
@@ -315,6 +318,234 @@ CREATE TABLE `record_detail` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for shop_address
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_address`;
+CREATE TABLE `shop_address` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `reciver` varchar(50) NOT NULL,
+  `region` varchar(50) NOT NULL,
+  `address` varchar(128) NOT NULL,
+  `contact` varchar(50) NOT NULL,
+  `is_default` tinyint(4) NOT NULL DEFAULT '0',
+  `create_time` datetime DEFAULT NULL,
+  `create_user` int(11) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of shop_address
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shop_admin
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_admin`;
+CREATE TABLE `shop_admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `password` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `email` (`email`,`phone`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_admin
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shop_brand
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_brand`;
+CREATE TABLE `shop_brand` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `posters` varchar(255) NOT NULL,
+  `desc` varchar(150) DEFAULT NULL,
+  `sort` int(11) DEFAULT '0',
+  `create_time` datetime DEFAULT NULL,
+  `create_user` int(11) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_brand
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shop_category
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_category`;
+CREATE TABLE `shop_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) DEFAULT '0',
+  `name` varchar(20) NOT NULL,
+  `posters` int(11) DEFAULT NULL,
+  `sort` int(11) DEFAULT '0',
+  `is_menu` tinyint(4) DEFAULT '0',
+  `create_time` datetime DEFAULT NULL,
+  `create_user` int(11) DEFAULT '0',
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_category
+-- ----------------------------
+INSERT INTO `shop_category` VALUES ('1', '0', '家具家纺', '20', '10', '1', '2018-08-31 16:55:14', '0', '2018-08-31 16:55:14', null);
+INSERT INTO `shop_category` VALUES ('2', '1', '床上用品', '21', '15', '1', '2018-08-31 17:10:43', '0', '2018-08-31 17:10:43', null);
+INSERT INTO `shop_category` VALUES ('3', '1', '【Border】开通broker账户', '23', '0', '0', '2018-08-31 17:33:03', '0', '2018-08-31 17:33:03', null);
+
+-- ----------------------------
+-- Table structure for shop_config
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_config`;
+CREATE TABLE `shop_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `config_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `create_user` varchar(255) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `config_id` (`config_id`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_config
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shop_helps
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_helps`;
+CREATE TABLE `shop_helps` (
+  `id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(128) NOT NULL,
+  `details` longtext,
+  `create_time` datetime DEFAULT NULL,
+  `create_user` int(11) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_helps
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shop_members
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_members`;
+CREATE TABLE `shop_members` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `nick_name` varchar(50) DEFAULT NULL COMMENT '昵称',
+  `password` varchar(32) NOT NULL,
+  `role_id` int(11) NOT NULL DEFAULT '-1' COMMENT '-1为商城会员',
+  `create_time` datetime DEFAULT NULL,
+  `create_user` int(11) DEFAULT '0',
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `email` (`email`,`phone`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_members
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shop_order
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_order`;
+CREATE TABLE `shop_order` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order_no` varchar(32) NOT NULL,
+  `order_amount` double NOT NULL,
+  `pay_type` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `progress` tinyint(4) NOT NULL DEFAULT '0',
+  `express_id` int(11) DEFAULT NULL,
+  `express_code` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `create_user` int(11) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`order_no`,`status`,`progress`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shop_order_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_order_detail`;
+CREATE TABLE `shop_order_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `shop_price` double(10,2) DEFAULT NULL,
+  `market_price` double(10,2) DEFAULT NULL,
+  `number` int(11) NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_order_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shop_product
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_product`;
+CREATE TABLE `shop_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  `brand_id` int(11) DEFAULT NULL,
+  `name` varchar(50) NOT NULL,
+  `shop_price` double(10,2) NOT NULL,
+  `market_price` double(10,2) DEFAULT NULL,
+  `stock` int(255) NOT NULL,
+  `posters` varchar(128) DEFAULT NULL,
+  `sale_number` int(11) DEFAULT '0',
+  `collection_number` int(11) DEFAULT '0',
+  `sort` int(255) DEFAULT '0',
+  `details` longtext,
+  `create_time` datetime DEFAULT NULL,
+  `create_user` int(11) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`,`brand_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_product
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for system_file
 -- ----------------------------
 DROP TABLE IF EXISTS `system_file`;
@@ -327,28 +558,18 @@ CREATE TABLE `system_file` (
   `time` datetime DEFAULT NULL,
   `user` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of system_file
 -- ----------------------------
-INSERT INTO `system_file` VALUES ('1', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/7260fc5cbde66a687208f55e7a433e93.png', '2018-08-21 19:02:21', null);
-INSERT INTO `system_file` VALUES ('2', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/fafaf0206b77fc6df8ca6fa4a0e8dc23.png', '2018-08-21 19:03:17', null);
-INSERT INTO `system_file` VALUES ('3', '201806151011288599548.jpg', '18665', 'jpg', '/resource/uploads/default/20180821/d899fe4bcfd7dd203f48921e31aca2d3.jpg', '2018-08-21 19:03:22', null);
-INSERT INTO `system_file` VALUES ('4', '201806151415585979614.jpg', '5383', 'jpg', '/resource/uploads/default/20180821/20d4b3474d4fa5f746cc205f35fd7e5a.jpg', '2018-08-21 19:03:25', null);
-INSERT INTO `system_file` VALUES ('5', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/ee8d63b3f46093345928061046e51794.png', '2018-08-21 19:06:35', null);
-INSERT INTO `system_file` VALUES ('6', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/8fe0f250b6c9e47d30b3af6f802a447b.png', '2018-08-21 19:06:53', null);
-INSERT INTO `system_file` VALUES ('7', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/b9af54c5634aafeba4d50f2347b346d1.png', '2018-08-21 19:07:01', null);
-INSERT INTO `system_file` VALUES ('8', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/71d3478e0ef622a8ae0492970cebfcc9.png', '2018-08-21 19:07:21', null);
-INSERT INTO `system_file` VALUES ('9', '201806151011288599548.jpg', '18665', 'jpg', '/resource/uploads/default/20180821/a475910797af4bb8ab8df7f0639832dc.jpg', '2018-08-21 19:07:30', null);
-INSERT INTO `system_file` VALUES ('10', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/26be5c9719f31dfbf2270dff4b0a1e68.png', '2018-08-21 19:09:14', null);
-INSERT INTO `system_file` VALUES ('11', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/02f7c4373277b8d84b45fd129872d336.png', '2018-08-21 19:10:01', null);
-INSERT INTO `system_file` VALUES ('12', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/cb5433642dc0bcea5a5f222015477cde.png', '2018-08-21 19:11:57', null);
-INSERT INTO `system_file` VALUES ('13', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/1465581ee3c67e0da050c7db95dc350d.png', '2018-08-21 19:13:18', null);
-INSERT INTO `system_file` VALUES ('14', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180821/b03dc7f8cc3aeaea55aee73764151adb.png', '2018-08-21 19:13:47', null);
-INSERT INTO `system_file` VALUES ('15', '201806151011288599548.jpg', '18665', 'jpg', '/resource/uploads/default/20180821/bb5fdca8e3553e8542eaf771410d6adf.jpg', '2018-08-21 19:13:51', null);
-INSERT INTO `system_file` VALUES ('16', '201806151415585979614.jpg', '5383', 'jpg', '/resource/uploads/default/20180821/29556c98a6335307e544e0602f61ac00.jpg', '2018-08-21 19:13:55', null);
-INSERT INTO `system_file` VALUES ('17', '201806151010304788818.png', '5862', 'png', '/resource/uploads/default/20180822/54f13b624cc0b2049b2b0327f33dda56.png', '2018-08-22 12:26:55', null);
+INSERT INTO `system_file` VALUES ('18', 'logo.png', '20462', 'png', '/resource/uploads/default/20180831/49937a18b33fe6994cb2e950d49690b6.png', '2018-08-31 16:48:45', null);
+INSERT INTO `system_file` VALUES ('19', 'logo.png', '20462', 'png', '/resource/uploads/default/20180831/c06ce6022994769f4d2498c664d8fe06.png', '2018-08-31 16:48:52', null);
+INSERT INTO `system_file` VALUES ('20', 'logo.png', '20462', 'png', '/resource/uploads/default/20180831/fe355f077c7058752b0a42b22e3344e1.png', '2018-08-31 16:55:13', null);
+INSERT INTO `system_file` VALUES ('21', 'logo.png', '20462', 'png', '/resource/uploads/default/20180831/f33de1696f29407f31be2dabf9389e14.png', '2018-08-31 17:10:42', null);
+INSERT INTO `system_file` VALUES ('22', 'logo.png', '20462', 'png', '/resource/uploads/default/20180831/a2023d4d54925960148412de0c51cace.png', '2018-08-31 17:29:04', null);
+INSERT INTO `system_file` VALUES ('23', 'logo.png', '20462', 'png', '/resource/uploads/default/20180831/49c39364738c1f3fda8affb0a5a6d0d2.png', '2018-08-31 17:30:29', null);
+INSERT INTO `system_file` VALUES ('24', 'logo.png', '20462', 'png', '/resource/uploads/default/20180831/8444bad0fcf9325d8a4fa646dc9f4b82.png', '2018-08-31 18:54:00', null);
 
 -- ----------------------------
 -- Table structure for system_gateway

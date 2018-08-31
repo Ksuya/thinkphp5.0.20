@@ -52,18 +52,11 @@ $(function () {
         }
     });
 
-    // 表单modal关闭重置表单
-    $('#myFormModal,#withdrawFormModal').on('hide.bs.modal', function (e) {
-        var obj = $(e.target);
-        var formId = obj.find("form");
-        $(formId).bootstrapValidator('resetForm');
-        $(formId)[0].reset();
-    })
 
     // checkbox  radio
     $('input').iCheck({
-        checkboxClass: 'icheckbox_flat-grey',
-        radioClass: 'iradio_flat-grey',
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue',
     });
 
     // datepicker
@@ -151,13 +144,21 @@ function renderForm(formobj, data) {
             var name = curElem[0].name;
             // id 在下拉框用到
             var id = curElem[0].id;
-            var dataName = data[name] ? data[name] : '';
+            var dataName = data[name];
             switch (type) {
                 case 'INPUT':
-                    $("body").find("input[name=\'" + name + "\']").val(dataName).change();
+                    var iptObj = $("body").find("input[name=\'" + name + "\']");
+                    var curType = iptObj.attr("type");
+                    if(curType == 'radio'){
+                        $(iptObj[value=dataName]).iCheck('check');
+                    }else if(curType == 'checkbox'){
+
+                    }else{
+                        iptObj.val(dataName).change();
+                    }
                     break;
                 case 'SELECT':
-                    $("#" + id).find("option[value=\'" + dataName + "\']").attr("selected", true);
+                    $("#" + id).find("option[value=\'" + dataName + "\']").attr("selected","selected");
                     break;
             }
         }
@@ -253,6 +254,7 @@ var FileInput = function () {
             initPreview.push("<img src='" + initIMmgs[i] + "' class='file-preview-image img-responsive' style='width: 100%;height: 100%'>");
         }
         var control = $('#' + ctrlName);
+        var isPath = $("#"+ctrlName).attr("data-path");
         $("#" + ctrlName + '_value').val(initValues).change();
         //初始化上传控件的样式
         control.fileinput({
@@ -305,7 +307,7 @@ var FileInput = function () {
                 } else {
                     var old = old.split(',');
                 }
-                old.push(response.path);
+                old.push(response.id);
                 $("#" + ctrlName + '_value').val(old.join(',')).change();
             } else {
                 alert(response.errmsg);
@@ -357,7 +359,7 @@ var TableInit = function () {
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: false,                //是否启用点击选中行
             height: '',                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-            uniqueId: "",                     //每一行的唯一标识，一般为主键列
+            uniqueId: "id",                     //每一行的唯一标识，一般为主键列
             showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
@@ -452,12 +454,7 @@ function bootstrapConfirm(title, msg, callback, tableId) {
     appendModal('confirm_Modal', confirm_html);
 }
 
-/* $(document).on('click','.btn-confirm',function (e) {
- var obj = $(e.target);
- var callback = obj.attr("callback");
- var func = eval(callback);
- func();
- });*/
+
 
 function modal_image(title, url) {
     var image_html = '<div class="modal fade" id="modalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\

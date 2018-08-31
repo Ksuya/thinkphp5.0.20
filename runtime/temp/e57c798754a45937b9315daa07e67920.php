@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:91:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\index\welcome.html";i:1535622522;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535439553;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534835935;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:91:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\index\welcome.html";i:1535622522;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535709704;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534835935;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="/static/fontsawesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="/static/vendor/bootstrap-validate/css/bootstrapValidator.css">
-    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/grey.css">
+    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/blue.css">
     <link rel="stylesheet" href="/static/vendor/datepicker/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/static/vendor/select/css/bootstrap-select.min.css">
     <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
@@ -24,8 +24,14 @@
     <script src="/static/js/tipSuppliers.js"></script>
     <script src="/static/system/core.js"></script>
     <script src="/static/system/vendor.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#apitoken").val("<?php echo $api_token; ?>");
+        });
+    </script>
 </head>
 <body>
+<input type="hidden" id="apitoken" value="">
 
 <body>
 <!--商户基本信息-->

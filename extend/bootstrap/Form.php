@@ -136,7 +136,7 @@ class Form
         echo $html;
     }
 
-    public static function vendor(array $rules,$fName='')
+    public static function vendor(array $rules,$fName='',$isfile=false)
     {
         if (empty($rules)) {
             return;
@@ -148,7 +148,8 @@ class Form
             $cur .= self::$prefix . $valiType . '="true" ';
             switch ($valiType) {
                 case 'notempty':
-                    $msg = '请填写'.$fName;
+                    $tag = $isfile ? '请上传' : '请填写';
+                    $msg = $tag.$fName;
                     break;
                 case 'stringlength':
                     $min = empty($type['min']) ? 6 : $type['min'];
@@ -189,7 +190,7 @@ class Form
 
     public static function file($isLoad,$name,$field,$list=[],$values='',$rules=[['rule' => 'notempty']])
     {
-        $valiHtml = self::vendor($rules);
+        $valiHtml = self::vendor($rules,$name,true);
         $html = '<div class="form-group">
                             <label class="col-sm-2 control-label">'.$name.'</label>
                             <div class="col-sm-10">

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\order\index.html";i:1535363593;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535439553;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\order\index.html";i:1535363593;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535707668;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="/static/fontsawesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="/static/vendor/bootstrap-validate/css/bootstrapValidator.css">
-    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/grey.css">
+    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/blue.css">
     <link rel="stylesheet" href="/static/vendor/datepicker/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/static/vendor/select/css/bootstrap-select.min.css">
     <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
@@ -26,6 +26,7 @@
     <script src="/static/system/vendor.js"></script>
 </head>
 <body>
+<input type="hidden" id="apitoken" value="<?php echo $api_token; ?>">
 
 <script src="/static/vendor/table/bootstrap-table.js"></script>
 <link href="/static/vendor/table/bootstrap-table.css" rel="stylesheet"/>

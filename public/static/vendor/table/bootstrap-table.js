@@ -2128,6 +2128,7 @@
                 base64Encode(JSON.stringify(data)) : base64Encode(data),//JSON.stringify(data)
             cache: this.options.cache,
             contentType: this.options.contentType,
+            headers : {'ApiToken':$("#apitoken").val()},
             dataType: this.options.dataType,
             success: function (res) {
                 var res = base64Decode(res);

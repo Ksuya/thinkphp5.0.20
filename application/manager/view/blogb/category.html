@@ -1,6 +1,8 @@
 {include file="common@public/admin-header"}
-<script src="__STATIC__/vendor/table/bootstrap-table.js"></script>
 <link href="__STATIC__/vendor/table/bootstrap-table.css" rel="stylesheet"/>
+<link href="__STATIC__/vendor/tree/css/bootstrap-treeview.css" rel="stylesheet"/>
+<script src="__STATIC__/vendor/table/bootstrap-table.js"></script>
+<script src="__STATIC__/vendor/tree/js/bootstrap-treeview.js"></script>
 <script src="__STATIC__/vendor/table/locale/bootstrap-table-zh-CN.js"></script>
 <body>
 <div class="panel-body">
@@ -11,16 +13,9 @@
     </ol>
     <div class="row">
         <div class="col-sm-2">
-            <ul class="nav nav-pills nav-stacked" style="height: 100%;background-color: #f5f5f5">
-                <li class="active"><a href="">Home</a></li>
-                <li><a href="">SVN</a></li>
-                <li><a href="">iOS</a></li>
-                <li><a href="">VB.Net</a></li>
-                <li><a href="">Java</a></li>
-                <li><a href="">PHP</a></li>
-            </ul>
+            <div id="tree"></div>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-10 row-right">
             <div id="toolbar" class="btn-group">
                 <div id="table-btn-list">
                     <form action="" id="searchTableForm">
@@ -121,6 +116,54 @@
         ];
         var oTable = new TableInit();
         oTable.Init(tableId, url, fields, 'a.create_time', 'desc','searchTableForm');
+        var tree = [
+            {
+                text: "Parent 1",
+                nodes: [
+                    {
+                        text: "Child 1",
+                        nodes: [
+                            {
+                                text: "Grandchild 1"
+                            },
+                            {
+                                text: "Grandchild 2"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Child 2"
+                    }
+                ]
+            },
+            {
+                text: "Parent 2"
+            },
+            {
+                text: "Parent 3"
+            },
+            {
+                text: "Parent 4"
+            },
+            {
+                text: "Parent 5"
+            }
+        ];
+        $('#tree').treeview({
+            data: tree,         // 数据源
+            showCheckbox: false,   //是否显示复选框
+            highlightSelected: true,    //是否高亮选中
+            //nodeIcon: 'glyphicon glyphicon-user',    //节点上的图标
+            //nodeIcon: 'glyphicon glyphicon-globe',
+            emptyIcon: '',    //没有子节点的节点图标
+            multiSelect: false,    //多选
+            onNodeChecked: function (event,data) {
+                alert(data.nodeId);
+            },
+            onNodeSelected: function (event, data) {
+                alert(data.nodeId);
+            }
+        });
     });
 </script>
 </body>

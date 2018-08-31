@@ -10,8 +10,8 @@
   * 加载层
   */
  function showLoadding() {
-     layer.load(2, {
-         shade: [0.1,'#fff'] //0.1透明度的白色背景
+     layer.load(3, {
+         shade: [0.3,'#fff'] //0.1透明度的白色背景
      });
  }
 
@@ -40,7 +40,7 @@
          async: true,//请求是否异步，默认为异步，这也是ajax重要特性
          data: JSON.stringify(data),    //参数值
          type: method,   //请求方式
-         headers : {'ApiToken':"mytoken"},
+         headers : {'ApiToken':$("#apitoken").val()},
          beforeSend: function () {
              //请求前的处理
              // 禁用按钮

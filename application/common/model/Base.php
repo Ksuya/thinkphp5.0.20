@@ -280,7 +280,6 @@ class Base extends Model{
             // 获取PHP input数据流
             $post = file_get_contents("php://input");
             $post = json_decode(base64_decode($post),true);
-            Log::notice($post);
             $offset = $post['offset'];
             $limit = $post['limit'];
             $sort = $post['sort'];

@@ -134,7 +134,14 @@ function timeRange($start, $end, $field)
 }
 
 
-
+/**
+ * 生成验证码
+ * @param string $type
+ * @param int $fontSize
+ * @param int $length
+ * @param bool $useNoise
+ * @return mixed
+ */
 function getCaptChar($type="num",$fontSize=30,$length=6,$useNoise=false)
 {
     switch($type){
@@ -157,4 +164,56 @@ function getCaptChar($type="num",$fontSize=30,$length=6,$useNoise=false)
     ];
     $captcha = new Captcha($config);
     return $captcha->entry();
+}
+
+
+/**
+ * 把返回的数据集转换成Tree
+ * @param array $list 要转换的数据集
+ * @param string $pid parent标记字段
+ * @param string $level level标记字段
+ * @return array
+ * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+ */
+function list_to_tree($list, $pk = 'id', $pid = 'parent', $child = '_child', $root =
+0)
+{
+    // 创建Tree
+    $tree = array();
+    if (is_array($list)) {
+        // 创建基于主键的数组引用
+        $refer = array();
+        foreach ($list as $key => $data) {
+            $refer[$data[$pk]] = &$list[$key];
+        }
+        foreach ($list as $key => $data) {
+            // 判断是否存在parent
+            $parentId = $data[$pid];
+            if ($root == $parentId) {
+                $tree[] = &$list[$key];
+            } else {
+                if (isset($refer[$parentId])) {
+                    $parent = &$refer[$parentId];
+                    $parent[$child][] = &$list[$key];
+                }
+            }
+        }
+    }
+    return $tree;
+}
+
+
+//获取某个分类的所有子分类
+function getSubs($categorys, $filed, $catId = 0, $level = 1)
+{
+    $subs = array();
+    foreach ($categorys as $item) {
+        if ($item[$filed] == $catId) {
+            $item['name'] = str_repeat('|--', $level-1) . $item['name'];
+            $item['level'] = $level;
+            $subs[] = $item;
+            $subs = array_merge($subs, getSubs($categorys,$filed, $item['id'], $level + 1));
+        }
+    }
+    return $subs;
 }

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:91:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\blog\category.html";i:1535630568;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535439553;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:91:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\blogb\category.html";i:1535696194;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535439553;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +27,10 @@
 </head>
 <body>
 
-<script src="/static/vendor/table/bootstrap-table.js"></script>
 <link href="/static/vendor/table/bootstrap-table.css" rel="stylesheet"/>
+<link href="/static/vendor/tree/css/bootstrap-treeview.css" rel="stylesheet"/>
+<script src="/static/vendor/table/bootstrap-table.js"></script>
+<script src="/static/vendor/tree/js/bootstrap-treeview.js"></script>
 <script src="/static/vendor/table/locale/bootstrap-table-zh-CN.js"></script>
 <body>
 <div class="panel-body">
@@ -39,16 +41,9 @@
     </ol>
     <div class="row">
         <div class="col-sm-2">
-            <ul class="nav nav-pills nav-stacked" style="height: 100%;background-color: #f5f5f5">
-                <li class="active"><a href="">Home</a></li>
-                <li><a href="">SVN</a></li>
-                <li><a href="">iOS</a></li>
-                <li><a href="">VB.Net</a></li>
-                <li><a href="">Java</a></li>
-                <li><a href="">PHP</a></li>
-            </ul>
+            <div id="tree"></div>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-10 row-right">
             <div id="toolbar" class="btn-group">
                 <div id="table-btn-list">
                     <form action="" id="searchTableForm">
@@ -149,6 +144,54 @@
         ];
         var oTable = new TableInit();
         oTable.Init(tableId, url, fields, 'a.create_time', 'desc','searchTableForm');
+        var tree = [
+            {
+                text: "Parent 1",
+                nodes: [
+                    {
+                        text: "Child 1",
+                        nodes: [
+                            {
+                                text: "Grandchild 1"
+                            },
+                            {
+                                text: "Grandchild 2"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Child 2"
+                    }
+                ]
+            },
+            {
+                text: "Parent 2"
+            },
+            {
+                text: "Parent 3"
+            },
+            {
+                text: "Parent 4"
+            },
+            {
+                text: "Parent 5"
+            }
+        ];
+        $('#tree').treeview({
+            data: tree,         // 数据源
+            showCheckbox: false,   //是否显示复选框
+            highlightSelected: true,    //是否高亮选中
+            //nodeIcon: 'glyphicon glyphicon-user',    //节点上的图标
+            //nodeIcon: 'glyphicon glyphicon-globe',
+            emptyIcon: '',    //没有子节点的节点图标
+            multiSelect: false,    //多选
+            onNodeChecked: function (event,data) {
+                alert(data.nodeId);
+            },
+            onNodeSelected: function (event, data) {
+                alert(data.nodeId);
+            }
+        });
     });
 </script>
 </body>

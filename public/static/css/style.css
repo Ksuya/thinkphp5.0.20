@@ -159,10 +159,10 @@ html,body{width:100%;height:100%;overflow:hidden;}
 }
 
 .modal-my-bottom{
-    position: fixed;
+   /* position: fixed;
     width: 100%;
-    bottom: 60px;
-    background-color: #eee;
+    bottom: 50px;
+    background-color: #eee;*/
 }
 
 .cxselect-list select{
@@ -214,3 +214,8 @@ html,body{width:100%;height:100%;overflow:hidden;}
 .table-extra thead tr{border-bottom: 1px solid #3b3b1f;}
 .table-extra th{font-weight: bold;font-size: 13px;border: none;}
 .table-extra tbody td{font-size: 13px;border: none;}
+
+.row-right{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
