@@ -68,13 +68,14 @@
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="form-horizontal" role="form"  action="{:url('saveCategory')}">
+            <form class="form-horizontal" role="form"  action="{:url('store')}">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">添加分类</h4>
                 </div>
                 <div class="modal-body">
                     {:token('token_category_actions','shal')}
+                    <input type="hidden" name="id" value="">
                     {:formInput('分类名称:','name','','text')}
                     {:formSelect('上级分类:','parent_id',$cates,'id','name')}
                     {:formInput('分类排序:','sort',0,'number')}
@@ -91,9 +92,10 @@
 </div>
 <script>
     var tableId = 'tb_departments';
+    var url = "{:url('dataList')}";
+    var delurl = "{:url('delData')}";
     $(function () {
         //1.初始化Table
-        var url = "{:url('cateList')}";
         var fields = [
             {checkbox: true},
             {field: 'name', title: '分类名称'},
@@ -170,8 +172,24 @@
         var uniqueId = $(_this).attr("data-index");
         var table = $(_this).closest("table");
         var tableId = table.attr("id");
-        bootstrapConfirm('删除商品分类','请谨慎操作','out22();');
+        bootstrapConfirm('删除商品分类','请谨慎操作','deletes($(this),'+uniqueId+',\''+delurl+'\');');
     });
+
+    // table row action
+    $(document).on('click', '.table-more-action', function (e) {
+        var obj = $(e.target);
+        var ids = getBtableAllselect(tableId,'id');
+        bootstrapConfirm('删除商品分类','请谨慎操作','deletes($(this),\''+ids+'\',\''+delurl+'\');');
+    });
+
+    function deletes(btn,id,url) {
+        pbAjax(btn,url,{id:id},function (res) {
+            $("#confirm_Modal").modal('hide');
+            hideLoading();
+            layer.msg(res.errmsg,{icon:6});
+            $("#" + tableId).bootstrapTable('refresh', {query: {}});
+        })
+    }
 </script>
 </body>
 </html>

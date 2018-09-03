@@ -125,7 +125,7 @@ class Form
         $html = '<div class="form-group">
                             <label class="col-sm-2 control-label">'.$name.'</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="'.$field.'" '.$valiHtml.'></textarea>
+                                <textarea class="form-control" id="'.$field.'" name="'.$field.'" '.$valiHtml.' data-bv-trigger="change"></textarea>
                             </div>
                         </div>';
         $html .= '<script type="text/javascript" src="/static/vendor/ckeditor/ckeditor.js"></script>';

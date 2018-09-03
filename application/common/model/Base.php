@@ -31,6 +31,12 @@ class Base extends Model{
     {
         Db::startTrans();
         try {
+            $fieldData = [];
+            foreach ($data as $k=>$v){
+                if(strpos($k,'token') === false){
+                    $fieldData[] = $k;
+                }
+            }
             $request = Request::instance();
             // 旧数据信息
             $oldData = [];
@@ -47,7 +53,7 @@ class Base extends Model{
                     $recordLevel = 2;
                     if($this->record){
                         $dataId = $data[$this->pk];
-                        $oldData = $this->allowField(true)->findData(array_keys($data),$condition);
+                        $oldData = $this->allowField(true)->findData(implode(',',$fieldData),$condition);
                         $oldData = $oldData['data'];
                     }
                 }
@@ -58,7 +64,7 @@ class Base extends Model{
                     $recordLevel = 2;
                     $dataId = $condition[$this->pk];
                     if($this->record) {
-                        $oldData = $this->findData(array_keys($data), $condition);
+                        $oldData = $this->findData(implode(',',$fieldData), $condition);
                         $oldData = $oldData['data'];
                     }
                 }else{
@@ -237,13 +243,17 @@ class Base extends Model{
      * @param $condition
      * @return array
      */
-    public function deleteData($action='删除',$condition)
+    public function deleteData($action='删除',$condition,$soft=true)
     {
         try{
             if(empty($condition)){
                 throw new Exception('删除时用户输入错误：'.json_encode($condition,JSON_UNESCAPED_LINE_TERMINATORS));
             }
-            $this->where($condition)->delete();
+            if(!$soft){
+                $this->where($condition)->delete(true);
+            }else{
+                $this->where($condition)->delete();
+            }
             return ['errcode'=>'0','errmsg'=>$action.'成功','data'=>''];
         }catch(Exception $e){
             appLog($e);

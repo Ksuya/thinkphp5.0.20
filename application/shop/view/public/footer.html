@@ -1,0 +1,24 @@
+<div class="clear" style="height:30px"></div>
+
+<div class="footerLink">
+    <div class="footerLink_ul center">
+        {volist name="catelog" id="item"}
+        <ul>
+            <h2>{$item.title}</h2>
+            {if !empty($item.subLog)}
+                {volist name="$item.subLog" id="subitem"}
+                <li><a href="{:url('index/help',['id'=>$subitem.id])}">{$subitem.title}</a></li>
+                {/volist}
+            {/if}
+        </ul>
+        {/volist}
+    </div>
+</div>
+
+<div class="footer center">
+    <p>
+        {$cfg.copy_right|default=''}<br />
+        {$cfg.address|default=''} 联系电话：{$cfg.contact|default=''}<br />
+        {$cfg.icp|default=''}
+    </p>
+</div>

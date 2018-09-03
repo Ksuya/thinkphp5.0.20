@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\index\index.html";i:1535439410;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535709704;s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-top-nav.html";i:1535700825;s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-left-menu.html";i:1535702242;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534835935;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\index\index.html";i:1535439410;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535951938;s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-top-nav.html";i:1535700825;s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-left-menu.html";i:1535954601;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534835935;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +81,7 @@
         </li>
         <li>
             <i class="menu_icon fa fa-users"></i>
-            <a href="javascript:void(0);" data-id="shop-manager" data-href="<?php echo url('/manager/Blog/article'); ?>">商品管理</a>
+            <a href="javascript:void(0);" data-id="shop-manager" data-href="<?php echo url('/manager/shop/product'); ?>">商品管理</a>
         </li>
         <li>
             <i class="menu_icon fa fa-users"></i>

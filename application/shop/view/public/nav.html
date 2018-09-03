@@ -1,0 +1,73 @@
+<!-- 顶部 -->
+<div class="index-top-box">
+    <div class="index-top center">
+        {if $Think.session.shopUserId}
+        <!--我的订单-->
+        {else}
+
+        <div class="fr noneAny"><a href="{:url('user/index')}">个人中心</a></div>
+        <!--免费注册-->
+        <div class="fr noneAny"><a href="{:url('open/login')}">[免费注册]</a></div>
+        <!--登录-->
+        <div class="fr noneAny"><a href="{:url('open/register')}">[登录]</a></div>
+        {/if}
+        <div class="fr noneAny">亲，欢迎来{$cfg.site_name}！</div>
+    </div>
+</div>
+
+<!-- 顶部结束-->
+<div class="clear"></div>
+<!-- logo开始-->
+<div class="logoBox center">
+    <!--左侧logo-->
+    <div class="logo fl">
+        <span class="fl"><img src="{$cfg.site_log|default='__STATIC__/shop/img/login/logo.jpg'}" /></span>
+    </div>
+
+    <!--右侧search-->
+    <div class="searchBox fl">
+
+        <!--搜索BOX-->
+        <div class="searchinput fr">
+            <!--搜索-->
+            <div class="S-bg">
+                <form action="{:url('index/search')}" method="post">
+                    <input type="text" class="S-text fl" name="keywords" placeholder="请输入关键词搜索" style="color:#c4c4c4" />
+                    <a href=""><input type="submit" class="S-submit size14 fl" value="搜索"></a>
+                </form>
+            </div>
+            <!--热词-->
+            <div class="hot-words">
+                <a href="allsearch.html">潮流男装</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- logo结束-->
+<div class="clear"></div>
+<!-- 导航开始-->
+<div class="navBox">
+    <div class="nav center">
+        <!--商品分类-->
+        <div class="classification fl">
+            <div class="hd size14-b">商品分类</div>
+        </div>
+        <!--导航栏目-->
+        <div class="bigNav fl">
+            <ul>
+                <li><a href="{:url('/shop')}">商城首页</a></li>
+                {volist name="nav" id="item"}
+                <li><a href="{:url('product/cate',['id'=>$item.id])}">{$item.name}</a></li>
+                {/volist}
+                <li><a href="{:url('index/about')}">关于我们</a></li>
+            </ul>
+        </div>
+        {if $Think.session.shopUserId}
+        <!--购物车-->
+        <div class="shopping-cart fr size14">购物车 ( <a href="user.html">0</a> ) 件</div>
+        {/if}
+    </div>
+</div>
+<!--导航结束-->
+<div class="clear"></div>

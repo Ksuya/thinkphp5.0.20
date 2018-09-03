@@ -875,7 +875,7 @@
                     sprintf(' style="%s"', halign + style),
                     sprintf(' rowspan="%s"', column.rowspan),
                     sprintf(' colspan="%s"', column.colspan),
-                    //sprintf(' data-field="%s"', column.field),
+                    sprintf(' data-field="%s"', column.field),
                     j === 0 && column.fieldIndex ? ' data-not-first-th' : '',
                     '>');
 

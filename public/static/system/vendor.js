@@ -29,6 +29,7 @@ $(function () {
         var btn = $(this);
         var formNode = $(this).closest('form');
         if (formNode.length > 0) {
+            sendPost();
             $(formNode).bootstrapValidator({excluded: [":disabled"]});
             $(formNode).bootstrapValidator('validate');
             var flag = $(formNode).data('bootstrapValidator').isValid()//验证是否通过true/false
@@ -83,20 +84,7 @@ $(function () {
         size: 4
     });
 
-    // table row action
-    $(document).on('click', '.table-row-action,.table-more-action', function (e) {
-        var obj = $(e.target);
-        var callback = eval(obj.attr("data-callback"));
-        var rowData = obj.attr("data-row");
-        var status = obj.attr("data-status");
-        if (rowData != undefined && rowData != '') {
-            var row = $.parseJSON(rowData);
-        } else {
-            var row = false;
-        }
-        var tableId = obj.attr("data-table");
-        callback(row, tableId, status);
-    });
+
 
     // table search
     $(".table-btn-search").click(function () {
@@ -145,21 +133,35 @@ function renderForm(formobj, data) {
             // id 在下拉框用到
             var id = curElem[0].id;
             var dataName = data[name];
-            switch (type) {
-                case 'INPUT':
-                    var iptObj = $("body").find("input[name=\'" + name + "\']");
-                    var curType = iptObj.attr("type");
-                    if(curType == 'radio'){
-                        $(iptObj[value=dataName]).iCheck('check');
-                    }else if(curType == 'checkbox'){
+            if(dataName && dataName != undefined){
+                switch (type) {
+                    case 'INPUT':
+                        var iptObj = $("body").find("input[name=\'" + name + "\']");
+                        var curType = iptObj.attr("type");
+                        if(curType == 'radio'){
+                            $(iptObj[value=dataName]).iCheck('check');
+                        }else if(curType == 'checkbox'){
 
-                    }else{
-                        iptObj.val(dataName).change();
-                    }
-                    break;
-                case 'SELECT':
-                    $("#" + id).find("option[value=\'" + dataName + "\']").attr("selected","selected");
-                    break;
+                        }else{
+                            iptObj.val(dataName).change();
+                        }
+                        break;
+                    case 'SELECT':
+                        $("#" + id).find("option[value=\'" + dataName + "\']").attr("selected","selected");
+                        break;
+                    case 'TEXTAREA':
+                        var editor = CKEDITOR.instances[id];
+                        if (data[name]) {
+                            $("#"+name).val(data[name]);
+                        } else {
+                            $("#"+name).val('');
+                        }
+                        if (editor) {
+                            editor.destroy(true);//销毁编辑器
+                        }
+                        CKEDITOR.replace(id);
+                        break;
+                }
             }
         }
     }
@@ -408,7 +410,7 @@ function base64Decode(input) {
  * @returns {jQuery}
  */
 function getBtableAllselect(id, ids) {
-    var ids = ids ? ids : false;
+    var ids = ids ? ids : 'id';
     var data = $('#' + id).bootstrapTable('getAllSelections');
     if (!ids) {
         return data;

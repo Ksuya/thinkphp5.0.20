@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:97:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\shop\category\index.html";i:1535717580;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535709704;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:97:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\shop\category\index.html";i:1535955045;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535951938;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,13 +102,14 @@
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="form-horizontal" role="form"  action="<?php echo url('saveCategory'); ?>">
+            <form class="form-horizontal" role="form"  action="<?php echo url('store'); ?>">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">添加分类</h4>
                 </div>
                 <div class="modal-body">
                     <?php echo token('token_category_actions','shal'); ?>
+                    <input type="hidden" name="id" value="">
                     <?php echo formInput('分类名称:','name','','text'); ?>
                     <?php echo formSelect('上级分类:','parent_id',$cates,'id','name'); ?>
                     <?php echo formInput('分类排序:','sort',0,'number'); ?>
@@ -125,9 +126,10 @@
 </div>
 <script>
     var tableId = 'tb_departments';
+    var url = "<?php echo url('dataList'); ?>";
+    var delurl = "<?php echo url('delData'); ?>";
     $(function () {
         //1.初始化Table
-        var url = "<?php echo url('cateList'); ?>";
         var fields = [
             {checkbox: true},
             {field: 'name', title: '分类名称'},
@@ -204,8 +206,24 @@
         var uniqueId = $(_this).attr("data-index");
         var table = $(_this).closest("table");
         var tableId = table.attr("id");
-        bootstrapConfirm('删除商品分类','请谨慎操作','out22();');
+        bootstrapConfirm('删除商品分类','请谨慎操作','deletes($(this),'+uniqueId+',\''+delurl+'\');');
     });
+
+    // table row action
+    $(document).on('click', '.table-more-action', function (e) {
+        var obj = $(e.target);
+        var ids = getBtableAllselect(tableId,'id');
+        bootstrapConfirm('删除商品分类','请谨慎操作','deletes($(this),\''+ids+'\',\''+delurl+'\');');
+    });
+
+    function deletes(btn,id,url) {
+        pbAjax(btn,url,{id:id},function (res) {
+            $("#confirm_Modal").modal('hide');
+            hideLoading();
+            layer.msg(res.errmsg,{icon:6});
+            $("#" + tableId).bootstrapTable('refresh', {query: {}});
+        })
+    }
 </script>
 </body>
 </html>

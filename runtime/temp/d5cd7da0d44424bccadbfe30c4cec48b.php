@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/blogb\view\index\index.html";i:1535622051;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blogb\view\public\header.html";i:1535621987;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blogb\view\public\nav.html";i:1535622009;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blogb\view\public\footer.html";i:1535621950;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/blog\view\index\index.html";i:1535622051;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\header.html";i:1535621987;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\nav.html";i:1535622009;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\footer.html";i:1535621950;}*/ ?>
 <!DOCTYPE html>
 <html lang="cn">
 <head>

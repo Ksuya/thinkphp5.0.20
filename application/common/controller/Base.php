@@ -24,10 +24,6 @@ class Base extends Controller{
         $token = md5($request->domain().time().mt_rand(99,99999));
         session('api_token',$token);
         $this->assign("api_token",$token);
-    }
-
-    public function _initialize()
-    {
         // 检查token是否有效
         if($this->request->isPost() || $this->request->isAjax())
         {
@@ -47,6 +43,11 @@ class Base extends Controller{
                 exit;
             }*/
         }
+    }
+
+    public function _initialize()
+    {
+
     }
 
     public function _empty($name)

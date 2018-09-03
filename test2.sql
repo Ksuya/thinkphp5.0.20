@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本机
+Source Server         : localhost
 Source Server Version : 50553
 Source Host           : localhost:3306
 Source Database       : test2
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-09-03 10:20:12
+Date: 2018-09-03 20:14:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -507,14 +507,19 @@ CREATE TABLE `record` (
   KEY `tableName` (`tableName`),
   KEY `user` (`user`),
   KEY `dataId` (`dataId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='数据变更记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='数据变更记录表';
 
 -- ----------------------------
 -- Records of record
 -- ----------------------------
-INSERT INTO `record` VALUES ('1', '1', '分类更新', '5944', '127.0.0.1', null, 'ShopCategory', '1', '2018-08-31 16:55:14', null, null);
-INSERT INTO `record` VALUES ('2', '1', '分类更新', '71189', '127.0.0.1', null, 'ShopCategory', '2', '2018-08-31 17:10:43', null, null);
-INSERT INTO `record` VALUES ('3', '1', '分类更新', '79031', '127.0.0.1', null, 'ShopCategory', '3', '2018-08-31 17:33:03', null, null);
+INSERT INTO `record` VALUES ('33', '2', '分类更新', '95793', '127.0.0.1', null, 'ShopCategory', '6', '2018-09-03 13:53:03', null, null);
+INSERT INTO `record` VALUES ('34', '2', '分类更新', '89736', '127.0.0.1', null, 'ShopCategory', '2', '2018-09-03 13:53:56', null, null);
+INSERT INTO `record` VALUES ('35', '2', '分类更新', '37171', '127.0.0.1', null, 'ShopCategory', '6', '2018-09-03 13:54:18', null, null);
+INSERT INTO `record` VALUES ('36', '1', '新增分类', '64388', '127.0.0.1', null, 'ShopCategory', '19', '2018-09-03 13:56:10', null, null);
+INSERT INTO `record` VALUES ('37', '2', '更新', '3914', '127.0.0.1', null, 'ShopProduct', '1', '2018-09-03 14:45:05', null, null);
+INSERT INTO `record` VALUES ('38', '2', '更新', '59430', '127.0.0.1', null, 'ShopProduct', '1', '2018-09-03 14:47:36', null, null);
+INSERT INTO `record` VALUES ('39', '1', '新增', '4151', '127.0.0.1', null, 'ShopProduct', '2', '2018-09-03 15:09:18', null, null);
+INSERT INTO `record` VALUES ('40', '1', '新增商品', '4101', '127.0.0.1', null, 'ShopProduct', '3', '2018-09-03 17:08:33', null, null);
 
 -- ----------------------------
 -- Table structure for record_detail
@@ -529,11 +534,16 @@ CREATE TABLE `record_detail` (
   `new` varchar(255) NOT NULL COMMENT '最新值',
   PRIMARY KEY (`id`),
   KEY `recordId` (`recordId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据变更详情表-只有修改的时候会写入详情到此表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='数据变更详情表-只有修改的时候会写入详情到此表';
 
 -- ----------------------------
 -- Records of record_detail
 -- ----------------------------
+INSERT INTO `record_detail` VALUES ('1', '33', '6', 'name', '家电大全', '家电大全2');
+INSERT INTO `record_detail` VALUES ('2', '34', '2', 'name', '床上用品', '床上用品bak');
+INSERT INTO `record_detail` VALUES ('3', '35', '6', 'name', '家电大全2', '家电大全');
+INSERT INTO `record_detail` VALUES ('4', '37', '1', 'name', '海尔 BCD-572WDENU1', '海尔 BCD-572WDENU1');
+INSERT INTO `record_detail` VALUES ('5', '38', '1', 'name', '海尔 BCD-572WDENU1', '海尔 BCD-572WDENU1');
 
 -- ----------------------------
 -- Table structure for shop_address
@@ -577,6 +587,27 @@ CREATE TABLE `shop_admin` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for shop_banner
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_banner`;
+CREATE TABLE `shop_banner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` tinyint(4) DEFAULT '1' COMMENT '1-首页轮播',
+  `name` varchar(50) DEFAULT NULL,
+  `posters` int(11) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_banner
+-- ----------------------------
+INSERT INTO `shop_banner` VALUES ('1', '1', '轮播1', '18', '2018-09-03 16:02:54', null);
+INSERT INTO `shop_banner` VALUES ('2', '1', '轮播2', '19', '2018-09-03 16:03:03', null);
+INSERT INTO `shop_banner` VALUES ('3', '1', '轮播3', '20', '2018-09-03 16:03:13', null);
+
+-- ----------------------------
 -- Table structure for shop_brand
 -- ----------------------------
 DROP TABLE IF EXISTS `shop_brand`;
@@ -591,11 +622,13 @@ CREATE TABLE `shop_brand` (
   `update_time` datetime DEFAULT NULL,
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shop_brand
 -- ----------------------------
+INSERT INTO `shop_brand` VALUES ('1', '海尔', '', '海尔', '0', '2018-09-03 13:57:06', null, null, null);
+INSERT INTO `shop_brand` VALUES ('2', '澳柯玛', '', '澳柯玛', '0', '2018-09-03 13:57:15', null, null, null);
 
 -- ----------------------------
 -- Table structure for shop_category
@@ -614,14 +647,79 @@ CREATE TABLE `shop_category` (
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shop_category
 -- ----------------------------
 INSERT INTO `shop_category` VALUES ('1', '0', '家具家纺', '20', '10', '1', '2018-08-31 16:55:14', '0', '2018-08-31 16:55:14', null);
-INSERT INTO `shop_category` VALUES ('2', '1', '床上用品', '21', '15', '1', '2018-08-31 17:10:43', '0', '2018-08-31 17:10:43', null);
-INSERT INTO `shop_category` VALUES ('3', '1', '【Border】开通broker账户', '23', '0', '0', '2018-08-31 17:33:03', '0', '2018-08-31 17:33:03', null);
+INSERT INTO `shop_category` VALUES ('2', '1', '床上用品', '21', '15', '0', '2018-08-31 17:10:43', '0', '2018-09-03 13:53:56', null);
+INSERT INTO `shop_category` VALUES ('4', '1', '四件套', '25', '0', '0', '2018-09-03 13:05:15', '0', '2018-09-03 13:05:15', null);
+INSERT INTO `shop_category` VALUES ('6', '0', '家电大全', '26', '0', '1', '2018-09-03 13:28:19', '0', '2018-09-03 13:54:18', null);
+INSERT INTO `shop_category` VALUES ('19', '6', '冰箱', '29', '0', '0', '2018-09-03 13:56:10', '0', '2018-09-03 13:56:10', null);
+
+-- ----------------------------
+-- Table structure for shop_catelog
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_catelog`;
+CREATE TABLE `shop_catelog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(255) NOT NULL,
+  `surname` varchar(255) DEFAULT NULL,
+  `brief` varchar(1022) DEFAULT NULL,
+  `content` text,
+  `seo_title` varchar(255) DEFAULT NULL,
+  `seo_keywords` varchar(255) DEFAULT NULL,
+  `seo_description` varchar(255) DEFAULT NULL,
+  `banner` varchar(255) DEFAULT NULL,
+  `is_nav` int(11) NOT NULL DEFAULT '1',
+  `sort_order` int(11) NOT NULL DEFAULT '50',
+  `page_type` varchar(255) NOT NULL DEFAULT 'page',
+  `page_size` int(11) NOT NULL DEFAULT '10',
+  `template_list` varchar(255) NOT NULL DEFAULT 'list',
+  `template_show` varchar(255) NOT NULL DEFAULT 'show',
+  `template_page` varchar(255) NOT NULL DEFAULT 'page',
+  `redirect_url` varchar(255) DEFAULT NULL,
+  `click` int(11) DEFAULT '0',
+  `status` int(11) NOT NULL DEFAULT '1',
+  `create_time` int(11) NOT NULL,
+  `update_time` int(11) NOT NULL,
+  `created_user` int(11) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `is_nav` (`is_nav`),
+  KEY `sort_order` (`sort_order`),
+  KEY `status` (`status`),
+  KEY `created_at` (`create_time`)
+) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_catelog
+-- ----------------------------
+INSERT INTO `shop_catelog` VALUES ('1', '0', '新手指南', 'getting_start', '', '<p><img alt=\"\" src=\"http://images.jumei.com/help_center/help_steps.jpg\" /></p>\r\n\r\n<h4>Step 1&nbsp;点击页面右上方的&ldquo;<a href=\"http://www.jumei.com/i/account/signup\" style=\"color: rgb(237, 20, 91); text-decoration: none;\" target=\"_blank\">注册</a>&rdquo;按钮注册账号</h4>\r\n\r\n<h4>Step 2&nbsp;注册前请仔细阅读《用户协议》，如无异议请点击&ldquo;同意以下协议并注册&rdquo;。请根据相应提示在信息栏内填入您的注册信息。</h4>\r\n\r\n<p><span style=\"color:rgb(102, 102, 102); font-family:arial,microsoft yahei,微软雅黑; font-size:12px\">注册成功后系统将自动登录您的账号，并转至首页。</span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><font color=\"#666666\" face=\"arial, microsoft yahei, 微软雅黑\"><span style=\"font-size:12px\">如有账号：</span></font></p>\r\n\r\n<p>Step 1 如您已经拥有账号，请点击页面上方的&ldquo;<a href=\"http://www.jumei.com/i/account/login/\" style=\"color: rgb(237, 20, 91); text-decoration: none;\" target=\"_blank\">登录</a>&rdquo;按钮</p>\r\n\r\n<h4>Step 2&nbsp;在登录页面的信息栏内填入对应信息，点击&ldquo;登录&rdquo;按钮进行登录，。登录成功后，系统将自动跳转至首页。</h4>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425949502', '1481114782', null, null);
+INSERT INTO `shop_catelog` VALUES ('2', '0', '配送政策', 'shipment', '', '', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425949533', '1425949533', null, null);
+INSERT INTO `shop_catelog` VALUES ('3', '0', '支付方式', 'payment', '', '', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425949596', '1425949596', null, null);
+INSERT INTO `shop_catelog` VALUES ('4', '0', '售后服务', 'after_sales', '', '', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425949619', '1425950281', null, null);
+INSERT INTO `shop_catelog` VALUES ('5', '0', '关于商城', 'about_shop', '', '', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425949660', '2018', null, null);
+INSERT INTO `shop_catelog` VALUES ('12', '1', '购物流程', 'flow', '', '<p><img alt=\"\" src=\"https://img30.360buyimg.com/pophelp/g10/M00/13/11/rBEQWVFlHpYIAAAAAACI4qKbEu4AAD0VAKcRBMAAIj6957.jpg\" /></p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481114956', null, null);
+INSERT INTO `shop_catelog` VALUES ('13', '1', '会员积分', 'point', '', '<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong>1、什么是会员积分？</strong><br />\r\n<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;所有会员在称本商城购物，并确认收货后，均可获得等同于购买商品实际支付金额的积分数。</p>\r\n\r\n<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;同时本商城会定期推出各类积分兑换活动，请随时关注活动公告。</p>\r\n\r\n<p><br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>2、如何获得积分？</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>（1）购买商品积分</strong></p>\r\n\r\n<p>&nbsp; &nbsp; &nbsp; &nbsp; A、每一张成功交易并确认收货的订单，都可获得积分，即您确认收货后才能获得积分，而不是付款后。</p>\r\n\r\n<p>&nbsp; &nbsp; &nbsp; &nbsp; B、不同商品积分标准不同，获得积分以订单提交时所注明的积分为准。（如：购买本商品可得 78 积分）</p>\r\n\r\n<p>&nbsp; &nbsp; &nbsp; &nbsp; C、同笔订单同款商品购买多件，可获得相应倍数的积分。</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>（2）商品交易评价积分 </strong><br />\r\n<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;购买过的商品，撰写您对商品的评价，您将获得每件商品5个积分的奖励。上传图片的精彩评价，还将获得每件商品25个积分的额外奖励。同笔订单同款商品只能评价一次。</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>（3）活动积分赠送 </strong><br />\r\n<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 参与相关活动您可以获得丰厚的积分奖励，请经常关注丽子首页活动。</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong> （4）玩游戏得积分 </strong><br />\r\n<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;去丽子问答与姐妹们分享美妆心得，还能得积分。<a href=\"http://www.lizi.com/ask\" target=\"_blank\">点这里去问答逛逛吧~</a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong> （5）LiZi问答得积分 </strong><br />\r\n<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;您可以在&ldquo;我的丽子&mdash;&mdash;账户管理&mdash;&mdash;我的积分&rdquo; &nbsp; &nbsp;查看您的累计积分。</p>\r\n\r\n<p><br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>3、如何查看积分 </strong><br />\r\n<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;您可以在&ldquo;我的丽子&mdash;&mdash;账户管理&mdash;&mdash;我的积分&rdquo;查看您的累计积分。</p>\r\n\r\n<p><br />\r\n<br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>4、积分使用 </strong><br />\r\n<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;会员积分可以抵现金使用， 100个积分=1元。<br />\r\n<br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>积分使用步骤：</strong>在商品详情页面<br />\r\n<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 点击加入购物车按钮&mdash;&gt;去购物车结算&mdash;&gt;我的购物车&mdash;&gt;去结算&mdash;&gt;使用积分（页面左下角，输入使用积分数量，点击使用）。</p>\r\n\r\n<p><br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>订单退款积分处理方式：</strong>订单付款前取消，积分自动返还；订单付款后，订单发生取消、退款、退货等状态变化，积分不再返还。</p>\r\n\r\n<p><br />\r\n&nbsp;<br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>5、免责声明 </strong><br />\r\n<br />\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;本商城感谢您访问会员积分计划，本计划由本商城提供。以上计划条款和条件，连同计划有关的任何促销内容的相应条款和条件，</p>\r\n\r\n<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;构成本计划会员与本商城之间关于制度的完整协议。如果您使用本商城，您就参加了本计划并接受了这些条款、条件、限制和要求。</p>\r\n\r\n<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;请注意，您本商城的使用以及您的会员资格还受制于本商城网站上更新的所有条款、条件、限制和要求，请仔细阅读这些条款和条件。</p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1425951005', null, null);
+INSERT INTO `shop_catelog` VALUES ('15', '1', '常见问题', 'faq', '', '<div class=\"help-tit1 flk06\" style=\"margin: 0px 0px 25px; padding: 0px 0px 15px; color: rgb(125, 213, 137); width: 650px; height: 25px; font-size: 20px; font-family: \'microsoft yahei\'; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(234, 234, 234);\">下单后可以修改订单吗？</div>\r\n\r\n<p><span style=\"font-family:宋体,simsun\">在订单打印之前可以修改，打开&ldquo;订单详情&rdquo;页面，点击&ldquo;修改订单&rdquo;即可，若没有修改订单按钮，则表示订单无法修改。</span></p>\r\n\r\n<p>注：</p>\r\n\r\n<p>1. 修改订单可能影响送货时间。</p>\r\n\r\n<p>2. 修改时将以当前商品信息为准，修改时需要注意查看活动信息。</p>\r\n\r\n<p>3. 由于订单生产速度快，可能出现修改不成功的情况。</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<div class=\"help-tit1 flk06\" style=\"margin: 0px 0px 25px; padding: 0px 0px 15px; color: rgb(125, 213, 137); width: 650px; height: 25px; font-size: 20px; font-family: \'microsoft yahei\'; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(234, 234, 234);\">如何联系众成？</div>\r\n\r\n<p><span style=\"font-family:宋体,simsun\">您可直接致电众成商城，也可以发送邮件至3503916187@qq.com，客服将会在第一时间与您取得联系，并帮助您解决问题。</span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<div class=\"help-tit1 flk06\" style=\"margin: 0px 0px 25px; padding: 0px 0px 15px; color: rgb(125, 213, 137); width: 650px; height: 25px; font-size: 20px; font-family: \'microsoft yahei\'; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(234, 234, 234);\">无货商品几天可以到货？</div>\r\n\r\n<p><span style=\"font-family:宋体,simsun\">您可以通过以下方法获取商品的到货时间：</span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\">1. 若商品页面中，显示&ldquo;无货&rdquo;时：商品具体的到货时间是无法确定的，您可以通过电话或是邮件的方式向众成表达您的意愿，待得有货后，众成将会第一时间通知到您。</span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<div class=\"help-tit1 flk06\" style=\"margin: 0px 0px 25px; padding: 0px 0px 15px; color: rgb(125, 213, 137); width: 650px; height: 25px; font-size: 20px; font-family: \'microsoft yahei\'; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(234, 234, 234);\">订单取消后还能恢复吗？</div>\r\n\r\n<p><span style=\"color:rgb(51, 51, 51); font-family:宋体\">订单一旦取消，将无法恢复，请您慎重操作。</span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<div class=\"help-tit1 flk06\" style=\"margin: 0px 0px 25px; padding: 0px 0px 15px; color: rgb(125, 213, 137); width: 650px; height: 25px; font-size: 20px; font-family: \'microsoft yahei\'; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(234, 234, 234);\">下单之后如何修改支付方式？</div>\r\n\r\n<p><span style=\"font-family:宋体\">订单提交之后暂不支持修改支付方式。</span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481115580', null, null);
+INSERT INTO `shop_catelog` VALUES ('21', '2', '包邮说明', 'shipment_free', '', '<p>众成商城采用所有发货形式都是采用第三方物流，暂时不支持包邮，但是众成商城会不定期地视您的消费数量以积分形式返还至您的账户</p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481115749', null, null);
+INSERT INTO `shop_catelog` VALUES ('22', '2', '配送范围', 'shipment_area', '', 'content', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1425951005', null, null);
+INSERT INTO `shop_catelog` VALUES ('23', '2', '配送费用', 'shipment_fee', '', '<p><span style=\"color:#008000\"><span style=\"font-size:18px\">如果能确定我的配送费用？</span></span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>由于众成商城的特殊性，大件物品均采用物流（非快递）配送，物流会根据物品的体积和重量来计算费用，具体特殊物件的费用可以询问客服人员。而可采用快递的商品，众成一律采用顺丰快递，且价格为12元每单。</p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481118096', null, null);
+INSERT INTO `shop_catelog` VALUES ('24', '2', '验货与签收', 'shipment_receive', '', '<p><span style=\"font-family:宋体,simsun\"><strong>1、 商品配送&nbsp;</strong><br />\r\n1.1卖家所选择的快递公司在派送商品时应当主动联系收货人，而不应在未征得收货人同意的情况下将商品交由小区保安、门卫、公司前台等人签收。<br />\r\n1.2卖家应与快递公司约定，在提供配送过程中，应遵守众成平台相关规则规定的标准及规范，为消费者提供满意的配送服务，积极提升客户满意度。</span></p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\"><strong>2、 商品签收&nbsp;</strong><br />\r\n2.1卖家按照约定发货后，收货人有及时收货的义务。收货人可以本人签收商品或委托他人代为签收商品，被委托人的签收视为收货人本人签收。<br />\r\n2.2消费者只填写了收货地址，但没有填写收货人或填写的收货人信息不特定，商品在收货地址被签收的，该签收视为消费者本人签收。</span></p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\"><strong>3、 商品验收&nbsp;</strong><br />\r\n3.1收货人签收商品时，应当对商品进行验收。<br />\r\n3.2涉及商品表面一致的事项，收货人应当在签收商品时进行验收。 本条所称&ldquo;表面一致&rdquo;，是指凭肉眼即可判断所收到的商品表面状况良好且与网上描述相符，表面一致的判断范围包括但不限于商品的形状、大小、数量、重量等。<br />\r\n3.3收货人签收商品时发现表面不一致的，有权拒绝签收商品。 众成商城会在商品拒收后及时联系消费者，进行处理。<br />\r\n3.4对于需要先签收再打开包装查看的商品，收货人应当要求承运人当场监督并打开包装查看，如发现表面不一致，应当在签收单（收货人联和承运人联）上备注详细情况并让承运人签字确认或者直接退回商品。<br />\r\n3.5收货人无正当理由拒绝签收商品的，运费由消费者承担。<br />\r\n3.6收货人拒绝签收商品后，众成会及时联系承运人取回商品。因众成怠于取回商品所产生的额外运费、保管费等费用由众成平台承担。</span></p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\"><strong>三、 风险转移</strong></span></p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\">商品毁损、灭失等的风险自收货人签收商品后由平台转移给收货人。</span></p>\r\n\r\n<div>&nbsp;</div>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481165880', null, null);
+INSERT INTO `shop_catelog` VALUES ('25', '2', '配送查询', 'shipment_search', '', '<p><span style=\"background-color:rgb(249, 249, 249); color:rgb(102, 102, 102); font-family:arial,verdana,宋体; font-size:12px\">请选择您要配送到的地址，选择后可以查看本地址支持的配送服务和时间。</span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>支付服务</p>\r\n\r\n<h4><img alt=\"\" src=\"https://static.360buyimg.com/item/assets/promise_icon/ps-i11.gif\" style=\"height:70px; width:70px\" />货到付款</h4>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h4>大件商品服务</h4>\r\n\r\n<p><img alt=\"\" src=\"https://static.360buyimg.com/item/assets/promise_icon/ps-i15.gif\" style=\"height:70px; width:70px\" />开箱验货</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h4>特色服务</h4>\r\n\r\n<p><img alt=\"\" src=\"https://static.360buyimg.com/item/assets/promise_icon/ps-i24.gif\" style=\"height:70px; width:70px\" />快速退款</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><span style=\"background-color:rgb(251, 251, 251); color:rgb(102, 102, 102); font-family:arial,verdana,宋体; font-size:12px\">配送服务查询将为您提供配送范围、配送方式、配送时间等相关配送信息的查询服务功能，该服务功能可快速查询您所在地区的众成配送服务内容，众成将一如既往地为您提供&ldquo;多、快、好、省&rdquo;的高品质服务。</span></p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481166223', null, null);
+INSERT INTO `shop_catelog` VALUES ('31', '3', '货到付款', 'payment_cod', '', '<div class=\"help-tit1 flk06\" style=\"margin: 0px 0px 25px; padding: 0px 0px 15px; color: rgb(125, 213, 137); width: 650px; height: 25px; font-size: 20px; font-family: \'microsoft yahei\'; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(234, 234, 234); line-height: 18px;\">能否货到付款？</div>\r\n\r\n<p><span style=\"font-family:宋体,simsun\">您的收货地址是否支持货到付款，请以订单结算页为准，若订单结算页下支付方式中可以选择&ldquo;货到付款&rdquo;，则支持&ldquo;货到付款&rdquo;，否则不支持。</span></p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481166288', null, null);
+INSERT INTO `shop_catelog` VALUES ('32', '3', '网上支付', 'payment_online', '', '<p><span style=\"color:rgb(125, 213, 137); font-family:microsoft yahei; font-size:20px\">支付平台支持哪些平台支付？</span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>目前平台仅支付通过宝付平台进行支付，更多在线支付，敬请期待</p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481166386', null, null);
+INSERT INTO `shop_catelog` VALUES ('41', '4', '正品保障', 'sales_quality', '', '<p><span style=\"color:rgb(125, 213, 137); font-family:microsoft yahei; font-size:20px\">售后服务温馨提示</span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\">众成平台向您保证所售商品均为正品行货，商品自带机打发票或电子发票，与商品一起寄送；凭质保证书及发票，可享受保修服务；为了享受商品的正常质保，我们建议您将发票开具为商品明细；</span></p>\r\n\r\n<ul>\r\n	<li>\r\n	<p><span style=\"font-family:宋体,simsun\">图片及信息仅供参考，不属质量问题。因拍摄灯光及不同显示器色差等问题可能造成商品图片与实物有色差，一切以实物为准；</span></p>\r\n	</li>\r\n	<li>\r\n	<p><span style=\"font-family:宋体,simsun\">由于您技术水平、使用环境限制造成的误报以及实际情况与您描述不符，众成将不予受理，按原地址返回的运费由您承担</span>；</p>\r\n	</li>\r\n</ul>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481166556', null, null);
+INSERT INTO `shop_catelog` VALUES ('42', '4', '售后政策', 'sales_return_policy', '', '<div class=\"help-tit1 flk06\" style=\"margin: 0px 0px 25px; padding: 0px 0px 15px; color: rgb(125, 213, 137); width: 650px; height: 25px; font-size: 20px; font-family: \'microsoft yahei\'; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(234, 234, 234); line-height: 18px;\">汽车用品类商品退换货细则</div>\r\n\r\n<div class=\"help_box\" style=\"margin: 0px; padding: 10px 10px 10px 20px; font-family: Arial, Verdana, 宋体; font-size: 12px; line-height: 18px; color: rgb(102, 102, 102);\">\r\n<div class=\"help_zybox\" style=\"margin: 0px 0px 10px; padding: 10px; border: 1px solid rgb(229, 229, 229);\">\r\n<p><strong>退换货时限</strong></p>\r\n\r\n<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">自实际收到商品之日起7日内可以退货，15日内可以换货</span></p>\r\n\r\n<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\"><strong>退换货原因</strong></span></p>\r\n\r\n<ul>\r\n	<li>\r\n	<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">7日内在商品（含附件）完好前提下可享受7日无理由退货;包装含防伪码的商品除外；</span></p>\r\n	</li>\r\n	<li>\r\n	<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">商品质量问题。</span></p>\r\n	</li>\r\n</ul>\r\n\r\n<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\"><strong>处理流程</strong></span></p>\r\n\r\n<ul>\r\n	<li>\r\n	<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">属于质量问题的，将生产厂家售后服务中心开具的检测报告（维修检验单据）、附件、说明书、发票、保卡、购物凭证、包装、问题商品（主板类产品需写明故障原因），一并返回我司办理退换货手续。</span></p>\r\n	</li>\r\n	<li>\r\n	<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">如果顾客在使用时对商品质量表示置疑，请出具书面鉴定，我们会按照国家法律规定予以处理。</span></p>\r\n	</li>\r\n	<li>\r\n	<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">对于存储类商品，众成概不提供数据导出服务，请务必在返修前将里面的数据自行导出，否则若有数据遗失、损坏等众成概不承担相应的责任。</span></p>\r\n	</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<div class=\"help-tit1 flk06\" style=\"margin: 0px 0px 25px; padding: 0px 0px 15px; color: rgb(125, 213, 137); width: 650px; height: 25px; font-size: 20px; font-family: \'microsoft yahei\'; border-bottom-width: 1px; border-bottom-style: dashed; border-bottom-color: rgb(234, 234, 234); line-height: 18px;\">家居、厨具、家装类商品退换货细则</div>\r\n\r\n<div class=\"help_box\" style=\"margin: 0px; padding: 10px 10px 10px 20px; font-family: Arial, Verdana, 宋体; font-size: 12px; line-height: 18px; color: rgb(102, 102, 102);\">\r\n<div class=\"help_zybox\" style=\"margin: 0px 0px 10px; padding: 10px; border: 1px solid rgb(229, 229, 229);\">\r\n<p><span style=\"font-family:宋体,simsun\"><strong>退换货时限</strong></span></p>\r\n\r\n<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">自实际收到商品之日起7日内可以退货，15日内可以换货</span></p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\"><strong>退换货原因</strong></span></p>\r\n\r\n<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">7日内在商品（含附件）完好前提下可享受7日无理由退货；注意事项中约定不适合退换的商品除外；</span></p>\r\n\r\n<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">商品质量问题。</span></p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\"><strong>处理流程</strong></span></p>\r\n\r\n<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">有质量问题或误导的，将附件、说明书、发票、购物凭证、包装、商品一并返回我司办理退换货手续</span></p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\"><strong>注意事项</strong></span></p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\"><span style=\"color:rgb(0, 0, 0)\">如出现质量问题，以换件为主，大家具类商品出现质量问题优先以换件为主。</span></span></p>\r\n\r\n<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">玻璃制品和易损制品局部损坏，直接补寄即可，无需全部退回。</span></p>\r\n\r\n<p><span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun\">包装含防伪码的商品防伪码一经刮开不予退换货。</span></p>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481169793', null, null);
+INSERT INTO `shop_catelog` VALUES ('43', '4', '退换货流程', 'sales_return_flow', '', '<p><span style=\"color:rgb(125, 213, 137); font-family:microsoft yahei; font-size:20px\">退货、换货、返修流程说明</span></p>\r \r <p>&nbsp;</p>\r \r <p>1、登入网站http://www.iubotech.com，进入【我的订单】，点击【退/换货申请】按钮</p>\r \r <p>2、<span style=\"color:rgb(0, 0, 0); font-family:宋体,simsun; font-size:12px\">提交成功后请耐心等待，由专业的售后工作人员受理您的申请。</span></p>\r ', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481170100', null, null);
+INSERT INTO `shop_catelog` VALUES ('44', '4', '退款说明', 'sales_return_money', '', '<p><span style=\"color:rgb(125, 213, 137); font-family:microsoft yahei; font-size:20px\">退款说明</span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>一般退款周期为5个工作日左右，款项将会退还至原支付银行卡中。</p>\r\n\r\n<p><strong><span style=\"font-family:宋体\">温馨提示：</span></strong><span style=\"color:rgb(0, 0, 0); font-family:宋体; font-size:12px\">退款周期仅供您参考，具体退款周期可能会受银行、支付机构等相关因素影响。</span></p>\r\n\r\n<p><span style=\"color:rgb(0, 0, 0); font-family:宋体; font-size:12px\">公司转账或支票支付的订单，需与客服人员确认公司相关信息后进行公司转账，目前众成只支持原路退回至客户原支付的公司账户中，给您带来的不便请您谅解。</span></p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481170276', null, null);
+INSERT INTO `shop_catelog` VALUES ('45', '4', '取消订单', 'sales_cancel_order', '', '<p><strong><span style=\"font-family:微软雅黑,microsoft yahei\">如何取消订单</span></strong></p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\">若您想取消未收货的订单，</span></p>\r\n\r\n<p><span style=\"font-family:宋体,simsun\">具体操作步骤如下：</span></p>\r\n\r\n<ul>\r\n	<li>\r\n	<p><span style=\"font-family:宋体,simsun\">进入</span><span style=\"font-family:宋体,simsun\">&quot;我的订单&quot;页面，找到要取消的订单，点击&ldquo;取消订单&rdquo;按钮；</span></p>\r\n	</li>\r\n	<li>\r\n	<p><span style=\"font-family:宋体,simsun\">选择订单取消原因后，提交申请；</span></p>\r\n	</li>\r\n	<li>\r\n	<p><span style=\"font-family:宋体,simsun\">&quot;取消订单&quot;申请成功后，您可在&ldquo;我的订单</span><span style=\"font-family:宋体,simsun\">&rdquo;页面查看取消进度。</span></p>\r\n	</li>\r\n</ul>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481170427', null, null);
+INSERT INTO `shop_catelog` VALUES ('51', '5', '关于我们', 'about_us', '', '<p><span style=\"font-size:20px\"><strong>关于众成商城</strong></span></p>\r\n\r\n<p><span style=\"color:rgb(102, 102, 102); font-family:arial,helvetica,sans-serif; font-size:12px\">众成商城于2017年5月正式上线，致力于成为网上综合生活购物超市，为顾客提供优质的丰富的商品选择以及无与伦比的购物体验，让顾客的生活更便捷。</span><br />\r\n<span style=\"color:rgb(102, 102, 102); font-family:arial,helvetica,sans-serif; font-size:12px\">目前，众成商城主要在线销售汽车用品及家具、家装等用品，立志逐布向全国扩散发展。众成商城致力于将最好的商品，最快速地交到您的手上，给您超出想像的购物体验。</span></p>\r\n\r\n<p>&nbsp;</p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481170773', null, null);
+INSERT INTO `shop_catelog` VALUES ('52', '5', '联系我们', 'about_contact', '', '<p>业务联系</p>\r \r <p>公司地址：北京市房山区辰光东路16号院4号楼10层1003</p>\r \r <p>联系邮件：3503916187@qq.com</p>\r <p>联系电话：18701308735</p>', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481193832', null, null);
+INSERT INTO `shop_catelog` VALUES ('55', '5', '商城协议', 'about_agreement', '', '<p>欢迎您注册成为众成商城会员。众成商城尊重您的隐私，并为下述之目的保存及使用您的姓名、住址以及您向众成商城提供的其他个人信息。为保障您的权益，请您于注册和使用众成商城网站之前，详细阅读本同意书！</p>\r\n\r\n<p>一、加入会员 当您在点选&ldquo;同意注册&rdquo;键时，表示您已注册为众成商城会员并同意使用众成商城所提供的任何服务（包括本公司不时更新和修改的服务），亦即视为您已阅读本同意书，并同意遵守本同意书的所有内容。您如果不同意本同意书，请终止注册并停止使用本网站。您一旦同意本同意书，即视为您授予本站有随时更新、修改服务条件的权利，并可根据情况自行决定暂停或终止服务，本公司对您和任何第三人均不承担责任。</p>\r\n\r\n<p>二 、知识产权 本站所有内容，包括但不限于文字、图形、影音、程序、电子邮件的全部内容、网站布局、网页设计、网站架构及资料编辑、使用之软件或程序，其著作权均属于本公司或授权本公司使用之正当权利人。在未经本公司或正当权利人合法授权前，任何人不得以任何形式复制、编辑、散布、公开发表、进行还原工程、解编或反向组译。尊重知识产权是您应尽的义务，否则本公司将依法追诉并请求赔偿。</p>\r\n\r\n<p>三 、个人信息使用 众成商城将为以下目的使用您的个人信息：</p>\r\n\r\n<p>&nbsp; （一） 就各项促销活动或商品销售之预订相关服务向您提供众成商城顾客支持；</p>\r\n\r\n<p>&nbsp; （二）向您提供的产品、服务、礼品以及促销活动的最新信息；&nbsp;</p>\r\n\r\n<p>&nbsp; （三）随时征询您的意见；&nbsp;</p>\r\n\r\n<p>&nbsp; （四）编制众成商城的统计资料。 为确保上述目的，您的个人信息可能在众成企业内部共享。如果使用目的发生任何改变，众成商城将通知您，并再次征求您的同意。请注意如果您不提供个人信息，某些服务可能无法实现。&nbsp;</p>\r\n\r\n<p>四、个人信息保存 众成商城保证采取一切适当的技术上的和组织上的措施防止您的个人信息为任何未经授权的第三方获取或使用。众成商城将在为达到上述目的而视为合理必要的期间内保存个人信息。&nbsp;</p>\r\n\r\n<p>五、个人信息保护 本站遵守刊登在本站的隐私权政策，处理会员所传输的资料或通讯，除以下情况外，未获得会员同意以前，本站不对外揭露会员之姓名、地址、电子邮件地址及其他依法受保护之个人资料：&nbsp;</p>\r\n\r\n<p>&nbsp; （一）基于法律规定。&nbsp;</p>\r\n\r\n<p>&nbsp; （二）受司法机关或其他有权机关基于法定程序之要求。&nbsp;</p>\r\n\r\n<p>&nbsp; （三）为保障本公司财产及权益。&nbsp;</p>\r\n\r\n<p>&nbsp; （四）在紧急情况下为维护其他会员或第三人之人身安全。&nbsp;</p>\r\n\r\n<p>&nbsp; （五）本站将不销售或任意提供给第三者（个人或公司团体）会员之登记资料，但是若为本站主办或协办之活动，因寄发赠品或联络需要，本站有权使用会员部分资料。&nbsp;</p>\r\n\r\n<p>&nbsp; （六）对于会员所登录或留存之个人资料，会员同意本公司及本公司之关系企业或合作伙伴，有权在法律许可之范围内搜集、处理、保存、传递及使用该等资料，以提供会员其他资讯或服务、作成会员统计资料或进行关于网路行为之调查或研究。&nbsp;</p>\r\n\r\n<p>&nbsp; （七）会员要求本公司或授权某人通过电子邮件服务透露这些信息。&nbsp;</p>\r\n\r\n<p>&nbsp; （八）为本公司向会员提供服务的目的。&nbsp;</p>\r\n\r\n<p>六、会员注册义务 会员同意遵守所有与本站服务相关之国内、国际法律及以下规定，并同意不干扰他人使用此项服务：&nbsp;</p>\r\n\r\n<p>&nbsp; （一）自行提供上网设备，包括电脑及上网装置；&nbsp;</p>\r\n\r\n<p>&nbsp; （二）自行支付上网所需的电话费用以及与使用本站服务所需会员自行承担的费用；&nbsp;</p>\r\n\r\n<p>&nbsp; （三）依本站会员注册表之提示提供本人正确、最新及完整的资料（以下简称&ldquo;注册资料&rdquo;）。&nbsp;</p>\r\n\r\n<p>&nbsp; （四） 若您提供任何错误、不实、过时或不完整的资料，或本站合理怀疑资料错误、不实、过时或不完整，本站有权暂停或终止您的帐号，并拒绝向您提供部分或全部服务。 &nbsp;</p>\r\n\r\n<p>七、会员帐号、密码及安全 会员应确保密码及帐号的机密安全，本站不负保管责任，会员同意以下事项：&nbsp;</p>\r\n\r\n<p>&nbsp; （一）会员密码或帐号遭到未获授权的使用，或其他任何安全问题发生时，会员应立即通知本站。&nbsp;</p>\r\n\r\n<p>&nbsp; （二）每次连线完毕，请确实结束帐号使用，如您未能遵守本项规定而发生任何损失，本站概不负责。&nbsp;</p>\r\n\r\n<p>&nbsp; （三）如果会员未保管好自己的帐号和密码而对会员、本公司或第三方造成的损害，会员将承担责任。&nbsp;</p>\r\n\r\n<p>八、会员行为 本站保留删除任何危害他人著作权或专利内容的权利，会员同意遵守并配合以下条款：&nbsp;</p>\r\n\r\n<p>&nbsp; （一）严禁使用本站所有相关服务从事非法行为。&nbsp;</p>\r\n\r\n<p>&nbsp; （二）严禁从事干扰或中断相关服务器或网路的行为。&nbsp;</p>\r\n\r\n<p>&nbsp; （三）遵守所有连接至此网路的要求、规则、程序及政策。&nbsp;</p>\r\n\r\n<p>&nbsp; （四）不得转售此项免费服务或连接至此的各项免费服务而居中牟利。&nbsp;</p>\r\n\r\n<p>&nbsp; （五）不得张贴或传播任何不实广告、宣传资料或其他形式的诱骗性广告。&nbsp;</p>\r\n\r\n<p>&nbsp; （六）不得传输任何有侵犯他人权利的资料。&nbsp;</p>\r\n\r\n<p>&nbsp; （七）不得传输违反现行法律、国际相关法律的资料。&nbsp;</p>\r\n\r\n<p>&nbsp; （八）不得利用本站传输任何非法、有害、威胁、辱骂、干扰性、诽谤、粗俗、淫秽、憎恨或其他任何有违良好道德风尚的资料、文字、图片、档案、连结、软件或其他资料。&nbsp;</p>\r\n\r\n<p>&nbsp; （九）不得进入本站计算机信息网络或者使用计算机信息网络资源。&nbsp;</p>\r\n\r\n<p>&nbsp; （十）不得对本站计算机信息网络功能进行删除、修改或者增加。&nbsp;</p>\r\n\r\n<p>&nbsp; （十一）不得进入本站计算机信息网络中存储、处理或者传输的数据和应用程序进行删除、修改或者增加。&nbsp;</p>\r\n\r\n<p>&nbsp; （十二）不得制作、传播计算机病毒以及通过其他方式破坏程序。&nbsp;</p>\r\n\r\n<p>&nbsp; （十三）不得进行其他危害计算机信息网络安全的行为。&nbsp;</p>\r\n\r\n<p>&nbsp; （十四）不得以任何方式干扰本公司的服务。&nbsp;</p>\r\n\r\n<p>&nbsp; （十五）遵守本站规定的所有程序。&nbsp;</p>\r\n\r\n<p>九、相关法律法规 本站所有画面、资料非经本站同意不得进行复制、移转、租用、出售；会员必须遵守包括电信法在内的相关法律法规，若违反相关法律法规致本公司损失，本公司将依法请求赔偿。 本站会员必须遵守本同意书之各项约定及本站所列之各项规定，若会员违反规定，本站有权暂停或终止会员的帐号和资格，并拒绝向会员提供部分或全部服务。本站有权变更条款所载事项，会员同意如有违反有关事项时，本站有权随时终止所提供的服务并保留法律追诉权。</p>\r\n\r\n<p>十、会员通知 会员通知将经由电子邮件或一般邮件发送，本公司可选择通过会员通知的方式或在本站上明示的方式告知会员有关服务内容、更新或修改的服务条件。如会员发现任何违反本同意书条款之情形，请通知众成商城客户服务中心。 会员在此授权本公司可以向其电子邮箱发送商业及服务信息。&nbsp;</p>\r\n\r\n<p>十一、 广告 您在本站上浏览到的所有广告内容、文字与图片之说明、展示样品或其他销售资讯，均以本公司或其门店实际发布的广告内容为准。</p>\r\n\r\n<p>十二、 免责声明 您明确了解并同意： 友谊网上商城对本站服务不提供任何明示或默示的担保，包含但不限于商业适售性、特定目的之适用性及未侵害他人权利。 友谊网上商城不保证以下事项：&nbsp;</p>\r\n\r\n<p>&nbsp; （一）本站将符合您的需求。&nbsp;</p>\r\n\r\n<p>&nbsp; （二）本站不受干扰、及时提供、安全可靠或免于出错。&nbsp;</p>\r\n\r\n<p>&nbsp; （三）由本站提供的信息为正确、及时、真实、可靠。&nbsp;</p>\r\n\r\n<p>&nbsp; （四）您经由本站取得的任何服务、资讯或其他资料将符合您的期望。 是否经由本服务之使用下载或取得任何资料应由您自行考量且自负风险，因任何资料之下载而导致您电脑系统之任何损坏或资料流失，本公司不承担任何责任。&nbsp;</p>\r\n\r\n<p>十三、会员声明 会员声明其为具备中华人民共和国法律规定的完全民事行为能力的自然人，或者是具有相应合法证照的实体组织，能够独立并完全地享受民事权利和承担民事责任。无民事行为能力人、限制民事行为能力人以及无合法证照的组织注册为本站会员的，一经发现，本公司有权注销会员资格。会员进一步声明，会员系经仔细阅读并审慎考虑上述内容后接受本同意书及其条款和条件的，其将遵守本同意书之各项约定及本站所列之各项规定。</p>\r\n\r\n<p>十四、适用法律 本同意书之解释与适用，以及与本同意书有关的争议，均应依照中华人民共和国（为本同意书之目的，不包括香港、台湾、澳门地区）法律予以处理。&nbsp;</p>\r\n', '', '', '', null, '1', '50', 'page', '10', 'list', 'show', 'page', '', '0', '1', '1425950891', '1481194230', null, null);
 
 -- ----------------------------
 -- Table structure for shop_config
@@ -638,11 +736,16 @@ CREATE TABLE `shop_config` (
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `config_id` (`config_id`,`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shop_config
 -- ----------------------------
+INSERT INTO `shop_config` VALUES ('1', '1', 'site_name', '汇众商城', null, null, null, null);
+INSERT INTO `shop_config` VALUES ('2', '1', 'copy_right', 'Copyright©2009-2018 汇众商城 All Rights Reserved', null, null, null, null);
+INSERT INTO `shop_config` VALUES ('3', '1', 'address', '中国美博城 安徽省合肥市居巢区', null, null, null, null);
+INSERT INTO `shop_config` VALUES ('4', '1', 'contact', '（86）0551-123456789', null, null, null, null);
+INSERT INTO `shop_config` VALUES ('5', '1', 'icp', '皖ICP备012344578号', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for shop_helps
@@ -757,11 +860,14 @@ CREATE TABLE `shop_product` (
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`,`brand_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shop_product
 -- ----------------------------
+INSERT INTO `shop_product` VALUES ('1', '19', '2', '海尔 BCD-572WDENU1', '3474.00', '3500.00', '500', '30', '0', '0', '0', '<p><img src=\"https://img.alicdn.com/tps/TB16fwuKVXXXXaXXpXXXXXXXXXX-16-16.png\" style=\"margin:0px 5px 0px 0px\" />商品具有<a href=\"https://baike.taobao.com/view.htm?wd=2012010701584939&amp;ac=29\" target=\"_blank\">中国强制性产品认证（CCC）编号</a>，符合国家CCC认证标准。</p>\r\n\r\n<p>品牌名称：Haier/海尔</p>\r\n\r\n<p><a href=\"https://detail.tmall.com/item.htm?spm=a230r.1.14.6.7326445bLA19xP&amp;id=44274812043&amp;cm_id=140105335569ed55e27b&amp;abbucket=20#J_Attrs\">更多参数</a><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>证书编号：2012010701584939</li>\r\n	<li>证书状态：有效</li>\r\n	<li>申请人名称：青岛海尔股份有限公司</li>\r\n	<li>制造商名称：青岛海尔股份有限公司</li>\r\n	<li>产品名称：冷藏冷冻箱</li>\r\n	<li>3C产品型号：见附件</li>\r\n	<li>3C规格型号：见附件</li>\r\n	<li>产品名称：Haier/海尔 BCD-160TMPQ</li>\r\n	<li>海尔冰箱型号:&nbsp;BCD-160TMPQ</li>\r\n	<li>冰箱冷柜机型:&nbsp;冷藏冷冻冰箱</li>\r\n	<li>制冷方式:&nbsp;直冷</li>\r\n	<li>箱门结构:&nbsp;双门式</li>\r\n	<li>能效等级:&nbsp;三级</li>\r\n</ul>\r\n', '2018-09-03 14:16:55', null, '2018-09-03 14:47:36', null);
+INSERT INTO `shop_product` VALUES ('2', '19', '1', '新飞双门式小冰箱冷藏冷冻家用宿舍办公室节能静音双门冰箱小型', '508.00', '559.00', '25', '33', '0', '0', '58', '<p><img src=\"https://img.alicdn.com/tps/TB16fwuKVXXXXaXXpXXXXXXXXXX-16-16.png\" style=\"margin:0px 5px 0px 0px\" />商品具有<a href=\"https://baike.taobao.com/view.htm?ac=29&amp;wd=2018010701072975\" target=\"_blank\">中国强制性产品认证（CCC）编号</a>，符合国家CCC认证标准。</p>\r\n\r\n<p>品牌名称：FRESTECH/新飞</p>\r\n\r\n<p><a href=\"https://detail.tmall.com/item.htm?spm=a230r.1.14.69.7326445bLA19xP&amp;id=569846809632&amp;ns=1&amp;abbucket=20#J_Attrs\">更多参数</a><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>证书编号：2018010701072975</li>\r\n	<li>证书状态：有效</li>\r\n	<li>产品名称：冷藏冷冻箱</li>\r\n	<li>3C规格型号：BCD-58A118 220V～ 50Hz 0.75A R600a</li>\r\n	<li>产品名称：FRESTECH/新飞 BCD-58A1...</li>\r\n	<li>新飞冰箱型号:&nbsp;BCD-58A118</li>\r\n	<li>冰箱冷柜机型:&nbsp;冷藏冷冻冰箱</li>\r\n	<li>制冷方式:&nbsp;直冷</li>\r\n	<li>箱门结构:&nbsp;双门式</li>\r\n	<li>能效等级:&nbsp;三级</li>\r\n</ul>\r\n', '2018-09-03 15:09:18', null, '2018-09-03 15:09:18', null);
+INSERT INTO `shop_product` VALUES ('3', '2', '1', 'LOVO家纺网红简约床品纯棉全棉四件套水洗棉时尚被套床单床上用品', '599.00', '652.00', '26', '34', '0', '0', '20', '<p>品牌名称：lovo</p>\r\n\r\n<p><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>件数:&nbsp;4件</li>\r\n	<li>被面材质:&nbsp;棉</li>\r\n	<li>品牌:&nbsp;lovo</li>\r\n	<li>货号:&nbsp;特丽斯/时尚皇冠/甜蜜冰激凌</li>\r\n	<li>被里材质:&nbsp;棉</li>\r\n	<li>棉种类:&nbsp;棉</li>\r\n	<li>成分含量:&nbsp;100%</li>\r\n	<li>床品工艺:&nbsp;其他</li>\r\n	<li>适用床尺寸:&nbsp;1.2m （4英尺） 床..&nbsp;1.5m （5英尺） 床..&nbsp;1.8m （6英尺） 床..</li>\r\n	<li>图案:&nbsp;纯色</li>\r\n	<li>款式:&nbsp;床单式</li>\r\n	<li>颜色分类:&nbsp;特丽斯&nbsp;甜蜜冰激凌&nbsp;时尚皇冠&nbsp;备用&nbsp;格蕾丝</li>\r\n	<li>产品等级:&nbsp;合格品</li>\r\n	<li>风格:&nbsp;简约</li>\r\n	<li>面料支数:&nbsp;其他</li>\r\n	<li>面料密度:&nbsp;.</li>\r\n	<li>商品条形码:&nbsp;6901486284387</li>\r\n	<li>印花工艺:&nbsp;活性印花</li>\r\n	<li>织造工艺:&nbsp;其他</li>\r\n</ul>\r\n\r\n<p><img src=\"https://assets.alicdn.com/kissy/1.0.0/build/imglazyload/spaceball.gif\" style=\"height:1px; margin:0px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><br />\r\n<img alt=\"改时间2.jpg\" src=\"https://img.alicdn.com/imgextra/i3/279887075/O1CN01228OcShN8OPITZk_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"1(7).jpg\" src=\"https://img.alicdn.com/imgextra/i4/279887075/TB2FuaauAOWBuNjSsppXXXPgpXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_01.jpg\" src=\"https://img.alicdn.com/imgextra/i1/279887075/TB2V6wZc21TBuNjy0FjXXajyXXa_!!279887075.jpg\" style=\"margin:0px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img src=\"https://assets.alicdn.com/kissy/1.0.0/build/imglazyload/spaceball.gif\" style=\"height:1px; margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_02.jpg\" src=\"https://img.alicdn.com/imgextra/i1/279887075/TB29YUEc1uSBuNjSsplXXbe8pXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_03.jpg\" src=\"https://img.alicdn.com/imgextra/i2/279887075/TB2szAZc21TBuNjy0FjXXajyXXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_04.jpg\" src=\"https://img.alicdn.com/imgextra/i2/279887075/TB2ZEQRcVuWBuNjSspnXXX1NVXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_05.jpg\" src=\"https://img.alicdn.com/imgextra/i3/279887075/TB2qZcGc4SYBuNjSsphXXbGvVXa_!!279887075.jpg\" style=\"margin:0px\" /></p>\r\n', '2018-09-03 17:08:33', null, '2018-09-03 17:08:33', null);
 
 -- ----------------------------
 -- Table structure for system_file
@@ -776,7 +882,7 @@ CREATE TABLE `system_file` (
   `time` datetime DEFAULT NULL,
   `user` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of system_file
@@ -788,6 +894,16 @@ INSERT INTO `system_file` VALUES ('21', 'logo.png', '20462', 'png', '/resource/u
 INSERT INTO `system_file` VALUES ('22', 'logo.png', '20462', 'png', '/resource/uploads/default/20180831/a2023d4d54925960148412de0c51cace.png', '2018-08-31 17:29:04', null);
 INSERT INTO `system_file` VALUES ('23', 'logo.png', '20462', 'png', '/resource/uploads/default/20180831/49c39364738c1f3fda8affb0a5a6d0d2.png', '2018-08-31 17:30:29', null);
 INSERT INTO `system_file` VALUES ('24', 'logo.png', '20462', 'png', '/resource/uploads/default/20180831/8444bad0fcf9325d8a4fa646dc9f4b82.png', '2018-08-31 18:54:00', null);
+INSERT INTO `system_file` VALUES ('25', 'logo.png', '20462', 'png', '/resource/uploads/default/20180903/71c48901067aee6b101cf6b757f9e04e.png', '2018-09-03 13:05:13', null);
+INSERT INTO `system_file` VALUES ('26', 'logo.png', '20462', 'png', '/resource/uploads/default/20180903/366cd586414911b8a0f6f0a46f5e4aee.png', '2018-09-03 13:28:18', null);
+INSERT INTO `system_file` VALUES ('27', 'logo.png', '20462', 'png', '/resource/uploads/default/20180903/730169b00144ce2f9c3f253e0682bf89.png', '2018-09-03 13:33:08', null);
+INSERT INTO `system_file` VALUES ('28', 'logo.png', '20462', 'png', '/resource/uploads/default/20180903/2b9fe72f977fa1a429369ba8703f14eb.png', '2018-09-03 13:41:44', null);
+INSERT INTO `system_file` VALUES ('29', 'logo.png', '20462', 'png', '/resource/uploads/default/20180903/e12896ac37e9817d2da3b322b071d4d2.png', '2018-09-03 13:56:09', null);
+INSERT INTO `system_file` VALUES ('30', 'TB1ubrtt9MmBKNjSZTEXXasKpXa_!!0-item_pic.jpg_60x60q90.jpg', '2690', 'jpg', '/resource/uploads/default/20180903/f04d3310fac159278114e4da39c61689.jpg', '2018-09-03 14:39:32', null);
+INSERT INTO `system_file` VALUES ('31', 'logo.png', '20462', 'png', '/resource/uploads/default/20180903/ec26f217e3fad528f53c9623c40d36d0.png', '2018-09-03 14:54:39', null);
+INSERT INTO `system_file` VALUES ('32', 'logo.png', '20462', 'png', '/resource/uploads/default/20180903/83ba1fe9c2148700889362301c63ecbb.png', '2018-09-03 14:56:05', null);
+INSERT INTO `system_file` VALUES ('33', 'TB2ln8SChWYBuNjy1zkXXXGGpXa_!!3937106725-0-item_pic.jpg_60x60q90.jpg', '1795', 'jpg', '/resource/uploads/default/20180903/bb28986af308f74d2d8a715a556ceaee.jpg', '2018-09-03 15:09:01', null);
+INSERT INTO `system_file` VALUES ('34', 'TB2T7iSCf5TBuNjSspcXXbnGFXa_!!279887075.jpg_60x60q90.jpg', '1365', 'jpg', '/resource/uploads/default/20180903/2c4b7b6f4d6c71f53e35d9db935c0b2f.jpg', '2018-09-03 17:07:58', null);
 
 -- ----------------------------
 -- Table structure for system_gateway

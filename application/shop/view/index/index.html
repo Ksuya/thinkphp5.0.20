@@ -1,0 +1,106 @@
+{include file="shop@public/header"}
+<body>
+{include file="shop@public/nav"}
+<!--banner 开始-->
+<div class="slideBox center">
+    <script language="javascript" src="__STATIC__/shop/js/common.js"></script>
+    <script language="javascript" src="__STATIC__/shop/js/nav.js"></script>
+    <div class="menuNav">
+        <h2></h2>
+        <div class="navlist" id="SNmenuNav" >
+            {foreach $allNav as $k=>$v}
+            <dl>
+                <dt class="icon03" ><a href="">{$v.name} </a></dt>
+                {if !empty($v.subNav)}
+                <dd class="menv{$k}">
+                    <div class="menv0{$k}_left">
+                        <ul>
+                            {foreach $v.subNav as $k2=>$v2}
+                            <li><a href="" title="{$v2.name}"><h3 style="color:#d51938; float:left;">{$v2.name}</h3></a>
+                                <br />
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                </dd>
+                {/if}
+            </dl>
+            {/foreach}
+        </div>
+    </div>
+    <!--幻灯片-->
+    <script type="text/javascript" src="__STATIC__/shop/js/jquery.pack.js"></script>
+    <script type="text/javascript" src="__STATIC__/shop/js/jquery.SuperSlide.js"></script>
+    <div class="index_slide fr">
+        <div class="hd">
+            <ul>
+                {foreach $banner as $k=>$v}
+                <li>{$k+1}</li>
+                {/foreach}
+            </ul>
+        </div>
+        <div class="bd">
+            <ul>
+                {foreach $banner as $k=>$v}
+                <li><img title="{$v.name}" src="{$v.path}" width="980" height="420" /></li>
+                {/foreach}
+            </ul>
+        </div>
+        <!--商城公告-->
+        <div class="index-notice" style="display: none;">
+            <div class="notice-title">&nbsp;&nbsp;商城公告</div>
+            <div class="notice-news center">
+                <ul>
+                    <li><a href="#"><img src="__STATIC__/shop/img/other/14.gif" /> </a><a href="#"  ><img src="__STATIC__/shop/img/other/12.jpg" /> </a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">jQuery(".index_slide").slide( { mainCell:".bd ul",effect:"top",autoPlay:true} );</script>
+</div>
+
+<!--爆品疯抢-->
+<script src="__STATIC__/shop/js/tab.js"></script>
+
+{foreach $showNav as $k=>$v}
+<div class="Version-world center">
+    <div class="VersionBox fl" style="width: 100%">
+        <div class="Version-hd">
+            <div class="fl here-hd" style="">{$k+1}F</div><div class="fl size16-b color2">&nbsp;{$v.name}</div>
+            <div class="fl" style="padding-left:100px;"></div>
+        </div>
+        <div class="Version-bd" style="width: 100%;">
+            <div class="fl Version-bd-left">
+                <dl class="Version-bd-left-text center">
+                    {foreach $v.childs as $k2=>$v2}
+                    <dd><a href="{:url('product/cate',['id'=>$v2.id])}">{$v2.name}</a></dd>
+                    {/foreach}
+                </dl>
+                <div class="Version-bd-focus">
+                    <a ><img src="{$v.path}" width="190" height="295" /></a>
+                </div>
+            </div>
+            <div class="Version-bd-pro">
+                <ul>
+                    {foreach $v.products as $k2=>$v2}
+                    <li>
+                        <div align="center" style="padding-top:10px;">
+                            <a href="{:url('product/detail',['id'=>$v2.id])}" title="{$v2.name}"><img src="{$v2.path}" width="150" height="150" /></a>
+                        </div>
+                        <div class="Version-bd-pro-text">
+                            <p class="hd"><a href="{:url('product/detail',['id'=>$v2.id])}" title="{$v2.name}">{$v2.name}</a></p>
+                            <p>价格：<span class="color4 size14">￥{$v2.shop_price}</span></p>
+                        </div>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{/foreach}
+
+{include file="shop@public/footer"}
+</body>
+</html>

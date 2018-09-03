@@ -12,17 +12,7 @@ use traits\model\SoftDelete;
 
 class ShopCategory extends Base{
     public $record = true;
-    use SoftDelete;
     protected $deleteTime = 'delete_time';
 
-    public function getIsMenuAttrBak($value)
-    {
-        switch ($value)
-        {
-            case 1:
-                return '是';
-            case 0:
-                return '否';
-        }
-    }
+
 }
