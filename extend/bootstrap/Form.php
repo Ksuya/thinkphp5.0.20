@@ -203,7 +203,7 @@ class Form
             $html .= '<script src="/static/vendor/fileinput/js/locales/zh.js"></script>';
             $html .= '<link rel="stylesheet" href="/static/vendor/fileinput/css/fileinput.css">';
         }
-        $url = url('Login/fileInputUpload');
+        $url = url('manager/Login/fileInputUpload');
         $html .= '<script>var oFileInput = new FileInput();oFileInput.Init("'.md5($field).'", "'.$url.'",'.json_encode($list).',"'.$values.'");</script>';
         echo $html;
     }

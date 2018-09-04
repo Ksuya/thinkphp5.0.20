@@ -45,11 +45,6 @@ class Base extends Controller{
         }
     }
 
-    public function _initialize()
-    {
-
-    }
-
     public function _empty($name)
     {
         return view();

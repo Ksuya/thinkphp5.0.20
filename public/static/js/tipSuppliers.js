@@ -25,8 +25,8 @@ guopengcheng
 					var tWidth=$(opts.Mleft).innerWidth(); //左侧宽度
 					var tHidth=$(opts.Mtop).innerHeight(); //top高度
 					var bHidth=$(opts.Mfooter).innerHeight(); //底部高度
-					$(opts.Mleft).css("height",(Height-tHidth-bHidth)+'px'); 
-					$(opts.Mright).css("height",(Height-tHidth-bHidth-40)+'px');
+					$(opts.Mleft).css("height",(Height-tHidth-bHidth-80)+'px');
+					$(opts.Mright).css("height",(Height-tHidth-bHidth-80)+'px');
 					if($(opts.Mleft).is(":hidden")){
 						$(opts.Mright).css("width",(Width)+'px');
 					}else{

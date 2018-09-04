@@ -142,6 +142,8 @@ function renderForm(formobj, data) {
                             $(iptObj[value=dataName]).iCheck('check');
                         }else if(curType == 'checkbox'){
 
+                        }else if(curType == 'file'){
+                            oFileInput.Init(id, "manager/Login/fileInputUpload",[dataName],dataName);
                         }else{
                             iptObj.val(dataName).change();
                         }
@@ -265,7 +267,7 @@ var FileInput = function () {
             allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
             showUpload: false, //是否显示上传按钮
             showCaption: false,//是否显示标题
-            showPreview: false,
+            showPreview: true,
             browseClass: "btn btn-primary", //按钮样式
             dropZoneEnabled: false,//是否显示拖拽区域
             //minImageWidth: 50, //图片的最小宽度
@@ -376,15 +378,7 @@ var TableInit = function () {
     return oTableInit;
 };
 
-function queryParams(params) {
-    var temp = {
-        limit: params.limit,
-        offset: params.offset,
-        order: params.order,
-        sort: params.sort,
-    };
-    return temp;
-}
+
 
 function base64Encode(input) {
     var rv;
