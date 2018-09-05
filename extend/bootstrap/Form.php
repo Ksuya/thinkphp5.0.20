@@ -188,23 +188,24 @@ class Form
         return $html;
     }
 
-    public static function file($isLoad,$name,$field,$list=[],$values='',$rules=[['rule' => 'notempty']])
+    public static function file($name,$field,$limit=1,$list=[],$values='',$rules=[['rule' => 'notempty']])
     {
         $valiHtml = self::vendor($rules,$name,true);
         $html = '<div class="form-group">
-                            <label class="col-sm-2 control-label">'.$name.'</label>
-                            <div class="col-sm-10">
-                                <input type="file" id="'.md5($field).'"  class="file-loading" />
-                                <input type="hidden" name="'.$field.'" id="'.md5($field).'_value" '.$valiHtml.' data-bv-trigger="change" />
-                            </div>
-                        </div>';
-        if($isLoad){
-            $html .= '<script src="/static/vendor/fileinput/js/fileinput.js"></script>';
-            $html .= '<script src="/static/vendor/fileinput/js/locales/zh.js"></script>';
-            $html .= '<link rel="stylesheet" href="/static/vendor/fileinput/css/fileinput.css">';
+                            <label class="control-label col-sm-2">'.$name.':</label>
+                             <div class="col-sm-4">
+            <input class="form-control" id="'.md5($field).'" data-url="'.url('/manager/login/fileInputUpload').'" data-limit="'.$limit.'" data-id="'.$field.'" data-preview="'.$field.'-preview" type="file" style="display:none" onchange="reayUpload($(this));">
+            <input type="hidden" id="'.$field.'" value="'.$values.'" '.$valiHtml.' name="'.$field.'" data-bv-trigger="change"/>
+            <button class="btn btn-info" type="button" onclick="$(\'input[id='.md5($field).']\').click();">点击上传</button><small></small>
+        </div><div class="col-sm-8 file-preview" id="'.$field.'-preview">';
+        foreach ($list as $v){
+            $id = md5(time());
+            $html .= '<div class="col-sm-3">
+            <img src="'.$v.'" id="'.$id.'" class="img-responsive">
+            <span title="删除图片" class="remove-file"  onclick="removePreview($(this),\''.$id.'\',\''.$field.'\');">x</span>
+            </div>';
         }
-        $url = url('manager/Login/fileInputUpload');
-        $html .= '<script>var oFileInput = new FileInput();oFileInput.Init("'.md5($field).'", "'.$url.'",'.json_encode($list).',"'.$values.'");</script>';
+        $html .= '</div></div>';
         echo $html;
     }
 

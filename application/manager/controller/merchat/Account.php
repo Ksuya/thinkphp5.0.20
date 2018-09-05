@@ -7,8 +7,8 @@
 |
 | 账户模块
 */
-namespace app\manager\controller;
-use app\manager\controller\MerchatBase;
+namespace app\manager\controller\merchat;
+use app\manager\controller\merchat\MerchatBase;
 use think\Request;
 
 class Account extends MerchatBase{

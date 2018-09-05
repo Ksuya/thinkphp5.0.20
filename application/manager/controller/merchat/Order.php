@@ -6,8 +6,8 @@
 | Description:
 | 商户订单信息
 */
-namespace app\manager\controller;
-use app\manager\controller\MerchatBase;
+namespace app\manager\controller\merchat;
+use app\manager\controller\merchat\MerchatBase;
 use think\Request;
 
 class Order extends MerchatBase{

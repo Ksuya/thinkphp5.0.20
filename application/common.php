@@ -51,13 +51,13 @@ function formEditor($name, $field)
     Form::editor($name, $field);
 }
 
-function formFile($isLoad = true, $name, $field, $list = '', $values = '')
+function formFile($name, $field, $limit=1,$list = '', $values = '')
 {
     $new = [];
     if ($list) {
         $new[] = $list;
     }
-    Form::file($isLoad, $name, $field, $new, $values);
+    Form::file($name, $field, $limit,$new, $values);
 }
 
 /**
@@ -91,7 +91,7 @@ function upload($folder = "default", $extType = "image", $defaultSize = 1)
             // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
             $fileData['path'] = '/resource/uploads/' . $folder . '/' . str_replace('\\', '/', $info->getSaveName());
             $upId = model('SystemFile')->insertGetId($fileData);
-            return ['errcode' => '0', 'id' => $upId, 'path' => $fileData['path']];
+            return ['errcode' => '0', 'errmsg'=>'文件上传成功', 'id' => $upId, 'path' => $fileData['path']];
             // 输出 42a79759f284b767dfcb2a0197904287.jpg
             // echo $info->getFilename();
         } else {

@@ -161,14 +161,8 @@
   */
  function ajaxUpload(curObject, id, url, preview) {
      var preview = preview ? preview : false;
-     var isMultyple = curObject.attr("multiple") ? true : false;
-     var floder = curObject.attr('data-dir') ? curObject.attr('data-dir') : 'default';
-     var size = curObject.attr('data-size') ? curObject.attr('data-size') : '2';
-     var thumb = curObject.attr('data-thumb') ? curObject.attr('data-thumb') : '';
-     var path = curObject.attr('data-type') ? curObject.attr('data-type') : false;
-     var icon = curObject.attr('data-icon') ? curObject.attr('data-icon') : '';
-     console.log(icon)
-     return
+     var limit = curObject.attr("data-limit") ? curObject.attr("data-limit") : 1;
+     var path = curObject.attr("data-path") ? curObject.attr("data-path") : false;
      var curObject = curObject;
      //获取上传所有文件信息
      var files = curObject.get(0).files;
@@ -178,10 +172,6 @@
          //装需要上传文件的数组
          data = new FormData();
          data.append("file", obj);
-         data.append("floder", floder);
-         data.append("size", size);
-         data.append("thumb", thumb);
-         data.append("icon", icon);
          $.ajax({
              data: data,
              type: "POST",
@@ -190,39 +180,39 @@
              contentType: false,
              processData: false,
              success: function (res) {
-                 if (isMultyple) {
+                 if(res.errcode != '0'){
+                     layer.msg(res.errmsg,{icon:5});
+                     return;
+                 }
+                 if (limit > 1) {
                      var curVal = $("#" + id).val();
                      if (curVal == '') {
                          var lastVal = new Array();
                      } else {
                          var lastVal = curVal.split(",");
+                         if(lastVal.length >= limit){
+                             layer.msg("最多可以上传"+limit+'张图片',{icon:5});
+                             return false;
+                         }
                      }
-
-                     lastVal.push(res.data);
+                     lastVal.push(res.id);
                      lastVal = lastVal.join(',');
-                     $("#" + id).val(lastVal);
+                     $("#" + id).val(lastVal).change();
                  } else {
-                     if(path && path =='path'){
-                         $("#" + id).val(res.path);
+                     if(path && path == 'path'){
+                         $("#" + id).val(res.path).change();
                      }else{
-                         $("#" + id).val(res.data);
+                         $("#" + id).val(res.id).change();
                      }
                  }
                  if (preview) {
-                     parent.layer.msg("文件上传成功", {icon: 1});
+                     layer.msg(res.errmsg, {icon: 6});
                      preview = preview.replace(/\s/g, "");
-                     if (isMultyple) {
-                         var html = '<div class="file-upload">\
-                            <img id="' + res.data + '" src="' + res.path + '" />\
-                            <span class="upload-close" onclick="removePreview($(this),' + res.data + ',\'' + id + '\');"></span>\
-                            </div>';
-                         //var html = '<div class="img col-lg-3"><img class="img-responsive" id="' + res.data + '" src="'+res.path+'"> <span class="close" onclick="removePreview($(this),'+res.data+',\''+id+'\');"><i class="fa fa-remove"></i>删除</span></div>';
-                         $(curObject).parent().append(html);
+                     if (limit > 1) {
+                         var html = '<div class="col-sm-3"><img id="'+res.id+'" src="'+res.path+'" class="img-responsive"><span title="删除图片" class="remove-file" onclick="removePreview($(this),' + res.id + ',\'' + id + '\');">x</span></div>';
+                         $("#" + preview).append(html);
                      } else {
-                         var html = '<div class="file-upload">\
-                            <img id="' + res.data + '" src="' + res.path + '" />\
-                            <span class="upload-close" onclick="removePreview($(this),' + res.data + ',\'' + id + '\');"></span>\
-                            </div>';
+                         var html = '<div class="col-sm-3"><img id="'+res.id+'" src="'+res.path+'" class="img-responsive"><span title="删除图片" class="remove-file" onclick="removePreview($(this),' + res.id + ',\'' + id + '\');">x</span></div>';
                          $("#" + preview).html(html)
                      }
                  }

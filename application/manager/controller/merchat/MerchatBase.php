@@ -6,30 +6,17 @@
 | Description:
 |
 */
-namespace app\manager\controller;
+namespace app\manager\controller\merchat;
 use app\common\controller\Base;
 
 class MerchatBase extends Base{
 
     public $model = [];
-    public $userId;
-    public $merchatId;
+    public $userId = 1;
+    public $merchatId = 1;
     public $merchatInfo;
 
-    public function _initialize()
-    {
-        $userId = session('userId');
-        $merchatId = session('merchatId');
-        $merchatInfo = session('merchatInfo');
-        if(!$userId || !$merchatId || !$merchatInfo){
-            $url = url('Login/login');
-            echo '<script>parent.location.href="'.$url.'"</script>';
-            exit;
-        }
-        $this->merchatId = $merchatId;
-        $this->userId = $userId;
-        $this->merchatInfo = $merchatInfo;
-    }
+
 
     public function randomNumber($leng=24)
     {

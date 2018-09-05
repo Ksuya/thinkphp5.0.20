@@ -48,7 +48,9 @@
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tb_departments_Modal">添加分类</button>
 {/block}
 {block name="table-more-actions"}
-<button type="button" class="btn btn-danger table-more-action" data-callback="merchatWithdraw" data-table="tb_departments" data-status="-1">批量删除</button>
+<button type="button" class="btn btn-danger table-more-action" data-callback="merchatWithdraw"
+        data-table="tb_departments" data-status="-1">批量删除
+</button>
 {/block}
 {block name="table-modal"}
 <div class="modal-header">
@@ -62,7 +64,7 @@
     {:formSelect('上级分类:','parent_id',$cates,'id','name')}
     {:formInput('分类排序:','sort',0,'number')}
     {:formCheck('radio','导航显示','is_menu',[['id'=>0,'name'=>'否'],['id'=>1,'name'=>'是']],'id','name')}
-    {:formFile(true,'分类图片','posters')}
+    {:formFile('分类图片','posters',1)}
 </div>
 {/block}
 {block name="table-script"}
@@ -75,18 +77,22 @@
         {checkbox: true},
         {field: 'name', title: '分类名称'},
         {field: 'parent_name', title: '上级分类'},
-        {field: 'is_menu', title: '导航显示',formatter:function (value) {
-                if(value == 1){
+        {
+            field: 'is_menu', title: '导航显示', formatter: function (value) {
+                if (value == 1) {
                     return '是';
-                }else{
+                } else {
                     return '否';
                 }
-            }},
+            }
+        },
         {field: 'sort', title: '分类排序', sortable: true},
         {field: 'create_time', title: '添加时间', sortable: true},
-        {field: '', title: '操作',formatter:function (value,row,index) {
-                return generateTableAtions(row,'id');
-            }},
+        {
+            field: '', title: '操作', formatter: function (value, row, index) {
+                return generateTableAtions(row, 'id');
+            }
+        },
     ];
     var sortName = 'a.create_time';
     var sortOrder = 'desc';

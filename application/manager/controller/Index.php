@@ -7,19 +7,11 @@
 |
 */
 namespace app\manager\controller;
-use app\manager\controller\MerchatBase;
-class Index extends MerchatBase{
+use app\manager\controller\ManagerBase;
+class Index extends ManagerBase{
 
     public function index()
     {
-        // 这个判断是否有手动提现通道
-        $isHandWithdraw = model('Merchat')->where('id',$this->merchatId)->value('gateway');
-        $ways = explode(',',$isHandWithdraw);
-        if(in_array(3,$ways)){
-            $handWithdraw = true;
-        }else{
-            $handWithdraw = false;
-        }
-        return view('',['handWithdraw'=>$handWithdraw]);
+        return view('');
     }
 }

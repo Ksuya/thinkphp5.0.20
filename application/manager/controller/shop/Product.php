@@ -7,7 +7,7 @@
 // | Author: whlphper  备注:
 // +----------------------------------------------------------------------
 namespace app\manager\controller\shop;
-use app\manager\controller\shop\ShopBase;
+use app\manager\controller\ManagerBase;
 
 class Product extends ShopBase{
     public function _initialize()

@@ -85,7 +85,6 @@ $(function () {
     });
 
 
-
     // table search
     $(".table-btn-search").click(function () {
         var tableId = $(this).attr("data-table");
@@ -124,39 +123,41 @@ $(function () {
 });
 
 function renderForm(formobj, data) {
+    console.log(data)
     var numtest = /^[0-9]*$/;
     for (var i = 0; i < formobj[0].length; i++) {
         if (numtest.test(i)) {
             var curElem = $(formobj[0][i]);
-            var type = curElem[0].tagName;
+            var type = curElem[0].type;
+            console.log(type)
             var name = curElem[0].name;
             // id 在下拉框用到
             var id = curElem[0].id;
             var dataName = data[name];
-            if(dataName && dataName != undefined){
+            if (dataName && dataName != undefined) {
                 switch (type) {
                     case 'INPUT':
                         var iptObj = $("body").find("input[name=\'" + name + "\']");
                         var curType = iptObj.attr("type");
-                        if(curType == 'radio'){
-                            $(iptObj[value=dataName]).iCheck('check');
-                        }else if(curType == 'checkbox'){
+                        if (curType == 'radio') {
+                            $(iptObj[value = dataName]).iCheck('check');
+                        } else if (curType == 'checkbox') {
 
-                        }else if(curType == 'file'){
-                            oFileInput.Init(id, "manager/Login/fileInputUpload",[dataName],dataName);
-                        }else{
+                        } else if (curType == 'file') {
+
+                        } else {
                             iptObj.val(dataName).change();
                         }
                         break;
                     case 'SELECT':
-                        $("#" + id).find("option[value=\'" + dataName + "\']").attr("selected","selected");
+                        $("#" + id).find("option[value=\'" + dataName + "\']").attr("selected", "selected");
                         break;
                     case 'TEXTAREA':
                         var editor = CKEDITOR.instances[id];
                         if (data[name]) {
-                            $("#"+name).val(data[name]);
+                            $("#" + name).val(data[name]);
                         } else {
-                            $("#"+name).val('');
+                            $("#" + name).val('');
                         }
                         if (editor) {
                             editor.destroy(true);//销毁编辑器
@@ -168,6 +169,55 @@ function renderForm(formobj, data) {
         }
     }
 }
+
+
+function renderForm2(formobj, data) {
+    console.log(data)
+    var numtest = /^[0-9]*$/;
+    for (var i = 0; i < formobj[0].length; i++) {
+        if (numtest.test(i)) {
+            var curElem = $(formobj[0][i]);
+            var type = curElem[0].tagName;
+            var name = curElem[0].name;
+            // id 在下拉框用到
+            var id = curElem[0].id;
+            var dataName = data[name];
+            if (dataName && dataName != undefined) {
+                switch (type) {
+                    case 'INPUT':
+                        var iptObj = $("body").find("input[name=\'" + name + "\']");
+                        var curType = iptObj.attr("type");
+                        if (curType == 'radio') {
+                            $(iptObj[value = dataName]).iCheck('check');
+                        } else if (curType == 'checkbox') {
+
+                        } else if (curType == 'file') {
+
+                        } else {
+                            iptObj.val(dataName).change();
+                        }
+                        break;
+                    case 'SELECT':
+                        $("#" + id).find("option[value=\'" + dataName + "\']").attr("selected", "selected");
+                        break;
+                    case 'TEXTAREA':
+                        var editor = CKEDITOR.instances[id];
+                        if (data[name]) {
+                            $("#" + name).val(data[name]);
+                        } else {
+                            $("#" + name).val('');
+                        }
+                        if (editor) {
+                            editor.destroy(true);//销毁编辑器
+                        }
+                        CKEDITOR.replace(id);
+                        break;
+                }
+            }
+        }
+    }
+}
+
 
 /**
  * 商户流水-行操作
@@ -258,7 +308,7 @@ var FileInput = function () {
             initPreview.push("<img src='" + initIMmgs[i] + "' class='file-preview-image img-responsive' style='width: 100%;height: 100%'>");
         }
         var control = $('#' + ctrlName);
-        var isPath = $("#"+ctrlName).attr("data-path");
+        var isPath = $("#" + ctrlName).attr("data-path");
         $("#" + ctrlName + '_value').val(initValues).change();
         //初始化上传控件的样式
         control.fileinput({
@@ -336,7 +386,7 @@ var FileInput = function () {
 var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
-    oTableInit.Init = function (id, url, field, sort, order,shFormId) {
+    oTableInit.Init = function (id, url, field, sort, order, shFormId) {
         var shFormId = shFormId ? shFormId : false;
         var field = field ? field : [];
         var sort = sort ? sort : '';
@@ -379,7 +429,6 @@ var TableInit = function () {
 };
 
 
-
 function base64Encode(input) {
     var rv;
     rv = encodeURIComponent(input);
@@ -394,8 +443,6 @@ function base64Decode(input) {
     rv = decodeURIComponent(rv);
     return rv;
 }
-
-
 
 
 /**
@@ -449,7 +496,6 @@ function bootstrapConfirm(title, msg, callback, tableId) {
      </div>';
     appendModal('confirm_Modal', confirm_html);
 }
-
 
 
 function modal_image(title, url) {

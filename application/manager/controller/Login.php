@@ -36,17 +36,15 @@ class Login extends Controller{
         if($user['data']['password'] !== md5($data['password'])){
             return ['errcode'=>'1005','errmsg'=>'密码错误'];
         }
-        session('merchatId',$user['data']['merchat_id']);
-        session('merchatInfo',$user['data']);
-        session('userId',$user['data']['id']);
-        return ['errcode'=>'0','errmsg'=>'登陆成功','url'=>url('/merchat/Index/index')];
+        session('managerId',$user['data']['merchat_id']);
+        session('managerInfo',$user['data']);
+        return ['errcode'=>'0','errmsg'=>'登陆成功','url'=>url('/manager')];
     }
 
     public function logout()
     {
-        session('merchatId',null);
-        session('merchatInfo',null);
-        session('userId',null);
+        session('managerId',null);
+        session('managerInfo',null);
         $this->redirect(url('login'));
     }
 

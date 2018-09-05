@@ -6,8 +6,8 @@
 | Description:
 | 产品信息
 */
-namespace app\manager\controller;
-use app\manager\controller\MerchatBase;
+namespace app\manager\controller\merchat;
+use app\manager\controller\merchat\MerchatBase;
 
 class Product extends MerchatBase{
 
