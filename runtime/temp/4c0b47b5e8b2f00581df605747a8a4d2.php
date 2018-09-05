@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\user\index.html";i:1536125119;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536041537;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\personal-left.html";i:1535975208;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:91:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\user\orderdetail.html";i:1536136520;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536041537;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\personal-left.html";i:1535975208;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -91,6 +91,8 @@
 </div>
 <!--导航结束-->
 <div class="clear"></div>
+<!--位置-->
+<div class="user_here center">所在的位置：中国美博城 > 我的订单</div>
 <!--用户管理中心-->
 <div class="user_center center">
     <!--左侧-->
@@ -118,75 +120,128 @@
     </div>
 </div>
     <!--右侧-->
+    <!--右侧-->
     <div class="user_right fr">
         <div class="user_dingdan">
-            <p>编辑资料</p>
+            <span class="fr"><a href="#"></a></span>
+            <p>订单详情</p>
         </div>
-        <div class="fapiao_table ziliao_table">
-            <form action="<?php echo url('saveInfo'); ?>">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td width="80" class="color2" align="right">昵称</td>
-                        <td><input type="text" class="oto_text_one oto_text_two fl" name="nick_name" value="<?php echo $info['nick_name']; ?>"/>
-                            <span class="fl margin10 lineheight30">长度不能超过12字</span></td>
-                    </tr>
-                    <tr>
-                        <td width="80" align="right" class="color2"><span class="color4 size14">*</span> 邮箱</td>
-                        <td><input type="text" class="oto_text_one fl" value="<?php echo $info['email']; ?>" readonly />
-                            <span class="fl margin10 lineheight30"></span></td>
-                    </tr>
-                    <tr>
-                        <td width="80" align="right" class="color2"><span class="color4 size14">*</span>手机号</td>
-                        <td><input type="text" class="oto_text_one oto_text_two fl" value="<?php echo $info['phone']; ?>" readonly /></td>
-                    </tr>
-                    <tr>
-                        <td width="80" align="right" class="color2">真实姓名</td>
-                        <td><input type="text" class="oto_text_one oto_text_two fl" name="real_name" value="<?php echo $info['real_name']; ?>"/></td>
-                    </tr>
-                    <tr>
-                        <td width="80" align="right" class="color2">身份证号码</td>
-                        <td><input type="text" class="oto_text_one fl" name="id_card" value="<?php echo $info['id_card']; ?>"/></td>
-                    </tr>
-                    <tr>
-                        <td width="80" align="right" valign="top" class="color2"><span class="color4 size14">*</span>所在地</td>
-                        <td>
-                            <div class="cxselect-list" style="width:100% ; height:35px" id="company_region">
-                                <select class="oto_select add_sheng fl province" name="region" data-first-title="选择省" data-value="<?php echo $info['region']['0']; ?>">
-                                </select>
-                                <select class="oto_select add_shi fl city" name="region" data-first-title="选择市" data-value="<?php echo $info['region']['1']; ?>">
-                                </select>
-                                <select class="oto_select add_qu fl area" name="region" data-first-title="选择区" data-value="<?php echo $info['region']['2']; ?>">
-                                </select>
-                            </div>
-                            <div class="" style="width:100% ; height:35px">
-                                <input type="text" class="oto_text_one fl" name="address" value="<?php echo $info['address']; ?>"
-                                       style="width:360px"/>
-                            </div>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>
-                            <button class="btn_baocun shop-submit" type="button">保存修改</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+        <div class="shopping_list_2" style="border-top:none;">
+            <table width="100%" border="0" class="shopping_list_table1" cellspacing="0" cellpadding="0">
+
+                <tr class="goodsbg">
+                    <td height="60" colspan="8" valign="top" style="border:1px solid #ff6600; background:#fff4d3;">
+
+
+                        <div class="fuxuan_2" style="padding:10px 0px;">
+                            <strong style="line-height:40px;">当前订单状态： <?php echo $order['status']['name']; ?>;
+                                物流状态:<?php echo $order['progress']['name']; ?></strong>
+                            <?php if($order['progress']['id'] == 2): ?>
+                            <p>
+                                <span class="fl">1.如果您已收到货，且对商品满意，您可以&nbsp;  </span>
+                                <a href="#" class="fl"
+                                   style="width:60px; height:20px; text-align:center; line-height:20px; background:#ff6600; display:block; color:#ffffff;">
+                                    确认收货
+                                </a>
+                            </p><br/>
+                            <p style=" margin-top:5px;"> 2.如果还未收到货，，您可以 <a href="#" style="color:#3699dc">查询物流状态</a></p>
+                            <?php endif; ?>
+                        </div>
+                    </td>
+                </tr>
+                <?php if($order['progress']['id'] > 1): ?>
+                <tr>
+                    <td height="50" colspan="2" style="border-bottom:1px solid #dedede;">
+                        <strong style="color:#000000; font-size:14px;">物流信息</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="30" colspan="2">物流公司：<?php echo $order['express_id']['name']; ?> 运单号码：<?php echo $order['express_code']; ?></td>
+                </tr>
+                <tr>
+                    <?php foreach($order['route'] as $k=>$v): ?>
+                    <td height="30" colspan="2" style="color:#ff6600">
+                        物流跟踪：<?php echo $v['time']; ?> <?php echo $v['context']; ?>
+                    </td>
+                    <?php endforeach; ?>
+                </tr>
+                <?php endif; ?>
+            </table>
+
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="color:#666666" class="table_xiangxi">
+                <tr>
+                    <td width="10%" height="35" align="right" style="padding-top:10px;"><strong>收货地址：</strong></td>
+                    <td height="35" colspan="3" style="padding-top:10px;"> <?php echo $order['reciver']; ?> ，<?php echo $order['contact']; ?>
+                        ，<?php echo $order['region']; ?> <?php echo $order['address']; ?>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td width="10%" height="35" align="right" style="padding-top:10px;"><strong>订单信息：</strong></td>
+                    <td height="35" colspan="3" style="padding-top:10px;">  编号：<?php echo $order['order_no']; ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td height="35" align="right">&nbsp;</td>
+                    <td height="35" colspan="2">发货时间：<?php echo $order['update_time']; ?></td>
+                    <td height="35">下单时间：<?php echo $order['create_time']; ?></td>
+                </tr>
+            </table>
+
+
+            <table width="100%" cellspacing="0" cellpadding="0" class="goumai_sp"
+                   style="text-align:center; margin-top:10px;">
+                <tr>
+                    <td width="480">商品</td>
+                    <td width="100">商品价</td>
+                    <td width="100">市场价</td>
+                    <td width="100">数量</td>
+                </tr>
+
+            </table>
+
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center; margin-top:5px; padding-bottom:5px;   ">
+                <?php foreach($order['products'] as $k=>$v): ?>
+                <tr>
+                    <td width="504" style="text-align:left;"><a href="#" target='_blank'
+                                                                style="float:left; margin:0 10px;">
+                        <img alt="" src="<?php echo $v['path']; ?>" width="50px" height="50px" style="border:1px solid #dcdcdc"></a>
+                        <div class="p-detail">
+                            <div class="p-name">
+                                <a href="#">
+                                    <?php echo $v['name']; ?>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                    <td width="114"><?php echo $v['shop_price']; ?>元</td>
+                    <td width="114"><?php echo $v['market_price']; ?></td>
+                    <td width="114"><?php echo $v['number']; ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+
+
         </div>
+        <div class="zongji">
+            <p>
+					<span class="fr">订单总额<span class="color4 size18"> ￥<?php echo $order['order_amount']; ?> </span>元
+					   </span>
+
+            </p>
+        </div>
+
     </div>
 </div>
-<script src="/static/vendor/cxselect/jquery.cxselect.min.js"></script>
-<script>
-    $(function () {
-        // 全国省市区
-        $('#company_region').cxSelect({
-            selects: ['province', 'city', 'area'],
-            nodata: 'none',
-            url: '/static/vendor/cxselect/cityData.min.json',
-        });
-    });
-</script>
+
+</div>
+</div>
+
 <div class="clear" style="height:30px"></div>
 
 <div class="footerLink">
@@ -209,6 +264,5 @@
         <?php echo (isset($cfg['icp']) && ($cfg['icp'] !== '')?$cfg['icp']:''); ?>
     </p>
 </div>
-
 </body>
 </html>

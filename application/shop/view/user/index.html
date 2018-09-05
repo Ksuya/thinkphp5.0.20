@@ -1,9 +1,7 @@
 {include file="shop@public/header"}
-<link href="__STATIC__/shop/css/user.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/shop/css/user.css" rel="stylesheet" type="text/css"/>
 <body>
 {include file="shop@public/nav"}
-<!--位置-->
-<div class="user_here center">所在的位置：中国美博城 > 编辑资料</div>
 <!--用户管理中心-->
 <div class="user_center center">
     {include file="shop@public/personal-left"}
@@ -13,82 +11,70 @@
             <p>编辑资料</p>
         </div>
         <div class="fapiao_table ziliao_table">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
+            <form action="{:url('saveInfo')}">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="80" class="color2" align="right">昵称</td>
+                        <td><input type="text" class="oto_text_one oto_text_two fl" name="nick_name" value="{$info.nick_name}"/>
+                            <span class="fl margin10 lineheight30">长度不能超过12字</span></td>
+                    </tr>
+                    <tr>
+                        <td width="80" align="right" class="color2"><span class="color4 size14">*</span> 邮箱</td>
+                        <td><input type="text" class="oto_text_one fl" value="{$info.email}" readonly />
+                            <span class="fl margin10 lineheight30"></span></td>
+                    </tr>
+                    <tr>
+                        <td width="80" align="right" class="color2"><span class="color4 size14">*</span>手机号</td>
+                        <td><input type="text" class="oto_text_one oto_text_two fl" value="{$info.phone}" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td width="80" align="right" class="color2">真实姓名</td>
+                        <td><input type="text" class="oto_text_one oto_text_two fl" name="real_name" value="{$info.real_name}"/></td>
+                    </tr>
+                    <tr>
+                        <td width="80" align="right" class="color2">身份证号码</td>
+                        <td><input type="text" class="oto_text_one fl" name="id_card" value="{$info.id_card}"/></td>
+                    </tr>
+                    <tr>
+                        <td width="80" align="right" valign="top" class="color2"><span class="color4 size14">*</span>所在地</td>
+                        <td>
+                            <div class="cxselect-list" style="width:100% ; height:35px" id="company_region">
+                                <select class="oto_select add_sheng fl province" name="region" data-first-title="选择省" data-value="{$info.region.0}">
+                                </select>
+                                <select class="oto_select add_shi fl city" name="region" data-first-title="选择市" data-value="{$info.region.1}">
+                                </select>
+                                <select class="oto_select add_qu fl area" name="region" data-first-title="选择区" data-value="{$info.region.2}">
+                                </select>
+                            </div>
+                            <div class="" style="width:100% ; height:35px">
+                                <input type="text" class="oto_text_one fl" name="address" value="{$info.address}"
+                                       style="width:360px"/>
+                            </div>
+                        </td>
+                    </tr>
 
-                    <td width="147" rowspan="9" align="center" class="color2" valign="top">
-                        <p><img src="__STATIC__/shop/img/user/touxiang.gif" width="105" height="105" /></p>
-                        <p><a href="#">修改头像</a></p></td>
-                    <td width="80" align="right" class="color2">用户名</td>
-                    <td width="733"><strong>otochina@163.com</strong></td>
-                </tr>
-                <tr>
-                    <td width="80" class="color2" align="right">昵称</td>
-                    <td><input type="text" class="oto_text_one oto_text_two fl" name="textfield" value="小刘" />
-                        <span class="fl margin10 lineheight30">长度不能超过4字</span></td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" class="color2"><span class="color4 size14">*</span> 邮箱</td>
-                    <td><input type="text" class="oto_text_one fl" name="textfield" />
-                        <span class="fl margin10 lineheight30"><a class="color5" href="#">[修改]</a></span></td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" class="color2"><span class="color4 size14">*</span> 手机</td>
-                    <td>
-                        <span class="fl lineheight30">绑定手机，让账户更安全</span>
-                        <span class="fl lineheight30 margin10"><button class="btn_baocun">验证手机</button></span>						</td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" class="color2"><span class="color4 size14">*</span> 性别</td>
-                    <td>
-                        <label><input name="" type="radio" value="保密" class="fl" style=" margin:4px" /> <span class="fl">保密</span></label>
-                        <label><input name="" type="radio" value="男" class="fl" style=" margin:4px ; margin-left:15px;" />
-                            <span class="fl">男</span></label>
-                        <label><input name="" type="radio" value="女" class="fl" style=" margin:4px ; margin-left:15px;" />
-                            <span class="fl">女</span></label>						</td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" class="color2">真实姓名</td>
-                    <td><input type="text" class="oto_text_one oto_text_two fl" name="textfield" /></td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" class="color2">身份证号码</td>
-                    <td><input type="text" class="oto_text_one fl" name="textfield" /></td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" valign="top" class="color2">所在地</td>
-                    <td><div class="" style="width:100% ; height:35px">
-                        <select class="oto_select add_sheng fl">
-                            <option value="安徽省">安徽省</option>
-                            <option value="安徽省">安徽省</option>
-                            <option value="安徽省">安徽省</option>
-                        </select>
-                        <select class="oto_select add_shi fl">
-                            <option value="合肥市">合肥市</option>
-                            <option value="合肥市">合肥市</option>
-                            <option value="合肥市">合肥市</option>
-                        </select>
-                        <select class="oto_select add_qu fl">
-                            <option value="瑶海区">瑶海区</option>
-                            <option value="瑶海区">瑶海区</option>
-                            <option value="瑶海区">瑶海区</option>
-                        </select>
-                    </div>
-                        <div class="" style="width:100% ; height:35px">
-                            <input type="text" class="oto_text_one fl" name="textfield" value="请输入详细地址" style="width:360px" />
-                        </div>						</td>
-                </tr>
-
-                <tr>
-                    <td>&nbsp;</td>
-                    <td><button class="btn_baocun">保存修改</button></td>
-                </tr>
-            </table>
-
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button class="btn_baocun shop-submit" type="button">保存修改</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </div>
 </div>
-
+<script src="__STATIC__/vendor/cxselect/jquery.cxselect.min.js"></script>
+<script>
+    $(function () {
+        // 全国省市区
+        $('#company_region').cxSelect({
+            selects: ['province', 'city', 'area'],
+            nodata: 'none',
+            url: '__STATIC__/vendor/cxselect/cityData.min.json',
+        });
+    });
+</script>
 {include file="shop@public/footer"}
 
 </body>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\user\carts.html";i:1535974686;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1535967627;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1535976227;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\personal-left.html";i:1535975208;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\user\carts.html";i:1536132446;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536041537;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\personal-left.html";i:1535975208;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,6 +11,10 @@
     <link href="/static/shop/css/index-body-style.css" rel="stylesheet" type="text/css" />
     <link href="/static/shop/css/css3style.css" rel="stylesheet" type="text/css" />
     <script src="/static/shop/js/top-city-check.js"></script>
+    <script src="/static/system/jquery-2.2.1.min.js"></script>
+    <script src="/static/vendor/layer/layer.js"></script>
+    <script src="/static/system/core.js"></script>
+    <script src="/static/shop/js/members.js"></script>
 </head>
 <link href="/static/shop/css/user.css" rel="stylesheet" type="text/css"/>
 <body>
@@ -19,15 +23,15 @@
     <div class="index-top center">
         <?php if(\think\Session::get('shopUserId')): ?>
         <!--我的订单-->
+        <div class="fr noneAny"><a href="<?php echo url('open/logout'); ?>">安全退出</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('user/index'); ?>"><b style="color: orange">个人中心</b></a></div>
         <?php else: ?>
-
-        <div class="fr noneAny"><a href="<?php echo url('user/index'); ?>">个人中心</a></div>
         <!--免费注册-->
-        <div class="fr noneAny"><a href="<?php echo url('open/login'); ?>">[免费注册]</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('open/register'); ?>">[免费注册]</a></div>
         <!--登录-->
-        <div class="fr noneAny"><a href="<?php echo url('open/register'); ?>">[登录]</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('open/login'); ?>">[登录]</a></div>
         <?php endif; ?>
-        <div class="fr noneAny">亲，欢迎来<?php echo $cfg['site_name']; ?>！</div>
+        <div class="fr noneAny">亲，<b style="color: orange"><?php echo \think\Session::get('shopUser.nick_name'); ?></b> &nbsp;欢迎来<?php echo $cfg['site_name']; ?>！</div>
     </div>
 </div>
 
@@ -118,88 +122,70 @@
     <!--右侧-->
     <div class="user_right fr">
         <div class="user_dingdan">
-            <span class="fr"><a href="#">订单回收站</a></span><p>我的订单</p>
+            <span class="fr"></span>
+            <p>我的订单</p>
         </div>
         <div class="dingdan_state">
-            <div class="state_step fl"><p class="step-lv">1</p><p>1.我的购物车</p></div>
-            <div class="state_step_hui fl"><p class="step-hui">2</p><p>2.填写核对订单信息</p></div>
-            <div class="state_step_hui fl"><p class="step-hui">3</p><p>3.成功提交订单</p></div>
+            <div class="state_step fl"><p class="step-lv">1</p>
+                <p>1.我的购物车</p></div>
+            <div class="state_step_hui fl"><p class="step-hui">2</p>
+                <p>2.填写核对订单信息</p></div>
+            <div class="state_step_hui fl"><p class="step-hui">3</p>
+                <p>3.成功提交订单</p></div>
         </div>
 
-        <div class="shopping_list">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td class="table_manu" width="40">全选</td>
-                    <td class="table_manu">商品</td>
-                    <td class="table_manu" width="100">价格</td>
-                    <td class="table_manu" width="100">优惠</td>
-                    <td class="table_manu" width="100">
-                        <select class="oto_select">
-                            <option value ="安徽">安徽</option>
-                            <option value ="北京">北京</option>
-                            <option value ="上海">上海</option>
-                            <option value ="江苏">江苏</option>
-                        </select>
-                    </td>
-                    <td class="table_manu" width="100">数量</td>
-                    <td class="table_manu" width="100">操作</td>
-                </tr>
-                <tr class="goodsbg">
-                    <td valign="top"><div class="fuxuan"><input type="checkbox" name="checkbox" value="checkbox" /></div></td>
-                    <td>
-                        <div class="goods">
-                            <img src="img/user/goods.jpg" class="fl" />
-                            <a href="#">撒旦法斯蒂芬斯蒂芬斯蒂芬斯蒂芬撒旦法斯蒂芬斯蒂芬斯蒂斯蒂芬斯蒂芬斯蒂芬</a>
-                        </div>
-                    </td>
-                    <td><p class="jiage">￥99.05</p></td>
-                    <td>&nbsp;</td>
-                    <td>有货</td>
-                    <td><div class="shuliang"><a class="jianqu" href="#">-</a><a class="zhi" href="#">1</a><a class="jiashang" href="#">+</a></div></td>
-                    <td><div class="caozuo"><p><a href="#">删除</a></p><p><a href="#">修改优惠</a></p></div></td>
-                </tr>
-                <tr class="goodsbg">
-                    <td valign="top"><div class="fuxuan"><input type="checkbox" name="checkbox" value="checkbox" /></div></td>
-                    <td>
-                        <div class="goods">
-                            <img src="img/user/goods.jpg" class="fl" />
-                            <a href="#">撒旦法斯蒂芬斯蒂芬斯蒂芬斯蒂芬撒旦法斯蒂芬斯蒂芬斯蒂斯蒂芬斯蒂芬斯蒂芬</a>
-                        </div>
-                    </td>
-                    <td><p class="jiage">￥99.05</p></td>
-                    <td>&nbsp;</td>
-                    <td>有货</td>
-                    <td><div class="shuliang"><a class="jianqu" href="#">-</a><a class="zhi" href="#">1</a><a class="jiashang" href="#">+</a></div></td>
-                    <td><div class="caozuo"><p><a href="#">删除</a></p><p><a href="#">修改优惠</a></p></div></td>
-                </tr>
-                <tr class="goodsbg">
-                    <td valign="top"><div class="fuxuan"><input type="checkbox" name="checkbox" value="checkbox" /></div></td>
-                    <td>
-                        <div class="goods">
-                            <img src="img/user/goods.jpg" class="fl" />
-                            <a href="#">撒旦法斯蒂芬斯蒂芬斯蒂芬斯蒂芬撒旦法斯蒂芬斯蒂芬斯蒂斯蒂芬斯蒂芬斯蒂芬</a>
-                        </div>
-                    </td>
-                    <td><p class="jiage">￥99.05</p></td>
-                    <td>&nbsp;</td>
-                    <td>有货</td>
-                    <td><div class="shuliang"><a class="jianqu" href="#">-</a><a class="zhi" href="#">1</a><a class="jiashang" href="#">+</a></div></td>
-                    <td><div class="caozuo"><p><a href="#">删除</a></p><p><a href="#">修改优惠</a></p></div></td>
-                </tr>
-
-            </table>
-        </div>
-        <div class="zongji">
-            <p>
+        <form action="">
+            <div class="shopping_list">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="table_manu" width="40">
+                            <div class="fuxuan"><input type="checkbox" class="checkallcarts" /></div>
+                        </td>
+                        <td class="table_manu">商品</td>
+                        <td class="table_manu" width="100">店内价格</td>
+                        <td class="table_manu" width="100">市场价格</td>
+                        <td class="table_manu" width="100">优惠</td>
+                        <td class="table_manu" width="100">数量</td>
+                        <td class="table_manu" width="100">操作</td>
+                    </tr>
+                    <?php foreach($carts as $k=>$v): ?>
+                    <tr class="goodsbg">
+                        <td valign="top">
+                            <div class="fuxuan"><input type="checkbox" name="product_id" value="<?php echo $v['product_id']; ?>"/></div>
+                        </td>
+                        <td>
+                            <div class="goods">
+                                <img src="<?php echo $v['path']; ?>" class="fl"/><?php echo $v['name']; ?></a>
+                            </div>
+                        </td>
+                        <td><p class="jiage">￥<?php echo $v['shop_price']; ?></p></td>
+                        <td><p class="jiage">￥<?php echo $v['market_price']; ?></p></td>
+                        <td>￥<?php echo $v['market_price'] - $v['shop_price']; ?></td>
+                        <td>
+                            <div class="shuliang fl"><input type="number" name="number" value="<?php echo $v['number']; ?>" min="1"></div>
+                        </td>
+                        <td>
+                            <div class="caozuo">
+                                <p><a href="javascript:void(0);" class="del-carts" data-id="<?php echo $v['id']; ?>">删除</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+            <div class="zongji">
+                <p>
 					<span class="fr">已选商品<span class="color4 size18"> 0 </span>件&nbsp;&nbsp;
 					合计(不含运费)：&nbsp;&nbsp;<span class="color4 size18">¥0.00</span></span>
-                全选删除 - 批量转入收藏夹 - 分享
-            </p>
-        </div>
-        <div class="jiesuan">
-            <button class="btn-jx fl">继续购物</button>
-            <button class="btn-js fr">去结算</button>
-        </div>
+
+                </p>
+            </div>
+            <div class="jiesuan">
+                <button class="btn-jx fl"><a href="<?php echo url('/shop'); ?>">继续购物</a></button>
+                <button class="btn-js fr shop-buy-now" type="button">去结算</button>
+            </div>
+        </form>
+
     </div>
 
 </div>

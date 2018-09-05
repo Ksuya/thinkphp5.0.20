@@ -8,7 +8,7 @@ namespace tool;
 class PHPEmail{
 
     private $config = [
-        'siteName' => '',
+        'siteName' => '汇众商城',
         'host' => 'smtp.163.com',
         'username' => 'whlphper1994@163.com',
         'password' => 'whlphper1994',
@@ -27,35 +27,14 @@ class PHPEmail{
 
     }
 
-    /**
-     * 转化邮件模板中的变量
-     * @param string $tag
-     * @param $content
-     * @param $data
-     * @return mixed
-     */
-    function parseContent($tag = '{', $content, $data)
-    {
-        foreach ($data as $k => $v) {
-            $content = str_replace('$'.$tag . $k . '}', $v, $content);
-        }
-        return $content;
-    }
 
-
-    /**
-     * 发送邮箱验证码
-     * @param $email  接收方
-     * @param $code   邮件内容
-     * @param $parse   需要翻译的字段
-     * @param $theme  邮件主题
-     * @return array
-     */
-    function myEmail($email, $code, $parse,$theme)
+    function myEmail($email,$theme,$content)
     {
         try {
             $toemail = $email;//定义收件人的邮箱
-            $mail = new PHPMailer();
+            import('PHPMailer.PHPMailer', VENDOR_PATH);
+            import('PHPMailer.SMTP', VENDOR_PATH);
+            $mail = new \PHPMailer();
             $siteName = $this->config['siteName'];
             $mail->isSMTP();// 使用SMTP服务
             $mail->CharSet = "utf8";// 编码格式为utf8，不设置编码的话，中文会出现乱码
@@ -72,16 +51,16 @@ class PHPEmail{
             //$mail->addBCC("xxx@163.com");// 设置秘密抄送人(这个人也能收到邮件)
             //$mail->addAttachment("bug0.jpg");// 添加附件
             $mail->Subject = $siteName . "-" . $theme;// 邮件标题
-            $body = $this->parseContent('{',$code,$parse);
+            $body = $content;
             $mail->Body = $body;// 邮件正文
             $mail->IsHTML(true);
             if (!$mail->send()) {// 发送邮件
                 throw new \Exception("Mailer Error: " . $mail->ErrorInfo);
             } else {
-                return ['code' => 1, 'msg' => lang('邮箱发送成功')];
+                return ['errcode' => '0', 'errmsg' => lang('邮箱发送成功')];
             }
         } catch (\Exception $E) {
-            return ['code' => 0, 'msg' => $E->getMessage()];
+            return ['errcode' => '12594', 'msg' => $E->getMessage()];
         }
     }
 }

@@ -7,7 +7,7 @@
 namespace tool;
 class Kd100{
     //订单物流信息请求curl
-    public function getUrlJson($url, $type = 0)
+    public static function getUrlJson($url, $type = 0)
     {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // 获取数据返回
@@ -25,14 +25,14 @@ class Kd100{
      * @param $type         运单公司
      * @return bool
      */
-    public function getRoute($express_num,$type)
+    public static function getRoute($express_num,$type)
     {
         try{
             if(empty($express_num) || empty($type)){
                 throw new \Exception('物流公司,运单号必填');
             }
             $url = "http://www.kuaidi100.com/query?type=" . $type . "&postid=" . $express_num . "&id=1&valicode=&temp=" . time() . rand(100000, 999999);
-            $kuaidis = $this->getUrlJson($url, 1);
+            $kuaidis = self::getUrlJson($url, 1);
             if ($kuaidis) {
                 return $kuaidis['data'];
             } else {

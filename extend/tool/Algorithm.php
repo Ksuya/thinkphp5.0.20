@@ -13,7 +13,7 @@ class Algorithm{
      * @param string $key
      * @return string
      */
-    static function passport_encrypt($txt, $key = 'mdappPcshop')
+    static function passport_encrypt($txt, $key = 'WHLPHPER')
     {
         srand((double)microtime() * 1000000);
         $encrypt_key = md5(rand(0, 32000));
@@ -32,7 +32,7 @@ class Algorithm{
      * @param string $key
      * @return string
      */
-    static function passport_decrypt($txt, $key = 'mdappPcshop')
+    static function passport_decrypt($txt, $key = 'WHLPHPER')
     {
         $txt = self::passport_key(base64_decode(urldecode($txt)), $key);
         $tmp = '';

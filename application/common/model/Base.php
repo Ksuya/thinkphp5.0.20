@@ -53,7 +53,7 @@ class Base extends Model{
                     $recordLevel = 2;
                     if($this->record){
                         $dataId = $data[$this->pk];
-                        $oldData = $this->allowField(true)->findData(implode(',',$fieldData),$condition);
+                        $oldData = $this->allowField(true)->findData('*',$condition);
                         $oldData = $oldData['data'];
                     }
                 }
@@ -64,7 +64,7 @@ class Base extends Model{
                     $recordLevel = 2;
                     $dataId = $condition[$this->pk];
                     if($this->record) {
-                        $oldData = $this->findData(implode(',',$fieldData), $condition);
+                        $oldData = $this->findData('*', $condition);
                         $oldData = $oldData['data'];
                     }
                 }else{
@@ -72,8 +72,7 @@ class Base extends Model{
                     // 批量更新数据
                     $recordLevel = 3;
                     if($this->record) {
-                        $oldData = $this->getColumn($condition,$this->pk);
-                        $oldData = $oldData['data'];
+                        $oldData = $this->where($condition)->column($this->pk);
                         $dataId = implode(',',$oldData);
                         $diff = $this->diffMultyArray($data,$condition);
                     }
@@ -228,7 +227,7 @@ class Base extends Model{
         try{
             $data = $this->alias('a')->field($field)->join($join)->where($condition)->group($group)->having($having)->order($order)->find();
             if(!$data){
-                throw new Exception('用户不存在');
+                throw new Exception('数据不存在');
             }
             return ['errcode'=>'0','data'=>$data];
         }catch(Exception $e){
@@ -243,13 +242,13 @@ class Base extends Model{
      * @param $condition
      * @return array
      */
-    public function deleteData($action='删除',$condition,$soft=true)
+    public function deleteData($action='删除',$condition,$soft=false)
     {
         try{
             if(empty($condition)){
                 throw new Exception('删除时用户输入错误：'.json_encode($condition,JSON_UNESCAPED_LINE_TERMINATORS));
             }
-            if(!$soft){
+            if($soft){
                 $this->where($condition)->delete(true);
             }else{
                 $this->where($condition)->delete();

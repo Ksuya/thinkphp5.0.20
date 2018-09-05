@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-body{  background:url(../img/login/login-bg.gif) top center no-repeat }
+body{ }
 
 /* 顶部 样式 */
 .login-top{ width:930px ; height:70px ; padding-top:45px ;/* border:1px solid red*/}

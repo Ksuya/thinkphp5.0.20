@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\index\help.html";i:1535975189;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1535967627;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1535976227;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\index\help.html";i:1536137474;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536137533;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,6 +11,10 @@
     <link href="/static/shop/css/index-body-style.css" rel="stylesheet" type="text/css" />
     <link href="/static/shop/css/css3style.css" rel="stylesheet" type="text/css" />
     <script src="/static/shop/js/top-city-check.js"></script>
+    <script src="/static/system/jquery-2.2.1.min.js"></script>
+    <script src="/static/vendor/layer/layer.js"></script>
+    <script src="/static/system/core.js"></script>
+    <script src="/static/shop/js/members.js"></script>
 </head>
 <link href="/static/shop/css/user.css" rel="stylesheet" type="text/css"/>
 <body>
@@ -19,15 +23,15 @@
     <div class="index-top center">
         <?php if(\think\Session::get('shopUserId')): ?>
         <!--我的订单-->
+        <div class="fr noneAny"><a href="<?php echo url('open/logout'); ?>">安全退出</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('user/index'); ?>"><b style="color: orange">个人中心</b></a></div>
         <?php else: ?>
-
-        <div class="fr noneAny"><a href="<?php echo url('user/index'); ?>">个人中心</a></div>
         <!--免费注册-->
-        <div class="fr noneAny"><a href="<?php echo url('open/login'); ?>">[免费注册]</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('open/register'); ?>">[免费注册]</a></div>
         <!--登录-->
-        <div class="fr noneAny"><a href="<?php echo url('open/register'); ?>">[登录]</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('open/login'); ?>">[登录]</a></div>
         <?php endif; ?>
-        <div class="fr noneAny">亲，欢迎来<?php echo $cfg['site_name']; ?>！</div>
+        <div class="fr noneAny">亲，<b style="color: orange"><?php echo \think\Session::get('shopUser.nick_name'); ?></b> &nbsp;欢迎来<?php echo $cfg['site_name']; ?>！</div>
     </div>
 </div>
 
@@ -76,7 +80,7 @@
                 <?php if(is_array($nav) || $nav instanceof \think\Collection || $nav instanceof \think\Paginator): $i = 0; $__LIST__ = $nav;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?>
                 <li><a href="<?php echo url('product/cate',['id'=>$item['id']]); ?>"><?php echo $item['name']; ?></a></li>
                 <?php endforeach; endif; else: echo "" ;endif; ?>
-                <li><a href="<?php echo url('index/about'); ?>">关于我们</a></li>
+                <li><a href="<?php echo url('index/help',['id'=>51]); ?>">关于我们</a></li>
             </ul>
         </div>
         <?php if(\think\Session::get('shopUserId')): ?>
@@ -88,50 +92,30 @@
 <!--导航结束-->
 <div class="clear"></div>
 <!--位置-->
-<div class="user_here center">所在的位置：中国美博城 > 我的订单</div>
+<div class="user_here center">所在的位置：<?php echo $cfg['site_name']; ?> > 帮助中心</div>
 <!--用户管理中心-->
 <div class="user_center center">
     <!--左侧-->
     <div class="user_left fl">
-        <div class="user_head"><img src="/static/shop/img/user/user_head.gif" /></div>
         <div class="user_menu">
+            <?php if(is_array($catelog) || $catelog instanceof \think\Collection || $catelog instanceof \think\Paginator): $i = 0; $__LIST__ = $catelog;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?>
             <ul>
-                <h2><img src="/static/shop/img/user/menu04.jpg" /><span class="" style="display:none">个人信息</span></h2>
-                <li><a href="<?php echo url('user/index'); ?>">&gt;&gt;&nbsp;编辑资料</a></li>
+                <h2 style="margin-left: 10px;"><?php echo $item['title']; ?></h2>
+                <?php if(!empty($item['subLog'])): if(is_array($item['subLog']) || $item['subLog'] instanceof \think\Collection || $item['subLog'] instanceof \think\Paginator): $i = 0; $__LIST__ = $item['subLog'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$subitem): $mod = ($i % 2 );++$i;?>
+                <li  <?php if($id == $subitem['id']): ?> style="background-color: #eee;" <?php endif; ?>><a href="<?php echo url('index/help',['id'=>$subitem['id']]); ?>" ><?php echo $subitem['title']; ?></a></li>
+                <?php endforeach; endif; else: echo "" ;endif; endif; ?>
             </ul>
-            <ul>
-                <h2><img src="/static/shop/img/user/menu03.jpg" /><span class="" style="display:none">账户信息</span></h2>
-                <li><a href="<?php echo url('user/address'); ?>" >&gt;&gt;&nbsp;收货地址</a></li>
-            </ul>
-
-            <ul>
-                <h2><img src="/static/shop/img/user/menu01.jpg" /><span class="" style="display:none">订单查询</span></h2>
-                <li><a href="<?php echo url('user/carts'); ?>">&gt;&gt;&nbsp;我的购物车</a></li>
-                <li><a href="<?php echo url('user/order'); ?>">&gt;&gt;&nbsp;我的订单</a></li>
-            </ul>
-            <ul>
-                <h2><img src="/static/shop/img/user/menu02.jpg" /><span class="" style="display:none">自助服务</span></h2>
-                <li><a href="<?php echo url('user/help'); ?>">&gt;&gt;&nbsp;帮助中心</a></li>
-            </ul>
+            <?php endforeach; endif; else: echo "" ;endif; ?>
         </div>
     </div>
     <!--右侧-->
     <div class="user_right fr">
         <div class="user_dingdan">
-            <p>常见问题查询</p>
+            <p><?php echo $info['title']; ?></p>
         </div>
         <div class="bupiao_js">
             <div class="padding20">
-
-                <p class="color3">Q：登录OTO总是无法链接，这是怎么回事？</p>
-                <p>A：请您先刷新一下；或者检查一下网络是否正常，能否登录其它网站，如果以上两种方式都无效，还有一种情况是网页正在更新，可能会影响您的浏览，还望能谅解。		  </p>
-                <p>&nbsp;</p>
-                <p class="color3">Q：网站上面显示商品已售完请问什么时候可以在到货？</p>
-                <p>A：一般补货时间是7-15个工作日，具体还是以网站信息为准。</p>
-                <p>&nbsp;</p>
-                <p class="color3">Q：此类商品的规格是什么？性能怎样？</p>
-                <p>A：具体商品规格参数及性能问题请您关注商品页面信息，也可以联系厂家电话咨询，或者在商品页面下方发表商品咨询，会有专业人员为您解答！ </p>
-                <p>&nbsp;</p>
+                <?php echo $info['content']; ?>
             </div>
         </div>
 

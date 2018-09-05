@@ -26,8 +26,8 @@
 
  function pbAjax(btnDom, url, data, callback, method, responseType) {
      var timestamp=new Date().getTime();
-     var method = method ? method : 'POST';
-     var responseType = responseType ? responseType : 'JSON';
+     var method = method ? method : 'post';
+     var responseType = responseType ? responseType : 'json';
      var callback = callback ? callback : function (res) {
          showLoadding();
          window.location.reload();
@@ -36,7 +36,7 @@
      $.ajax({
          url: url+'?_time='+timestamp,    //请求的url地址
          dataType: responseType,   //返回格式为json
-         contentType:"application/json", //也就是 request payload
+         contentType:"application/json; charset=utf-8", //也就是 request payload
          async: true,//请求是否异步，默认为异步，这也是ajax重要特性
          data: JSON.stringify(data),    //参数值
          type: method,   //请求方式
@@ -102,38 +102,36 @@
          var formData = formId.serializeArray();
      }
      var isGET = isGET ? true : false;
-
-     if (isGET) {
-         var param = '';
-         $.each(formData, function () {
-             if (this.value != '') {
-                 if (param == '') {
-                     param = '?' + this.name + '=' + this.value;
-                 } else {
-                     param = param + '&' + this.name + '=' + this.value;
-                 }
+     var o = {};
+     $.each(formData, function () {
+         if (o[this.name]) {
+             if (!o[this.name].push) {
+                 o[this.name] = [o[this.name]];
              }
-         });
-         return param;
-     } else {
-         var o = {};
-         $.each(formData, function () {
-             if (o[this.name]) {
-                 if (!o[this.name].push) {
-                     o[this.name] = [o[this.name]];
-                 }
-                 o[this.name].push(this.value || '');
-             } else {
-                 if (this.value && this.value != '') {
-                     o[this.name] = this.value || '';
-                 }
-             }
-         });
-         for (tmp in o) {
-             if ($.isArray(o[tmp])) {
-                 o[tmp] = o[tmp].join(",");
+             o[this.name].push(this.value || '');
+         } else {
+             if (this.value && this.value != '') {
+                 o[this.name] = this.value || '';
              }
          }
+     });
+     for (tmp in o) {
+         if ($.isArray(o[tmp])) {
+             o[tmp] = o[tmp].join(",");
+         }
+     }
+     if (isGET) {
+         var params = '';
+         for (tmp in o) {
+             if(params == '')
+             {
+                 params = '?' + params + tmp + '=' + o[tmp];
+             }else{
+                 params = params + '&' + tmp + '=' + o[tmp];
+             }
+         }
+         return params;
+     } else {
          return o;
      }
  }

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\index\index.html";i:1535976540;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1535967627;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1535976227;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\index\index.html";i:1536138478;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536137533;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,6 +11,10 @@
     <link href="/static/shop/css/index-body-style.css" rel="stylesheet" type="text/css" />
     <link href="/static/shop/css/css3style.css" rel="stylesheet" type="text/css" />
     <script src="/static/shop/js/top-city-check.js"></script>
+    <script src="/static/system/jquery-2.2.1.min.js"></script>
+    <script src="/static/vendor/layer/layer.js"></script>
+    <script src="/static/system/core.js"></script>
+    <script src="/static/shop/js/members.js"></script>
 </head>
 <body>
 <!-- 顶部 -->
@@ -18,15 +22,15 @@
     <div class="index-top center">
         <?php if(\think\Session::get('shopUserId')): ?>
         <!--我的订单-->
+        <div class="fr noneAny"><a href="<?php echo url('open/logout'); ?>">安全退出</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('user/index'); ?>"><b style="color: orange">个人中心</b></a></div>
         <?php else: ?>
-
-        <div class="fr noneAny"><a href="<?php echo url('user/index'); ?>">个人中心</a></div>
         <!--免费注册-->
-        <div class="fr noneAny"><a href="<?php echo url('open/login'); ?>">[免费注册]</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('open/register'); ?>">[免费注册]</a></div>
         <!--登录-->
-        <div class="fr noneAny"><a href="<?php echo url('open/register'); ?>">[登录]</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('open/login'); ?>">[登录]</a></div>
         <?php endif; ?>
-        <div class="fr noneAny">亲，欢迎来<?php echo $cfg['site_name']; ?>！</div>
+        <div class="fr noneAny">亲，<b style="color: orange"><?php echo \think\Session::get('shopUser.nick_name'); ?></b> &nbsp;欢迎来<?php echo $cfg['site_name']; ?>！</div>
     </div>
 </div>
 
@@ -75,7 +79,7 @@
                 <?php if(is_array($nav) || $nav instanceof \think\Collection || $nav instanceof \think\Paginator): $i = 0; $__LIST__ = $nav;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?>
                 <li><a href="<?php echo url('product/cate',['id'=>$item['id']]); ?>"><?php echo $item['name']; ?></a></li>
                 <?php endforeach; endif; else: echo "" ;endif; ?>
-                <li><a href="<?php echo url('index/about'); ?>">关于我们</a></li>
+                <li><a href="<?php echo url('index/help',['id'=>51]); ?>">关于我们</a></li>
             </ul>
         </div>
         <?php if(\think\Session::get('shopUserId')): ?>
@@ -95,13 +99,13 @@
         <div class="navlist" id="SNmenuNav" >
             <?php foreach($allNav as $k=>$v): ?>
             <dl>
-                <dt class="icon03" ><a href=""><?php echo $v['name']; ?> </a></dt>
+                <dt class="icon03" ><a href="<?php echo url('product/cate',['id'=>$v['id']]); ?>"><?php echo $v['name']; ?> </a></dt>
                 <?php if(!empty($v['subNav'])): ?>
                 <dd class="menv<?php echo $k; ?>">
                     <div class="menv0<?php echo $k; ?>_left">
                         <ul>
                             <?php foreach($v['subNav'] as $k2=>$v2): ?>
-                            <li><a href="" title="<?php echo $v2['name']; ?>"><h3 style="color:#d51938; float:left;"><?php echo $v2['name']; ?></h3></a>
+                            <li><a href="<?php echo url('product/cate',['id'=>$v['id']]); ?>" title="<?php echo $v2['name']; ?>"><h3 style="color:#d51938; float:left;"><?php echo $v2['name']; ?></h3></a>
                                 <br />
                             </li>
                             <?php endforeach; ?>

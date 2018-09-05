@@ -10,13 +10,13 @@
         <div class="navlist" id="SNmenuNav" >
             {foreach $allNav as $k=>$v}
             <dl>
-                <dt class="icon03" ><a href="">{$v.name} </a></dt>
+                <dt class="icon03" ><a href="{:url('product/cate',['id'=>$v.id])}">{$v.name} </a></dt>
                 {if !empty($v.subNav)}
                 <dd class="menv{$k}">
                     <div class="menv0{$k}_left">
                         <ul>
                             {foreach $v.subNav as $k2=>$v2}
-                            <li><a href="" title="{$v2.name}"><h3 style="color:#d51938; float:left;">{$v2.name}</h3></a>
+                            <li><a href="{:url('product/cate',['id'=>$v.id])}" title="{$v2.name}"><h3 style="color:#d51938; float:left;">{$v2.name}</h3></a>
                                 <br />
                             </li>
                             {/foreach}

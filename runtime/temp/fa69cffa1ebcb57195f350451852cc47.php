@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:83:"D:\phpStudy\PHPTutorial\WWW\payment\public/../application/shop\view\user\index.html";i:1535978470;s:76:"D:\phpStudy\PHPTutorial\WWW\payment\application\shop\view\public\header.html";i:1535978470;s:73:"D:\phpStudy\PHPTutorial\WWW\payment\application\shop\view\public\nav.html";i:1535978470;s:83:"D:\phpStudy\PHPTutorial\WWW\payment\application\shop\view\public\personal-left.html";i:1535978470;s:76:"D:\phpStudy\PHPTutorial\WWW\payment\application\shop\view\public\footer.html";i:1535978470;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\user\modaddr.html";i:1536126864;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536041537;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\personal-left.html";i:1535975208;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,23 +11,27 @@
     <link href="/static/shop/css/index-body-style.css" rel="stylesheet" type="text/css" />
     <link href="/static/shop/css/css3style.css" rel="stylesheet" type="text/css" />
     <script src="/static/shop/js/top-city-check.js"></script>
+    <script src="/static/system/jquery-2.2.1.min.js"></script>
+    <script src="/static/vendor/layer/layer.js"></script>
+    <script src="/static/system/core.js"></script>
+    <script src="/static/shop/js/members.js"></script>
 </head>
-<link href="/static/shop/css/user.css" rel="stylesheet" type="text/css" />
+<link href="/static/shop/css/user.css" rel="stylesheet" type="text/css"/>
 <body>
 <!-- 顶部 -->
 <div class="index-top-box">
     <div class="index-top center">
         <?php if(\think\Session::get('shopUserId')): ?>
         <!--我的订单-->
+        <div class="fr noneAny"><a href="<?php echo url('open/logout'); ?>">安全退出</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('user/index'); ?>"><b style="color: orange">个人中心</b></a></div>
         <?php else: ?>
-
-        <div class="fr noneAny"><a href="<?php echo url('user/index'); ?>">个人中心</a></div>
         <!--免费注册-->
-        <div class="fr noneAny"><a href="<?php echo url('open/login'); ?>">[免费注册]</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('open/register'); ?>">[免费注册]</a></div>
         <!--登录-->
-        <div class="fr noneAny"><a href="<?php echo url('open/register'); ?>">[登录]</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('open/login'); ?>">[登录]</a></div>
         <?php endif; ?>
-        <div class="fr noneAny">亲，欢迎来<?php echo $cfg['site_name']; ?>！</div>
+        <div class="fr noneAny">亲，<b style="color: orange"><?php echo \think\Session::get('shopUser.nick_name'); ?></b> &nbsp;欢迎来<?php echo $cfg['site_name']; ?>！</div>
     </div>
 </div>
 
@@ -87,8 +91,6 @@
 </div>
 <!--导航结束-->
 <div class="clear"></div>
-<!--位置-->
-<div class="user_here center">所在的位置：中国美博城 > 编辑资料</div>
 <!--用户管理中心-->
 <div class="user_center center">
     <!--左侧-->
@@ -118,85 +120,64 @@
     <!--右侧-->
     <div class="user_right fr">
         <div class="user_dingdan">
-            <p>编辑资料</p>
+            <p>收货地址</p>
         </div>
         <div class="fapiao_table ziliao_table">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
+            <form action="<?php echo url('saveAddress'); ?>">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <input type="hidden" name="id" value="<?php echo (isset($address['id']) && ($address['id'] !== '')?$address['id']:''); ?>">
+                    <tr>
+                        <td width="80" class="color2" align="right"><span class="color4 size14">*</span>收件人</td>
+                        <td><input type="text" class="oto_text_one oto_text_two fl" name="reciver" value="<?php echo (isset($address['reciver']) && ($address['reciver'] !== '')?$address['reciver']:''); ?>"/>
+                            <span class="fl margin10 lineheight30">长度不能超过12字</span></td>
+                    </tr>
 
-                    <td width="147" rowspan="9" align="center" class="color2" valign="top">
-                        <p><img src="/static/shop/img/user/touxiang.gif" width="105" height="105" /></p>
-                        <p><a href="#">修改头像</a></p></td>
-                    <td width="80" align="right" class="color2">用户名</td>
-                    <td width="733"><strong>otochina@163.com</strong></td>
-                </tr>
-                <tr>
-                    <td width="80" class="color2" align="right">昵称</td>
-                    <td><input type="text" class="oto_text_one oto_text_two fl" name="textfield" value="小刘" />
-                        <span class="fl margin10 lineheight30">长度不能超过4字</span></td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" class="color2"><span class="color4 size14">*</span> 邮箱</td>
-                    <td><input type="text" class="oto_text_one fl" name="textfield" />
-                        <span class="fl margin10 lineheight30"><a class="color5" href="#">[修改]</a></span></td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" class="color2"><span class="color4 size14">*</span> 手机</td>
-                    <td>
-                        <span class="fl lineheight30">绑定手机，让账户更安全</span>
-                        <span class="fl lineheight30 margin10"><button class="btn_baocun">验证手机</button></span>						</td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" class="color2"><span class="color4 size14">*</span> 性别</td>
-                    <td>
-                        <label><input name="" type="radio" value="保密" class="fl" style=" margin:4px" /> <span class="fl">保密</span></label>
-                        <label><input name="" type="radio" value="男" class="fl" style=" margin:4px ; margin-left:15px;" />
-                            <span class="fl">男</span></label>
-                        <label><input name="" type="radio" value="女" class="fl" style=" margin:4px ; margin-left:15px;" />
-                            <span class="fl">女</span></label>						</td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" class="color2">真实姓名</td>
-                    <td><input type="text" class="oto_text_one oto_text_two fl" name="textfield" /></td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" class="color2">身份证号码</td>
-                    <td><input type="text" class="oto_text_one fl" name="textfield" /></td>
-                </tr>
-                <tr>
-                    <td width="80" align="right" valign="top" class="color2">所在地</td>
-                    <td><div class="" style="width:100% ; height:35px">
-                        <select class="oto_select add_sheng fl">
-                            <option value="安徽省">安徽省</option>
-                            <option value="安徽省">安徽省</option>
-                            <option value="安徽省">安徽省</option>
-                        </select>
-                        <select class="oto_select add_shi fl">
-                            <option value="合肥市">合肥市</option>
-                            <option value="合肥市">合肥市</option>
-                            <option value="合肥市">合肥市</option>
-                        </select>
-                        <select class="oto_select add_qu fl">
-                            <option value="瑶海区">瑶海区</option>
-                            <option value="瑶海区">瑶海区</option>
-                            <option value="瑶海区">瑶海区</option>
-                        </select>
-                    </div>
-                        <div class="" style="width:100% ; height:35px">
-                            <input type="text" class="oto_text_one fl" name="textfield" value="请输入详细地址" style="width:360px" />
-                        </div>						</td>
-                </tr>
+                    <tr>
+                        <td width="80" align="right" class="color2"><span class="color4 size14">*</span>联系方式</td>
+                        <td><input type="text" class="oto_text_one oto_text_two fl" name="contact" value="<?php echo (isset($address['contact']) && ($address['contact'] !== '')?$address['contact']:''); ?>"  /></td>
+                    </tr>
 
-                <tr>
-                    <td>&nbsp;</td>
-                    <td><button class="btn_baocun">保存修改</button></td>
-                </tr>
-            </table>
+                    <tr>
+                        <td width="80" align="right" valign="top" class="color2"><span class="color4 size14">*</span>地区</td>
+                        <td>
+                            <div class="cxselect-list" style="width:100% ; height:35px" id="company_region">
+                                <select class="oto_select add_sheng fl province" name="region" data-first-title="选择省" data-value="<?php echo (isset($address['region']['0']) && ($address['region']['0'] !== '')?$address['region']['0']:''); ?>">
+                                </select>
+                                <select class="oto_select add_shi fl city" name="region" data-first-title="选择市" data-value="<?php echo (isset($address['region']['1']) && ($address['region']['1'] !== '')?$address['region']['1']:''); ?>">
+                                </select>
+                                <select class="oto_select add_qu fl area" name="region" data-first-title="选择区" data-value="<?php echo (isset($address['region']['2']) && ($address['region']['2'] !== '')?$address['region']['2']:''); ?>">
+                                </select>
+                            </div>
+                            <div class="" style="width:100% ; height:35px">
+                                <input type="text" class="oto_text_one fl" name="address" value="<?php echo (isset($address['address']) && ($address['address'] !== '')?$address['address']:''); ?>"
+                                       style="width:360px"/>
+                            </div>
+                        </td>
+                    </tr>
 
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button class="btn_baocun shop-submit" type="button">保存</button>
+                            <button class="btn_baocun" type="button" onclick="window.history.go(-1)">返回</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </div>
 </div>
-
+<script src="/static/vendor/cxselect/jquery.cxselect.min.js"></script>
+<script>
+    $(function () {
+        // 全国省市区
+        $('#company_region').cxSelect({
+            selects: ['province', 'city', 'area'],
+            nodata: 'none',
+            url: '/static/vendor/cxselect/cityData.min.json',
+        });
+    });
+</script>
 <div class="clear" style="height:30px"></div>
 
 <div class="footerLink">

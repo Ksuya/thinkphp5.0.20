@@ -5,14 +5,14 @@
 {include file="shop@public/nav"}
 <div class="user_here center">所在的位置：中国美博城 > 我的订单</div>
 <div class="center results_of_search" style="margin-top: 40px;">
-   
-    <div class="results_list fl s_one">
+
+    <!--<div class="results_list fl s_one">
         <ul>
             <li><a href="#" class="checkOn">默认</a></li>
             <li>最新</li>
         </ul>
-    </div>
-    <div class="results_list fl s_two">
+    </div>-->
+   <!-- <div class="results_list fl s_two">
         <ul>
             <li>价格</li>
             <li><input name="" type="text"  value="￥" class="oto_text" /></li>
@@ -21,38 +21,29 @@
             <li>确定</li>
             <li>清空</li>
         </ul>
-    </div>
+    </div>-->
 </div>
 
 <div class="ibody">
     <!--产品普通排列图-->
     <div class="shangpin_Box center">
         <ul>
-
+            {foreach $pros as $k=>$v}
             <li>
                 <div class="padding10">
-                    <p><img src="img/other/90X110.jpg" width="200" height="200" /></p>
-                    <p class="color4 size20">￥399.00</p>
-                    <p class="shangpin_Box_text"><a href="payfor.html">本产品标题，请自行设置并发布请自行设置并发布...</a></p>
-                    <p>店铺产品</p>
+                    <p><img src="{$v.path}" width="200" height="200" /></p>
+                    <p class="color4 size20">￥{$v.shop_price}</p>{$v.name}</a></p>
                     <p class="btn_buy">
-                        <button class="shangpin_Box_button1">加入购物车</button>
-                        <button class="shangpin_Box_button2">立即购买</button>
+                        <button class="shangpin_Box_button2"><a href="{:url('product/detail',['id'=>$v.id])}">立即购买</a></button>
                     </p>
                 </div>
             </li>
-
+            {/foreach}
         </ul>
     </div>
 
-    <div class="all_page center">
-        <a href="#">上一页</a>
-        <a href="#"> 1 </a>
-        <a href="#"> 2 </a>
-        <a href="#"> 3 </a>
-        <a href="#"> ... </a>
-        <a href="#"> 10 </a>
-        <a href="#">下一页</a>
+    <div style="text-align: center;">
+       {$page}
     </div>
 
 

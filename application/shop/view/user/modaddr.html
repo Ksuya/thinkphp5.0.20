@@ -1,0 +1,72 @@
+{include file="shop@public/header"}
+<link href="__STATIC__/shop/css/user.css" rel="stylesheet" type="text/css"/>
+<body>
+{include file="shop@public/nav"}
+<!--用户管理中心-->
+<div class="user_center center">
+    {include file="shop@public/personal-left"}
+    <!--右侧-->
+    <div class="user_right fr">
+        <div class="user_dingdan">
+            <p>收货地址</p>
+        </div>
+        <div class="fapiao_table ziliao_table">
+            <form action="{:url('saveAddress')}">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <input type="hidden" name="id" value="{$address.id|default=''}">
+                    <tr>
+                        <td width="80" class="color2" align="right"><span class="color4 size14">*</span>收件人</td>
+                        <td><input type="text" class="oto_text_one oto_text_two fl" name="reciver" value="{$address.reciver|default=''}"/>
+                            <span class="fl margin10 lineheight30">长度不能超过12字</span></td>
+                    </tr>
+
+                    <tr>
+                        <td width="80" align="right" class="color2"><span class="color4 size14">*</span>联系方式</td>
+                        <td><input type="text" class="oto_text_one oto_text_two fl" name="contact" value="{$address.contact|default=''}"  /></td>
+                    </tr>
+
+                    <tr>
+                        <td width="80" align="right" valign="top" class="color2"><span class="color4 size14">*</span>地区</td>
+                        <td>
+                            <div class="cxselect-list" style="width:100% ; height:35px" id="company_region">
+                                <select class="oto_select add_sheng fl province" name="region" data-first-title="选择省" data-value="{$address.region.0|default=''}">
+                                </select>
+                                <select class="oto_select add_shi fl city" name="region" data-first-title="选择市" data-value="{$address.region.1|default=''}">
+                                </select>
+                                <select class="oto_select add_qu fl area" name="region" data-first-title="选择区" data-value="{$address.region.2|default=''}">
+                                </select>
+                            </div>
+                            <div class="" style="width:100% ; height:35px">
+                                <input type="text" class="oto_text_one fl" name="address" value="{$address.address|default=''}"
+                                       style="width:360px"/>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button class="btn_baocun shop-submit" type="button">保存</button>
+                            <button class="btn_baocun" type="button" onclick="window.history.go(-1)">返回</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/vendor/cxselect/jquery.cxselect.min.js"></script>
+<script>
+    $(function () {
+        // 全国省市区
+        $('#company_region').cxSelect({
+            selects: ['province', 'city', 'area'],
+            nodata: 'none',
+            url: '__STATIC__/vendor/cxselect/cityData.min.json',
+        });
+    });
+</script>
+{include file="shop@public/footer"}
+
+</body>
+</html>

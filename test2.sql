@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-09-03 20:14:02
+Date: 2018-09-05 17:09:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -507,19 +507,81 @@ CREATE TABLE `record` (
   KEY `tableName` (`tableName`),
   KEY `user` (`user`),
   KEY `dataId` (`dataId`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='数据变更记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8 COMMENT='数据变更记录表';
 
 -- ----------------------------
 -- Records of record
 -- ----------------------------
-INSERT INTO `record` VALUES ('33', '2', '分类更新', '95793', '127.0.0.1', null, 'ShopCategory', '6', '2018-09-03 13:53:03', null, null);
-INSERT INTO `record` VALUES ('34', '2', '分类更新', '89736', '127.0.0.1', null, 'ShopCategory', '2', '2018-09-03 13:53:56', null, null);
-INSERT INTO `record` VALUES ('35', '2', '分类更新', '37171', '127.0.0.1', null, 'ShopCategory', '6', '2018-09-03 13:54:18', null, null);
-INSERT INTO `record` VALUES ('36', '1', '新增分类', '64388', '127.0.0.1', null, 'ShopCategory', '19', '2018-09-03 13:56:10', null, null);
-INSERT INTO `record` VALUES ('37', '2', '更新', '3914', '127.0.0.1', null, 'ShopProduct', '1', '2018-09-03 14:45:05', null, null);
-INSERT INTO `record` VALUES ('38', '2', '更新', '59430', '127.0.0.1', null, 'ShopProduct', '1', '2018-09-03 14:47:36', null, null);
-INSERT INTO `record` VALUES ('39', '1', '新增', '4151', '127.0.0.1', null, 'ShopProduct', '2', '2018-09-03 15:09:18', null, null);
-INSERT INTO `record` VALUES ('40', '1', '新增商品', '4101', '127.0.0.1', null, 'ShopProduct', '3', '2018-09-03 17:08:33', null, null);
+INSERT INTO `record` VALUES ('1', '1', '用户下单', '49997', '127.0.0.1', null, 'ShopOrder', '2', '2018-09-04 19:12:33', '6', null);
+INSERT INTO `record` VALUES ('2', '1', '下单详情', '55560', '127.0.0.1', null, 'ShopOrderDetail', '1', '2018-09-04 19:12:33', '6', null);
+INSERT INTO `record` VALUES ('3', '1', '用户下单', '69132', '127.0.0.1', null, 'ShopOrder', '3', '2018-09-04 20:05:46', '6', null);
+INSERT INTO `record` VALUES ('4', '1', '下单详情', '64953', '127.0.0.1', null, 'ShopOrderDetail', '2', '2018-09-04 20:05:46', '6', null);
+INSERT INTO `record` VALUES ('5', '1', '用户下单', '54549', '127.0.0.1', null, 'ShopOrder', '4', '2018-09-04 20:07:50', '6', null);
+INSERT INTO `record` VALUES ('6', '1', '下单详情', '71995', '127.0.0.1', null, 'ShopOrderDetail', '3', '2018-09-04 20:07:50', '6', null);
+INSERT INTO `record` VALUES ('7', '1', '用户下单', '60776', '127.0.0.1', null, 'ShopOrder', '5', '2018-09-04 20:08:07', '6', null);
+INSERT INTO `record` VALUES ('8', '1', '下单详情', '19286', '127.0.0.1', null, 'ShopOrderDetail', '4', '2018-09-04 20:08:07', '6', null);
+INSERT INTO `record` VALUES ('9', '1', '用户下单', '50024', '127.0.0.1', null, 'ShopOrder', '6', '2018-09-04 20:15:44', '6', null);
+INSERT INTO `record` VALUES ('10', '1', '下单详情', '30813', '127.0.0.1', null, 'ShopOrderDetail', '5', '2018-09-04 20:15:44', '6', null);
+INSERT INTO `record` VALUES ('11', '1', '用户下单', '64466', '127.0.0.1', null, 'ShopOrder', '7', '2018-09-04 20:17:20', '6', null);
+INSERT INTO `record` VALUES ('12', '1', '下单详情', '1577', '127.0.0.1', null, 'ShopOrderDetail', '6', '2018-09-04 20:17:20', '6', null);
+INSERT INTO `record` VALUES ('13', '1', '用户下单', '47918', '127.0.0.1', null, 'ShopOrder', '8', '2018-09-05 12:38:07', '6', null);
+INSERT INTO `record` VALUES ('14', '1', '用户下单', '34145', '127.0.0.1', null, 'ShopOrder', '1', '2018-09-05 12:42:12', '6', null);
+INSERT INTO `record` VALUES ('15', '1', '用户下单', '92621', '127.0.0.1', null, 'ShopOrder', '2', '2018-09-05 12:43:54', '6', null);
+INSERT INTO `record` VALUES ('16', '1', '用户下单', '97355', '127.0.0.1', null, 'ShopOrder', '3', '2018-09-05 12:44:00', '6', null);
+INSERT INTO `record` VALUES ('17', '1', '用户下单', '35235', '127.0.0.1', null, 'ShopOrder', '4', '2018-09-05 12:44:35', '6', null);
+INSERT INTO `record` VALUES ('19', '1', '用户下单', '20042', '127.0.0.1', null, 'ShopOrder', '5', '2018-09-05 12:58:03', '6', null);
+INSERT INTO `record` VALUES ('20', '1', '用户下单', '84217', '127.0.0.1', null, 'ShopOrder', '6', '2018-09-05 12:58:31', '6', null);
+INSERT INTO `record` VALUES ('21', '2', '完善订单信息', '46780', '127.0.0.1', null, 'ShopOrder', '6', '2018-09-05 12:58:33', '6', null);
+INSERT INTO `record` VALUES ('22', '1', '完善订单信息', '36863', '127.0.0.1', null, 'ShopOrder', '1', '2018-09-05 12:59:25', '6', null);
+INSERT INTO `record` VALUES ('23', '1', '完善订单信息', '7294', '127.0.0.1', null, 'ShopOrder', '2', '2018-09-05 12:59:45', '6', null);
+INSERT INTO `record` VALUES ('24', '1', '用户下单', '30395', '127.0.0.1', null, 'ShopOrder', '1', '2018-09-05 13:01:19', '6', null);
+INSERT INTO `record` VALUES ('25', '1', '用户下单', '42855', '127.0.0.1', null, 'ShopOrder', '2', '2018-09-05 13:03:39', '6', null);
+INSERT INTO `record` VALUES ('26', '2', '完善订单信息', '18430', '127.0.0.1', null, 'ShopOrder', '2', '2018-09-05 13:03:41', '6', null);
+INSERT INTO `record` VALUES ('27', '1', '用户下单', '40375', '127.0.0.1', null, 'ShopOrder', '3', '2018-09-05 13:03:45', '6', null);
+INSERT INTO `record` VALUES ('28', '2', '修改个人信息', '5748', '127.0.0.1', null, 'ShopMembers', '6', '2018-09-05 13:23:48', '6', null);
+INSERT INTO `record` VALUES ('29', '2', '修改个人信息', '96990', '127.0.0.1', null, 'ShopMembers', '6', '2018-09-05 13:23:50', '6', null);
+INSERT INTO `record` VALUES ('30', '2', '修改个人信息', '9124', '127.0.0.1', null, 'ShopMembers', '6', '2018-09-05 13:23:52', '6', null);
+INSERT INTO `record` VALUES ('31', '2', '修改个人信息', '15048', '127.0.0.1', null, 'ShopMembers', '6', '2018-09-05 13:25:03', '6', null);
+INSERT INTO `record` VALUES ('32', '2', '修改个人信息', '12925', '127.0.0.1', null, 'ShopMembers', '6', '2018-09-05 13:25:54', '6', null);
+INSERT INTO `record` VALUES ('33', '2', '更新收货地址', '15556', '127.0.0.1', null, 'ShopAddress', '1', '2018-09-05 13:51:51', '6', null);
+INSERT INTO `record` VALUES ('34', '2', '更新收货地址', '35215', '127.0.0.1', null, 'ShopAddress', '2', '2018-09-05 13:53:31', '6', null);
+INSERT INTO `record` VALUES ('35', '1', '更新收货地址', '50406', '127.0.0.1', null, 'ShopAddress', '3', '2018-09-05 14:04:34', '6', null);
+INSERT INTO `record` VALUES ('36', '2', '更新收货地址', '87333', '127.0.0.1', null, 'ShopAddress', '3', '2018-09-05 14:06:21', '6', null);
+INSERT INTO `record` VALUES ('37', '3', '设置默认地址', '89536', '127.0.0.1', 'a:1:{s:7:\"user_id\";i:6;}', 'ShopAddress', '3', '2018-09-05 14:08:10', '6', null);
+INSERT INTO `record` VALUES ('38', '3', '设置默认地址-全部非默认', '94663', '127.0.0.1', 'a:1:{s:7:\"user_id\";i:6;}', 'ShopAddress', '3', '2018-09-05 14:10:13', '6', null);
+INSERT INTO `record` VALUES ('39', '3', '设置默认地址-默认', '12117', '127.0.0.1', 'a:1:{s:7:\"user_id\";i:6;}', 'ShopAddress', '3', '2018-09-05 14:10:13', '6', null);
+INSERT INTO `record` VALUES ('40', '1', '新增收货地址', '22898', '127.0.0.1', null, 'ShopAddress', '4', '2018-09-05 14:10:45', '6', null);
+INSERT INTO `record` VALUES ('41', '3', '设置默认地址-全部非默认', '43864', '127.0.0.1', 'a:1:{s:7:\"user_id\";i:6;}', 'ShopAddress', '3,4', '2018-09-05 14:10:51', '6', null);
+INSERT INTO `record` VALUES ('42', '3', '设置默认地址-默认', '35933', '127.0.0.1', 'a:1:{s:7:\"user_id\";i:6;}', 'ShopAddress', '3,4', '2018-09-05 14:10:51', '6', null);
+INSERT INTO `record` VALUES ('43', '3', '设置默认地址-全部非默认', '89502', '127.0.0.1', 'a:1:{s:7:\"user_id\";i:6;}', 'ShopAddress', '3,4', '2018-09-05 14:11:44', '6', null);
+INSERT INTO `record` VALUES ('44', '3', '设置默认地址-全部非默认', '88388', '127.0.0.1', 'a:1:{s:7:\"user_id\";i:6;}', 'ShopAddress', '3,4', '2018-09-05 14:12:06', '6', null);
+INSERT INTO `record` VALUES ('45', '3', '设置默认地址-全部非默认', '90447', '127.0.0.1', 'a:1:{s:7:\"user_id\";i:6;}', 'ShopAddress', '3,4', '2018-09-05 14:12:21', '6', null);
+INSERT INTO `record` VALUES ('46', '2', '设置默认地址-默认', '20226', '127.0.0.1', null, 'ShopAddress', '4', '2018-09-05 14:12:21', '6', null);
+INSERT INTO `record` VALUES ('47', '3', '设置默认地址-全部非默认', '66426', '127.0.0.1', 'a:1:{s:7:\"user_id\";i:6;}', 'ShopAddress', '3,4', '2018-09-05 14:12:25', '6', null);
+INSERT INTO `record` VALUES ('48', '2', '设置默认地址-默认', '41082', '127.0.0.1', null, 'ShopAddress', '3', '2018-09-05 14:12:25', '6', null);
+INSERT INTO `record` VALUES ('49', '3', '设置默认地址-全部非默认', '11856', '127.0.0.1', 'a:1:{s:7:\"user_id\";i:6;}', 'ShopAddress', '3,4', '2018-09-05 14:12:30', '6', null);
+INSERT INTO `record` VALUES ('50', '2', '设置默认地址-默认', '47570', '127.0.0.1', null, 'ShopAddress', '4', '2018-09-05 14:12:30', '6', null);
+INSERT INTO `record` VALUES ('51', '1', '新增收货地址', '14842', '127.0.0.1', null, 'ShopAddress', '5', '2018-09-05 14:13:14', '6', null);
+INSERT INTO `record` VALUES ('52', '2', '更新收货地址', '60669', '127.0.0.1', null, 'ShopAddress', '5', '2018-09-05 14:13:44', '6', null);
+INSERT INTO `record` VALUES ('53', '1', '用户下单', '55179', '127.0.0.1', null, 'ShopOrder', '4', '2018-09-05 14:43:26', '6', null);
+INSERT INTO `record` VALUES ('54', '1', '用户下单', '77582', '127.0.0.1', null, 'ShopOrder', '5', '2018-09-05 14:44:09', '6', null);
+INSERT INTO `record` VALUES ('55', '1', '用户下单', '81546', '127.0.0.1', null, 'ShopOrder', '6', '2018-09-05 14:44:37', '6', null);
+INSERT INTO `record` VALUES ('56', '1', '用户下单', '1410', '127.0.0.1', null, 'ShopOrder', '7', '2018-09-05 14:45:43', '6', null);
+INSERT INTO `record` VALUES ('57', '1', '用户下单', '90707', '127.0.0.1', null, 'ShopOrder', '8', '2018-09-05 14:55:17', '6', null);
+INSERT INTO `record` VALUES ('58', '1', '用户下单', '14357', '127.0.0.1', null, 'ShopOrder', '9', '2018-09-05 14:56:12', '6', null);
+INSERT INTO `record` VALUES ('59', '1', '用户下单', '58064', '127.0.0.1', null, 'ShopOrder', '10', '2018-09-05 15:01:56', '6', null);
+INSERT INTO `record` VALUES ('60', '1', '用户下单', '16747', '127.0.0.1', null, 'ShopOrder', '1', '2018-09-05 15:28:56', '6', null);
+INSERT INTO `record` VALUES ('61', '2', '完善订单信息', '20816', '127.0.0.1', null, 'ShopOrder', '1', '2018-09-05 15:29:04', '6', null);
+INSERT INTO `record` VALUES ('62', '1', '用户下单', '38971', '127.0.0.1', null, 'ShopOrder', '2', '2018-09-05 15:29:11', '6', null);
+INSERT INTO `record` VALUES ('63', '1', '用户下单', '18731', '127.0.0.1', null, 'ShopOrder', '3', '2018-09-05 15:36:52', '6', null);
+INSERT INTO `record` VALUES ('64', '2', '完善订单信息', '98302', '127.0.0.1', null, 'ShopOrder', '3', '2018-09-05 15:36:56', '6', null);
+INSERT INTO `record` VALUES ('65', '1', '用户下单', '82263', '127.0.0.1', null, 'ShopOrder', '4', '2018-09-05 15:37:18', '6', null);
+INSERT INTO `record` VALUES ('66', '2', '完善订单信息', '68598', '127.0.0.1', null, 'ShopOrder', '4', '2018-09-05 15:37:23', '6', null);
+INSERT INTO `record` VALUES ('67', '1', '用户下单', '27284', '127.0.0.1', null, 'ShopOrder', '5', '2018-09-05 15:39:18', '6', null);
+INSERT INTO `record` VALUES ('68', '2', '完善订单信息', '61944', '127.0.0.1', null, 'ShopOrder', '5', '2018-09-05 15:39:30', '6', null);
+INSERT INTO `record` VALUES ('69', '2', '完成订单', '66990', '127.0.0.1', null, 'ShopOrder', '5', '2018-09-05 16:30:21', '6', null);
+INSERT INTO `record` VALUES ('70', '1', '用户下单', '69889', '127.0.0.1', null, 'ShopOrder', '7', '2018-09-05 16:30:41', '6', null);
+INSERT INTO `record` VALUES ('71', '2', '完善订单信息', '9806', '127.0.0.1', null, 'ShopOrder', '7', '2018-09-05 16:30:48', '6', null);
 
 -- ----------------------------
 -- Table structure for record_detail
@@ -534,23 +596,35 @@ CREATE TABLE `record_detail` (
   `new` varchar(255) NOT NULL COMMENT '最新值',
   PRIMARY KEY (`id`),
   KEY `recordId` (`recordId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='数据变更详情表-只有修改的时候会写入详情到此表';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='数据变更详情表-只有修改的时候会写入详情到此表';
 
 -- ----------------------------
 -- Records of record_detail
 -- ----------------------------
-INSERT INTO `record_detail` VALUES ('1', '33', '6', 'name', '家电大全', '家电大全2');
-INSERT INTO `record_detail` VALUES ('2', '34', '2', 'name', '床上用品', '床上用品bak');
-INSERT INTO `record_detail` VALUES ('3', '35', '6', 'name', '家电大全2', '家电大全');
-INSERT INTO `record_detail` VALUES ('4', '37', '1', 'name', '海尔 BCD-572WDENU1', '海尔 BCD-572WDENU1');
-INSERT INTO `record_detail` VALUES ('5', '38', '1', 'name', '海尔 BCD-572WDENU1', '海尔 BCD-572WDENU1');
+INSERT INTO `record_detail` VALUES ('2', '37', '3', 'is_default', '0', '0');
+INSERT INTO `record_detail` VALUES ('3', '38', '3', 'is_default', '0', '0');
+INSERT INTO `record_detail` VALUES ('4', '39', '3', 'is_default', '0', '1');
+INSERT INTO `record_detail` VALUES ('5', '41', '3', 'is_default', '1', '0');
+INSERT INTO `record_detail` VALUES ('6', '41', '4', 'is_default', '0', '0');
+INSERT INTO `record_detail` VALUES ('7', '42', '3', 'is_default', '0', '1');
+INSERT INTO `record_detail` VALUES ('8', '42', '4', 'is_default', '0', '1');
+INSERT INTO `record_detail` VALUES ('9', '43', '3', 'is_default', '1', '0');
+INSERT INTO `record_detail` VALUES ('10', '43', '4', 'is_default', '0', '0');
+INSERT INTO `record_detail` VALUES ('11', '44', '3', 'is_default', '0', '0');
+INSERT INTO `record_detail` VALUES ('12', '44', '4', 'is_default', '0', '0');
+INSERT INTO `record_detail` VALUES ('13', '45', '3', 'is_default', '0', '0');
+INSERT INTO `record_detail` VALUES ('14', '45', '4', 'is_default', '0', '0');
+INSERT INTO `record_detail` VALUES ('15', '47', '3', 'is_default', '0', '0');
+INSERT INTO `record_detail` VALUES ('16', '47', '4', 'is_default', '1', '0');
+INSERT INTO `record_detail` VALUES ('17', '49', '3', 'is_default', '1', '0');
+INSERT INTO `record_detail` VALUES ('18', '49', '4', 'is_default', '0', '0');
 
 -- ----------------------------
 -- Table structure for shop_address
 -- ----------------------------
 DROP TABLE IF EXISTS `shop_address`;
 CREATE TABLE `shop_address` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `reciver` varchar(50) NOT NULL,
   `region` varchar(50) NOT NULL,
@@ -563,11 +637,14 @@ CREATE TABLE `shop_address` (
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of shop_address
 -- ----------------------------
+INSERT INTO `shop_address` VALUES ('3', '6', '王红亮', '内蒙古自治区,包头市,白云鄂博矿区', 'dsadadsaddsad', '15369521521', '0', '2018-09-05 14:04:34', null, '2018-09-05 14:12:30', null);
+INSERT INTO `shop_address` VALUES ('4', '6', '李飞宇', '辽宁省,丹东市,振安区', '香港中路', '15245854587', '1', '2018-09-05 14:10:45', null, '2018-09-05 14:12:30', null);
+INSERT INTO `shop_address` VALUES ('5', '6', '王红亮2', '山西省,长治市,郊区', 'dsad', '15369558418', '0', '2018-09-05 14:13:14', null, '2018-09-05 14:13:44', null);
 
 -- ----------------------------
 -- Table structure for shop_admin
@@ -629,6 +706,23 @@ CREATE TABLE `shop_brand` (
 -- ----------------------------
 INSERT INTO `shop_brand` VALUES ('1', '海尔', '', '海尔', '0', '2018-09-03 13:57:06', null, null, null);
 INSERT INTO `shop_brand` VALUES ('2', '澳柯玛', '', '澳柯玛', '0', '2018-09-03 13:57:15', null, null, null);
+
+-- ----------------------------
+-- Table structure for shop_carts
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_carts`;
+CREATE TABLE `shop_carts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `number` int(11) DEFAULT '1',
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_carts
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for shop_category
@@ -779,43 +873,53 @@ CREATE TABLE `shop_members` (
   `nick_name` varchar(50) DEFAULT NULL COMMENT '昵称',
   `password` varchar(32) NOT NULL,
   `role_id` int(11) NOT NULL DEFAULT '-1' COMMENT '-1为商城会员',
+  `real_name` varchar(20) DEFAULT NULL,
+  `id_card` varchar(20) DEFAULT NULL,
+  `region` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `create_user` int(11) DEFAULT '0',
   `update_time` datetime DEFAULT NULL,
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `email` (`email`,`phone`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shop_members
 -- ----------------------------
+INSERT INTO `shop_members` VALUES ('6', '761243073@qq.com', '15720048541', 'mem70439upd', 'B3MOfQ4%2BCHkFYlNiXDcGNwkxVzQ%3D', '-1', null, null, '山西省,阳泉市,平定县', '青岛市市北分行', '2018-09-04 13:30:35', '0', '2018-09-05 13:25:54', null);
 
 -- ----------------------------
 -- Table structure for shop_order
 -- ----------------------------
 DROP TABLE IF EXISTS `shop_order`;
 CREATE TABLE `shop_order` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `order_no` varchar(32) NOT NULL,
   `order_amount` double NOT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `address_id` int(11) DEFAULT NULL,
   `pay_type` int(11) NOT NULL DEFAULT '0',
   `status` tinyint(4) NOT NULL DEFAULT '0',
   `progress` tinyint(4) NOT NULL DEFAULT '0',
-  `express_id` int(11) DEFAULT NULL,
+  `express_id` varchar(20) DEFAULT NULL,
   `express_code` varchar(255) DEFAULT NULL,
+  `confirm` tinyint(4) DEFAULT '0',
   `create_time` datetime DEFAULT NULL,
   `create_user` int(11) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`order_no`,`status`,`progress`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shop_order
 -- ----------------------------
+INSERT INTO `shop_order` VALUES ('5', '6', '2018090515391892297', '3474', '海尔 BCD-572WDENU1 * 1;', '3', '1', '1', '3', 'shunfeng', '256435416067', '1', '2018-09-05 15:39:18', null, '2018-09-05 16:30:21', null);
+INSERT INTO `shop_order` VALUES ('7', '6', '201809051630419388', '599', 'LOVO家纺网红简约床品纯棉全棉四件套水洗棉时尚被套床单床上用品 * 1;', '4', '2', '0', '0', null, null, '1', '2018-09-05 16:30:41', null, '2018-09-05 16:30:48', null);
 
 -- ----------------------------
 -- Table structure for shop_order_detail
@@ -831,11 +935,17 @@ CREATE TABLE `shop_order_detail` (
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shop_order_detail
 -- ----------------------------
+INSERT INTO `shop_order_detail` VALUES ('1', '1', '1', '3474.00', '3500.00', '1', '2018-09-05 15:28:56');
+INSERT INTO `shop_order_detail` VALUES ('2', '2', '1', '3474.00', '3500.00', '1', '2018-09-05 15:29:11');
+INSERT INTO `shop_order_detail` VALUES ('3', '3', '3', '599.00', '652.00', '1', '2018-09-05 15:36:52');
+INSERT INTO `shop_order_detail` VALUES ('4', '4', '2', '508.00', '559.00', '1', '2018-09-05 15:37:18');
+INSERT INTO `shop_order_detail` VALUES ('5', '5', '1', '3474.00', '3500.00', '1', '2018-09-05 15:39:18');
+INSERT INTO `shop_order_detail` VALUES ('6', '7', '3', '599.00', '652.00', '1', '2018-09-05 16:30:41');
 
 -- ----------------------------
 -- Table structure for shop_product
@@ -865,9 +975,28 @@ CREATE TABLE `shop_product` (
 -- ----------------------------
 -- Records of shop_product
 -- ----------------------------
-INSERT INTO `shop_product` VALUES ('1', '19', '2', '海尔 BCD-572WDENU1', '3474.00', '3500.00', '500', '30', '0', '0', '0', '<p><img src=\"https://img.alicdn.com/tps/TB16fwuKVXXXXaXXpXXXXXXXXXX-16-16.png\" style=\"margin:0px 5px 0px 0px\" />商品具有<a href=\"https://baike.taobao.com/view.htm?wd=2012010701584939&amp;ac=29\" target=\"_blank\">中国强制性产品认证（CCC）编号</a>，符合国家CCC认证标准。</p>\r\n\r\n<p>品牌名称：Haier/海尔</p>\r\n\r\n<p><a href=\"https://detail.tmall.com/item.htm?spm=a230r.1.14.6.7326445bLA19xP&amp;id=44274812043&amp;cm_id=140105335569ed55e27b&amp;abbucket=20#J_Attrs\">更多参数</a><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>证书编号：2012010701584939</li>\r\n	<li>证书状态：有效</li>\r\n	<li>申请人名称：青岛海尔股份有限公司</li>\r\n	<li>制造商名称：青岛海尔股份有限公司</li>\r\n	<li>产品名称：冷藏冷冻箱</li>\r\n	<li>3C产品型号：见附件</li>\r\n	<li>3C规格型号：见附件</li>\r\n	<li>产品名称：Haier/海尔 BCD-160TMPQ</li>\r\n	<li>海尔冰箱型号:&nbsp;BCD-160TMPQ</li>\r\n	<li>冰箱冷柜机型:&nbsp;冷藏冷冻冰箱</li>\r\n	<li>制冷方式:&nbsp;直冷</li>\r\n	<li>箱门结构:&nbsp;双门式</li>\r\n	<li>能效等级:&nbsp;三级</li>\r\n</ul>\r\n', '2018-09-03 14:16:55', null, '2018-09-03 14:47:36', null);
-INSERT INTO `shop_product` VALUES ('2', '19', '1', '新飞双门式小冰箱冷藏冷冻家用宿舍办公室节能静音双门冰箱小型', '508.00', '559.00', '25', '33', '0', '0', '58', '<p><img src=\"https://img.alicdn.com/tps/TB16fwuKVXXXXaXXpXXXXXXXXXX-16-16.png\" style=\"margin:0px 5px 0px 0px\" />商品具有<a href=\"https://baike.taobao.com/view.htm?ac=29&amp;wd=2018010701072975\" target=\"_blank\">中国强制性产品认证（CCC）编号</a>，符合国家CCC认证标准。</p>\r\n\r\n<p>品牌名称：FRESTECH/新飞</p>\r\n\r\n<p><a href=\"https://detail.tmall.com/item.htm?spm=a230r.1.14.69.7326445bLA19xP&amp;id=569846809632&amp;ns=1&amp;abbucket=20#J_Attrs\">更多参数</a><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>证书编号：2018010701072975</li>\r\n	<li>证书状态：有效</li>\r\n	<li>产品名称：冷藏冷冻箱</li>\r\n	<li>3C规格型号：BCD-58A118 220V～ 50Hz 0.75A R600a</li>\r\n	<li>产品名称：FRESTECH/新飞 BCD-58A1...</li>\r\n	<li>新飞冰箱型号:&nbsp;BCD-58A118</li>\r\n	<li>冰箱冷柜机型:&nbsp;冷藏冷冻冰箱</li>\r\n	<li>制冷方式:&nbsp;直冷</li>\r\n	<li>箱门结构:&nbsp;双门式</li>\r\n	<li>能效等级:&nbsp;三级</li>\r\n</ul>\r\n', '2018-09-03 15:09:18', null, '2018-09-03 15:09:18', null);
-INSERT INTO `shop_product` VALUES ('3', '2', '1', 'LOVO家纺网红简约床品纯棉全棉四件套水洗棉时尚被套床单床上用品', '599.00', '652.00', '26', '34', '0', '0', '20', '<p>品牌名称：lovo</p>\r\n\r\n<p><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>件数:&nbsp;4件</li>\r\n	<li>被面材质:&nbsp;棉</li>\r\n	<li>品牌:&nbsp;lovo</li>\r\n	<li>货号:&nbsp;特丽斯/时尚皇冠/甜蜜冰激凌</li>\r\n	<li>被里材质:&nbsp;棉</li>\r\n	<li>棉种类:&nbsp;棉</li>\r\n	<li>成分含量:&nbsp;100%</li>\r\n	<li>床品工艺:&nbsp;其他</li>\r\n	<li>适用床尺寸:&nbsp;1.2m （4英尺） 床..&nbsp;1.5m （5英尺） 床..&nbsp;1.8m （6英尺） 床..</li>\r\n	<li>图案:&nbsp;纯色</li>\r\n	<li>款式:&nbsp;床单式</li>\r\n	<li>颜色分类:&nbsp;特丽斯&nbsp;甜蜜冰激凌&nbsp;时尚皇冠&nbsp;备用&nbsp;格蕾丝</li>\r\n	<li>产品等级:&nbsp;合格品</li>\r\n	<li>风格:&nbsp;简约</li>\r\n	<li>面料支数:&nbsp;其他</li>\r\n	<li>面料密度:&nbsp;.</li>\r\n	<li>商品条形码:&nbsp;6901486284387</li>\r\n	<li>印花工艺:&nbsp;活性印花</li>\r\n	<li>织造工艺:&nbsp;其他</li>\r\n</ul>\r\n\r\n<p><img src=\"https://assets.alicdn.com/kissy/1.0.0/build/imglazyload/spaceball.gif\" style=\"height:1px; margin:0px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><br />\r\n<img alt=\"改时间2.jpg\" src=\"https://img.alicdn.com/imgextra/i3/279887075/O1CN01228OcShN8OPITZk_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"1(7).jpg\" src=\"https://img.alicdn.com/imgextra/i4/279887075/TB2FuaauAOWBuNjSsppXXXPgpXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_01.jpg\" src=\"https://img.alicdn.com/imgextra/i1/279887075/TB2V6wZc21TBuNjy0FjXXajyXXa_!!279887075.jpg\" style=\"margin:0px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img src=\"https://assets.alicdn.com/kissy/1.0.0/build/imglazyload/spaceball.gif\" style=\"height:1px; margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_02.jpg\" src=\"https://img.alicdn.com/imgextra/i1/279887075/TB29YUEc1uSBuNjSsplXXbe8pXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_03.jpg\" src=\"https://img.alicdn.com/imgextra/i2/279887075/TB2szAZc21TBuNjy0FjXXajyXXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_04.jpg\" src=\"https://img.alicdn.com/imgextra/i2/279887075/TB2ZEQRcVuWBuNjSspnXXX1NVXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_05.jpg\" src=\"https://img.alicdn.com/imgextra/i3/279887075/TB2qZcGc4SYBuNjSsphXXbGvVXa_!!279887075.jpg\" style=\"margin:0px\" /></p>\r\n', '2018-09-03 17:08:33', null, '2018-09-03 17:08:33', null);
+INSERT INTO `shop_product` VALUES ('1', '19', '2', '海尔 BCD-572WDENU1', '3474.00', '3500.00', '491', '30', '9', '0', '0', '<p><img src=\"https://img.alicdn.com/tps/TB16fwuKVXXXXaXXpXXXXXXXXXX-16-16.png\" style=\"margin:0px 5px 0px 0px\" />商品具有<a href=\"https://baike.taobao.com/view.htm?wd=2012010701584939&amp;ac=29\" target=\"_blank\">中国强制性产品认证（CCC）编号</a>，符合国家CCC认证标准。</p>\r\n\r\n<p>品牌名称：Haier/海尔</p>\r\n\r\n<p><a href=\"https://detail.tmall.com/item.htm?spm=a230r.1.14.6.7326445bLA19xP&amp;id=44274812043&amp;cm_id=140105335569ed55e27b&amp;abbucket=20#J_Attrs\">更多参数</a><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>证书编号：2012010701584939</li>\r\n	<li>证书状态：有效</li>\r\n	<li>申请人名称：青岛海尔股份有限公司</li>\r\n	<li>制造商名称：青岛海尔股份有限公司</li>\r\n	<li>产品名称：冷藏冷冻箱</li>\r\n	<li>3C产品型号：见附件</li>\r\n	<li>3C规格型号：见附件</li>\r\n	<li>产品名称：Haier/海尔 BCD-160TMPQ</li>\r\n	<li>海尔冰箱型号:&nbsp;BCD-160TMPQ</li>\r\n	<li>冰箱冷柜机型:&nbsp;冷藏冷冻冰箱</li>\r\n	<li>制冷方式:&nbsp;直冷</li>\r\n	<li>箱门结构:&nbsp;双门式</li>\r\n	<li>能效等级:&nbsp;三级</li>\r\n</ul>\r\n', '2018-09-03 14:16:55', null, '2018-09-03 14:47:36', null);
+INSERT INTO `shop_product` VALUES ('2', '19', '1', '新飞双门式小冰箱冷藏冷冻家用宿舍办公室节能静音双门冰箱小型', '508.00', '559.00', '20', '33', '5', '0', '58', '<p><img src=\"https://img.alicdn.com/tps/TB16fwuKVXXXXaXXpXXXXXXXXXX-16-16.png\" style=\"margin:0px 5px 0px 0px\" />商品具有<a href=\"https://baike.taobao.com/view.htm?ac=29&amp;wd=2018010701072975\" target=\"_blank\">中国强制性产品认证（CCC）编号</a>，符合国家CCC认证标准。</p>\r\n\r\n<p>品牌名称：FRESTECH/新飞</p>\r\n\r\n<p><a href=\"https://detail.tmall.com/item.htm?spm=a230r.1.14.69.7326445bLA19xP&amp;id=569846809632&amp;ns=1&amp;abbucket=20#J_Attrs\">更多参数</a><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>证书编号：2018010701072975</li>\r\n	<li>证书状态：有效</li>\r\n	<li>产品名称：冷藏冷冻箱</li>\r\n	<li>3C规格型号：BCD-58A118 220V～ 50Hz 0.75A R600a</li>\r\n	<li>产品名称：FRESTECH/新飞 BCD-58A1...</li>\r\n	<li>新飞冰箱型号:&nbsp;BCD-58A118</li>\r\n	<li>冰箱冷柜机型:&nbsp;冷藏冷冻冰箱</li>\r\n	<li>制冷方式:&nbsp;直冷</li>\r\n	<li>箱门结构:&nbsp;双门式</li>\r\n	<li>能效等级:&nbsp;三级</li>\r\n</ul>\r\n', '2018-09-03 15:09:18', null, '2018-09-03 15:09:18', null);
+INSERT INTO `shop_product` VALUES ('3', '2', '1', 'LOVO家纺网红简约床品纯棉全棉四件套水洗棉时尚被套床单床上用品', '599.00', '652.00', '9', '34', '17', '0', '20', '<p>品牌名称：lovo</p>\r\n\r\n<p><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>件数:&nbsp;4件</li>\r\n	<li>被面材质:&nbsp;棉</li>\r\n	<li>品牌:&nbsp;lovo</li>\r\n	<li>货号:&nbsp;特丽斯/时尚皇冠/甜蜜冰激凌</li>\r\n	<li>被里材质:&nbsp;棉</li>\r\n	<li>棉种类:&nbsp;棉</li>\r\n	<li>成分含量:&nbsp;100%</li>\r\n	<li>床品工艺:&nbsp;其他</li>\r\n	<li>适用床尺寸:&nbsp;1.2m （4英尺） 床..&nbsp;1.5m （5英尺） 床..&nbsp;1.8m （6英尺） 床..</li>\r\n	<li>图案:&nbsp;纯色</li>\r\n	<li>款式:&nbsp;床单式</li>\r\n	<li>颜色分类:&nbsp;特丽斯&nbsp;甜蜜冰激凌&nbsp;时尚皇冠&nbsp;备用&nbsp;格蕾丝</li>\r\n	<li>产品等级:&nbsp;合格品</li>\r\n	<li>风格:&nbsp;简约</li>\r\n	<li>面料支数:&nbsp;其他</li>\r\n	<li>面料密度:&nbsp;.</li>\r\n	<li>商品条形码:&nbsp;6901486284387</li>\r\n	<li>印花工艺:&nbsp;活性印花</li>\r\n	<li>织造工艺:&nbsp;其他</li>\r\n</ul>\r\n\r\n<p><img src=\"https://assets.alicdn.com/kissy/1.0.0/build/imglazyload/spaceball.gif\" style=\"height:1px; margin:0px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><br />\r\n<img alt=\"改时间2.jpg\" src=\"https://img.alicdn.com/imgextra/i3/279887075/O1CN01228OcShN8OPITZk_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"1(7).jpg\" src=\"https://img.alicdn.com/imgextra/i4/279887075/TB2FuaauAOWBuNjSsppXXXPgpXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_01.jpg\" src=\"https://img.alicdn.com/imgextra/i1/279887075/TB2V6wZc21TBuNjy0FjXXajyXXa_!!279887075.jpg\" style=\"margin:0px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img src=\"https://assets.alicdn.com/kissy/1.0.0/build/imglazyload/spaceball.gif\" style=\"height:1px; margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_02.jpg\" src=\"https://img.alicdn.com/imgextra/i1/279887075/TB29YUEc1uSBuNjSsplXXbe8pXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_03.jpg\" src=\"https://img.alicdn.com/imgextra/i2/279887075/TB2szAZc21TBuNjy0FjXXajyXXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_04.jpg\" src=\"https://img.alicdn.com/imgextra/i2/279887075/TB2ZEQRcVuWBuNjSspnXXX1NVXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_05.jpg\" src=\"https://img.alicdn.com/imgextra/i3/279887075/TB2qZcGc4SYBuNjSsphXXbGvVXa_!!279887075.jpg\" style=\"margin:0px\" /></p>\r\n', '2018-09-03 17:08:33', null, '2018-09-03 17:08:33', null);
+
+-- ----------------------------
+-- Table structure for shop_sms
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_sms`;
+CREATE TABLE `shop_sms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` tinyint(4) DEFAULT '1' COMMENT '1-email 2- mobile',
+  `reciver` varchar(50) NOT NULL,
+  `code` varchar(128) NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `expires` int(11) DEFAULT '10' COMMENT '过期时间 10分钟',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_sms
+-- ----------------------------
+INSERT INTO `shop_sms` VALUES ('5', '1', '761243073@qq.com', '4709', '2018-09-04 16:27:17', '10');
 
 -- ----------------------------
 -- Table structure for system_file

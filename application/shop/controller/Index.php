@@ -42,4 +42,10 @@ class Index extends Shopbase{
         $assign = compact('banner','showNav');
         return view('',$assign);
     }
+
+    public function help($id=12)
+    {
+        $info = model('ShopCatelog')->field('id,title,content')->where('id',$id)->find();
+        return view('',['info'=>$info,'id'=>$id]);
+    }
 }

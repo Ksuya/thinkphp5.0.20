@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\user\address.html";i:1535974921;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1535967627;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1535976227;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\personal-left.html";i:1535975208;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\user\address.html";i:1536127461;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536041537;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\personal-left.html";i:1535975208;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,6 +11,10 @@
     <link href="/static/shop/css/index-body-style.css" rel="stylesheet" type="text/css" />
     <link href="/static/shop/css/css3style.css" rel="stylesheet" type="text/css" />
     <script src="/static/shop/js/top-city-check.js"></script>
+    <script src="/static/system/jquery-2.2.1.min.js"></script>
+    <script src="/static/vendor/layer/layer.js"></script>
+    <script src="/static/system/core.js"></script>
+    <script src="/static/shop/js/members.js"></script>
 </head>
 <link href="/static/shop/css/user.css" rel="stylesheet" type="text/css"/>
 <body>
@@ -19,15 +23,15 @@
     <div class="index-top center">
         <?php if(\think\Session::get('shopUserId')): ?>
         <!--我的订单-->
+        <div class="fr noneAny"><a href="<?php echo url('open/logout'); ?>">安全退出</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('user/index'); ?>"><b style="color: orange">个人中心</b></a></div>
         <?php else: ?>
-
-        <div class="fr noneAny"><a href="<?php echo url('user/index'); ?>">个人中心</a></div>
         <!--免费注册-->
-        <div class="fr noneAny"><a href="<?php echo url('open/login'); ?>">[免费注册]</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('open/register'); ?>">[免费注册]</a></div>
         <!--登录-->
-        <div class="fr noneAny"><a href="<?php echo url('open/register'); ?>">[登录]</a></div>
+        <div class="fr noneAny"><a href="<?php echo url('open/login'); ?>">[登录]</a></div>
         <?php endif; ?>
-        <div class="fr noneAny">亲，欢迎来<?php echo $cfg['site_name']; ?>！</div>
+        <div class="fr noneAny">亲，<b style="color: orange"><?php echo \think\Session::get('shopUser.nick_name'); ?></b> &nbsp;欢迎来<?php echo $cfg['site_name']; ?>！</div>
     </div>
 </div>
 
@@ -87,8 +91,6 @@
 </div>
 <!--导航结束-->
 <div class="clear"></div>
-<!--位置-->
-<div class="user_here center">所在的位置：中国美博城 > 收货地址</div>
 <!--用户管理中心-->
 <div class="user_center center">
     <!--左侧-->
@@ -119,98 +121,39 @@
     <div class="user_right fr">
         <div class="user_dingdan">
             <span class="fr"><a href=""></a></span>
-            <p>我的订单</p>
+            <p>收货地址</p>
         </div>
 
         <div class="dingdan_state">
-            <div class="state_step fl"><a href=""><p class="step-lv"></p><p>新增地址</p></a></div>
+            <div class="state_step fl"><a href="<?php echo url('modaddr'); ?>"><p class="step-lv"></p><p>新增地址</p></a></div>
         </div>
 
         <div class="shopping_list">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td class="table_manu" width="40">全选</td>
-                    <td class="table_manu">商品</td>
-                    <td class="table_manu" width="100">价格</td>
-                    <td class="table_manu" width="100">优惠</td>
-                    <td class="table_manu" width="100">
-                        <select class="oto_select">
-                            <option value="安徽">安徽</option>
-                            <option value="北京">北京</option>
-                            <option value="上海">上海</option>
-                            <option value="江苏">江苏</option>
-                        </select>
-                    </td>
-                    <td class="table_manu" width="100">数量</td>
-                    <td class="table_manu" width="100">操作</td>
+                    <td class="table_manu">收件人</td>
+                    <td class="table_manu">地区</td>
+                    <td class="table_manu">详细地址<td>
+                    <td class="table_manu"></td>
+                    <td class="table_manu" ></td>
                 </tr>
+                <?php foreach($address as $k=>$v): ?>
                 <tr class="goodsbg">
-                    <td valign="top">
-                        <div class="fuxuan"><input type="checkbox" name="checkbox" value="checkbox"/></div>
-                    </td>
+                    <td><?php echo $v['reciver']; ?></td>
+                    <td><?php echo implode(',',$v['region']); ?></td>
+                    <td><?php echo $v['address']; ?></td>
+                    <td><?php echo $v['contact']; ?></td>
                     <td>
-                        <div class="goods">
-                            <img src="img/user/goods.jpg" class="fl"/>
-                            <a href="#">撒旦法斯蒂芬斯蒂芬斯蒂芬斯蒂芬撒旦法斯蒂芬斯蒂芬斯蒂斯蒂芬斯蒂芬斯蒂芬</a>
-                        </div>
-                    </td>
-                    <td><p class="jiage">￥99.05</p></td>
-                    <td>&nbsp;</td>
-                    <td>有货</td>
-                    <td>
-                        <div class="shuliang"><a class="jianqu" href="#">-</a><a class="zhi" href="#">1</a><a
-                                class="jiashang" href="#">+</a></div>
-                    </td>
-                    <td>
-                        <div class="caozuo"><p><a href="#">删除</a></p>
-                            <p><a href="#">修改优惠</a></p></div>
+                        <a href="javascript:void(0);" class="del-address" data-id="<?php echo $v['id']; ?>">删除&nbsp;&nbsp;</a>
+                        <a href="<?php echo url('modaddr',['id'=>$v['id']]); ?>">修改&nbsp;&nbsp;</a>
+                        <?php if($v['is_default']['id'] == 1): ?>
+                        <a href="javascript:void(0);" style="color: orange;">默认地址</a>
+                        <?php else: ?>
+                        <a href="javascript:void(0);" style="color: red;" class="default-address" data-id="<?php echo $v['id']; ?>">设为默认</a>
+                        <?php endif; ?>
                     </td>
                 </tr>
-                <tr class="goodsbg">
-                    <td valign="top">
-                        <div class="fuxuan"><input type="checkbox" name="checkbox" value="checkbox"/></div>
-                    </td>
-                    <td>
-                        <div class="goods">
-                            <img src="img/user/goods.jpg" class="fl"/>
-                            <a href="#">撒旦法斯蒂芬斯蒂芬斯蒂芬斯蒂芬撒旦法斯蒂芬斯蒂芬斯蒂斯蒂芬斯蒂芬斯蒂芬</a>
-                        </div>
-                    </td>
-                    <td><p class="jiage">￥99.05</p></td>
-                    <td>&nbsp;</td>
-                    <td>有货</td>
-                    <td>
-                        <div class="shuliang"><a class="jianqu" href="#">-</a><a class="zhi" href="#">1</a><a
-                                class="jiashang" href="#">+</a></div>
-                    </td>
-                    <td>
-                        <div class="caozuo"><p><a href="#">删除</a></p>
-                            <p><a href="#">修改优惠</a></p></div>
-                    </td>
-                </tr>
-                <tr class="goodsbg">
-                    <td valign="top">
-                        <div class="fuxuan"><input type="checkbox" name="checkbox" value="checkbox"/></div>
-                    </td>
-                    <td>
-                        <div class="goods">
-                            <img src="img/user/goods.jpg" class="fl"/>
-                            <a href="#">撒旦法斯蒂芬斯蒂芬斯蒂芬斯蒂芬撒旦法斯蒂芬斯蒂芬斯蒂斯蒂芬斯蒂芬斯蒂芬</a>
-                        </div>
-                    </td>
-                    <td><p class="jiage">￥99.05</p></td>
-                    <td>&nbsp;</td>
-                    <td>有货</td>
-                    <td>
-                        <div class="shuliang"><a class="jianqu" href="#">-</a><a class="zhi" href="#">1</a><a
-                                class="jiashang" href="#">+</a></div>
-                    </td>
-                    <td>
-                        <div class="caozuo"><p><a href="#">删除</a></p>
-                            <p><a href="#">修改优惠</a></p></div>
-                    </td>
-                </tr>
-
+                <?php endforeach; ?>
             </table>
         </div>
     </div>

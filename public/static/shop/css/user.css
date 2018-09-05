@@ -210,7 +210,7 @@
 .shopping_list_table1 tr td{ padding-left:20px; color:#666666;   }
 
 .shopping_list_table  tr td:hover{ background:none;}
-.shopping_list_table  tr td{ line-height:20px ; padding:15px ; }
+.shopping_list_table  tr td{ padding:15px ; }
 .shopping_list_table  tr .table_manu_2{height:30px; line-height:30px; background:#f7f7f7 ; border-bottom:1px solid #dedede ; padding:5px 0px 5px 15px ; color:#666666}
 .fuxuan_2 strong{ color:#000000; font-size:14px;}
 .fuxuan_2 a{ color:#3699dc}
@@ -255,6 +255,13 @@
 .dingdan_huisou_top a{ padding:5px 15px;   font-size:16px; font-weight:bold; border-right:1px solid #efefef;}
 
 .dingdan_huisou tr td{ }
+
+.cursel{
+	border: 1px solid orange;
+}
+.goodsbg td{
+	cursor: pointer;
+}
  
 
 
