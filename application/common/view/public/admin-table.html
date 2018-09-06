@@ -1,33 +1,51 @@
 {include file="common@public/admin-header"}
+<link rel="stylesheet" href="__STATIC__/vendor/bootstrap-validate/css/bootstrapValidator.css">
+<link rel="stylesheet" href="__STATIC__/vendor/icheck/skins/flat/blue.css">
+<link rel="stylesheet" href="__STATIC__/vendor/datepicker/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="__STATIC__/vendor/select/css/bootstrap-select.min.css">
+<script src="__STATIC__/vendor/bootstrap-validate/js/bootstrapValidator.js"></script>
+<script src="__STATIC__/vendor/bootstrap-validate/js/language/zh_CN.js"></script>
+<script src="__STATIC__/vendor/cxselect/jquery.cxselect.min.js"></script>
+<script src="__STATIC__/vendor/icheck/icheck.min.js"></script>
+<script type="text/javascript" src="__STATIC__/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/vendor/select/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="__STATIC__/vendor/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 <link href="__STATIC__/vendor/table/bootstrap-table.css" rel="stylesheet"/>
 <link href="__STATIC__/vendor/tree/css/bootstrap-treeview.css" rel="stylesheet"/>
 <script src="__STATIC__/vendor/table/bootstrap-table.js"></script>
 <script src="__STATIC__/vendor/tree/js/bootstrap-treeview.js"></script>
 <script src="__STATIC__/vendor/table/locale/bootstrap-table-zh-CN.js"></script>
-<body>
+<body style="overflow: auto">
 <div class="panel-body">
     {block name="breadcrumb"}
     {/block}
-    <div id="toolbar" class="btn-group">
-        <div id="table-btn-list">
-            <form action="" id="tb_departments_SearchTableForm">
-                {block name="table-search"}
-                {/block}
-                <div class="myBtn-content">
-                    <button type="button" class="btn btn-primary table-btn-search" data-table="tb_departments">搜索</button>
-                    <button type="button" class="btn btn-default table-btn-reset" data-table="tb_departments">重置</button>
-                    {block name="table-actions"}
+    <div class="row">
+        <div class="col-sm-2" style="overflow: auto">
+            <div id="tree"></div>
+        </div>
+        <div class="col-sm-10">
+            <div id="toolbar" class="btn-group">
+                <div id="table-btn-list">
+                    <form action="" id="tb_departments_SearchTableForm">
+                        {block name="table-search"}
+                        {/block}
+                        <div class="myBtn-content">
+                            <button type="button" class="btn btn-primary table-btn-search" data-table="tb_departments">搜索</button>
+                            <button type="button" class="btn btn-default table-btn-reset" data-table="tb_departments">重置</button>
+                            {block name="table-actions"}
+                            {/block}
+                        </div>
+                    </form>
+                </div>
+                <div id="table-btn-moreaction-list" style="display: none;">
+                    <span>您选中了 <span id="row-select-total"></span> 行 </span>
+                    {block name="table-more-actions"}
                     {/block}
                 </div>
-            </form>
-        </div>
-        <div id="table-btn-moreaction-list" style="display: none;">
-            <span>您选中了 <span id="row-select-total"></span> 行 </span>
-            {block name="table-more-actions"}
-            {/block}
+            </div>
+            <table id="tb_departments" class="table table-hover table-striped table-extra"></table>
         </div>
     </div>
-    <table id="tb_departments" class="table table-hover table-striped table-extra"></table>
 </div>
 <div class="modal fade right" id="tb_departments_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">

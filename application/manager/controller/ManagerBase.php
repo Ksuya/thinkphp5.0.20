@@ -10,6 +10,7 @@ namespace app\manager\controller;
 use app\common\controller\Base;
 
 class ManagerBase extends Base{
+    public $models;
     public $theme;
     public $model;
     public $field;

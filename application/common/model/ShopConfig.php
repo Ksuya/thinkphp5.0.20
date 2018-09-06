@@ -19,8 +19,10 @@ class ShopConfig extends Base{
         foreach ($list as $k=>$v)
         {
             $config[$v['name']] = $v['value'];
+            if($v['name'] == 'site_logo'){
+                $config[$v['name'].'_path'] = model('SystemFile')->where('id',$v['value'])->value('path');
+            }
         }
         return $config;
     }
-
 }

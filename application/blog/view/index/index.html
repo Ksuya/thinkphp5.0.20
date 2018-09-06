@@ -42,38 +42,16 @@
     <div class="row">
         <div class="col-sm-8">
             <ul class="r_box">
-                <li><i><a href="/tuseday/diary/12.html" title="个人博客，我为什么要用帝国cms？"><img
+                {foreach $list as $K=>$v}
+                <li style="cursor: pointer"><i><a href="{:url('/blog/article/info',['id'=>$v.id])}" title="{$v.title}"><img
                         src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
-                        alt="个人博客，我为什么要用帝国cms？"></a></i>
-                    <h3>[ 顶 ] <a href="/tuseday/diary/12.html" target="_blank">个人博客，我为什么要用帝国cms？</a></h3>
-                    <p>我所知道的比较流行的博客系统有，wordpress，Z-Blog，emlog等，最流行的是worpress，主题多，插件多，所以选择wp的个人站长也很多。以上三个博客系统我都用过，用的时间最</p>
+                        alt="{$v.title}？"></a></i>
+                    <h3>[ 顶 ] <a href="{:url('/blog/article/info',['id'=>$v.id])}">{$v.title}</a></h3>
+                    <p>{$v.description}</p>
                 </li>
-                <li><i><a href="/tuseday/diary/12.html" title="个人博客，我为什么要用帝国cms？"><img
-                        src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
-                        alt="个人博客，我为什么要用帝国cms？"></a></i>
-                    <h3>[ 顶 ] <a href="/tuseday/diary/12.html" target="_blank">个人博客，我为什么要用帝国cms？</a></h3>
-                    <p>我所知道的比较流行的博客系统有，wordpress，Z-Blog，emlog等，最流行的是worpress，主题多，插件多，所以选择wp的个人站长也很多。以上三个博客系统我都用过，用的时间最</p>
-                </li>
-                <li><i><a href="/tuseday/diary/12.html" title="个人博客，我为什么要用帝国cms？"><img
-                        src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
-                        alt="个人博客，我为什么要用帝国cms？"></a></i>
-                    <h3>[ 顶 ] <a href="/tuseday/diary/12.html" target="_blank">个人博客，我为什么要用帝国cms？</a></h3>
-                    <p>我所知道的比较流行的博客系统有，wordpress，Z-Blog，emlog等，最流行的是worpress，主题多，插件多，所以选择wp的个人站长也很多。以上三个博客系统我都用过，用的时间最</p>
-                </li>
-                <li><i><a href="/tuseday/diary/12.html" title="个人博客，我为什么要用帝国cms？"><img
-                        src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
-                        alt="个人博客，我为什么要用帝国cms？"></a></i>
-                    <h3>[ 顶 ] <a href="/tuseday/diary/12.html" target="_blank">个人博客，我为什么要用帝国cms？</a></h3>
-                    <p>我所知道的比较流行的博客系统有，wordpress，Z-Blog，emlog等，最流行的是worpress，主题多，插件多，所以选择wp的个人站长也很多。以上三个博客系统我都用过，用的时间最</p>
-                </li>
-                <li><i><a href="/tuseday/diary/12.html" title="个人博客，我为什么要用帝国cms？"><img
-                        src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
-                        alt="个人博客，我为什么要用帝国cms？"></a></i>
-                    <h3>[ 顶 ] <a href="/tuseday/diary/12.html" target="_blank">个人博客，我为什么要用帝国cms？</a></h3>
-                    <p>我所知道的比较流行的博客系统有，wordpress，Z-Blog，emlog等，最流行的是worpress，主题多，插件多，所以选择wp的个人站长也很多。以上三个博客系统我都用过，用的时间最</p>
-                </li>
+                {/foreach}
             </ul>
-            <ul class="pagination pagination-lg" style="float: right">
+            <!--<ul class="pagination pagination-lg" style="float: right">
                 <li><a href="#">&laquo;</a></li>
                 <li><a href="#">1</a></li>
                 <li><a href="#">2</a></li>
@@ -81,7 +59,7 @@
                 <li><a href="#">4</a></li>
                 <li><a href="#">5</a></li>
                 <li><a href="#">&raquo;</a></li>
-            </ul>
+            </ul>-->
         </div>
         <div class="col-sm-4">
             <h2>标签</h2>

@@ -9,7 +9,7 @@
 namespace app\manager\controller\shop;
 use app\manager\controller\ManagerBase;
 
-class Product extends ShopBase{
+class Product extends ManagerBase{
     public function _initialize()
     {
         $this->theme = '商品';

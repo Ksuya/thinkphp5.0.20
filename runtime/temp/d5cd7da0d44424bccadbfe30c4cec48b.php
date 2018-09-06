@@ -1,10 +1,10 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/blog\view\index\index.html";i:1535622051;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\header.html";i:1535621987;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\nav.html";i:1535622009;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\footer.html";i:1535621950;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/blog\view\index\index.html";i:1536236001;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\header.html";i:1536234191;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\nav.html";i:1536236218;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\footer.html";i:1535621950;}*/ ?>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>详情页</title>
+    <title>whlphper-博客</title>
     <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/blog.css">
     <script src="/static/system/jquery.min.js"></script>
@@ -15,27 +15,25 @@
     <div class="container-fluid ">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">菜鸟教程</a>
+                <a class="navbar-brand" href="<?php echo url('/blog'); ?>">whlphper-博客</a>
             </div>
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">iOS</a></li>
-                    <li><a href="#">SVN</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Java
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">jmeter</a></li>
-                            <li><a href="#">EJB</a></li>
-                            <li><a href="#">Jasper Report</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">分离的链接</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">另一个分离的链接</a></li>
-                        </ul>
-                    </li>
+                    <?php foreach($nav as $k=>$v): if(!empty($v['subNav'])): ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <?php echo $v['name']; ?>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <?php foreach($v['subNav'] as $k2=>$v2): ?>
+                                    <li><a href="#"><?php echo $v2['name']; ?></a></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                        <?php else: ?>
+                            <li><a href="#"><?php echo $v['name']; ?></a></li>
+                        <?php endif; endforeach; ?>
                 </ul>
             </div>
         </div>
@@ -82,38 +80,16 @@
     <div class="row">
         <div class="col-sm-8">
             <ul class="r_box">
-                <li><i><a href="/tuseday/diary/12.html" title="个人博客，我为什么要用帝国cms？"><img
+                <?php foreach($list as $K=>$v): ?>
+                <li style="cursor: pointer"><i><a href="<?php echo url('/blog/article/info',['id'=>$v['id']]); ?>" title="<?php echo $v['title']; ?>"><img
                         src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
-                        alt="个人博客，我为什么要用帝国cms？"></a></i>
-                    <h3>[ 顶 ] <a href="/tuseday/diary/12.html" target="_blank">个人博客，我为什么要用帝国cms？</a></h3>
-                    <p>我所知道的比较流行的博客系统有，wordpress，Z-Blog，emlog等，最流行的是worpress，主题多，插件多，所以选择wp的个人站长也很多。以上三个博客系统我都用过，用的时间最</p>
+                        alt="<?php echo $v['title']; ?>？"></a></i>
+                    <h3>[ 顶 ] <a href="<?php echo url('/blog/article/info',['id'=>$v['id']]); ?>"><?php echo $v['title']; ?></a></h3>
+                    <p><?php echo $v['description']; ?></p>
                 </li>
-                <li><i><a href="/tuseday/diary/12.html" title="个人博客，我为什么要用帝国cms？"><img
-                        src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
-                        alt="个人博客，我为什么要用帝国cms？"></a></i>
-                    <h3>[ 顶 ] <a href="/tuseday/diary/12.html" target="_blank">个人博客，我为什么要用帝国cms？</a></h3>
-                    <p>我所知道的比较流行的博客系统有，wordpress，Z-Blog，emlog等，最流行的是worpress，主题多，插件多，所以选择wp的个人站长也很多。以上三个博客系统我都用过，用的时间最</p>
-                </li>
-                <li><i><a href="/tuseday/diary/12.html" title="个人博客，我为什么要用帝国cms？"><img
-                        src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
-                        alt="个人博客，我为什么要用帝国cms？"></a></i>
-                    <h3>[ 顶 ] <a href="/tuseday/diary/12.html" target="_blank">个人博客，我为什么要用帝国cms？</a></h3>
-                    <p>我所知道的比较流行的博客系统有，wordpress，Z-Blog，emlog等，最流行的是worpress，主题多，插件多，所以选择wp的个人站长也很多。以上三个博客系统我都用过，用的时间最</p>
-                </li>
-                <li><i><a href="/tuseday/diary/12.html" title="个人博客，我为什么要用帝国cms？"><img
-                        src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
-                        alt="个人博客，我为什么要用帝国cms？"></a></i>
-                    <h3>[ 顶 ] <a href="/tuseday/diary/12.html" target="_blank">个人博客，我为什么要用帝国cms？</a></h3>
-                    <p>我所知道的比较流行的博客系统有，wordpress，Z-Blog，emlog等，最流行的是worpress，主题多，插件多，所以选择wp的个人站长也很多。以上三个博客系统我都用过，用的时间最</p>
-                </li>
-                <li><i><a href="/tuseday/diary/12.html" title="个人博客，我为什么要用帝国cms？"><img
-                        src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
-                        alt="个人博客，我为什么要用帝国cms？"></a></i>
-                    <h3>[ 顶 ] <a href="/tuseday/diary/12.html" target="_blank">个人博客，我为什么要用帝国cms？</a></h3>
-                    <p>我所知道的比较流行的博客系统有，wordpress，Z-Blog，emlog等，最流行的是worpress，主题多，插件多，所以选择wp的个人站长也很多。以上三个博客系统我都用过，用的时间最</p>
-                </li>
+                <?php endforeach; ?>
             </ul>
-            <ul class="pagination pagination-lg" style="float: right">
+            <!--<ul class="pagination pagination-lg" style="float: right">
                 <li><a href="#">&laquo;</a></li>
                 <li><a href="#">1</a></li>
                 <li><a href="#">2</a></li>
@@ -121,7 +97,7 @@
                 <li><a href="#">4</a></li>
                 <li><a href="#">5</a></li>
                 <li><a href="#">&raquo;</a></li>
-            </ul>
+            </ul>-->
         </div>
         <div class="col-sm-4">
             <h2>标签</h2>

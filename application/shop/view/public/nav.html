@@ -21,7 +21,7 @@
 <div class="logoBox center">
     <!--左侧logo-->
     <div class="logo fl">
-        <span class="fl"><img src="{$cfg.site_log|default='__STATIC__/shop/img/login/logo.jpg'}" /></span>
+        <span class="fl"><a href="{:url('/shop')}"><img src="{$cfg.site_logo_path|default='__STATIC__/shop/img/login/logo.jpg'}" style="width:200px;" /></a></span>
     </div>
 
     <!--右侧search-->
@@ -33,15 +33,13 @@
             <div class="S-bg">
                 <form action="{:url('index/search')}" method="post">
                     <input type="text" class="S-text fl" name="keywords" placeholder="请输入关键词搜索" style="color:#c4c4c4" />
-                    <a href=""><input type="submit" class="S-submit size14 fl" value="搜索"></a>
+                    <input type="button" class="S-submit size14 fl" value="搜索">
                 </form>
             </div>
             <!--热词-->
             <div class="hot-words">
-                <a href="allsearch.html">潮流男装</a>
             </div>
         </div>
-
     </div>
 </div>
 <!-- logo结束-->

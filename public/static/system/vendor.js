@@ -1,8 +1,6 @@
 $(function () {
     hideLoading();
-    setTimeout(function () {
-        $("iframe[name='cont_box']").css("opacity", "1");
-    }, 1);
+
     $(".top-nav li:first").trigger("click");
     box();
     $(window).resize(function () {
@@ -18,7 +16,6 @@ $(function () {
         }, 1);
     });
 
-
     // 退出登陆
     $(".logout").click(function () {
         bootstrapConfirm('信息确认', '确定退出登陆吗?', 'out();');
@@ -29,8 +26,8 @@ $(function () {
         var btn = $(this);
         var formNode = $(this).closest('form');
         if (formNode.length > 0) {
-            sendPost();
             $(formNode).bootstrapValidator({excluded: [":disabled"]});
+            sendPost();
             $(formNode).bootstrapValidator('validate');
             var flag = $(formNode).data('bootstrapValidator').isValid()//验证是否通过true/false
             if (flag) {
@@ -41,118 +38,38 @@ $(function () {
                 // 回调函数
                 var callback = $(formNode).attr("callback");
                 var callback = callback ? eval(callback) : function (res) {
-                    parent.layer.msg(res.errmsg, {icon: 1});
+                    layer.msg(res.errmsg, {icon: 1});
                     setTimeout(function () {
                         $('#myFormModal').modal('hide');
                         reloadIframe();
                     }, 1000)
-
                 };
                 pbAjax(btn, action, formData, callback);
             }
         }
     });
-
-
-    // checkbox  radio
-    $('input').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue',
-    });
-
-    // datepicker
-    $('.datepicker').datepicker({
-        "autoclose": true, "format": "yyyy-mm-dd", "language": "zh-CN"
-    });
-
-    // ckeditor 冲突
-    $.fn.modal.Constructor.prototype.enforceFocus = function () {
-        modal_this = this
-        $(document).on('focusin.modal', function (e) {
-            if (modal_this.$element[0] !== e.target
-                && !modal_this.$element.has(e.target).length
-                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
-                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
-                modal_this.$element.focus()
-            }
-        })
-    };
-
-    // bootstrap select
-    $('.selectpicker').selectpicker({
-        style: '',
-        size: 4
-    });
-
-
-    // table search
-    $(".table-btn-search").click(function () {
-        var tableId = $(this).attr("data-table");
-        var curForm = $(this).closest('form');
-        var data = pbFormJson(curForm);
-        data._time = Math.random();
-        showLoadding();
-        $("#" + tableId).bootstrapTable('refresh', {query: data});
-        hideLoading();
-    });
-
-    // table reset
-    $(".table-btn-reset").click(function () {
-        var tableId = $(this).attr("data-table");
-        var curForm = $(this).closest('form');
-        $(curForm)[0].reset();
-        showLoadding();
-        $("#" + tableId).bootstrapTable('refresh', {query: {}});
-        hideLoading();
-    });
-
-    // 提现申请银行change事件
-    $("#e78cbbe1114af26550a6322904a07657").change(function () {
-        var obj = $(this);
-        var curVal = obj.val();
-        var form = obj.closest('form');
-        if (curVal) {
-            pbAjax(false, '/merchat/Account/getBankInfo', {id: curVal}, function (res) {
-                renderForm(form, res.data);
-                hideLoading();
-            });
-        } else {
-            renderForm(form, {});
-        }
-    });
 });
 
 function renderForm(formobj, data) {
-    console.log(data)
     var numtest = /^[0-9]*$/;
     for (var i = 0; i < formobj[0].length; i++) {
         if (numtest.test(i)) {
             var curElem = $(formobj[0][i]);
             var type = curElem[0].type;
-            console.log(type)
             var name = curElem[0].name;
             // id 在下拉框用到
             var id = curElem[0].id;
             var dataName = data[name];
-            if (dataName && dataName != undefined) {
+            if ((dataName && dataName != undefined) || type == 'file') {
+                var iptObj = $("body").find("input[name=\'" + name + "\']");
                 switch (type) {
-                    case 'INPUT':
-                        var iptObj = $("body").find("input[name=\'" + name + "\']");
-                        var curType = iptObj.attr("type");
-                        if (curType == 'radio') {
-                            $(iptObj[value = dataName]).iCheck('check');
-                        } else if (curType == 'checkbox') {
-
-                        } else if (curType == 'file') {
-
-                        } else {
-                            iptObj.val(dataName).change();
-                        }
+                    case 'radio':
+                        $(iptObj[value = dataName]).iCheck('check');
                         break;
-                    case 'SELECT':
-                        $("#" + id).find("option[value=\'" + dataName + "\']").attr("selected", "selected");
+                    case 'select-one':
+                        $("#" + id).find("option[value=\'" + dataName + "\']").prop("selected", "selected");
                         break;
-                    case 'TEXTAREA':
+                    case 'textarea':
                         var editor = CKEDITOR.instances[id];
                         if (data[name]) {
                             $("#" + name).val(data[name]);
@@ -164,6 +81,25 @@ function renderForm(formobj, data) {
                         }
                         CKEDITOR.replace(id);
                         break;
+                    case 'file':
+                        var dataId = curElem.attr("data-id");
+                        var pathId = data[dataId];
+                        var preview = curElem.attr("data-preview");
+                        var path = data[dataId+'_path'];
+                        if(path && path != ''){
+                            var file = [];
+                            file.push(path);
+                            var html = '';
+                            for(var j=0;j<file.length;j++){
+                                html = html + '<div class="col-sm-3"><img src="'+file[j]+'" id="'+pathId+'" class="img-responsive"><span title="删除图片" class="remove-file"  onclick="removePreview($(this),\''+pathId+'\',\''+dataId+'\');">x</span></div>'
+                            }
+                            $("#"+preview).html(html);
+                        }else{
+                            $("#"+preview).html('');
+                        }
+                        break;
+                    default:
+                        iptObj.val(dataName).change();
                 }
             }
         }
@@ -288,98 +224,12 @@ function reloadIframe() {
  * ckedior 同步内容到texarea
  */
 function sendPost() {
-    for (instance in CKEDITOR.instances) {
-        CKEDITOR.instances[instance].updateElement();
+    if(typeof(CKEDITOR) != 'undefined'){
+        for (instance in CKEDITOR.instances) {
+            CKEDITOR.instances[instance].updateElement();
+        }
     }
 }
-
-
-//初始化fileinput
-var FileInput = function () {
-    var oFile = new Object();
-    //初始化fileinput控件
-    oFile.Init = function (ctrlName, uploadUrl, initIMmgs, initValues) {
-        var initIMmgs = initIMmgs ? initIMmgs : [];
-        var initValues = initValues ? initValues : '';
-        var initPreview = [];
-        var block = $("#" + ctrlName + '_value').parent("div").find(".help-block");
-        var bdiv = $("#" + ctrlName + '_value').parent("div").parent("div");
-        for (var i = 0; i < initIMmgs.length; i++) {
-            initPreview.push("<img src='" + initIMmgs[i] + "' class='file-preview-image img-responsive' style='width: 100%;height: 100%'>");
-        }
-        var control = $('#' + ctrlName);
-        var isPath = $("#" + ctrlName).attr("data-path");
-        $("#" + ctrlName + '_value').val(initValues).change();
-        //初始化上传控件的样式
-        control.fileinput({
-            language: 'zh', //设置语言
-            uploadUrl: uploadUrl, //上传的地址
-            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
-            showUpload: false, //是否显示上传按钮
-            showCaption: false,//是否显示标题
-            showPreview: true,
-            browseClass: "btn btn-primary", //按钮样式
-            dropZoneEnabled: false,//是否显示拖拽区域
-            //minImageWidth: 50, //图片的最小宽度
-            //minImageHeight: 50,//图片的最小高度
-            //maxImageWidth: 200,//图片的最大宽度
-            //maxImageHeight: 200,//图片的最大高度
-            maxFileSize: 600,//单位为kb，如果为0表示不限制文件大小
-            maxFileCount: 1, //表示允许同时上传的最大文件个数
-            enctype: 'multipart/form-data',
-            validateInitialCount: true,
-            multiple: false,
-            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-            initialPreview: initPreview,
-            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-            //向后台传递参数
-            /*
-            uploadExtraData:function(){
-                var data={
-                    apkName:'aaa',
-                    versionNum:'bbb',
-                    description:'ccc',
-                };
-                return data;
-            },*/
-            layoutTemplates: {
-                actionDelete: '', //去除上传预览的缩略图中的删除图标
-                actionUpload: '',//去除上传预览缩略图中的上传图片；
-                //actionZoom:''   //去除上传预览缩略图中的查看详情预览的缩略图标。
-            },
-        });
-        $("#" + ctrlName).on("filebatchselected", function (event, files) {
-            $("#" + ctrlName).fileinput("upload");
-        });
-        // 导入文件上传完成之后的事件
-        $("#" + ctrlName).on("fileuploaded", function (event, data) {
-            var response = data.response;
-            if (response.errcode == '0') {
-                var old = $("#" + ctrlName + '_value').val();
-                if (old == '') {
-                    var old = [];
-                } else {
-                    var old = old.split(',');
-                }
-                old.push(response.id);
-                $("#" + ctrlName + '_value').val(old.join(',')).change();
-            } else {
-                alert(response.errmsg);
-            }
-
-        });
-        // 删除事件
-        $('#' + ctrlName).on('filesuccessremove', function (event, data, previewId, index) {
-            $("#" + ctrlName + '_value').val('').change();
-        });
-        // 清空控件
-        $('#' + ctrlName).on('fileclear', function (event, data, msg) {
-            $("#" + ctrlName + '_value').val('').change();
-        });
-
-    }
-    return oFile;
-};
 
 
 //初始化bootstrap table

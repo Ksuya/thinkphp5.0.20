@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:96:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\shop\product\index.html";i:1536034710;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-table.html";i:1536034710;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1535951938;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:96:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\shop\product\index.html";i:1536219900;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-table.html";i:1536232991;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1536223691;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,21 +6,10 @@
     <title>商户后台管理</title>
     <link type="text/css" rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="/static/fontsawesome/css/font-awesome.css"/>
-    <link rel="stylesheet" href="/static/vendor/bootstrap-validate/css/bootstrapValidator.css">
-    <link rel="stylesheet" href="/static/vendor/icheck/skins/flat/blue.css">
-    <link rel="stylesheet" href="/static/vendor/datepicker/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="/static/vendor/select/css/bootstrap-select.min.css">
     <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
     <script src="/static/js/jquery-2.2.1.min.js"></script>
     <script src="/static/vendor/bootstrap/js/bootstrap.js"></script>
     <script src="/static/vendor/layer/layer.js"></script>
-    <script src="/static/vendor/bootstrap-validate/js/bootstrapValidator.js"></script>
-    <script src="/static/vendor/bootstrap-validate/js/language/zh_CN.js"></script>
-    <script src="/static/vendor/cxselect/jquery.cxselect.min.js"></script>
-    <script src="/static/vendor/icheck/icheck.min.js"></script>
-    <script type="text/javascript" src="/static/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="/static/vendor/select/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="/static/vendor/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
     <script src="/static/js/tipSuppliers.js"></script>
     <script src="/static/system/core.js"></script>
     <script src="/static/system/vendor.js"></script>
@@ -33,24 +22,40 @@
 <body>
 <input type="hidden" id="apitoken" value="">
 
+<link rel="stylesheet" href="/static/vendor/bootstrap-validate/css/bootstrapValidator.css">
+<link rel="stylesheet" href="/static/vendor/icheck/skins/flat/blue.css">
+<link rel="stylesheet" href="/static/vendor/datepicker/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="/static/vendor/select/css/bootstrap-select.min.css">
+<script src="/static/vendor/bootstrap-validate/js/bootstrapValidator.js"></script>
+<script src="/static/vendor/bootstrap-validate/js/language/zh_CN.js"></script>
+<script src="/static/vendor/cxselect/jquery.cxselect.min.js"></script>
+<script src="/static/vendor/icheck/icheck.min.js"></script>
+<script type="text/javascript" src="/static/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/static/vendor/select/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="/static/vendor/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 <link href="/static/vendor/table/bootstrap-table.css" rel="stylesheet"/>
 <link href="/static/vendor/tree/css/bootstrap-treeview.css" rel="stylesheet"/>
 <script src="/static/vendor/table/bootstrap-table.js"></script>
 <script src="/static/vendor/tree/js/bootstrap-treeview.js"></script>
 <script src="/static/vendor/table/locale/bootstrap-table-zh-CN.js"></script>
-<body>
+<body style="overflow: auto">
 <div class="panel-body">
     
 <ol class="breadcrumb">
     <li><a>首页</a></li>
     <li><a>商城管理</a></li>
-    <li class="active">分类管理</li>
+    <li class="active">商品管理</li>
 </ol>
 
-    <div id="toolbar" class="btn-group">
-        <div id="table-btn-list">
-            <form action="" id="tb_departments_SearchTableForm">
-                
+    <div class="row">
+        <div class="col-sm-2" style="overflow: auto">
+            <div id="tree"></div>
+        </div>
+        <div class="col-sm-10">
+            <div id="toolbar" class="btn-group">
+                <div id="table-btn-list">
+                    <form action="" id="tb_departments_SearchTableForm">
+                        
 <div class="my-container">
     <label class="myLabel-content">商品名称：</label>
     <div class="myText-content">
@@ -89,23 +94,25 @@
     </div>
 </div>
 
-                <div class="myBtn-content">
-                    <button type="button" class="btn btn-primary table-btn-search" data-table="tb_departments">搜索</button>
-                    <button type="button" class="btn btn-default table-btn-reset" data-table="tb_departments">重置</button>
-                    
+                        <div class="myBtn-content">
+                            <button type="button" class="btn btn-primary table-btn-search" data-table="tb_departments">搜索</button>
+                            <button type="button" class="btn btn-default table-btn-reset" data-table="tb_departments">重置</button>
+                            
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tb_departments_Modal">添加商品</button>
 
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-        <div id="table-btn-moreaction-list" style="display: none;">
-            <span>您选中了 <span id="row-select-total"></span> 行 </span>
-            
+                <div id="table-btn-moreaction-list" style="display: none;">
+                    <span>您选中了 <span id="row-select-total"></span> 行 </span>
+                    
 <button type="button" class="btn btn-danger table-more-action" data-callback="merchatWithdraw" data-table="tb_departments" data-status="-1">批量删除</button>
 
+                </div>
+            </div>
+            <table id="tb_departments" class="table table-hover table-striped table-extra"></table>
         </div>
     </div>
-    <table id="tb_departments" class="table table-hover table-striped table-extra"></table>
 </div>
 <div class="modal fade right" id="tb_departments_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -127,7 +134,7 @@
     <?php echo formInput('市场价格:','market_price',0); ?>
     <?php echo formInput('商品排序:','sort',0,'number'); ?>
     <?php echo formInput('商品库存:','stock',0,'number'); ?>
-    <?php echo formFile(true,'商品图片','posters'); ?>
+    <?php echo formFile('商品图片','posters',5); ?>
     <?php echo formEditor('商品详情','details'); ?>
 </div>
 <div class="modal-footer modal-my-bottom">

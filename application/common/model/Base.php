@@ -51,8 +51,8 @@ class Base extends Model{
                     $condition = [$this->pk=>$data[$this->pk]];
                     // 更新数据表主键数据
                     $recordLevel = 2;
+                    $dataId = $data[$this->pk];
                     if($this->record){
-                        $dataId = $data[$this->pk];
                         $oldData = $this->allowField(true)->findData('*',$condition);
                         $oldData = $oldData['data'];
                     }
@@ -324,13 +324,36 @@ class Base extends Model{
     public function getPageList($field,$condition=[],$join=[],$order='',$group='',$having='')
     {
         try {
-            $list = $this->alias('a')->field($field)->join($join)->group($group)->having($having)->where($condition)->order($order)->paginate(1,false,[
+            $allParam = Request::instance()->get();
+            foreach ($allParam as $k=>$v){
+                $k2 = preg_replace('/_/', '.', $k);
+                if($k2){
+                    unset($allParam[$k]);
+                    $allParam[$k2] = $v;
+                }
+            }
+            $param = Request::instance()->except('start,end,p');
+            Log::notice($param);
+            $search = [];
+            foreach ($param as $k=>$v){
+                if(strpos($k,'/') === false){
+                    $k = preg_replace('/_/', '.', $k);
+                    if(is_numeric($v)){
+                        $search[$k] = $v;
+                    }else{
+                        $search[$k] = ['like',"%$v%"];
+                    }
+                }
+            }
+            $search = array_merge($condition,$search);
+            Log::notice($search);
+            $list = $this->alias('a')->field($field)->join($join)->group($group)->having($having)->where($search)->order($order)->paginate(1,false,[
                 'type'     => 'bootstrap',
                 'var_page' => 'p',
             ]);
             $page = $list->render();
             $list = $list->toArray();
-            $info = ['errcode' => '0', 'pageList' => $page, 'data' => $list['data'],'curPage'=>$list['current_page'],'total'=>$list['total'],'perPage'=>$list['per_page']];
+            $info = ['errcode' => '0', 'allPrama'=>$allParam,'page' => $page, 'list' => $list['data'],'curPage'=>$list['current_page'],'total'=>$list['total'],'perPage'=>$list['per_page']];
             return $info;
         } catch (Exception $e) {
             echo $e->getMessage();exit;

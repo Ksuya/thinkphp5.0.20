@@ -1,0 +1,111 @@
+{extend name="common@public/admin-table"}
+{block name="breadcrumb"}
+<ol class="breadcrumb">
+    <li><a>首页</a></li>
+    <li><a>文章管理</a></li>
+    <li class="active">文章管理</li>
+</ol>
+{/block}
+{block name="table-search"}
+<div class="my-container">
+    <label class="myLabel-content">文章标题：</label>
+    <div class="myText-content">
+        <input type="text" name="a.title" class="form-control" >
+    </div>
+</div>
+<input type="hidden" name="a.category_id" id="categoryid">
+<div class="my-container">
+    <label class="myLabel-content">添加时间：</label>
+    <div class="myText-content">
+        <input type="text" name="start" class="form-control datepicker" placeholder="输入开始时间">
+    </div>
+    <div class="myText-content">
+        <input type="text" name="end" class="form-control datepicker" placeholder="输入结束时间">
+    </div>
+</div>
+{/block}
+{block name="table-actions"}
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#tb_departments_Modal">添加文章</button>
+{/block}
+{block name="table-more-actions"}
+<button type="button" class="btn btn-danger table-more-action" data-callback="merchatWithdraw"
+        data-table="tb_departments" data-status="-1">批量删除
+</button>
+{/block}
+{block name="table-modal"}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">添加文章</h4>
+</div>
+<div class="modal-body">
+    {:token('token_category_actions','shal')}
+    <input type="hidden" name="id" value="">
+    {:formInput('文章标题:','title','','text')}
+    {:formSelect('所属分类:','category_id',$cates,'nodeId','text')}
+    {:formInput('排序:','sort',0,'number')}
+    {:formCheck('radio','推荐','is_recommend',[['id'=>0,'name'=>'否'],['id'=>1,'name'=>'是']],'id','name')}
+    {:formCheck('radio','置顶','is_top',[['id'=>0,'name'=>'否'],['id'=>1,'name'=>'是']],'id','name')}
+    {:formEditor('文章内容','content')}
+
+</div>
+{/block}
+{block name="table-script"}
+<script>
+    var tableId = 'tb_departments';
+    var url = "{:url('dataList')}";
+    var delurl = "{:url('delData')}";
+    var formModal = 'tb_departments_Modal';
+    var fields = [
+        {checkbox: true},
+        {field: 'title', title: '标题'},
+        {field: 'cate_name', title: '分类名称'},
+        {
+            field: 'is_menu', title: '是否推荐', formatter: function (value) {
+                if (value == 1) {
+                    return '是';
+                } else {
+                    return '否';
+                }
+            }
+        },
+        {
+            field: 'is_menu', title: '是否置顶', formatter: function (value) {
+                if (value == 1) {
+                    return '是';
+                } else {
+                    return '否';
+                }
+            }
+        },
+        {field: 'sort', title: '文章排序', sortable: true},
+        {field: 'create_time', title: '添加时间', sortable: true},
+        {
+            field: '', title: '操作', formatter: function (value, row, index) {
+                return generateTableAtions(row, 'id');
+            }
+        },
+    ];
+    var sortName = 'a.create_time';
+    var sortOrder = 'desc';
+    $(document).ready(function () {
+        var data = '<?php echo json_encode($tree,true);?>';
+        data = $.parseJSON(data);
+        $('#tree').treeview({
+            data: data,         // 数据源
+            showCheckbox: false,   //是否显示复选框
+            highlightSelected: true,    //是否高亮选中
+            //nodeIcon: 'glyphicon glyphicon-user',    //节点上的图标
+            //nodeIcon: 'glyphicon glyphicon-file',
+            emptyIcon: '',    //没有子节点的节点图标
+            multiSelect: false,    //多选
+            onNodeChecked: function (event,data) {
+                $("#categoryid").val(data.id);
+            },
+            onNodeSelected: function (event, data) {
+                $("#categoryid").val(data.Id);
+                $(".table-btn-search").click();
+            }
+        });
+    });
+</script>
+{/block}

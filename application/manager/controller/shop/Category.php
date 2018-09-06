@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 namespace app\manager\controller\shop;
 use app\manager\controller\ManagerBase;
-class Category extends ShopBase{
+class Category extends ManagerBase{
 
     public function _initialize()
     {
@@ -26,6 +26,4 @@ class Category extends ShopBase{
         array_unshift($list,['id'=>0,'name'=>'顶级分类','parent_id'=>0]);
         return view('',['cates'=>$list]);
     }
-
-
 }

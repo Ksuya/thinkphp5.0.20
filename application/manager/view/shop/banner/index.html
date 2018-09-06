@@ -1,0 +1,68 @@
+{extend name="common@public/admin-table"}
+{block name="breadcrumb"}
+<ol class="breadcrumb">
+    <li><a>首页</a></li>
+    <li><a>商城管理</a></li>
+    <li class="active">分类管理</li>
+</ol>
+{/block}
+{block name="table-search"}
+<div class="my-container">
+    <label class="myLabel-content">轮播名称：</label>
+    <div class="myText-content">
+        <input type="text" name="a.name" class="form-control" placeholder="输入分类名称">
+    </div>
+</div>
+<div class="my-container">
+    <label class="myLabel-content">添加时间：</label>
+    <div class="myText-content">
+        <input type="text" name="start" class="form-control datepicker" placeholder="输入开始时间">
+    </div>
+    <div class="myText-content">
+        <input type="text" name="end" class="form-control datepicker" placeholder="输入结束时间">
+    </div>
+</div>
+{/block}
+{block name="table-actions"}
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#tb_departments_Modal">添加分类</button>
+{/block}
+{block name="table-more-actions"}
+<button type="button" class="btn btn-danger table-more-action" data-callback="merchatWithdraw"
+        data-table="tb_departments" data-status="-1">批量删除
+</button>
+{/block}
+{block name="table-modal"}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">添加分类</h4>
+</div>
+<div class="modal-body">
+    {:token('token_banner_actions','shal')}
+    <input type="hidden" name="id" value="">
+    {:formInput('轮播名称:','name','','text')}
+    {:formFile('轮播图片','posters',1)}
+</div>
+{/block}
+{block name="table-script"}
+<script>
+    var tableId = 'tb_departments';
+    var url = "{:url('dataList')}";
+    var delurl = "{:url('delData')}";
+    var formModal = 'tb_departments_Modal';
+    var fields = [
+        {checkbox: true},
+        {field: 'name', title: '轮播名称'},
+        {field: 'type', title: '位置',formatter:function (value) {
+                return value.name;
+            }},
+        {field: 'create_time', title: '添加时间', sortable: true},
+        {
+            field: '', title: '操作', formatter: function (value, row, index) {
+                return generateTableAtions(row, 'id');
+            }
+        },
+    ];
+    var sortName = 'a.create_time';
+    var sortOrder = 'desc';
+</script>
+{/block}

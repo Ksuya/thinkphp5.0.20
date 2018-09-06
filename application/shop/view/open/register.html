@@ -25,8 +25,7 @@
 <div class="login-top center">
     <!--左侧logo-->
     <div class="logo fl">
-        <span class="fl"><a href="{:url('/shop')}"><img
-                src="{$cfg.site_log|default='__STATIC__/shop/img/login/logo.jpg'}" title="返回首页"/></a></span>
+        <span class="fl"><a href="{:url('/shop')}"><img src="{$cfg.site_logo_path|default='__STATIC__/shop/img/login/logo.jpg'}" style="width:200px;" /></a></span>
     </div>
 </div>
 <input type="hidden" id="apitoken" value="{$api_token}">

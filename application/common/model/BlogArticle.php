@@ -1,12 +1,15 @@
 <?php
 // +----------------------------------------------------------------------
-// | Time  : 15:41  2018/8/31/031
+// | IUBO    PHP
+// +----------------------------------------------------------------------
+// | Time  : 18:12  2018/9/6/006
 // +----------------------------------------------------------------------
 // | Author: whlphper  备注:
 // +----------------------------------------------------------------------
-namespace app\manager\controller\shop;
-use app\manager\controller\ManagerBase;
+namespace app\common\model;
+use app\common\model\Base;
+use think\Exception;
 
-class ShopBase extends ManagerBase{
+class BlogArticle extends Base{
 
 }

@@ -1,0 +1,27 @@
+{include file="common@public/admin-header"}
+<link rel="stylesheet" href="__STATIC__/vendor/bootstrap-validate/css/bootstrapValidator.css">
+<script src="__STATIC__/vendor/bootstrap-validate/js/bootstrapValidator.js"></script>
+<body>
+<div class="panel-body">
+    <ol class="breadcrumb">
+        <li><a>首页</a></li>
+        <li><a>商城管理</a></li>
+        <li class="active">商城配置</li>
+    </ol>
+    <form class="form-horizontal" role="form" action="{:url('saveConf')}">
+        <input type="hidden" name="config_id" value="1">
+        {:formInput('站点名称:','site_name',$conf.site_name,'text')}
+        {:formInput('版权信息:','copy_right',$conf.copy_right,'text')}
+        {:formInput('地址信息:','address',$conf.address,'text')}
+        {:formInput('联系方式:','contact',$conf.contact,'text')}
+        {:formInput('备案标号:','icp',$conf.icp,'text')}
+        {:formFile('站点LOGO','site_logo',1,[$conf.site_logo_path],$conf.site_logo)}
+        <div class="form-group"><label  class="col-sm-2 control-label"></label>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-primary form-ajax-submit">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

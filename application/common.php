@@ -51,13 +51,9 @@ function formEditor($name, $field)
     Form::editor($name, $field);
 }
 
-function formFile($name, $field, $limit=1,$list = '', $values = '')
+function formFile($name, $field, $limit=1,$list = [], $values = '')
 {
-    $new = [];
-    if ($list) {
-        $new[] = $list;
-    }
-    Form::file($name, $field, $limit,$new, $values);
+    Form::file($name, $field, $limit,$list, $values);
 }
 
 /**
@@ -168,15 +164,15 @@ function list_to_tree($list, $pk = 'id', $pid = 'parent', $child = '_child', $ro
 
 
 //获取某个分类的所有子分类
-function getSubs($categorys, $filed, $catId = 0, $level = 1)
+function getSubs($categorys, $filed,$pk='id',$name='name',$catId = 0, $level = 1)
 {
     $subs = array();
     foreach ($categorys as $item) {
         if ($item[$filed] == $catId) {
-            $item['name'] = str_repeat('|--', $level-1) . $item['name'];
+            $item[$name] = str_repeat('|--', $level-1) . $item[$name];
             $item['level'] = $level;
             $subs[] = $item;
-            $subs = array_merge($subs, getSubs($categorys,$filed, $item['id'], $level + 1));
+            $subs = array_merge($subs, getSubs($categorys,$filed, $item[$pk], $name,$level + 1));
         }
     }
     return $subs;

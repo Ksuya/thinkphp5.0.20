@@ -264,7 +264,8 @@
 		$.each(node.nodes, function checkStates(index, node) {
 
 			// nodeId : unique, incremental identifier
-			node.nodeId = _this.nodes.length;
+            node.Id = Number(node.nodeId);
+            node.nodeId = _this.nodes.length;
 
 			// parentId : transversing up the tree
 			node.parentId = parent.nodeId;
@@ -510,7 +511,6 @@
 
 		var _this = this;
 		$.each(nodes, function addNodes(id, node) {
-
 			var treeItem = $(_this.template.item)
 				.addClass('node-' + _this.elementId)
 				.addClass(node.state.checked ? 'node-checked' : '')
@@ -518,6 +518,7 @@
 				.addClass(node.state.selected ? 'node-selected' : '')
 				.addClass(node.searchResult ? 'search-result' : '') 
 				.attr('data-nodeid', node.nodeId)
+				.attr('id', node.Id)
 				.attr('style', _this.buildStyleOverride(node));
 
 			// Add indent/spacer to mimic tree structure

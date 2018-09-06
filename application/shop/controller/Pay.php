@@ -85,9 +85,9 @@ class Pay extends Shopbase{
                 $this->models['product']->where('id',$proID)->setDec('stock',$number[$k]);
                 // 增加销量
                 $this->models['product']->where('id',$proID)->setInc('sale_number',$number[$k]);
-            }
+            }*/
             // 销毁购物车
-            $this->models['carts']->where('user_id',session("shopUserId"))->where('product_id','in',$product_id)->delete();*/
+            $this->models['carts']->where('user_id',session("shopUserId"))->where('product_id','in',$product_id)->delete();
             $assign = compact('order','details','address');
             Db::commit();
             // 生成订单详情

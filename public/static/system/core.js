@@ -10,7 +10,7 @@
   * 加载层
   */
  function showLoadding() {
-     layer.load(3, {
+     parent.layer.load(3, {
          shade: [0.3,'#fff'] //0.1透明度的白色背景
      });
  }
@@ -89,6 +89,17 @@
              hideLoading();
          }
      });
+ }
+
+ function getQueryVariable(variable)
+ {
+     var query = window.location.search.substring(1);
+     var vars = query.split("&");
+     for (var i=0;i<vars.length;i++) {
+         var pair = vars[i].split("=");
+         if(pair[0] == variable){return pair[1];}
+     }
+     return(false);
  }
 
 
@@ -247,7 +258,7 @@
          }
      }
      newVal.join(",");
-     $("#" + valueId).val(newVal);
+     $("#" + valueId).val(newVal).change();
  }
 
 

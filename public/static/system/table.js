@@ -1,18 +1,78 @@
 $(function () {
     //1.初始化Table
     var oTable = new TableInit();
-    oTable.Init(tableId, url, fields, sortName, sortOrder);
+    if(tableId){
+        oTable.Init(tableId, url, fields, sortName, sortOrder);
+
+    }
+
     // 表单modal关闭重置表单
     $('#tb_departments_Modal').on('hide.bs.modal', function (e) {
         try{
             var obj = $(e.target);
             var formId = obj.find("form");
             $(formId).bootstrapValidator('resetForm');
-            $(formId)[0].reset();
+            //$(formId)[0].reset();
         }catch (error){
 
         }
     })
+
+
+
+
+
+    // checkbox  radio
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue',
+    });
+
+    // datepicker
+    $('.datepicker').datepicker({
+        "autoclose": true, "format": "yyyy-mm-dd", "language": "zh-CN"
+    });
+
+    // ckeditor 冲突
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {
+        modal_this = this
+        $(document).on('focusin.modal', function (e) {
+            if (modal_this.$element[0] !== e.target
+                && !modal_this.$element.has(e.target).length
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+                modal_this.$element.focus()
+            }
+        })
+    };
+
+    // bootstrap select
+    $('.selectpicker').selectpicker({
+        style: '',
+        size: 4
+    });
+
+
+    // table search
+    $(".table-btn-search").click(function (href) {
+        var tableId = $(this).attr("data-table");
+        var curForm = $(this).closest('form');
+        var data = pbFormJson(curForm,true);
+        data._time = Math.random();
+        showLoadding();
+        $("#"+tableId).bootstrapTable('refresh',data);
+        hideLoading();
+    });
+
+    // table reset
+    $(".table-btn-reset").click(function () {
+        var tableId = $(this).attr("data-table");
+        var curForm = $(this).closest('form');
+        $(curForm)[0].reset();
+        showLoadding();
+        $("#"+tableId).bootstrapTable('refresh',{});
+        hideLoading();
+    });
 });
 function generateTableAtions(row,primarykey,actions) {
     var defaultAction = [

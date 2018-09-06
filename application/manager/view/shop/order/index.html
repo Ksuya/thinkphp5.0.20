@@ -1,0 +1,86 @@
+{extend name="common@public/admin-table"}
+{block name="breadcrumb"}
+<ol class="breadcrumb">
+    <li><a>首页</a></li>
+    <li><a>商城管理</a></li>
+    <li class="active">分类管理</li>
+</ol>
+{/block}
+{block name="table-search"}
+<div class="my-container">
+    <label class="myLabel-content">订单编号：</label>
+    <div class="myText-content">
+        <input type="text" name="order_no" class="form-control" placeholder="输入订单编号">
+    </div>
+</div>
+<div class="my-container">
+    <label class="myLabel-content">下单用户：</label>
+    <div class="myText-content">
+        <select class="form-control" name="user_id">
+            <option value="">全部</option>
+            {foreach $user as $v}
+            <option value="{$v.id}">{$v.nick_name}</option>
+            {/foreach}
+        </select>
+    </div>
+</div>
+<div class="my-container">
+    <label class="myLabel-content">订单状态：</label>
+    <div class="myText-content">
+        <select class="form-control" name="status">
+            <option value="">全部</option>
+            <option value="0">未支付</option>
+            <option value="1">支付成功</option>
+        </select>
+    </div>
+</div>
+<div class="my-container">
+    <label class="myLabel-content">下单时间：</label>
+    <div class="myText-content">
+        <input type="text" name="start" class="form-control datepicker" placeholder="输入开始时间">
+    </div>
+    <div class="myText-content">
+        <input type="text" name="end" class="form-control datepicker" placeholder="输入结束时间">
+    </div>
+</div>
+{/block}
+{block name="table-more-actions"}
+<button type="button" class="btn btn-danger table-more-action" data-callback="merchatWithdraw"
+        data-table="tb_departments" data-status="-1">批量删除
+</button>
+<button type="button" class="btn btn-danger table-more-action" data-callback="merchatWithdraw"
+        data-table="tb_departments" data-status="-1">批量发货
+</button>
+{/block}
+{block name="table-script"}
+<script>
+    var tableId = 'tb_departments';
+    var url = "{:url('dataList')}";
+    var delurl = "{:url('delData')}";
+    var formModal = 'tb_departments_Modal';
+    var fields = [
+        {checkbox: true},
+        {field: 'order_no', title: '订单编号'},
+        {field: 'user_name', title: '下单用户'},
+        {field: 'order_amount', title: '订单金额'},
+        {field: 'pay_type', title: '支付方式',formatter:function (value) {
+                return value.name;
+            }},
+        {field: 'status', title: '订单状态',formatter:function (value) {
+                return value.name;
+            }},
+        {field: 'progress', title: '物流状态',formatter:function (value) {
+                return value.name;
+            }},
+        {field: 'desc', title: '订单描述'},
+        {field: 'create_time', title: '下单时间', sortable: true},
+        {
+            field: '', title: '操作', formatter: function (value, row, index) {
+                return generateTableAtions(row, 'id');
+            }
+        },
+    ];
+    var sortName = 'a.create_time';
+    var sortOrder = 'desc';
+</script>
+{/block}

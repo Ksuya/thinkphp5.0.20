@@ -132,7 +132,7 @@ class Form
         $url = url('Login/ajaxUpload');
         $html .= '<script type="text/javascript">CKEDITOR.replace("'.$field.'",{
             filebrowserImageUploadUrl : "'.$url.'",
-        });setInterval("sendPost()",100);</script>';
+        });</script>';
         echo $html;
     }
 
@@ -194,7 +194,7 @@ class Form
         $html = '<div class="form-group">
                             <label class="control-label col-sm-2">'.$name.':</label>
                              <div class="col-sm-4">
-            <input class="form-control" id="'.md5($field).'" data-url="'.url('/manager/login/fileInputUpload').'" data-limit="'.$limit.'" data-id="'.$field.'" data-preview="'.$field.'-preview" type="file" style="display:none" onchange="reayUpload($(this));">
+            <input class="form-control" id="'.md5($field).'" data-url="'.url('/manager/login/fileInputUpload').'" data-limit="'.$limit.'" data-id="'.$field.'" data-preview="'.$field.'-preview" type="file" style="opacity: 0;height: 0;width: 0;" onchange="reayUpload($(this));">
             <input type="hidden" id="'.$field.'" value="'.$values.'" '.$valiHtml.' name="'.$field.'" data-bv-trigger="change"/>
             <button class="btn btn-info" type="button" onclick="$(\'input[id='.md5($field).']\').click();">点击上传</button><small></small>
         </div><div class="col-sm-8 file-preview" id="'.$field.'-preview">';

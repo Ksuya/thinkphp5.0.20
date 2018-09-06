@@ -1,0 +1,45 @@
+{include file="blog@public/header"}
+<body>
+{include file="blog@public/nav"}
+<div class="container">
+    <div class="page-header">
+        <h1>{$info.title}
+            <small>
+                {$info.description|substr=0,60}
+            </small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {$info.content}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h2>标签</h2>
+            <h5>标签介绍:</h5>
+            <div class="fakeimg">
+                <span class="label label-default">默认标签</span>
+                <span class="label label-primary">主要标签</span>
+                <span class="label label-success">成功标签</span>
+                <span class="label label-info">信息标签</span>
+                <span class="label label-warning">警告标签</span>
+                <span class="label label-danger">危险标签</span>
+            </div>
+            <h3>友情链接</h3>
+            <p>友情链接描述文本。</p>
+            <ul class="nav nav-stacked">
+                <li class="active"><a href="#">链接 1</a></li>
+                <li><a href="#">链接 2</a></li>
+                <li><a href="#">链接 3</a></li>
+            </ul>
+            <hr class="hidden-sm hidden-md hidden-lg">
+        </div>
+
+    </div>
+</div>
+{include file="blog@public/footer"}
+</body>
+</html>

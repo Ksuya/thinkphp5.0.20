@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\index\help.html";i:1536137474;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536137533;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\index\help.html";i:1536137474;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536227597;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -41,7 +41,7 @@
 <div class="logoBox center">
     <!--左侧logo-->
     <div class="logo fl">
-        <span class="fl"><img src="<?php echo (isset($cfg['site_log']) && ($cfg['site_log'] !== '')?$cfg['site_log']:'/static/shop/img/login/logo.jpg'); ?>" /></span>
+        <span class="fl"><a href="<?php echo url('/shop'); ?>"><img src="<?php echo (isset($cfg['site_logo_path']) && ($cfg['site_logo_path'] !== '')?$cfg['site_logo_path']:'/static/shop/img/login/logo.jpg'); ?>" style="width:200px;" /></a></span>
     </div>
 
     <!--右侧search-->
@@ -53,12 +53,12 @@
             <div class="S-bg">
                 <form action="<?php echo url('index/search'); ?>" method="post">
                     <input type="text" class="S-text fl" name="keywords" placeholder="请输入关键词搜索" style="color:#c4c4c4" />
-                    <a href=""><input type="submit" class="S-submit size14 fl" value="搜索"></a>
+                    <input type="button" class="S-submit size14 fl" value="搜索">
                 </form>
             </div>
             <!--热词-->
             <div class="hot-words">
-                <a href="allsearch.html">潮流男装</a>
+
             </div>
         </div>
 

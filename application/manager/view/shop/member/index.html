@@ -1,0 +1,59 @@
+{extend name="common@public/admin-table"}
+{block name="breadcrumb"}
+<ol class="breadcrumb">
+    <li><a>首页</a></li>
+    <li><a>商城管理</a></li>
+    <li class="active">分类管理</li>
+</ol>
+{/block}
+{block name="table-search"}
+<div class="my-container">
+    <label class="myLabel-content">用户昵称：</label>
+    <div class="myText-content">
+        <input type="text" name="nick_name" class="form-control" placeholder="输入昵称">
+    </div>
+</div>
+<div class="my-container">
+    <label class="myLabel-content">联系电话：</label>
+    <div class="myText-content">
+        <input type="text" name="phone" class="form-control" placeholder="输入联系电话">
+    </div>
+</div>
+<div class="my-container">
+    <label class="myLabel-content">电子邮箱：</label>
+    <div class="myText-content">
+        <input type="text" name="email" class="form-control" placeholder="输入电子邮箱">
+    </div>
+</div>
+<div class="my-container">
+    <label class="myLabel-content">创建时间：</label>
+    <div class="myText-content">
+        <input type="text" name="start" class="form-control datepicker" placeholder="输入开始时间">
+    </div>
+    <div class="myText-content">
+        <input type="text" name="end" class="form-control datepicker" placeholder="输入结束时间">
+    </div>
+</div>
+{/block}
+{block name="table-more-actions"}
+{/block}
+{block name="table-script"}
+<script>
+    var tableId = 'tb_departments';
+    var url = "{:url('dataList')}";
+    var delurl = "{:url('delData')}";
+    var formModal = 'tb_departments_Modal';
+    var fields = [
+        {checkbox: true},
+        {field: 'email', title: '电子邮箱'},
+        {field: 'phone', title: '联系电话'},
+        {field: 'nick_name', title: '昵称'},
+        {field: 'real_name', title: '真实姓名'},
+        {field: 'region', title: '所在地区'},
+        {field: 'address', title: '详细地址'},
+        {field: 'create_time', title: '创建时间', sortable: true},
+    ];
+    var sortName = 'a.create_time';
+    var sortOrder = 'desc';
+</script>
+{/block}
