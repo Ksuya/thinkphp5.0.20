@@ -272,7 +272,7 @@ var TableInit = function () {
 
         $('#' + id).on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function (row) {
             var length = getBtableAllselect(id).length;
-            handlerToobar(length);
+            //handlerToobar(length);
         });
     };
     return oTableInit;

@@ -19,11 +19,9 @@
 <div class="panel-body">
     {block name="breadcrumb"}
     {/block}
-    <div class="row">
-        <div class="col-sm-2" style="overflow: auto">
-            <div id="tree"></div>
-        </div>
-        <div class="col-sm-10">
+    {block name="left-tree"}
+    {/block}
+
             <div id="toolbar" class="btn-group">
                 <div id="table-btn-list">
                     <form action="" id="tb_departments_SearchTableForm">
@@ -44,8 +42,8 @@
                 </div>
             </div>
             <table id="tb_departments" class="table table-hover table-striped table-extra"></table>
-        </div>
-    </div>
+    {block name="left-tree-end"}
+    {/block}
 </div>
 <div class="modal fade right" id="tb_departments_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">

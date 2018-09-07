@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\open\login.html";i:1536041510;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\open\login.html";i:1536227451;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,8 +28,7 @@
 <div class="login-top center">
     <!--左侧logo-->
     <div class="logo fl">
-        <span class="fl"><a href="<?php echo url('/shop'); ?>"><img
-                src="<?php echo (isset($cfg['site_log']) && ($cfg['site_log'] !== '')?$cfg['site_log']:'/static/shop/img/login/logo.jpg'); ?>" title="返回首页"/></a></span>
+        <span class="fl"><a href="<?php echo url('/shop'); ?>"><img src="<?php echo (isset($cfg['site_logo_path']) && ($cfg['site_logo_path'] !== '')?$cfg['site_logo_path']:'/static/shop/img/login/logo.jpg'); ?>" style="width:200px;" /></a></span>
     </div>
 
 </div>

@@ -172,7 +172,7 @@ function getSubs($categorys, $filed,$pk='id',$name='name',$catId = 0, $level = 1
             $item[$name] = str_repeat('|--', $level-1) . $item[$name];
             $item['level'] = $level;
             $subs[] = $item;
-            $subs = array_merge($subs, getSubs($categorys,$filed, $item[$pk], $name,$level + 1));
+            $subs = array_merge($subs, getSubs($categorys,$filed, $pk, $name,$item[$pk],$level + 1));
         }
     }
     return $subs;

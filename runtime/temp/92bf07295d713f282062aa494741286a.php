@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\index\index.html";i:1536138478;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536227597;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\index\index.html";i:1536314396;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536296161;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -50,17 +50,18 @@
         <div class="searchinput fr">
             <!--搜索-->
             <div class="S-bg">
-                <form action="<?php echo url('index/search'); ?>" method="post">
+                <form action="<?php echo url('index/search'); ?>" method="get">
                     <input type="text" class="S-text fl" name="keywords" placeholder="请输入关键词搜索" style="color:#c4c4c4" />
-                    <input type="button" class="S-submit size14 fl" value="搜索">
+                    <input type="submit" class="S-submit size14 fl" value="搜索">
                 </form>
             </div>
             <!--热词-->
             <div class="hot-words">
-
+                <?php foreach($his as $k=>$v): ?>
+                <a href="<?php echo url('index/search',['keywords'=>$v['keywords']]); ?>"><?php echo $v['keywords']; ?></a>
+                <?php endforeach; ?>
             </div>
         </div>
-
     </div>
 </div>
 <!-- logo结束-->
@@ -105,7 +106,7 @@
                     <div class="menv0<?php echo $k; ?>_left">
                         <ul>
                             <?php foreach($v['subNav'] as $k2=>$v2): ?>
-                            <li><a href="<?php echo url('product/cate',['id'=>$v['id']]); ?>" title="<?php echo $v2['name']; ?>"><h3 style="color:#d51938; float:left;"><?php echo $v2['name']; ?></h3></a>
+                            <li><a href="<?php echo url('product/cate',['id'=>$v2['id']]); ?>" title="<?php echo $v2['name']; ?>"><h3 style="color:#d51938; float:left;"><?php echo $v2['name']; ?></h3></a>
                                 <br />
                             </li>
                             <?php endforeach; ?>

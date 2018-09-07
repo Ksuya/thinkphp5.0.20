@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\product\cate.html";i:1536138388;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536227597;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\product\cate.html";i:1536295649;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536050763;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536296161;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -52,17 +52,18 @@
         <div class="searchinput fr">
             <!--搜索-->
             <div class="S-bg">
-                <form action="<?php echo url('index/search'); ?>" method="post">
+                <form action="<?php echo url('index/search'); ?>" method="get">
                     <input type="text" class="S-text fl" name="keywords" placeholder="请输入关键词搜索" style="color:#c4c4c4" />
-                    <input type="button" class="S-submit size14 fl" value="搜索">
+                    <input type="submit" class="S-submit size14 fl" value="搜索">
                 </form>
             </div>
             <!--热词-->
             <div class="hot-words">
-
+                <?php foreach($his as $k=>$v): ?>
+                <a href="<?php echo url('index/search',['keywords'=>$v['keywords']]); ?>"><?php echo $v['keywords']; ?></a>
+                <?php endforeach; ?>
             </div>
         </div>
-
     </div>
 </div>
 <!-- logo结束-->
@@ -113,12 +114,13 @@
     </div>-->
 </div>
 
-<div class="ibody">
+<a class="ibody">
     <!--产品普通排列图-->
     <div class="shangpin_Box center">
         <ul>
             <?php foreach($pros as $k=>$v): ?>
-            <li>
+            <li style="cursor: pointer">
+                <a href="<?php echo url('product/detail',['id'=>$v['id']]); ?>">
                 <div class="padding10">
                     <p><img src="<?php echo $v['path']; ?>" width="200" height="200" /></p>
                     <p class="color4 size20">￥<?php echo $v['shop_price']; ?></p><?php echo $v['name']; ?></a></p>
@@ -126,6 +128,7 @@
                         <button class="shangpin_Box_button2"><a href="<?php echo url('product/detail',['id'=>$v['id']]); ?>">立即购买</a></button>
                     </p>
                 </div>
+                </a>
             </li>
             <?php endforeach; ?>
         </ul>

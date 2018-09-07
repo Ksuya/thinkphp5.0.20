@@ -1,0 +1,49 @@
+<style>
+    .list-group .span{font-weight: bolder;}
+</style>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        基本信息
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">订单编号: <span>{$detail.order_no}</span></li>
+        <li class="list-group-item">购买用户: <span>{$detail.user_name}</span></li>
+        <li class="list-group-item">订单金额: <span>{$detail.order_amount}</span></li>
+        <li class="list-group-item">支付方式: <span>{$detail.pay_type.name}</span></li>
+        <li class="list-group-item">订单状态: <span>{$detail.status.name}</span></li>
+        <li class="list-group-item">物流状态: <span>{$detail.progress.name}</span></li>
+        <li class="list-group-item">下单时间: <span>{$detail.create_time}</span></li>
+    </ul>
+</div>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        收货信息
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">收货人: <span>{$detail.reciver}</span></li>
+        <li class="list-group-item">联系电话: <span>{$detail.contact}</span></li>
+        <li class="list-group-item">所在地区: <span>{$detail.region}</span></li>
+        <li class="list-group-item">详细地址: <span>{$detail.address}</span></li>
+    </ul>
+</div>
+
+{if $detail.progress.id gt 1}
+<div class="panel panel-primary">
+    <div class="panel-heading">物流信息</div>
+    <table class="table">
+        <th>时间</th><th>追踪 </th>
+        {foreach $detail.route as $k=>$v}
+        <tr><td>{$v.time}</td><td>{$v.context}</td></tr>
+        {/foreach}
+    </table>
+</div>
+{/if}
+<div class="panel panel-info">
+    <div class="panel-heading">商品信息</div>
+    <table class="table">
+        <th>图片</th><th>商品</th><th>价格 </th><th>市场价 </th><th>购买数量 </th>
+        {foreach $detail.products as $k=>$v}
+        <tr><td><img src="{$v.path}" class="img-responsive" alt=""></td><td>{$v.name}</td><td>{$v.shop_price}</td><td>{$v.market_price}</td><td>{$v.number}</td></tr>
+        {/foreach}
+    </table>
+</div>

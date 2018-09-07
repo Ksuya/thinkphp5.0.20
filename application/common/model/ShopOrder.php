@@ -85,14 +85,16 @@ class ShopOrder extends Base{
     {
         // 订单详情
         $info = $this->alias('a')
-            ->field('a.*,b.reciver,b.contact,b.region,b.address')
+            ->field('a.*,b.reciver,b.contact,b.region,b.address,c.nick_name as user_name')
             ->where('a.id',$id)
-            ->join([['shop_address b','a.address_id = b.id','left']])
+            ->join([['shop_address b','a.address_id = b.id','left'],['shop_members c','a.user_id = c.id','left']])
             ->find()->toArray();
         // 订单物流
         if($info && $info['progress']['id'] > 1){
             $route = Kd100::getRoute($info['express_code'],$info['express_id']['id']);
             $info['route']  = $route;
+        }else{
+            $info['route'] = [];
         }
         // 订单商品
         $products = model('ShopOrderDetail')

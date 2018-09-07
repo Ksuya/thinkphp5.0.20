@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\index\index.html";i:1536234072;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1536223691;s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-top-nav.html";i:1536221156;s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-left-menu.html";i:1536228107;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534835935;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\index\index.html";i:1536234072;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1536223691;s:87:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-top-nav.html";i:1536320227;s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-left-menu.html";i:1536228107;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-script.html";i:1534835935;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +32,7 @@
             <i class="fa fa-file-text font_lager"></i>
             <p data-id="shop-manager">商城管理</p>
         </li>
+        <!--
         <li>
             <i class="fa fa-file-text font_lager"></i>
             <p data-id="blog-manager">文章管理</p>
@@ -39,7 +40,7 @@
         <li>
             <i class="fa fa-user-circle-o font_lager"></i>
             <p data-id="payment-manager">PAY管理</p>
-        </li>
+        </li>-->
     </ul>
 </div>
     <div class="top-nav_roll f_left" style="display:none;">

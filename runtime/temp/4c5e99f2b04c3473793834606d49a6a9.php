@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\open\register.html";i:1536227512;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\open\register.html";i:1536295398;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -102,7 +102,7 @@
                         <label>
                             <input name="agree" type="checkbox" class="fl" value="1"
                                    style="margin:5px 6px 0 0 ; _margin:2px 6px 0 0"/>
-                            <span class="fl">同意<a href="" class="color5">《美博城交易条款与用户使用协议》</a></span>
+                            <span class="fl">同意<a href="<?php echo url('/shop/index/help',['id'=>55]); ?>" target="_blank" class="color5">《用户使用协议》</a></span>
                         </label>
                     </td>
                 </tr>

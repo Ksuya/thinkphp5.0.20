@@ -24,12 +24,13 @@
     </div>-->
 </div>
 
-<div class="ibody">
+<a class="ibody">
     <!--产品普通排列图-->
     <div class="shangpin_Box center">
         <ul>
             {foreach $pros as $k=>$v}
-            <li>
+            <li style="cursor: pointer">
+                <a href="{:url('product/detail',['id'=>$v.id])}">
                 <div class="padding10">
                     <p><img src="{$v.path}" width="200" height="200" /></p>
                     <p class="color4 size20">￥{$v.shop_price}</p>{$v.name}</a></p>
@@ -37,6 +38,7 @@
                         <button class="shangpin_Box_button2"><a href="{:url('product/detail',['id'=>$v.id])}">立即购买</a></button>
                     </p>
                 </div>
+                </a>
             </li>
             {/foreach}
         </ul>

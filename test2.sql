@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-09-06 20:17:35
+Date: 2018-09-07 19:37:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -506,7 +506,7 @@ CREATE TABLE `record` (
   KEY `tableName` (`tableName`),
   KEY `user` (`user`),
   KEY `dataId` (`dataId`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8 COMMENT='数据变更记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8 COMMENT='数据变更记录表';
 
 -- ----------------------------
 -- Records of record
@@ -588,6 +588,8 @@ INSERT INTO `record` VALUES ('75', '2', '商品更新', '18938', '127.0.0.1', nu
 INSERT INTO `record` VALUES ('76', '2', '帮助中心更新', '41756', '127.0.0.1', null, 'ShopCatelog', '55', '2018-09-06 16:40:28', null, null);
 INSERT INTO `record` VALUES ('77', '2', '帮助中心更新', '26489', '127.0.0.1', null, 'ShopCatelog', '55', '2018-09-06 16:40:34', null, null);
 INSERT INTO `record` VALUES ('78', '1', '新增帮助中心', '84544', '127.0.0.1', null, 'ShopCatelog', '56', '2018-09-06 16:40:43', null, null);
+INSERT INTO `record` VALUES ('79', '1', '新增分类', '39580', '127.0.0.1', null, 'ShopCategory', '20', '2018-09-07 15:53:16', null, null);
+INSERT INTO `record` VALUES ('80', '1', '新增分类', '60872', '127.0.0.1', null, 'ShopCategory', '21', '2018-09-07 17:54:22', null, null);
 
 -- ----------------------------
 -- Table structure for record_detail
@@ -751,16 +753,18 @@ CREATE TABLE `shop_category` (
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shop_category
 -- ----------------------------
 INSERT INTO `shop_category` VALUES ('1', '0', '家具家纺', '44', '10', '1', '2018-08-31 16:55:14', '0', '2018-09-06 13:07:40', null);
-INSERT INTO `shop_category` VALUES ('2', '1', '床上用品', null, '15', '0', '2018-08-31 17:10:43', '0', '2018-09-03 13:53:56', null);
-INSERT INTO `shop_category` VALUES ('4', '1', '四件套', null, '0', '0', '2018-09-03 13:05:15', '0', '2018-09-03 13:05:15', null);
+INSERT INTO `shop_category` VALUES ('2', '1', '家具大全', null, '15', '0', '2018-08-31 17:10:43', '0', '2018-09-03 13:53:56', null);
+INSERT INTO `shop_category` VALUES ('4', '1', '床上用品', null, '0', '0', '2018-09-03 13:05:15', '0', '2018-09-03 13:05:15', null);
 INSERT INTO `shop_category` VALUES ('6', '0', '家电大全', '43', '0', '1', '2018-09-03 13:28:19', '0', '2018-09-06 13:06:16', null);
 INSERT INTO `shop_category` VALUES ('19', '6', '冰箱', null, '0', '0', '2018-09-03 13:56:10', '0', '2018-09-03 13:56:10', null);
+INSERT INTO `shop_category` VALUES ('20', '6', '电脑/平板', '60', '10', '0', '2018-09-07 15:53:16', '0', '2018-09-07 15:53:16', null);
+INSERT INTO `shop_category` VALUES ('21', '6', '手机专区', '109', '20', '0', '2018-09-07 17:54:22', '0', '2018-09-07 17:54:22', null);
 
 -- ----------------------------
 -- Table structure for shop_catelog
@@ -951,6 +955,7 @@ CREATE TABLE `shop_product` (
   `category_id` int(11) NOT NULL DEFAULT '0',
   `brand_id` int(11) DEFAULT NULL,
   `name` varchar(50) NOT NULL,
+  `configure` varchar(255) DEFAULT NULL,
   `shop_price` double(10,2) NOT NULL,
   `market_price` double(10,2) DEFAULT NULL,
   `stock` int(255) NOT NULL,
@@ -965,14 +970,264 @@ CREATE TABLE `shop_product` (
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`,`brand_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=236 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shop_product
 -- ----------------------------
-INSERT INTO `shop_product` VALUES ('1', '19', '2', '海尔 BCD-572WDENU1', '3474.00', '3500.00', '491', '30', '9', '0', '0', '<p><img src=\"https://img.alicdn.com/tps/TB16fwuKVXXXXaXXpXXXXXXXXXX-16-16.png\" style=\"margin:0px 5px 0px 0px\" />商品具有<a href=\"https://baike.taobao.com/view.htm?wd=2012010701584939&amp;ac=29\" target=\"_blank\">中国强制性产品认证（CCC）编号</a>，符合国家CCC认证标准。</p>\r\n\r\n<p>品牌名称：Haier/海尔</p>\r\n\r\n<p><a href=\"https://detail.tmall.com/item.htm?spm=a230r.1.14.6.7326445bLA19xP&amp;id=44274812043&amp;cm_id=140105335569ed55e27b&amp;abbucket=20#J_Attrs\">更多参数</a><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>证书编号：2012010701584939</li>\r\n	<li>证书状态：有效</li>\r\n	<li>申请人名称：青岛海尔股份有限公司</li>\r\n	<li>制造商名称：青岛海尔股份有限公司</li>\r\n	<li>产品名称：冷藏冷冻箱</li>\r\n	<li>3C产品型号：见附件</li>\r\n	<li>3C规格型号：见附件</li>\r\n	<li>产品名称：Haier/海尔 BCD-160TMPQ</li>\r\n	<li>海尔冰箱型号:&nbsp;BCD-160TMPQ</li>\r\n	<li>冰箱冷柜机型:&nbsp;冷藏冷冻冰箱</li>\r\n	<li>制冷方式:&nbsp;直冷</li>\r\n	<li>箱门结构:&nbsp;双门式</li>\r\n	<li>能效等级:&nbsp;三级</li>\r\n</ul>\r\n', '2018-09-03 14:16:55', null, '2018-09-03 14:47:36', null);
-INSERT INTO `shop_product` VALUES ('2', '19', '1', '新飞双门式小冰箱冷藏冷冻家用宿舍办公室节能静音双门冰箱小型', '508.00', '559.00', '20', '33', '5', '0', '58', '<p><img src=\"https://img.alicdn.com/tps/TB16fwuKVXXXXaXXpXXXXXXXXXX-16-16.png\" style=\"margin:0px 5px 0px 0px\" />商品具有<a href=\"https://baike.taobao.com/view.htm?ac=29&amp;wd=2018010701072975\" target=\"_blank\">中国强制性产品认证（CCC）编号</a>，符合国家CCC认证标准。</p>\r\n\r\n<p>品牌名称：FRESTECH/新飞</p>\r\n\r\n<p><a href=\"https://detail.tmall.com/item.htm?spm=a230r.1.14.69.7326445bLA19xP&amp;id=569846809632&amp;ns=1&amp;abbucket=20#J_Attrs\">更多参数</a><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>证书编号：2018010701072975</li>\r\n	<li>证书状态：有效</li>\r\n	<li>产品名称：冷藏冷冻箱</li>\r\n	<li>3C规格型号：BCD-58A118 220V～ 50Hz 0.75A R600a</li>\r\n	<li>产品名称：FRESTECH/新飞 BCD-58A1...</li>\r\n	<li>新飞冰箱型号:&nbsp;BCD-58A118</li>\r\n	<li>冰箱冷柜机型:&nbsp;冷藏冷冻冰箱</li>\r\n	<li>制冷方式:&nbsp;直冷</li>\r\n	<li>箱门结构:&nbsp;双门式</li>\r\n	<li>能效等级:&nbsp;三级</li>\r\n</ul>\r\n', '2018-09-03 15:09:18', null, '2018-09-03 15:09:18', null);
-INSERT INTO `shop_product` VALUES ('3', '2', '1', 'LOVO家纺网红简约床品纯棉全棉四件套', '599.00', '652.00', '9', '34', '17', '0', '20', '<p>品牌名称：lovo</p>\r\n\r\n<p><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>件数:&nbsp;4件</li>\r\n	<li>被面材质:&nbsp;棉</li>\r\n	<li>品牌:&nbsp;lovo</li>\r\n	<li>货号:&nbsp;特丽斯/时尚皇冠/甜蜜冰激凌</li>\r\n	<li>被里材质:&nbsp;棉</li>\r\n	<li>棉种类:&nbsp;棉</li>\r\n	<li>成分含量:&nbsp;100%</li>\r\n	<li>床品工艺:&nbsp;其他</li>\r\n	<li>适用床尺寸:&nbsp;1.2m （4英尺） 床..&nbsp;1.5m （5英尺） 床..&nbsp;1.8m （6英尺） 床..</li>\r\n	<li>图案:&nbsp;纯色</li>\r\n	<li>款式:&nbsp;床单式</li>\r\n	<li>颜色分类:&nbsp;特丽斯&nbsp;甜蜜冰激凌&nbsp;时尚皇冠&nbsp;备用&nbsp;格蕾丝</li>\r\n	<li>产品等级:&nbsp;合格品</li>\r\n	<li>风格:&nbsp;简约</li>\r\n	<li>面料支数:&nbsp;其他</li>\r\n	<li>面料密度:&nbsp;.</li>\r\n	<li>商品条形码:&nbsp;6901486284387</li>\r\n	<li>印花工艺:&nbsp;活性印花</li>\r\n	<li>织造工艺:&nbsp;其他</li>\r\n</ul>\r\n\r\n<p><img src=\"https://assets.alicdn.com/kissy/1.0.0/build/imglazyload/spaceball.gif\" style=\"height:1px; margin:0px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><br />\r\n<img alt=\"改时间2.jpg\" src=\"https://img.alicdn.com/imgextra/i3/279887075/O1CN01228OcShN8OPITZk_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"1(7).jpg\" src=\"https://img.alicdn.com/imgextra/i4/279887075/TB2FuaauAOWBuNjSsppXXXPgpXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_01.jpg\" src=\"https://img.alicdn.com/imgextra/i1/279887075/TB2V6wZc21TBuNjy0FjXXajyXXa_!!279887075.jpg\" style=\"margin:0px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img src=\"https://assets.alicdn.com/kissy/1.0.0/build/imglazyload/spaceball.gif\" style=\"height:1px; margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_02.jpg\" src=\"https://img.alicdn.com/imgextra/i1/279887075/TB29YUEc1uSBuNjSsplXXbe8pXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_03.jpg\" src=\"https://img.alicdn.com/imgextra/i2/279887075/TB2szAZc21TBuNjy0FjXXajyXXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_04.jpg\" src=\"https://img.alicdn.com/imgextra/i2/279887075/TB2ZEQRcVuWBuNjSspnXXX1NVXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_05.jpg\" src=\"https://img.alicdn.com/imgextra/i3/279887075/TB2qZcGc4SYBuNjSsphXXbGvVXa_!!279887075.jpg\" style=\"margin:0px\" /></p>\r\n', '2018-09-03 17:08:33', null, '2018-09-06 16:03:11', null);
+INSERT INTO `shop_product` VALUES ('1', '19', '2', '海尔 BCD-572WDENU1', null, '3474.00', '3500.00', '491', '30', '9', '0', '0', '<p><img src=\"https://img.alicdn.com/tps/TB16fwuKVXXXXaXXpXXXXXXXXXX-16-16.png\" style=\"margin:0px 5px 0px 0px\" />商品具有<a href=\"https://baike.taobao.com/view.htm?wd=2012010701584939&amp;ac=29\" target=\"_blank\">中国强制性产品认证（CCC）编号</a>，符合国家CCC认证标准。</p>\r\n\r\n<p>品牌名称：Haier/海尔</p>\r\n\r\n<p><a href=\"https://detail.tmall.com/item.htm?spm=a230r.1.14.6.7326445bLA19xP&amp;id=44274812043&amp;cm_id=140105335569ed55e27b&amp;abbucket=20#J_Attrs\">更多参数</a><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>证书编号：2012010701584939</li>\r\n	<li>证书状态：有效</li>\r\n	<li>申请人名称：青岛海尔股份有限公司</li>\r\n	<li>制造商名称：青岛海尔股份有限公司</li>\r\n	<li>产品名称：冷藏冷冻箱</li>\r\n	<li>3C产品型号：见附件</li>\r\n	<li>3C规格型号：见附件</li>\r\n	<li>产品名称：Haier/海尔 BCD-160TMPQ</li>\r\n	<li>海尔冰箱型号:&nbsp;BCD-160TMPQ</li>\r\n	<li>冰箱冷柜机型:&nbsp;冷藏冷冻冰箱</li>\r\n	<li>制冷方式:&nbsp;直冷</li>\r\n	<li>箱门结构:&nbsp;双门式</li>\r\n	<li>能效等级:&nbsp;三级</li>\r\n</ul>\r\n', '2018-09-03 14:16:55', null, '2018-09-03 14:47:36', null);
+INSERT INTO `shop_product` VALUES ('2', '19', '1', '新飞双门式小冰箱冷藏冷冻家用宿舍办公室节能静音双门冰箱小型', null, '508.00', '559.00', '20', '33', '5', '0', '58', '<p><img src=\"https://img.alicdn.com/tps/TB16fwuKVXXXXaXXpXXXXXXXXXX-16-16.png\" style=\"margin:0px 5px 0px 0px\" />商品具有<a href=\"https://baike.taobao.com/view.htm?ac=29&amp;wd=2018010701072975\" target=\"_blank\">中国强制性产品认证（CCC）编号</a>，符合国家CCC认证标准。</p>\r\n\r\n<p>品牌名称：FRESTECH/新飞</p>\r\n\r\n<p><a href=\"https://detail.tmall.com/item.htm?spm=a230r.1.14.69.7326445bLA19xP&amp;id=569846809632&amp;ns=1&amp;abbucket=20#J_Attrs\">更多参数</a><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>证书编号：2018010701072975</li>\r\n	<li>证书状态：有效</li>\r\n	<li>产品名称：冷藏冷冻箱</li>\r\n	<li>3C规格型号：BCD-58A118 220V～ 50Hz 0.75A R600a</li>\r\n	<li>产品名称：FRESTECH/新飞 BCD-58A1...</li>\r\n	<li>新飞冰箱型号:&nbsp;BCD-58A118</li>\r\n	<li>冰箱冷柜机型:&nbsp;冷藏冷冻冰箱</li>\r\n	<li>制冷方式:&nbsp;直冷</li>\r\n	<li>箱门结构:&nbsp;双门式</li>\r\n	<li>能效等级:&nbsp;三级</li>\r\n</ul>\r\n', '2018-09-03 15:09:18', null, '2018-09-03 15:09:18', null);
+INSERT INTO `shop_product` VALUES ('3', '2', '1', 'LOVO家纺网红简约床品纯棉全棉四件套', null, '599.00', '652.00', '9', '34', '17', '0', '20', '<p>品牌名称：lovo</p>\r\n\r\n<p><strong>产品参数：</strong></p>\r\n\r\n<ul>\r\n	<li>件数:&nbsp;4件</li>\r\n	<li>被面材质:&nbsp;棉</li>\r\n	<li>品牌:&nbsp;lovo</li>\r\n	<li>货号:&nbsp;特丽斯/时尚皇冠/甜蜜冰激凌</li>\r\n	<li>被里材质:&nbsp;棉</li>\r\n	<li>棉种类:&nbsp;棉</li>\r\n	<li>成分含量:&nbsp;100%</li>\r\n	<li>床品工艺:&nbsp;其他</li>\r\n	<li>适用床尺寸:&nbsp;1.2m （4英尺） 床..&nbsp;1.5m （5英尺） 床..&nbsp;1.8m （6英尺） 床..</li>\r\n	<li>图案:&nbsp;纯色</li>\r\n	<li>款式:&nbsp;床单式</li>\r\n	<li>颜色分类:&nbsp;特丽斯&nbsp;甜蜜冰激凌&nbsp;时尚皇冠&nbsp;备用&nbsp;格蕾丝</li>\r\n	<li>产品等级:&nbsp;合格品</li>\r\n	<li>风格:&nbsp;简约</li>\r\n	<li>面料支数:&nbsp;其他</li>\r\n	<li>面料密度:&nbsp;.</li>\r\n	<li>商品条形码:&nbsp;6901486284387</li>\r\n	<li>印花工艺:&nbsp;活性印花</li>\r\n	<li>织造工艺:&nbsp;其他</li>\r\n</ul>\r\n\r\n<p><img src=\"https://assets.alicdn.com/kissy/1.0.0/build/imglazyload/spaceball.gif\" style=\"height:1px; margin:0px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><br />\r\n<img alt=\"改时间2.jpg\" src=\"https://img.alicdn.com/imgextra/i3/279887075/O1CN01228OcShN8OPITZk_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"1(7).jpg\" src=\"https://img.alicdn.com/imgextra/i4/279887075/TB2FuaauAOWBuNjSsppXXXPgpXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_01.jpg\" src=\"https://img.alicdn.com/imgextra/i1/279887075/TB2V6wZc21TBuNjy0FjXXajyXXa_!!279887075.jpg\" style=\"margin:0px\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img src=\"https://assets.alicdn.com/kissy/1.0.0/build/imglazyload/spaceball.gif\" style=\"height:1px; margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_02.jpg\" src=\"https://img.alicdn.com/imgextra/i1/279887075/TB29YUEc1uSBuNjSsplXXbe8pXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_03.jpg\" src=\"https://img.alicdn.com/imgextra/i2/279887075/TB2szAZc21TBuNjy0FjXXajyXXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_04.jpg\" src=\"https://img.alicdn.com/imgextra/i2/279887075/TB2ZEQRcVuWBuNjSspnXXX1NVXa_!!279887075.jpg\" style=\"margin:0px\" /><img alt=\"LOVO特丽斯--水洗棉床品四件套-杨中改2018_05.jpg\" src=\"https://img.alicdn.com/imgextra/i3/279887075/TB2qZcGc4SYBuNjSsphXXbGvVXa_!!279887075.jpg\" style=\"margin:0px\" /></p>\r\n', '2018-09-03 17:08:33', null, '2018-09-06 16:03:11', null);
+INSERT INTO `shop_product` VALUES ('4', '19', null, '海尔 BCD-572WDENU1', '变频智控 低温净味 隐藏门把手', '3498.00', null, '0', '61', '852223', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('5', '19', null, '美的 BCD-213TM(E)', '分类保鲜 三门三温 低温补偿', '1500.00', null, '0', '62', '692256', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('6', '19', null, '海尔 BCD-329WDVL', 'T.ABT杀菌 多温多控 无需除霜', '3598.00', null, '0', '63', '785012', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('7', '19', null, '海尔 BCD-160TMPQ', '宁静节能 HIPS高光抗菌内胆 低温自动补偿功能', '1200.00', null, '0', '64', '497651', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('8', '19', null, '美的 BCD-535WKZM(E)', '智能操控 风冷无霜 静音省电', '3116.00', null, '0', '65', '800293', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('9', '19', null, '海尔 BCD-470WDPG', '触摸显示屏 隐藏式把手 双循环系统', '4699.00', null, '0', '66', '896009', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('10', '19', null, '康佳 BCD-150GB2SU', '7档温度调节 保鲜冷藏室 微孔发泡技术', '858.00', null, '0', '67', '539126', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('11', '19', null, '西门子 BCD-610W(KA92NV02TI)', '无霜保鲜 循环制冷 宽气候带设计', '5615.00', null, '0', '68', '256593', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('12', '19', null, '海尔 BCD-217WDVLU1', '智能远程操控 DEO净味保鲜技术', '2486.00', null, '0', '69', '876231', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('13', '19', null, '美的 BCD-319WTPZM(E)', '铂金净味 分区存储 五合一保鲜', '3068.00', null, '0', '70', '46892', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('14', '19', null, '美的 BCD-525WKPZM(E)', '节能静音 快速深度制冷  多模式中央智控', '3258.00', null, '0', '71', '684177', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('15', '19', null, '容声 BCD-320WD12MYP', '-25°深冷锁鲜  生态抑菌净化', '3249.00', null, '0', '72', '981217', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('16', '19', null, '康佳 BCD-386BX4S', '四门玻璃面板  大容量四门对开', '2055.00', null, '0', '73', '52852', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('17', '19', null, '美的 BCD-598WKPZM(E)', '变频智能 风冷无霜 节能静音', '3532.00', null, '0', '74', '64772', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('18', '19', null, '海尔 BCD-458WDVMU1', '手机远程时时操控 T.ABT智能杀菌', '4188.00', null, '0', '75', '747496', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('19', '19', null, '西门子 BCD-610W(KA92NV03TI)', '二级节能 电脑触摸屏 双循环技术', '6150.00', null, '0', '76', '535117', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('20', '19', null, '海尔 BCD-576WDPU', '大空间设计 风冷无霜 低温杀菌净味系统', '3406.00', null, '0', '77', '187615', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('21', '19', null, '海尔 BCD-206STPA', '简约外观 自动低温补偿 节能静音', '1485.00', null, '0', '78', '460860', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('22', '19', null, '海尔 BCD-591WDVLU1', '全空间保鲜  低温触媒净味 智能WIFI 拉丝面板', '4177.00', null, '0', '79', '326195', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('23', '19', null, '美的 BCD-521WKM(E)', '风冷无霜 纤薄机身 时尚外观', '2716.00', null, '0', '80', '774608', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('24', '19', null, '美的 BCD-468WTPM(E)', '多维智能变频 无霜保鲜', '3702.00', null, '0', '81', '837066', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('25', '19', null, '康佳 BCD-288GY4S', '百变多门 纤薄机身  锁住新鲜', '1606.00', null, '0', '82', '230968', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('26', '19', null, '海尔 BCD-451WDEMU1', '风冷无霜 纤薄机身 低温净味', '3128.00', null, '0', '83', '271860', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('27', '19', null, '海尔 BCD-531WDVLU1', '触摸显示屏 智能WIFI 双变频', '5161.00', null, '0', '84', '8591', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('28', '19', null, '容声 BCD-532WD11HP', '55CM纤薄机身 变频更节能', '3349.00', null, '0', '85', '838935', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('29', '19', null, 'TCL BCD-118KA9', '安心材质 冷藏冷冻实用不占地  节能静音', '799.00', null, '0', '86', '261124', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('30', '19', null, '美的 BCD-215WTM(E)', '双系统风冷 铂金净味 一键控温', '1897.00', null, '0', '87', '588799', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('31', '19', null, '美菱 BCD-601WPCX', '变频节能 时尚对开大冰箱 循环风冷', '3506.00', null, '0', '88', '330141', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('32', '19', null, '容声 BCD-632WD11HAP', '智能远程控制 全生态保鲜 智能双变频', '3765.00', null, '0', '89', '371834', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('33', '19', null, '海尔 BCD-335WDECU1', '高配双变频 彩晶面板 WIFI控制', '4063.00', null, '0', '90', '8186', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('34', '19', null, '容声 BCD-460WD11FP', '纳米负离子保鲜 矢量双变频黑科技', '4699.00', null, '0', '91', '644496', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('35', '19', null, '美的 BCD-230WTM', '宽幅变温 立体风保鲜 中门调温', '2055.00', null, '0', '92', '337288', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('36', '19', null, '美的 BCD-258WTM(E)', '风冷无霜 电脑控温 节能静音', '2219.00', null, '0', '93', '613642', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('37', '19', null, '海尔 BCD-312WDPM', '精控多温 超强保鲜 环绕立体风', '3041.00', null, '0', '94', '945540', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('38', '19', null, '海尔 BC-93TMPF', '精巧占地小 无边框暗把手设计 7档温度可调', '802.00', null, '0', '95', '29526', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('39', '19', null, '西门子 BCD-610W(KA92NV41TI)', '全触屏门把手', '8017.00', null, '0', '96', '87229', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('40', '19', null, 'TCL BCD-282KR50', '周期性化霜 电脑温控 雷达感温', '1814.00', null, '0', '97', '484351', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('41', '19', null, '容声 BCD-218D11N', '温度自感应 家用节能 拉丝工艺面板', '1416.00', null, '0', '98', '745438', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('42', '19', null, '海尔 BCD-189WDPV', '净味保鲜 LED冷光源 电脑控温', '1701.00', null, '0', '99', '713731', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('43', '19', null, '海尔 BCD-642WDVMU1', '变频压缩机，节能静音 WiFi功能：APP控制 触摸式显示屏', '4158.00', null, '0', '100', '157863', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('44', '19', null, '容声 BCD-529WD11HP', '矢量双变频 纤薄机身 智能操控', '2508.00', null, '0', '101', '71886', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('45', '19', null, '康佳 BCD-192MT', ' 中门软冷冻  健康安全材质 三级能效节能', '1100.00', null, '0', '102', '164034', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('46', '19', null, 'TCL BCD-205TF1', '德国工艺 中门软冷冻  三门节能电冰箱', '1228.00', null, '0', '103', '551469', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('47', '19', null, '海尔 BCD-652WDBGU1', '智能WIFI 低温净味 双变频', '4917.00', null, '0', '104', '736045', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('48', '19', null, '容声 BCD-172D11D', '自感应温度补偿 双门养鲜 时尚小巧', '1212.00', null, '0', '105', '251374', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('49', '19', null, '统帅 BCD-258WLDPN', '环绕立体风 急速冷冻 中门宽幅变温', '2153.00', null, '0', '106', '782251', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('50', '19', null, '云米 BCD-456WMSD', '风冷无霜  456L大容量 智能调温', '2199.00', null, '0', '107', '370652', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('51', '19', null, '美的 BCD-629WKPZM(E)', '一级能效 双变频保鲜 节能静音', '2903.00', null, '0', '108', '813487', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('52', '21', null, '小米 红米6Pro', '异形全面屏 后置1200万双摄 4000mAh超大电池', '871.00', '978.00', '0', '110', '769108', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('53', '21', null, 'OPPO A5', '全屏双摄 强悍续航 AI智慧美颜', '1471.00', '1690.00', '0', '111', '674308', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('54', '21', null, '小米 小米手机8', '超清四曲面 AI超感光双摄 红外人脸识别', '2274.00', '2471.00', '0', '112', '988337', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('55', '21', null, 'vivo Z1', '3D炫彩流光机身 后置1300万AI智慧双摄', '1602.00', '1827.00', '0', '113', '356105', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('56', '21', null, '苹果 iPhone X', '面容ID识别 前置深感摄像头 人像光效', '6272.00', '6447.00', '0', '114', '446407', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('57', '21', null, '华为 nova 3i', '双摄美拍 智慧场景识别', '1959.00', '2150.00', '0', '115', '743141', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('58', '21', null, 'OPPO R15', '超视野全面屏 AI智能拍照 让美更自然', '2533.00', '2654.00', '0', '116', '464379', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('59', '21', null, '小米 小米手机8 SE', 'AI超感光双摄 持久待机 录制视频清晰稳定', '1643.00', '1817.00', '0', '117', '748496', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('60', '21', null, '荣耀 荣耀Play', '人工智能NPU 前后1600万AI摄影 3D人像光效', '1784.00', '1990.00', '0', '118', '614188', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('61', '21', null, '华为 nova 3', '3D炫彩机身 2400万高清四摄', '2584.00', '2790.00', '0', '119', '958519', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('62', '21', null, '小米 红米6A', '小巧高性能 AI人脸解锁', '522.00', '709.00', '0', '120', '942030', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('63', '21', null, '苹果 iPhone 8 Plus ', '双镜头光学变焦 原彩显示技术 全新感光元件', '4906.00', '4991.00', '0', '121', '262512', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('64', '21', null, '小米 6X', '前后2000万，自拍更美 骁龙660 AIE处理器', '1163.00', '1347.00', '0', '122', '668546', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('65', '21', null, '荣耀 荣耀10', '2400万AI摄影 3D人像光效 超级快充', '2152.00', '2329.00', '0', '123', '629614', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('66', '21', null, '魅族 16', '3D曲面玻璃 光学屏下指纹', '2778.00', '2863.00', '0', '124', '707907', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('67', '21', null, '小米 Max 3', '巨无霸级全面屏 AI双摄 双功放立体声', '1551.00', '1741.00', '0', '125', '275790', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('68', '21', null, 'OPPO A59', '闪速正面指纹识别 支持4G+网络 Real原声技术', '745.00', '862.00', '0', '126', '200937', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('69', '21', null, 'OPPO Find X', '曲面全景屏 隐藏式3D摄像头 后置AI智能双摄', '4918.00', '5021.00', '0', '127', '219720', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('70', '21', null, 'vivo NEX 旗舰版', '8GB大运存 超级智慧AI Jovi智能语音助手', '4105.00', '4187.00', '0', '128', '659775', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('71', '21', null, '华为 P20', '徕卡双镜头 AI智慧全面屏  杜比全景声', '3056.00', '3152.00', '0', '129', '351858', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('72', '21', null, '魅族 16 Plus ', '双摄光学防抖 骁龙845 AI加速', '3013.00', '3151.00', '0', '130', '650365', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('73', '21', null, 'vivo X21', 'AI智慧拍照 人工智能美颜 面部识别2.0', '2457.00', '2601.00', '0', '131', '900397', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('74', '21', null, '华为 P20 Pro', '4000万徕卡三摄 AI智慧摄影 智慧续航', '3473.00', '3634.00', '0', '132', '484041', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('75', '21', null, '荣耀 荣耀9青春版', '全屏四摄 智慧化系统 续航无忧', '921.00', '1004.00', '0', '133', '333287', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('76', '21', null, '三星 Galaxy S9+ ', '凝时拍摄 智能可变光圈 背景虚化实时对焦', '3449.00', '3562.00', '0', '134', '351972', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('77', '21', null, '苹果 iPhone 8', '双面全玻璃设计 抗水防尘 支持无线充电', '3806.00', '3922.00', '0', '135', '908287', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('78', '21', null, '诺基亚 X6', '人脸识别 高清体验', '1170.00', '1257.00', '0', '136', '833960', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('79', '21', null, '华为 畅享8', '高清全面屏 柔光自拍 人脸识别', '900.00', '1128.00', '0', '137', '883128', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('80', '21', null, '小米 红米Note 5', 'AI双摄 骁龙636高性能处理器 暗光逆光更出色', '826.00', '1063.00', '0', '138', '822656', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('81', '21', null, '小米 红米6', '高清全面屏 AI人像模式', '612.00', '747.00', '0', '139', '791050', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('82', '21', null, '三星 Galaxy S8+', 'Bixby智能助手 IP68级防尘防水 三种方式，随心解锁', '2413.00', '2575.00', '0', '140', '963309', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('83', '21', null, '华为 NOVA 3e ', '前置2400万自然美妆 人脸识别，解锁更快捷', '1639.00', '1800.00', '0', '141', '774438', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('84', '21', null, '小米 MIX 2S', 'AI超感光双摄 四曲面陶瓷 无线快充', '2628.00', '2803.00', '0', '142', '677418', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('85', '21', null, '华为 NOVA 2S', '高颜值爱自拍 2000万四镜头 人脸识别快速解锁', '1501.00', '1594.00', '0', '143', '524656', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('86', '21', null, 'vivo NEX', 'AI智慧拍照 升降式前置摄像头 电竞级游戏体验', '3898.00', '4068.00', '0', '144', '923927', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('87', '21', null, '诺基亚 X5', '双面玻璃机身 智能人脸识别', '933.00', '1102.00', '0', '145', '257417', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('88', '21', null, '魅族 魅蓝note6', '全像素双核对焦 双色温4-LED闪光灯', '677.00', '839.00', '0', '146', '35175', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('89', '21', null, '华为 畅享8 Plus', '超清全面屏 前后双摄 大容量长续航', '1234.00', '1332.00', '0', '147', '422416', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('90', '21', null, '美图 T9', '3D曲面流线型机身 全像素PDAF对焦 IPX3等级防水', '3307.00', '3410.00', '0', '148', '902917', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('91', '21', null, 'vivo X21i', 'AI智慧拍照 照亮你的美 Face Wake面部识别', '2398.00', '2496.00', '0', '149', '329163', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('92', '21', null, 'vivo X21屏幕指纹版', '屏幕指纹解锁 人工智能游戏引擎', '2777.00', '2864.00', '0', '150', '452350', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('93', '21', null, 'VJVJ V21-X', '高清全面屏 人脸解锁', '488.00', '606.00', '0', '151', '197160', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('94', '21', null, '华为 畅享8e  青春', '高清全面屏 智能柔光自拍 三指滑动截屏', '725.00', '814.00', '0', '152', '866417', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('95', '21', null, '华为 Mate 10 Pro  ', '徕卡双镜头 支持异源投屏 防溅抗水防尘', '3000.00', '3192.00', '0', '153', '229170', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('96', '21', null, 'vivo Y75s', '5000万超清画质 Face Wake面部识别 游戏画中画', '1218.00', '1338.00', '0', '154', '754260', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('97', '21', null, 'OPPO A1', '大内存全面屏 面部识别 更长续航', '988.00', '1171.00', '0', '155', '548069', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('98', '21', null, 'OPPO A3', '超视野全面屏 AI智能芯片 全屏多任务', '1872.00', '2088.00', '0', '156', '237704', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('99', '21', null, '小米 黑鲨游戏手机', '全面屏超宽视野 独立图像处理芯片 震撼Biso音效', '2899.00', '3138.00', '0', '157', '399512', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('100', '21', null, '小米 红米6Pro', '异形全面屏 后置1200万双摄 4000mAh超大电池', '871.00', '1045.00', '0', '158', '769108', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('101', '21', null, 'OPPO A5', '全屏双摄 强悍续航 AI智慧美颜', '1471.00', '1712.00', '0', '159', '674308', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('102', '21', null, '小米 小米手机8', '超清四曲面 AI超感光双摄 红外人脸识别', '2274.00', '2503.00', '0', '160', '988337', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('103', '21', null, 'vivo Z1', '3D炫彩流光机身 后置1300万AI智慧双摄', '1602.00', '1828.00', '0', '161', '356105', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('104', '21', null, '苹果 iPhone X', '面容ID识别 前置深感摄像头 人像光效', '6272.00', '6489.00', '0', '162', '446407', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('105', '21', null, '华为 nova 3i', '双摄美拍 智慧场景识别', '1959.00', '2070.00', '0', '163', '743141', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('106', '21', null, 'OPPO R15', '超视野全面屏 AI智能拍照 让美更自然', '2533.00', '2681.00', '0', '164', '464379', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('107', '21', null, '小米 小米手机8 SE', 'AI超感光双摄 持久待机 录制视频清晰稳定', '1643.00', '1855.00', '0', '165', '748496', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('108', '21', null, '荣耀 荣耀Play', '人工智能NPU 前后1600万AI摄影 3D人像光效', '1784.00', '1969.00', '0', '166', '614188', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('109', '21', null, '华为 nova 3', '3D炫彩机身 2400万高清四摄', '2584.00', '2721.00', '0', '167', '958519', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('110', '21', null, '小米 红米6A', '小巧高性能 AI人脸解锁', '522.00', '689.00', '0', '168', '942030', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('111', '21', null, '苹果 iPhone 8 Plus ', '双镜头光学变焦 原彩显示技术 全新感光元件', '4906.00', '5138.00', '0', '169', '262512', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('112', '21', null, '小米 6X', '前后2000万，自拍更美 骁龙660 AIE处理器', '1163.00', '1367.00', '0', '170', '668546', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('113', '21', null, '荣耀 荣耀10', '2400万AI摄影 3D人像光效 超级快充', '2152.00', '2268.00', '0', '171', '629614', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('114', '21', null, '魅族 16', '3D曲面玻璃 光学屏下指纹', '2778.00', '3019.00', '0', '172', '707907', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('115', '21', null, '小米 Max 3', '巨无霸级全面屏 AI双摄 双功放立体声', '1551.00', '1693.00', '0', '173', '275790', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('116', '21', null, 'OPPO A59', '闪速正面指纹识别 支持4G+网络 Real原声技术', '745.00', '993.00', '0', '174', '200937', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('117', '21', null, 'OPPO Find X', '曲面全景屏 隐藏式3D摄像头 后置AI智能双摄', '4918.00', '5146.00', '0', '175', '219720', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('118', '21', null, 'vivo NEX 旗舰版', '8GB大运存 超级智慧AI Jovi智能语音助手', '4105.00', '4263.00', '0', '176', '659775', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('119', '21', null, '华为 P20', '徕卡双镜头 AI智慧全面屏  杜比全景声', '3056.00', '3247.00', '0', '177', '351858', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('120', '21', null, '魅族 16 Plus ', '双摄光学防抖 骁龙845 AI加速', '3013.00', '3103.00', '0', '178', '650365', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('121', '21', null, 'vivo X21', 'AI智慧拍照 人工智能美颜 面部识别2.0', '2457.00', '2572.00', '0', '179', '900397', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('122', '21', null, '华为 P20 Pro', '4000万徕卡三摄 AI智慧摄影 智慧续航', '3473.00', '3666.00', '0', '180', '484041', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('123', '21', null, '荣耀 荣耀9青春版', '全屏四摄 智慧化系统 续航无忧', '921.00', '1041.00', '0', '181', '333287', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('124', '21', null, '三星 Galaxy S9+ ', '凝时拍摄 智能可变光圈 背景虚化实时对焦', '3449.00', '3615.00', '0', '182', '351972', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('125', '21', null, '苹果 iPhone 8', '双面全玻璃设计 抗水防尘 支持无线充电', '3806.00', '3904.00', '0', '183', '908287', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('126', '21', null, '诺基亚 X6', '人脸识别 高清体验', '1170.00', '1382.00', '0', '184', '833960', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('127', '21', null, '华为 畅享8', '高清全面屏 柔光自拍 人脸识别', '900.00', '1060.00', '0', '185', '883128', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('128', '21', null, '小米 红米Note 5', 'AI双摄 骁龙636高性能处理器 暗光逆光更出色', '826.00', '971.00', '0', '186', '822656', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('129', '21', null, '小米 红米6', '高清全面屏 AI人像模式', '612.00', '779.00', '0', '187', '791050', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('130', '21', null, '三星 Galaxy S8+', 'Bixby智能助手 IP68级防尘防水 三种方式，随心解锁', '2413.00', '2541.00', '0', '188', '963309', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('131', '21', null, '华为 NOVA 3e ', '前置2400万自然美妆 人脸识别，解锁更快捷', '1639.00', '1839.00', '0', '189', '774438', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('132', '21', null, '小米 MIX 2S', 'AI超感光双摄 四曲面陶瓷 无线快充', '2628.00', '2838.00', '0', '190', '677418', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('133', '21', null, '华为 NOVA 2S', '高颜值爱自拍 2000万四镜头 人脸识别快速解锁', '1501.00', '1650.00', '0', '191', '524656', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('134', '21', null, 'vivo NEX', 'AI智慧拍照 升降式前置摄像头 电竞级游戏体验', '3898.00', '4041.00', '0', '192', '923927', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('135', '21', null, '诺基亚 X5', '双面玻璃机身 智能人脸识别', '933.00', '1088.00', '0', '193', '257417', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('136', '21', null, '魅族 魅蓝note6', '全像素双核对焦 双色温4-LED闪光灯', '677.00', '889.00', '0', '194', '35175', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('137', '21', null, '华为 畅享8 Plus', '超清全面屏 前后双摄 大容量长续航', '1234.00', '1386.00', '0', '195', '422416', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('138', '21', null, '美图 T9', '3D曲面流线型机身 全像素PDAF对焦 IPX3等级防水', '3307.00', '3507.00', '0', '196', '902917', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('139', '21', null, 'vivo X21i', 'AI智慧拍照 照亮你的美 Face Wake面部识别', '2398.00', '2486.00', '0', '197', '329163', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('140', '21', null, 'vivo X21屏幕指纹版', '屏幕指纹解锁 人工智能游戏引擎', '2777.00', '3026.00', '0', '198', '452350', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('141', '21', null, 'VJVJ V21-X', '高清全面屏 人脸解锁', '488.00', '593.00', '0', '199', '197160', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('142', '21', null, '华为 畅享8e  青春', '高清全面屏 智能柔光自拍 三指滑动截屏', '725.00', '818.00', '0', '200', '866417', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('143', '21', null, '华为 Mate 10 Pro  ', '徕卡双镜头 支持异源投屏 防溅抗水防尘', '3000.00', '3126.00', '0', '201', '229170', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('144', '21', null, 'vivo Y75s', '5000万超清画质 Face Wake面部识别 游戏画中画', '1218.00', '1402.00', '0', '202', '754260', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('145', '21', null, 'OPPO A1', '大内存全面屏 面部识别 更长续航', '988.00', '1178.00', '0', '203', '548069', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('146', '21', null, 'OPPO A3', '超视野全面屏 AI智能芯片 全屏多任务', '1872.00', '2121.00', '0', '204', '237704', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('147', '21', null, '小米 黑鲨游戏手机', '全面屏超宽视野 独立图像处理芯片 震撼Biso音效', '2899.00', '3071.00', '0', '205', '399512', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('148', '2', null, '新中式实木沙发组合现代简约禅意客厅原木色酒店客栈民宿办公家具', '江苏 苏州', '1650.00', '1886.00', '0', '206', '402417', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('149', '2', null, '后现代美式全实木轻奢别墅家具真皮沙发客厅整装组合简约高端定制', '广东 佛山', '3870.00', '3987.00', '0', '207', '931431', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('150', '2', null, '新款现代中式冬夏两用实木沙发组合小户型储物布艺沙发客厅家具', '江西 赣州', '3390.00', '3549.00', '0', '208', '19257', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('151', '2', null, '轻奢风沙发样板房后现代美式组合简约客厅港式不锈钢沙发家具定制', '江苏 苏州', '980.00', '1077.00', '0', '209', '742588', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('152', '2', null, '欧式真皮沙发 头层牛皮 实木客厅 美式123贵妃组合新古典奢华家具', '广东 佛山', '21800.00', '21976.00', '0', '210', '725084', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('153', '2', null, '北欧真皮床1.8米1.5m现代简约结婚主卧榻榻米双人床 卧室家具欧式', '广东 佛山', '1668.00', '1915.00', '0', '211', '695459', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('154', '2', null, '仿古实木办公桌榆木书房家具套装组合中式书桌椅组合写字台书法桌', '浙江 绍兴', '2500.00', '2606.00', '0', '212', '42829', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('155', '2', null, '实木沙发组合新中式冬夏两用仿古花梨木客厅酒店别墅古典红木家具', '江西 赣州', '15990.00', '16204.00', '0', '213', '900645', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('156', '2', null, '新款布艺沙发现代客厅整装大小户型简约转角功能家具可拆洗布沙发', '广东 佛山', '1060.00', '1207.00', '0', '214', '407097', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('157', '2', null, '惠航欧式沙发组合客厅转角小户型奢华整装简欧式布艺沙发实木家具', '广东 佛山', '3989.00', '4176.00', '0', '215', '560068', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('158', '2', null, '北欧布艺沙发组合客厅转角整装大小户型简约现代日式布艺沙发家具', '广东 佛山', '1980.00', '2203.00', '0', '216', '336622', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('159', '2', null, '优尚雅轩实木沙发组合现代新中式客厅家具小户型布艺整装木沙发', '广东 佛山', '2090.00', '2298.00', '0', '217', '824098', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('160', '2', null, '新中式沙发实木布艺123组合沙发禅意酒店别墅样板房会所家具定制', '浙江 杭州', '2450.00', '2564.00', '0', '218', '790206', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('161', '2', null, '华南家具简约现代实木床1.8米主卧卧室双人床1.5m单人储物床原木', '江西 赣州', '1190.00', '1414.00', '0', '219', '100039', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('162', '2', null, '喜美嘉冬夏两用布艺沙发组合客厅家具整装大小户型可拆洗现代简约', '广东 佛山', '2080.00', '2188.00', '0', '220', '420771', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('163', '2', null, '花梨木茶桌红木家具新中式茶桌椅组合实木仿古茶台泡茶桌功夫茶几', '广东 江门', '3680.00', '3884.00', '0', '221', '946247', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('164', '2', null, '新中式沙发 现代简约客厅样板房别墅禅意家具 全实木布艺沙发组合', '江苏 苏州', '1700.00', '1838.00', '0', '222', '389349', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('165', '2', null, '傅邦 实木沙发黑胡桃木真皮沙发现代新中式沙发组合客厅成套家具', '江苏 苏州', '18760.00', '18973.00', '0', '223', '847378', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('166', '2', null, '老船木茶桌椅组合小型客厅茶几实木功夫阳台客厅户外茶台船木家具', '广东 中山', '2638.00', '2872.00', '0', '224', '896141', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('167', '2', null, '实木沙发组合花梨木新中式客厅刺猬紫檀红木家具整装实木布艺沙发', '广东 佛山', '9000.00', '9211.00', '0', '225', '696215', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('168', '2', null, '欧式沙发组合客厅小户型新古典实木三沙发法式真皮轻奢华简欧家具', '江苏 苏州', '3680.00', '3790.00', '0', '226', '789996', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('169', '2', null, '乌金木沙发现代简约中式布艺别墅客厅全实木沙发123组合原木家具', '天津', '11390.00', '11552.00', '0', '227', '345909', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('170', '2', null, '德家家具欧式床双人床主卧1.8实木床韩式田园高箱床储物公主婚床', '广东 佛山', '950.00', '1069.00', '0', '228', '10015', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('171', '2', null, '林氏木业北欧简约可伸缩电视柜茶几组合小户型客厅家具套装DV1M', '广东 佛山', '1100.00', '1336.00', '0', '229', '342441', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('172', '2', null, '花梨木功夫茶桌红木家具新中式茶桌椅组合实木茶几茶台仿古茶艺桌', '广东 佛山', '3680.00', '3911.00', '0', '230', '895668', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('173', '2', null, '新中式全实木鞋柜雕花门厅玄关柜仿古收纳储物柜复古家具多层鞋架', '浙江 绍兴', '1000.00', '1237.00', '0', '231', '219613', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('174', '2', null, '欧式床双人床 主卧公主床卧室现代简约1.5 1.8米欧式风格婚床家具', '广东 佛山', '1327.20', '1452.20', '0', '232', '325830', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('175', '2', null, '盛发橡木沙发实木沙发组合55现代新中式小户型简约整套客厅家具', '江西 赣州', '2880.00', '3122.00', '0', '233', '136866', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('176', '2', null, '顾家家居 美式头层牛皮真皮沙发小户型客厅家具单双三组合5560', '浙江 杭州', '3999.00', '4204.00', '0', '234', '483482', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('177', '2', null, '北欧羽绒布艺沙发组合可拆洗现代简约大小户型沙发客厅整装家具', '广东 佛山', '1480.00', '1725.00', '0', '235', '429795', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('178', '2', null, '汇安实木床主卧1.5/1.8米双人床北欧白蜡木床现代简约高档家具床', '广东 佛山', '2380.00', '2511.00', '0', '236', '741839', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('179', '2', null, '北欧实木沙发组合小户型现代简约贵妃新中式布艺沙发客厅整装家具', '广东 佛山', '880.00', '1018.00', '0', '237', '194725', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('180', '2', null, '实木床双人床松木主卧储物床现代1.8米1.5米大床单人1.2家具包邮', '江苏 宿迁', '420.00', '504.00', '0', '238', '425532', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('181', '2', null, '新中式全实木床1.8米双人主卧1.5M现代简约高箱储物婚床卧室家具', '江西 赣州', '1599.00', '1828.00', '0', '239', '944705', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('182', '2', null, '福妮特欧式真皮沙发组合客厅整装实木雕花大户型美式沙发别墅家具', '广东 佛山', '5566.00', '5703.00', '0', '240', '526423', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('183', '2', null, '小户型实木餐桌椅组合圆形家用饭桌圆餐厅4/6人美式家具 小圆餐桌', '江西 赣州', '1120.00', '1213.00', '0', '241', '412718', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('184', '2', null, '简约现代布艺沙发 大小户型客厅整装家具 可拆洗U型沙发转角组合', '广东 佛山', '1510.20', '1704.20', '0', '242', '612922', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('185', '2', null, '北欧实木床主卧简约现代双人床高箱储物大小户型1.5米1.8婚床家具', '广东 佛山', '1290.00', '1396.00', '0', '243', '123369', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('186', '2', null, '老船木茶桌椅组合客厅阳台小茶几办公泡茶桌茶台中式实木家具特价', '广东 中山', '1662.50', '1817.50', '0', '244', '441714', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('187', '2', null, '小户型北欧布艺沙发三人位客厅整装组合现代简约网红乳胶公寓家具', '广东 佛山', '1680.00', '1837.00', '0', '245', '954186', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('188', '2', null, '北欧布艺沙发可拆洗L型简约现代棉麻布乳胶沙发客厅整装组合家具', '广东 佛山', '2280.00', '2452.00', '0', '246', '243730', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('189', '2', null, '实木沙发组合 简约现代北欧风布艺沙发可拆洗经济型客厅家具整装', '广东 佛山', '3998.00', '4194.00', '0', '247', '85254', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('190', '2', null, '北欧客厅家具地柜电视柜 茶几组合墙套装现代简约黑白色宜可伸缩', '上海', '1297.80', '1529.80', '0', '248', '781369', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('191', '2', null, '北欧风格全实木床1.5m 现代简约双人床1.8米大床白蜡木主卧家具', '广东 佛山', '2680.00', '2870.00', '0', '249', '1387', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('192', '4', null, '四件套全棉纯棉被套欧式简约1.8m床单学生宿舍三件套单人床上用品', '江苏 南通', '99.00', '217.00', '0', '250', '208009', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('193', '4', null, '床上四件套纯棉床单被套全棉四件套1.2米宿舍三件套网红学生 单人', '江苏 南通', '58.00', '177.00', '0', '251', '710340', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('194', '4', null, '床单三件套单件网红全棉纯棉1.2m米被套学生宿舍床上单人 四件套', '江苏 南通', '58.00', '159.00', '0', '252', '225704', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('195', '4', null, '被子冬被全棉学生宿舍单人夏天凉被芯空调薄被双人春秋被子四件套', '江苏 南通', '75.00', '242.00', '0', '253', '613808', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('196', '4', null, '被子夏天薄被春秋单双人夏季凉被冬被全棉四件套空调被芯学生宿舍', '江苏 南通', '75.00', '202.00', '0', '254', '186771', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('197', '4', null, '网红床上四件套全棉纯棉欧式床单被套宿舍三件套学生单双人ins风', '江苏 南通', '79.90', '226.90', '0', '255', '140135', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('198', '4', null, '简约全棉纯色四件套1.5/1.8m纯棉床单被套学生宿舍床上用品清仓', '江苏 南通', '119.00', '335.00', '0', '256', '481589', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('199', '4', null, '全棉四件套1.8m床单水洗棉纯棉床上用品被套三件套单人学生宿舍', '江苏 南通', '99.00', '255.00', '0', '257', '655321', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('200', '4', null, '网红四件套全棉纯棉1.8m被套1.5米床单人三件套被罩床上用品ins风', '江苏 南通', '45.00', '251.00', '0', '258', '370606', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('201', '4', null, '网红四件套全棉纯棉简约被套1.8m床上用品1.5m床单三件套学生宿舍', '江苏 南通', '45.00', '166.00', '0', '259', '110322', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('202', '4', null, '南极人被子冬被加厚保暖被芯双人冬天棉被单人学生空调被春秋被褥', '浙江 台州', '69.00', '164.00', '0', '260', '651781', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('203', '4', null, '网红单人床单单件大学生宿舍纯棉女2被套1.2米被单三件套床上用品', '江苏 南通', '49.00', '187.00', '0', '261', '713237', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('204', '4', null, '水洗棉四件套全棉被套简约北欧格子条纹纯棉床单床笠1.8m床上用品', '江苏 南通', '158.00', '293.00', '0', '262', '917741', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('205', '4', null, '谷蝶全棉碎花单人学生床单单件1.5米床 纯棉布1.8m双人床宿舍被单', '江苏 南通', '25.00', '129.00', '0', '263', '956098', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('206', '4', null, 'ins网红少女四件套全棉纯棉公主风床裙床单被套1.8/2.0m床上用品', '江苏 南通', '88.00', '183.00', '0', '264', '552051', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('207', '4', null, '四件套全棉纯棉床单三件套床上用品1.2/1.5m床卡通学生宿舍单人女', '江苏 南通', '198.00', '386.00', '0', '265', '738351', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('208', '4', null, '冬被子单人学生宿舍水洗全棉被芯双人加厚保暖春秋被褥空调被纯棉', '江苏 南通', '129.00', '218.00', '0', '266', '82405', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('209', '4', null, '维科床单被套婚庆床上四件套全棉纯棉 简约床笠用品单人三件套', '浙江 杭州', '138.00', '359.00', '0', '267', '135696', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('210', '4', null, '床上四件套全棉纯棉被套床单三件套1.8m床简约学生宿舍双人单人男', '江苏 南通', '228.00', '472.00', '0', '268', '312263', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('211', '4', null, '精典泰迪床上四件套全棉纯棉被套床单被单床笠简约1.5/1.8m米床', '江苏 南通', '228.00', '420.00', '0', '269', '528826', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('212', '4', null, '蝉梦罗莱家纺四件套全棉纯棉简约春秋特价网红床单被套1.8m米床上', '江苏 南通', '108.00', '322.00', '0', '270', '620442', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('213', '4', null, '空调被夏凉被双人夏被纯棉夏天被芯单人薄被子夏季儿童春秋被天丝', '江苏 南通', '136.00', '227.00', '0', '271', '573674', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('214', '4', null, '恬梦家纺老粗布床单单件 100%纯棉加厚双人被单全棉布1.5米1.8m床', '山东 潍坊', '38.80', '184.80', '0', '272', '697292', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('215', '4', null, '特价全棉纯棉四件套床单被套1.8双人床上用品单人清仓三件套2.0', '江苏 南通', '99.00', '267.00', '0', '273', '550673', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('216', '4', null, '四件套全棉纯棉床单被套双人简约婚庆1.8m床ins风网红床上四件套', '江苏 南通', '79.00', '297.00', '0', '274', '366218', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('217', '4', null, '全棉刺绣新婚庆四件套长绒棉大红色结婚六十件套纯棉绣花床上用品', '江苏 徐州', '398.00', '622.00', '0', '275', '80717', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('218', '4', null, '床上四件套纯棉1.5m 1.8m 床上用品简约60支长绒棉刺绣全棉床单', '上海', '287.00', '516.00', '0', '276', '555676', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('219', '4', null, '南极人空调被夏凉被单人夏季薄被子被芯双人春秋被夏天儿童被夏被', '江苏 南通', '39.00', '267.00', '0', '277', '904832', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('220', '4', null, '天竺棉四件套 纯棉简约条纹床单被套针织棉全棉床笠床上用品', '江苏 南通', '184.00', '401.00', '0', '278', '591276', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('221', '4', null, '床上四件套床单被套里全棉纯棉简约欧式双人纯色高档刺绣奢华绣花', '江苏 南通', '388.00', '563.00', '0', '279', '693366', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('222', '4', null, '全棉凯蒂猫四件套女孩公主风粉色KT猫纯棉三件套卡通儿童床品可爱', '江苏 南通', '158.00', '261.00', '0', '280', '81492', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('223', '4', null, '水洗棉无印良品四件套全棉被套格子床单日式双人简约床上纯棉床笠', '上海', '207.76', '438.76', '0', '281', '73095', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('224', '4', null, '被褥套装床上四件套被子冬单双人春秋棉被芯学生三件套宿舍六件套', '江苏 南通', '128.00', '315.00', '0', '282', '930558', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('225', '4', null, 'ins网红床单四件套1.8m床水洗棉双人全棉纯棉床上格子被套公主风', '江苏 南通', '119.00', '337.00', '0', '283', '171984', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('226', '4', null, '网红裸睡水洗棉四件套床单被套1.8m床上用品单人床学生宿舍三件套', '江苏 南通', '55.00', '289.00', '0', '284', '937227', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('227', '4', null, '四件套儿童全棉磨毛床单笠被套纯棉1.5m床品卡通男孩奥特曼三件套', '江苏 南通', '156.00', '271.00', '0', '285', '835727', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('228', '4', null, '被子冬被全棉被芯单人学生宿舍加厚保暖被褥套装四件套双人春秋被', '江苏 南通', '75.00', '227.00', '0', '286', '581104', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('229', '4', null, 'ins公主风全棉4四件套纯棉被套床单床裙网红少女心床上用品1.8m床', '江苏 南通', '168.00', '372.00', '0', '287', '934', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('230', '4', null, '100%纯棉老粗布床单单件1.8m2米1.5床棉麻亚麻双人被单枕套三件套', '山东 潍坊', '29.00', '134.00', '0', '288', '527375', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('231', '4', null, 'INS北欧网红四件套双单人1.5米1.8m床单被套纯色学生宿舍床上用品', '江苏 南通', '99.00', '297.00', '0', '289', '512188', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('232', '4', null, '婚庆四件套大红全棉龙凤刺绣被套纯棉新结婚房六八十件套床上用品', '江苏 南通', '238.00', '462.00', '0', '290', '541337', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('233', '4', null, '夏季清仓简约全棉四件套床单被套纯棉1.5/1.8m单双人床上用品学生', '江苏 南通', '79.00', '283.00', '0', '291', '712091', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('234', '4', null, '南极人抗菌防螨 空调被夏凉被双人可水洗夏被宿舍单人春秋薄被子', '江苏 南通', '99.00', '208.00', '0', '292', '247731', '0', '0', null, null, null, null, null);
+INSERT INTO `shop_product` VALUES ('235', '4', null, '床单被套床上用品四件套全棉纯棉欧式1.8m床结婚庆床罩床裙款简约', '浙江 嘉兴', '268.00', '391.00', '0', '293', '882165', '0', '0', null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for shop_search
+-- ----------------------------
+DROP TABLE IF EXISTS `shop_search`;
+CREATE TABLE `shop_search` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `keywords` varchar(20) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shop_search
+-- ----------------------------
+INSERT INTO `shop_search` VALUES ('2', 'lovo', '2018-09-07 12:50:33', null);
+INSERT INTO `shop_search` VALUES ('3', '测试', '2018-09-07 12:56:15', null);
 
 -- ----------------------------
 -- Table structure for shop_sms
@@ -1006,7 +1261,7 @@ CREATE TABLE `system_file` (
   `time` datetime DEFAULT NULL,
   `user` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=294 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of system_file
@@ -1052,6 +1307,240 @@ INSERT INTO `system_file` VALUES ('55', 'u=2196756355,3239570648&fm=26&gp=0.jpg'
 INSERT INTO `system_file` VALUES ('56', 'u=4194840732,1883563224&fm=26&gp=0.jpg', '30295', 'jpg', '/resource/uploads/default/20180906/5dcf9a34897e8aed8bc540b46b7e64c3.jpg', '2018-09-06 17:39:28', null);
 INSERT INTO `system_file` VALUES ('57', 'logo.png', '20462', 'png', '/resource/uploads/default/20180906/c05f0636c25b0869e6f7d194c27603a1.png', '2018-09-06 17:42:02', null);
 INSERT INTO `system_file` VALUES ('58', 'u=4194840732,1883563224&fm=26&gp=0.jpg', '30295', 'jpg', '/resource/uploads/default/20180906/3a5f6e0617e7e43e5d389ce472908a78.jpg', '2018-09-06 17:48:38', null);
+INSERT INTO `system_file` VALUES ('59', 'logo.png', '20462', 'png', '/resource/uploads/default/20180907/759fbe7c9766d90e246c2dd110c6dc64.png', '2018-09-07 14:12:28', null);
+INSERT INTO `system_file` VALUES ('60', 'TB2tq94lNtnkeRjSZSgXXXAuXXa_!!0-saturn_solar.jpg_270x270.jpg', '42459', 'jpg', '/resource/uploads/default/20180907/eb8760a30d385ea5aaf2295fbffeb167.jpg', '2018-09-07 15:53:14', null);
+INSERT INTO `system_file` VALUES ('61', '0import', null, null, '/resource/uploads/product/20180907/c81d0f1e036f7ea4cf23d7c072903294.jpg', null, null);
+INSERT INTO `system_file` VALUES ('62', '1import', null, null, '/resource/uploads/product/20180907/1ef5a9483981851c23fe7b35eb6c1d5b.jpg', null, null);
+INSERT INTO `system_file` VALUES ('63', '2import', null, null, '/resource/uploads/product/20180907/1e6be404624ea80429a934395261aa65.jpg', null, null);
+INSERT INTO `system_file` VALUES ('64', '3import', null, null, '/resource/uploads/product/20180907/c23f43af23b89891d7f6a75c331079b1.jpg', null, null);
+INSERT INTO `system_file` VALUES ('65', '4import', null, null, '/resource/uploads/product/20180907/70a6226748566ce63cd821a1138df12c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('66', '5import', null, null, '/resource/uploads/product/20180907/b19803240bb1371f973ad74cf907d351.jpg', null, null);
+INSERT INTO `system_file` VALUES ('67', '6import', null, null, '/resource/uploads/product/20180907/82db448d730d54f3247be943f30f0f3f.jpg', null, null);
+INSERT INTO `system_file` VALUES ('68', '7import', null, null, '/resource/uploads/product/20180907/718f46844fc7f69399b76e2908764a5c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('69', '8import', null, null, '/resource/uploads/product/20180907/d23acfa2f2afaae35efcbc3aa5fc646c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('70', '9import', null, null, '/resource/uploads/product/20180907/48b9d33fbb29d121078d572c8ef5d497.jpg', null, null);
+INSERT INTO `system_file` VALUES ('71', '10import', null, null, '/resource/uploads/product/20180907/ea61123628d9478e888807f26f0acc90.jpg', null, null);
+INSERT INTO `system_file` VALUES ('72', '11import', null, null, '/resource/uploads/product/20180907/4f06f8ad02dbb480e31922dbe2f68e21.jpg', null, null);
+INSERT INTO `system_file` VALUES ('73', '12import', null, null, '/resource/uploads/product/20180907/28800dc3a7575a83e254c3f57b49a0da.jpg', null, null);
+INSERT INTO `system_file` VALUES ('74', '13import', null, null, '/resource/uploads/product/20180907/12bc60e283fd7cc76f49304472572fb2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('75', '14import', null, null, '/resource/uploads/product/20180907/65c92e64ac2f1d79aef00cfd985260ae.jpg', null, null);
+INSERT INTO `system_file` VALUES ('76', '15import', null, null, '/resource/uploads/product/20180907/2a1446e7146dc8c53bca6a280ae9369c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('77', '16import', null, null, '/resource/uploads/product/20180907/777aa5baf9d9b3d6adefc396fd2a5d9a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('78', '17import', null, null, '/resource/uploads/product/20180907/66cccf977cc5cb18936934556fb45021.jpg', null, null);
+INSERT INTO `system_file` VALUES ('79', '18import', null, null, '/resource/uploads/product/20180907/d3dde28f087f3146490c7f7cf82a14ef.jpg', null, null);
+INSERT INTO `system_file` VALUES ('80', '19import', null, null, '/resource/uploads/product/20180907/26c929ce244feaadff10557eaf67b29a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('81', '20import', null, null, '/resource/uploads/product/20180907/58d22eb9f555a9234145e53fee18e58e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('82', '21import', null, null, '/resource/uploads/product/20180907/2ead61518d834d7b77dfa545f1f43d39.jpg', null, null);
+INSERT INTO `system_file` VALUES ('83', '22import', null, null, '/resource/uploads/product/20180907/9d6c939e8a675a249fa153b50f68a071.jpg', null, null);
+INSERT INTO `system_file` VALUES ('84', '23import', null, null, '/resource/uploads/product/20180907/101d8ca691a1e1d872c0704b685afecb.jpg', null, null);
+INSERT INTO `system_file` VALUES ('85', '24import', null, null, '/resource/uploads/product/20180907/f158a993d0bfa628603c4e39742723be.jpg', null, null);
+INSERT INTO `system_file` VALUES ('86', '25import', null, null, '/resource/uploads/product/20180907/46fe6014f9b0f99dffff501237fdcc8a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('87', '26import', null, null, '/resource/uploads/product/20180907/f3cec8ff3ec64fa3bd23a13a2ff65bd0.jpg', null, null);
+INSERT INTO `system_file` VALUES ('88', '27import', null, null, '/resource/uploads/product/20180907/007138e57c3e22cd5bc15772e7d8d364.jpg', null, null);
+INSERT INTO `system_file` VALUES ('89', '28import', null, null, '/resource/uploads/product/20180907/45df39e8dcc618f932993135d337cbf2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('90', '29import', null, null, '/resource/uploads/product/20180907/a0c51411665dc4a1c56cf08a94d2e435.jpg', null, null);
+INSERT INTO `system_file` VALUES ('92', '31import', null, null, '/resource/uploads/product/20180907/6eba3c566e0f02717dc885635e911223.jpg', null, null);
+INSERT INTO `system_file` VALUES ('93', '32import', null, null, '/resource/uploads/product/20180907/9839ee215fa679f711f3bae8ccee8726.jpg', null, null);
+INSERT INTO `system_file` VALUES ('94', '33import', null, null, '/resource/uploads/product/20180907/8dc87760ffbeaf767776824ecd40e254.jpg', null, null);
+INSERT INTO `system_file` VALUES ('95', '34import', null, null, '/resource/uploads/product/20180907/42270fbb3a4ac3ef0e2ce66df35eeea2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('96', '35import', null, null, '/resource/uploads/product/20180907/388d17c51b747c468a1f337b77baf28c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('97', '36import', null, null, '/resource/uploads/product/20180907/a9f374e1955763dc23e8730446e6be7d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('98', '37import', null, null, '/resource/uploads/product/20180907/d31131bd85f242e745736120ed0e303d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('99', '38import', null, null, '/resource/uploads/product/20180907/f15140dc7835d6003fceaf196bbf0ae2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('100', '39import', null, null, '/resource/uploads/product/20180907/af60aa1ca008952b1d1162b82844dc9d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('101', '40import', null, null, '/resource/uploads/product/20180907/b491fd8a2137cd0b13004f7f8ae9e0e1.jpg', null, null);
+INSERT INTO `system_file` VALUES ('102', '41import', null, null, '/resource/uploads/product/20180907/f83466ff2e30d24f6f5a5f522a0d7241.jpg', null, null);
+INSERT INTO `system_file` VALUES ('103', '42import', null, null, '/resource/uploads/product/20180907/6775433da6e4774a80d0569a0923cd44.jpg', null, null);
+INSERT INTO `system_file` VALUES ('104', '43import', null, null, '/resource/uploads/product/20180907/83885c7b9f8130a12ac18f695b045f0d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('105', '44import', null, null, '/resource/uploads/product/20180907/ae11658a3a1d3ae2aadada7d73fd8128.jpg', null, null);
+INSERT INTO `system_file` VALUES ('106', '45import', null, null, '/resource/uploads/product/20180907/0a8b3c44246e9199c89745fb54baf589.jpg', null, null);
+INSERT INTO `system_file` VALUES ('107', '46import', null, null, '/resource/uploads/product/20180907/6c25eb37332ea7b548ce7ee24f4777cf.jpg', null, null);
+INSERT INTO `system_file` VALUES ('108', '47import', null, null, '/resource/uploads/product/20180907/481f8a3133ec2ef0bd6ce107f9d85368.jpg', null, null);
+INSERT INTO `system_file` VALUES ('109', 'u=2233238195,933580160&fm=26&gp=0.jpg', '22286', 'jpg', '/resource/uploads/default/20180907/05309cccd5b151c08513073e4a56679e.jpg', '2018-09-07 17:54:21', null);
+INSERT INTO `system_file` VALUES ('110', '0import', null, null, '/resource/uploads/product/20180907/d7a0fe40ffe6232c937024e4fc309b2c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('111', '1import', null, null, '/resource/uploads/product/20180907/82bec54b20f702e2424a8c67843c2ebd.jpg', null, null);
+INSERT INTO `system_file` VALUES ('112', '2import', null, null, '/resource/uploads/product/20180907/2dc590a4a7d833e9aac30563f81726d9.jpg', null, null);
+INSERT INTO `system_file` VALUES ('113', '3import', null, null, '/resource/uploads/product/20180907/9aea48c0bc5ee618b2c0a30f9fea7c93.jpg', null, null);
+INSERT INTO `system_file` VALUES ('114', '4import', null, null, '/resource/uploads/product/20180907/235d0b3640c61d390dd390deaace62e4.jpg', null, null);
+INSERT INTO `system_file` VALUES ('115', '5import', null, null, '/resource/uploads/product/20180907/5b000418ebe519be9a002f95d91c522b.jpg', null, null);
+INSERT INTO `system_file` VALUES ('116', '6import', null, null, '/resource/uploads/product/20180907/748dac39db852ba8f5efa50119bc3603.jpg', null, null);
+INSERT INTO `system_file` VALUES ('117', '7import', null, null, '/resource/uploads/product/20180907/9755222623e1a3d17cfa56b0528aec58.jpg', null, null);
+INSERT INTO `system_file` VALUES ('118', '8import', null, null, '/resource/uploads/product/20180907/e48e3918389d7d8ffd51283cdc818f27.jpg', null, null);
+INSERT INTO `system_file` VALUES ('119', '9import', null, null, '/resource/uploads/product/20180907/c9350253a5f7b55674a8132fded1859e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('120', '10import', null, null, '/resource/uploads/product/20180907/cfb2450081704d69e30b457c519b10a7.jpg', null, null);
+INSERT INTO `system_file` VALUES ('121', '11import', null, null, '/resource/uploads/product/20180907/293248163d760efaecadddef34a3bf93.jpg', null, null);
+INSERT INTO `system_file` VALUES ('122', '12import', null, null, '/resource/uploads/product/20180907/9b3733771ff2f82e8f9e823d11835f14.jpg', null, null);
+INSERT INTO `system_file` VALUES ('123', '13import', null, null, '/resource/uploads/product/20180907/60fbde87025e59c316af8fdcec413b1c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('124', '14import', null, null, '/resource/uploads/product/20180907/d390223e0ba45dbf151ef21f809bd93c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('125', '15import', null, null, '/resource/uploads/product/20180907/034a91fc22fe4659e2bf5b3f6bb012d4.jpg', null, null);
+INSERT INTO `system_file` VALUES ('126', '16import', null, null, '/resource/uploads/product/20180907/6a9852e270377dddae1e36e68ab1710a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('127', '17import', null, null, '/resource/uploads/product/20180907/91c92b2e6336037b6cd7b7950e770ef8.jpg', null, null);
+INSERT INTO `system_file` VALUES ('128', '18import', null, null, '/resource/uploads/product/20180907/8babda1a3eeace538392803893c68290.jpg', null, null);
+INSERT INTO `system_file` VALUES ('129', '19import', null, null, '/resource/uploads/product/20180907/c4719eb5e92c805329bc41ced298dc57.jpg', null, null);
+INSERT INTO `system_file` VALUES ('130', '20import', null, null, '/resource/uploads/product/20180907/5d16d794120c4faf2cecc7417ea315b4.jpg', null, null);
+INSERT INTO `system_file` VALUES ('131', '21import', null, null, '/resource/uploads/product/20180907/b31531557b93e434874829d6c6a3944c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('132', '22import', null, null, '/resource/uploads/product/20180907/a41dd35ba4538b1319e0d25f9ae7805d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('133', '23import', null, null, '/resource/uploads/product/20180907/05982bceb4736de0ccc01a9407d42ef2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('134', '24import', null, null, '/resource/uploads/product/20180907/81880f1e94121481ad9067c303e60044.jpg', null, null);
+INSERT INTO `system_file` VALUES ('135', '25import', null, null, '/resource/uploads/product/20180907/fc784c5eec1e5c9241588e79b8795ed6.jpg', null, null);
+INSERT INTO `system_file` VALUES ('136', '26import', null, null, '/resource/uploads/product/20180907/9f3fbc48daaca01553e7d2d7c114dc1a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('137', '27import', null, null, '/resource/uploads/product/20180907/fc784c5eec1e5c9241588e79b8795ed6.jpg', null, null);
+INSERT INTO `system_file` VALUES ('138', '28import', null, null, '/resource/uploads/product/20180907/d97c810f0c91ae49a55f878b0b0ca150.jpg', null, null);
+INSERT INTO `system_file` VALUES ('139', '29import', null, null, '/resource/uploads/product/20180907/64101f22b2bb078bb4355f351610cc86.jpg', null, null);
+INSERT INTO `system_file` VALUES ('140', '30import', null, null, '/resource/uploads/product/20180907/c9dca9278c3dcb4a51977870e52ea2f4.jpg', null, null);
+INSERT INTO `system_file` VALUES ('141', '31import', null, null, '/resource/uploads/product/20180907/a78c41a5b146c7b1cac9fbd058071d21.jpg', null, null);
+INSERT INTO `system_file` VALUES ('142', '32import', null, null, '/resource/uploads/product/20180907/ca373d3261e3a8e347400117cfdce768.jpg', null, null);
+INSERT INTO `system_file` VALUES ('143', '33import', null, null, '/resource/uploads/product/20180907/829632386da3dc409423442fbb5023dc.jpg', null, null);
+INSERT INTO `system_file` VALUES ('144', '34import', null, null, '/resource/uploads/product/20180907/b0437ca8878b8728d0e0f151fd4cd597.jpg', null, null);
+INSERT INTO `system_file` VALUES ('145', '35import', null, null, '/resource/uploads/product/20180907/a2271e6534f93af442183ecc3573a814.jpg', null, null);
+INSERT INTO `system_file` VALUES ('146', '36import', null, null, '/resource/uploads/product/20180907/6b6eaef7b6aeaf2597879f1b5b7618a3.jpg', null, null);
+INSERT INTO `system_file` VALUES ('147', '37import', null, null, '/resource/uploads/product/20180907/8e2235d607ddbf1249686143e4113bd5.jpg', null, null);
+INSERT INTO `system_file` VALUES ('148', '38import', null, null, '/resource/uploads/product/20180907/25ccfa57c4e32f5b77105693b28f473d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('149', '39import', null, null, '/resource/uploads/product/20180907/ad37d1ae56a02e26f015562c4d9e4a90.jpg', null, null);
+INSERT INTO `system_file` VALUES ('150', '40import', null, null, '/resource/uploads/product/20180907/4427c13f29a51770f16b9cbe33235ad9.jpg', null, null);
+INSERT INTO `system_file` VALUES ('151', '41import', null, null, '/resource/uploads/product/20180907/7052245e99b2d5996c21b6f07b737988.jpg', null, null);
+INSERT INTO `system_file` VALUES ('152', '42import', null, null, '/resource/uploads/product/20180907/cd7d7d4eededa5255359b0546194fdbb.jpg', null, null);
+INSERT INTO `system_file` VALUES ('153', '43import', null, null, '/resource/uploads/product/20180907/c89db715549f93506454de2be09f09bf.jpg', null, null);
+INSERT INTO `system_file` VALUES ('154', '44import', null, null, '/resource/uploads/product/20180907/e542777ec21d3e9b718e8a7d93b01e47.jpg', null, null);
+INSERT INTO `system_file` VALUES ('155', '45import', null, null, '/resource/uploads/product/20180907/c71ac94d67f3d256ffe09c29543e3707.jpg', null, null);
+INSERT INTO `system_file` VALUES ('156', '46import', null, null, '/resource/uploads/product/20180907/2b50c43509c042b736dc9f11eec76991.jpg', null, null);
+INSERT INTO `system_file` VALUES ('157', '47import', null, null, '/resource/uploads/product/20180907/b10b32c8cfc3227666857ba2ef39478d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('158', '0import', null, null, '/resource/uploads/product/20180907/104abf2edb1e87027b4448430a842a8e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('159', '1import', null, null, '/resource/uploads/product/20180907/844d9d9f54fd4e4b6175b20974c71f3f.jpg', null, null);
+INSERT INTO `system_file` VALUES ('160', '2import', null, null, '/resource/uploads/product/20180907/0176159a14f9ad212ecb4e06a95c64f8.jpg', null, null);
+INSERT INTO `system_file` VALUES ('161', '3import', null, null, '/resource/uploads/product/20180907/e65f6e648cf9bcc11a34607118aa5985.jpg', null, null);
+INSERT INTO `system_file` VALUES ('162', '4import', null, null, '/resource/uploads/product/20180907/cc2d83e99aa196c8fb89ff286c485271.jpg', null, null);
+INSERT INTO `system_file` VALUES ('163', '5import', null, null, '/resource/uploads/product/20180907/462e29b1b2d77c703d4977d43c067d4f.jpg', null, null);
+INSERT INTO `system_file` VALUES ('164', '6import', null, null, '/resource/uploads/product/20180907/9166c77f0a91075c06ca5d153cbf400c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('165', '7import', null, null, '/resource/uploads/product/20180907/fa58b0041a927146c454f3c5062df735.jpg', null, null);
+INSERT INTO `system_file` VALUES ('166', '8import', null, null, '/resource/uploads/product/20180907/f0d342c3b946c9b3773551eee3d2be3a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('167', '9import', null, null, '/resource/uploads/product/20180907/dd01de328deebea7fbf16bf624a5fbd5.jpg', null, null);
+INSERT INTO `system_file` VALUES ('168', '10import', null, null, '/resource/uploads/product/20180907/184123ab9b372af89a06d102dba6a505.jpg', null, null);
+INSERT INTO `system_file` VALUES ('169', '11import', null, null, '/resource/uploads/product/20180907/c3f46a59cf45f0ea8fba941cbb493184.jpg', null, null);
+INSERT INTO `system_file` VALUES ('170', '12import', null, null, '/resource/uploads/product/20180907/1b44a66809672a5edf919e59e8ad5fe9.jpg', null, null);
+INSERT INTO `system_file` VALUES ('171', '13import', null, null, '/resource/uploads/product/20180907/97ab306ac06f9629a088cf68c6134579.jpg', null, null);
+INSERT INTO `system_file` VALUES ('172', '14import', null, null, '/resource/uploads/product/20180907/1fac3c46f02d3c181fa037084e11fa13.jpg', null, null);
+INSERT INTO `system_file` VALUES ('173', '15import', null, null, '/resource/uploads/product/20180907/27f589c55ca5f59a34ea0ade76edfb90.jpg', null, null);
+INSERT INTO `system_file` VALUES ('174', '16import', null, null, '/resource/uploads/product/20180907/87e143ae2eb15ea5eb46f845e2492cbb.jpg', null, null);
+INSERT INTO `system_file` VALUES ('175', '17import', null, null, '/resource/uploads/product/20180907/35c0f67f3d925a715c459659d9c782f7.jpg', null, null);
+INSERT INTO `system_file` VALUES ('176', '18import', null, null, '/resource/uploads/product/20180907/b128f8a63b8776ebf4cb8ba0238462e3.jpg', null, null);
+INSERT INTO `system_file` VALUES ('177', '19import', null, null, '/resource/uploads/product/20180907/13cfe84f65d56822853e457a8e8a17db.jpg', null, null);
+INSERT INTO `system_file` VALUES ('178', '20import', null, null, '/resource/uploads/product/20180907/7be8fe4e5f074391b276556f55841806.jpg', null, null);
+INSERT INTO `system_file` VALUES ('179', '21import', null, null, '/resource/uploads/product/20180907/a00e2742515820aa08b9f47e476efffa.jpg', null, null);
+INSERT INTO `system_file` VALUES ('180', '22import', null, null, '/resource/uploads/product/20180907/9c8802851b84a08a5f76d209fd772cd6.jpg', null, null);
+INSERT INTO `system_file` VALUES ('181', '23import', null, null, '/resource/uploads/product/20180907/58cd30416f564a902472fc59dbd1eb1d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('182', '24import', null, null, '/resource/uploads/product/20180907/db1b6bae5ed083831a1a99de0a1178da.jpg', null, null);
+INSERT INTO `system_file` VALUES ('183', '25import', null, null, '/resource/uploads/product/20180907/d9ddd8e3a01736c72d58ecb1c1fa4f57.jpg', null, null);
+INSERT INTO `system_file` VALUES ('184', '26import', null, null, '/resource/uploads/product/20180907/471e26305ebadaf19adce9e0dcfbca11.jpg', null, null);
+INSERT INTO `system_file` VALUES ('185', '27import', null, null, '/resource/uploads/product/20180907/aaf955048722e385d325a082472bfb41.jpg', null, null);
+INSERT INTO `system_file` VALUES ('186', '28import', null, null, '/resource/uploads/product/20180907/a3ad007579a0524383d3d7406b4ecd1e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('187', '29import', null, null, '/resource/uploads/product/20180907/63dd7fd7435e987a00cc347d5d17ed6d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('188', '30import', null, null, '/resource/uploads/product/20180907/8e20ca9d45e0de1b8a296c79b048fe6c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('189', '31import', null, null, '/resource/uploads/product/20180907/eee0d609c7da89e79c3ae3394f6957da.jpg', null, null);
+INSERT INTO `system_file` VALUES ('190', '32import', null, null, '/resource/uploads/product/20180907/37e872218e1f44e820cd82d1f0f7721f.jpg', null, null);
+INSERT INTO `system_file` VALUES ('191', '33import', null, null, '/resource/uploads/product/20180907/0855f024db5990ca2fd8daa1738887ec.jpg', null, null);
+INSERT INTO `system_file` VALUES ('192', '34import', null, null, '/resource/uploads/product/20180907/02109f85e6fa151ef0464b09d5059d0c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('193', '35import', null, null, '/resource/uploads/product/20180907/06583c62a87bc40f40a855497a663cd8.jpg', null, null);
+INSERT INTO `system_file` VALUES ('194', '36import', null, null, '/resource/uploads/product/20180907/06acbd947a976fff3278a52566fae9c3.jpg', null, null);
+INSERT INTO `system_file` VALUES ('195', '37import', null, null, '/resource/uploads/product/20180907/57a5689682e01630ba0c93470f0817e2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('196', '38import', null, null, '/resource/uploads/product/20180907/d057dccbb13b6d05a9b24d17cc127cb5.jpg', null, null);
+INSERT INTO `system_file` VALUES ('197', '39import', null, null, '/resource/uploads/product/20180907/32f15608d7dfbc28e1ada94de23eadae.jpg', null, null);
+INSERT INTO `system_file` VALUES ('198', '40import', null, null, '/resource/uploads/product/20180907/0865392e4a5a843808ab57c436be2591.jpg', null, null);
+INSERT INTO `system_file` VALUES ('199', '41import', null, null, '/resource/uploads/product/20180907/2c956cc6d03ea38e9baa08a4216234e6.jpg', null, null);
+INSERT INTO `system_file` VALUES ('200', '42import', null, null, '/resource/uploads/product/20180907/01331b1aa8ca41e4002cd8eda8bc889d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('201', '43import', null, null, '/resource/uploads/product/20180907/0b566ee0ef1b6db5861d9459b70771b7.jpg', null, null);
+INSERT INTO `system_file` VALUES ('202', '44import', null, null, '/resource/uploads/product/20180907/a359cbcd21be0a55b2d97f66dc404894.jpg', null, null);
+INSERT INTO `system_file` VALUES ('203', '45import', null, null, '/resource/uploads/product/20180907/031ff1b1053ed7512937d512a6c0f01e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('204', '46import', null, null, '/resource/uploads/product/20180907/e5e30416f55d360cb0d266702275bd25.jpg', null, null);
+INSERT INTO `system_file` VALUES ('205', '47import', null, null, '/resource/uploads/product/20180907/26be82dea7a6f11a482de34c805dbb27.jpg', null, null);
+INSERT INTO `system_file` VALUES ('206', '0import', null, null, '/resource/uploads/product/20180907/6721ac0ebbbbd1d807fa179c1550e8d7.jpg', null, null);
+INSERT INTO `system_file` VALUES ('207', '1import', null, null, '/resource/uploads/product/20180907/ddec78ecf5de2fe5e0d8f8206a3daa2a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('208', '2import', null, null, '/resource/uploads/product/20180907/99cdc2c6da60585998cf09ea22974ce7.jpg', null, null);
+INSERT INTO `system_file` VALUES ('209', '3import', null, null, '/resource/uploads/product/20180907/2dfabb97a9389e89da3e895474c250f4.jpg', null, null);
+INSERT INTO `system_file` VALUES ('210', '4import', null, null, '/resource/uploads/product/20180907/b88eb168e972b0a8d1447d1e92d5e1f3.jpg', null, null);
+INSERT INTO `system_file` VALUES ('211', '5import', null, null, '/resource/uploads/product/20180907/75b42b013e9fcff3674ed9295f20613b.jpg', null, null);
+INSERT INTO `system_file` VALUES ('212', '6import', null, null, '/resource/uploads/product/20180907/cfd3a7481af94b60aecbda9d18e1fc39.jpg', null, null);
+INSERT INTO `system_file` VALUES ('213', '7import', null, null, '/resource/uploads/product/20180907/1a6db3be697690bdf0da21d60e51b94d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('214', '8import', null, null, '/resource/uploads/product/20180907/a8e2ab764cd43cd5bca94ee0f32a5c9a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('215', '9import', null, null, '/resource/uploads/product/20180907/11c9706c51b2768ba01f52501c400241.jpg', null, null);
+INSERT INTO `system_file` VALUES ('216', '10import', null, null, '/resource/uploads/product/20180907/59d0180f83c0b29f8065b77f3a2358b5.jpg', null, null);
+INSERT INTO `system_file` VALUES ('217', '11import', null, null, '/resource/uploads/product/20180907/3936e14355d804598e9c4a2d55b9367a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('218', '12import', null, null, '/resource/uploads/product/20180907/0b203f4c6171744146c6900ad71c4ade.jpg', null, null);
+INSERT INTO `system_file` VALUES ('219', '13import', null, null, '/resource/uploads/product/20180907/15adf942d89af2844c6f29f70632fe57.jpg', null, null);
+INSERT INTO `system_file` VALUES ('220', '14import', null, null, '/resource/uploads/product/20180907/e08715972a38e0218f0789b2e71b4be8.jpg', null, null);
+INSERT INTO `system_file` VALUES ('221', '15import', null, null, '/resource/uploads/product/20180907/eda931eddc8bb38f2465878860447461.jpg', null, null);
+INSERT INTO `system_file` VALUES ('222', '16import', null, null, '/resource/uploads/product/20180907/2d2146fd0eda306fbab80f276a18a456.jpg', null, null);
+INSERT INTO `system_file` VALUES ('223', '17import', null, null, '/resource/uploads/product/20180907/4aa13ffd6eeda1b210d9b4dcb2b49e62.jpg', null, null);
+INSERT INTO `system_file` VALUES ('224', '18import', null, null, '/resource/uploads/product/20180907/832879cbd540ee9214ea34904def979e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('225', '19import', null, null, '/resource/uploads/product/20180907/9db3a2e7e44bb382fbbee67befe3155f.jpg', null, null);
+INSERT INTO `system_file` VALUES ('226', '20import', null, null, '/resource/uploads/product/20180907/b14e36e329f4183ca9ab3db2d2873b9e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('227', '21import', null, null, '/resource/uploads/product/20180907/4a998b36bdfc5533985fe17c882cb82d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('228', '22import', null, null, '/resource/uploads/product/20180907/7f692fd7b1a2c724bc73b89a09df7084.jpg', null, null);
+INSERT INTO `system_file` VALUES ('229', '23import', null, null, '/resource/uploads/product/20180907/48e32ad0bf42868603a98aac30f0598c.jpg', null, null);
+INSERT INTO `system_file` VALUES ('230', '24import', null, null, '/resource/uploads/product/20180907/9f257cf5eba95ab7c4cc098c7714de82.jpg', null, null);
+INSERT INTO `system_file` VALUES ('231', '25import', null, null, '/resource/uploads/product/20180907/b7367a8a526bda6b0d5a35c39a1313e0.jpg', null, null);
+INSERT INTO `system_file` VALUES ('232', '26import', null, null, '/resource/uploads/product/20180907/8fbf8f1ba248766d388941d7fdd285b2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('233', '27import', null, null, '/resource/uploads/product/20180907/5a3aa44e835bee70169150a3b797a7cd.jpg', null, null);
+INSERT INTO `system_file` VALUES ('234', '28import', null, null, '/resource/uploads/product/20180907/cd0cbb534a0671c6a88730a634f2221e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('235', '29import', null, null, '/resource/uploads/product/20180907/e011c6fb96cf8a97d3f74d7aee4797b4.jpg', null, null);
+INSERT INTO `system_file` VALUES ('236', '30import', null, null, '/resource/uploads/product/20180907/33ffb7432c5385729e72fa33ca4d3c7b.jpg', null, null);
+INSERT INTO `system_file` VALUES ('237', '31import', null, null, '/resource/uploads/product/20180907/7f840d3c57084b1948e8886317c32025.jpg', null, null);
+INSERT INTO `system_file` VALUES ('238', '32import', null, null, '/resource/uploads/product/20180907/f9a4d9f44d83292ba3f60e30d87f47fc.jpg', null, null);
+INSERT INTO `system_file` VALUES ('239', '33import', null, null, '/resource/uploads/product/20180907/aedeb42047432a5e949afec81612471a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('240', '34import', null, null, '/resource/uploads/product/20180907/870c61ef3eaa0918d4a42ea63cf13926.jpg', null, null);
+INSERT INTO `system_file` VALUES ('241', '35import', null, null, '/resource/uploads/product/20180907/ff89449a7232adf46ecc67417e9210ec.jpg', null, null);
+INSERT INTO `system_file` VALUES ('242', '36import', null, null, '/resource/uploads/product/20180907/d74e1bdb00afd4acb893309dd2609d0e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('243', '37import', null, null, '/resource/uploads/product/20180907/a1198741f04594177ec73aa3ae87e774.jpg', null, null);
+INSERT INTO `system_file` VALUES ('244', '38import', null, null, '/resource/uploads/product/20180907/046663683914c77fc1b4a9d5569d1136.jpg', null, null);
+INSERT INTO `system_file` VALUES ('245', '39import', null, null, '/resource/uploads/product/20180907/45af135fe2403c30f4c2034c728b1f90.jpg', null, null);
+INSERT INTO `system_file` VALUES ('246', '40import', null, null, '/resource/uploads/product/20180907/6a3f47b55056c810613cb1d56e110c85.jpg', null, null);
+INSERT INTO `system_file` VALUES ('247', '41import', null, null, '/resource/uploads/product/20180907/e04266489215988ebc4fbb068525c8bd.jpg', null, null);
+INSERT INTO `system_file` VALUES ('248', '42import', null, null, '/resource/uploads/product/20180907/555f93925e2cb6c1d0da3bc4c825bb61.jpg', null, null);
+INSERT INTO `system_file` VALUES ('249', '43import', null, null, '/resource/uploads/product/20180907/c9638b83cc3a5c5f882a6485024a25e2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('250', '0import', null, null, '/resource/uploads/product/20180907/6c1214d8fc93672026623219a24c31fd.jpg', null, null);
+INSERT INTO `system_file` VALUES ('251', '1import', null, null, '/resource/uploads/product/20180907/56f8c96449288abe99f7a0f39a5b3537.jpg', null, null);
+INSERT INTO `system_file` VALUES ('252', '2import', null, null, '/resource/uploads/product/20180907/e8735917376742ea6486443decabf249.jpg', null, null);
+INSERT INTO `system_file` VALUES ('253', '3import', null, null, '/resource/uploads/product/20180907/278b29b9f59b173567d81386ff062cb7.jpg', null, null);
+INSERT INTO `system_file` VALUES ('254', '4import', null, null, '/resource/uploads/product/20180907/1fa0f0d1521f506e923fc6fe933346d2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('255', '5import', null, null, '/resource/uploads/product/20180907/f04972b0d5b6ca3cc8b20c7be266ed5d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('256', '6import', null, null, '/resource/uploads/product/20180907/c450257e257ce7069055bfc7d60b399d.jpg', null, null);
+INSERT INTO `system_file` VALUES ('257', '7import', null, null, '/resource/uploads/product/20180907/4cd4827a0bf4fe5ccae3135aef1c780b.jpg', null, null);
+INSERT INTO `system_file` VALUES ('258', '8import', null, null, '/resource/uploads/product/20180907/e9a4737c67d2bb720c0a384178d89b7b.jpg', null, null);
+INSERT INTO `system_file` VALUES ('259', '9import', null, null, '/resource/uploads/product/20180907/d344bb4ef400e1834ab9b7a048c299a3.jpg', null, null);
+INSERT INTO `system_file` VALUES ('260', '10import', null, null, '/resource/uploads/product/20180907/430c21ffcdd4d3531d73bd5fcb871f34.jpg', null, null);
+INSERT INTO `system_file` VALUES ('261', '11import', null, null, '/resource/uploads/product/20180907/fa436f1ac11902a11c664d619f3b8a47.jpg', null, null);
+INSERT INTO `system_file` VALUES ('262', '12import', null, null, '/resource/uploads/product/20180907/c43f9ded033cac79eac472fa61c10a57.jpg', null, null);
+INSERT INTO `system_file` VALUES ('263', '13import', null, null, '/resource/uploads/product/20180907/f8f2d15a675df137340b22f40249d9dc.jpg', null, null);
+INSERT INTO `system_file` VALUES ('264', '14import', null, null, '/resource/uploads/product/20180907/83e5c444a7af8a13bca69de9dd2d73b6.jpg', null, null);
+INSERT INTO `system_file` VALUES ('265', '15import', null, null, '/resource/uploads/product/20180907/51af3b8c745523c6ba1e875c277e3df3.jpg', null, null);
+INSERT INTO `system_file` VALUES ('266', '16import', null, null, '/resource/uploads/product/20180907/a39b8f2a07b2fd5d4f158084ecd3ef09.jpg', null, null);
+INSERT INTO `system_file` VALUES ('267', '17import', null, null, '/resource/uploads/product/20180907/e9c7f7710d3035da08a3a807822c4d05.jpg', null, null);
+INSERT INTO `system_file` VALUES ('268', '18import', null, null, '/resource/uploads/product/20180907/99d425c91e7c24b4e4f81156c05e5f90.jpg', null, null);
+INSERT INTO `system_file` VALUES ('269', '19import', null, null, '/resource/uploads/product/20180907/9f176a328a136f55a632ce573f4948d1.jpg', null, null);
+INSERT INTO `system_file` VALUES ('270', '20import', null, null, '/resource/uploads/product/20180907/c51e6b5f8821d84b395720f9ce43f838.jpg', null, null);
+INSERT INTO `system_file` VALUES ('271', '21import', null, null, '/resource/uploads/product/20180907/ebde7af6c75888ea7d93047d76a886b7.jpg', null, null);
+INSERT INTO `system_file` VALUES ('272', '22import', null, null, '/resource/uploads/product/20180907/60716cc031ffe01e9b0b8abc24b3fcee.jpg', null, null);
+INSERT INTO `system_file` VALUES ('273', '23import', null, null, '/resource/uploads/product/20180907/cdc53eeac52a766884ad4390fa6147ae.jpg', null, null);
+INSERT INTO `system_file` VALUES ('274', '24import', null, null, '/resource/uploads/product/20180907/5c9ceb5a500c696df31fb37fe9703ca3.jpg', null, null);
+INSERT INTO `system_file` VALUES ('275', '25import', null, null, '/resource/uploads/product/20180907/326bd2633746b2ce047e24a5545935e2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('276', '26import', null, null, '/resource/uploads/product/20180907/e75fb5b610a3b1c705befec20d015294.jpg', null, null);
+INSERT INTO `system_file` VALUES ('277', '27import', null, null, '/resource/uploads/product/20180907/db22d5f99144f16a51ed4712632bc458.jpg', null, null);
+INSERT INTO `system_file` VALUES ('278', '28import', null, null, '/resource/uploads/product/20180907/469859a25e7069e62d17330c8b9de819.jpg', null, null);
+INSERT INTO `system_file` VALUES ('279', '29import', null, null, '/resource/uploads/product/20180907/e278dbed84939730c634f10e220bb19a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('280', '30import', null, null, '/resource/uploads/product/20180907/131048e89073642718040361ad36e481.jpg', null, null);
+INSERT INTO `system_file` VALUES ('281', '31import', null, null, '/resource/uploads/product/20180907/a5e0b648e30d5181a317fb36d33422a2.jpg', null, null);
+INSERT INTO `system_file` VALUES ('282', '32import', null, null, '/resource/uploads/product/20180907/6905548af8da436da3a2a5a55b901f5a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('283', '33import', null, null, '/resource/uploads/product/20180907/6ebf48eaf2e99a33fa2958b0f8f7900e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('284', '34import', null, null, '/resource/uploads/product/20180907/5459d17ecc46766c507070f3e4ab9e81.jpg', null, null);
+INSERT INTO `system_file` VALUES ('285', '35import', null, null, '/resource/uploads/product/20180907/58bb7f4af80e92fea393fbe3f379a7d7.jpg', null, null);
+INSERT INTO `system_file` VALUES ('286', '36import', null, null, '/resource/uploads/product/20180907/0b13ab790a95e516cdf67a934b498a6a.jpg', null, null);
+INSERT INTO `system_file` VALUES ('287', '37import', null, null, '/resource/uploads/product/20180907/ed4533d07fdabe3cc5b747df3814426e.jpg', null, null);
+INSERT INTO `system_file` VALUES ('288', '38import', null, null, '/resource/uploads/product/20180907/671560ed411118257f22df8cf1ef7869.jpg', null, null);
+INSERT INTO `system_file` VALUES ('289', '39import', null, null, '/resource/uploads/product/20180907/2a454bd128c6478186ec3d3f7f7257dc.jpg', null, null);
+INSERT INTO `system_file` VALUES ('290', '40import', null, null, '/resource/uploads/product/20180907/7f243e1b914019ea5cc1ced110868f1b.jpg', null, null);
+INSERT INTO `system_file` VALUES ('291', '41import', null, null, '/resource/uploads/product/20180907/07a2aff9e3b1405d9045a3623b69af50.jpg', null, null);
+INSERT INTO `system_file` VALUES ('292', '42import', null, null, '/resource/uploads/product/20180907/12f42537d2004399f5c9153584578467.jpg', null, null);
+INSERT INTO `system_file` VALUES ('293', '43import', null, null, '/resource/uploads/product/20180907/9bae55b8189c0872e276ce461ababeef.jpg', null, null);
 
 -- ----------------------------
 -- Table structure for system_gateway

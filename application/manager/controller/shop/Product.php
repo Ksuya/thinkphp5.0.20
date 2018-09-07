@@ -14,7 +14,7 @@ class Product extends ManagerBase{
     {
         $this->theme = '商品';
         $this->model = model('ShopProduct');
-        $this->field = 'a.*,b.path,c.name as cate_name,d.name as brand_name';
+        $this->field = 'a.*,b.path as posters_path,c.name as cate_name,d.name as brand_name';
         $this->con = [];
         $this->join = [
             ['system_file b','a.posters = b.id','left'],

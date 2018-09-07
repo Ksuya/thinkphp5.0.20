@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:96:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\shop\product\index.html";i:1536219900;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-table.html";i:1536232991;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1536223691;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:96:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\shop\product\index.html";i:1536301038;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-table.html";i:1536296598;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1536223691;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,11 +47,9 @@
     <li class="active">商品管理</li>
 </ol>
 
-    <div class="row">
-        <div class="col-sm-2" style="overflow: auto">
-            <div id="tree"></div>
-        </div>
-        <div class="col-sm-10">
+    
+    
+
             <div id="toolbar" class="btn-group">
                 <div id="table-btn-list">
                     <form action="" id="tb_departments_SearchTableForm">
@@ -111,8 +109,8 @@
                 </div>
             </div>
             <table id="tb_departments" class="table table-hover table-striped table-extra"></table>
-        </div>
-    </div>
+    
+    
 </div>
 <div class="modal fade right" id="tb_departments_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -134,7 +132,7 @@
     <?php echo formInput('市场价格:','market_price',0); ?>
     <?php echo formInput('商品排序:','sort',0,'number'); ?>
     <?php echo formInput('商品库存:','stock',0,'number'); ?>
-    <?php echo formFile('商品图片','posters',5); ?>
+    <?php echo formFile('商品图片','posters',1); ?>
     <?php echo formEditor('商品详情','details'); ?>
 </div>
 <div class="modal-footer modal-my-bottom">

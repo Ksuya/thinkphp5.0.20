@@ -101,7 +101,7 @@
 .Version-bd-focus{ width:192px; height:295px ; margin-top:20px; border:4px solid #dedede ; border-left:3px solid #dedede; border-right:3px solid #dedede}
 .Version-bd-focus img{ width:192px; height:295px ; }
 
-.Version-bd-pro{ width:780px ; height:480px;background:url(../img/sprite/sprite-point.jpg) repeat-x 0 239px ; }								 
+.Version-bd-pro{height:480px;background:url(../img/sprite/sprite-point.jpg) repeat-x 0 239px ; }
 .Version-bd-pro ul li{ width:194px ; height:240px; float:left ; display:inline ; border-right:1px solid #dedede ; position:relative ;}								 
 .Version-bd-pro .hd{ height:30px; line-height:14px;}
 .Version-bd-pro-text{ padding:10px 10px 0 25px;}

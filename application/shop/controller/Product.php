@@ -25,7 +25,7 @@ class Product extends Shopbase{
             ->where('category_id','in',$list)
             ->field('a.id,a.name,a.shop_price,b.path')
             ->join([['system_file b','a.posters = b.id','left']])
-            ->paginate(12,false,[
+            ->paginate(15,false,[
                 'type'     => 'bootstrap',
                 'var_page' => 'page',
             ]);

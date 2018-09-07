@@ -82,6 +82,7 @@ function generateTableAtions(row,primarykey,actions) {
     var primarykey = primarykey ? primarykey : 'id';
     if(actions){
         if(typeof actions == 'object'){
+            var defaultAction = [];
             for(var i=0;i<actions.length;i++){
                 defaultAction.push(actions[i]);
             }
@@ -100,6 +101,7 @@ function generateTableAtions(row,primarykey,actions) {
     return html;
 }
 
+// 常规编辑数据
 $(document).on('click','.row-edit',function (e) {
     var _this = $(e.target);
     var uniqueId = $(_this).attr("data-index");
@@ -110,6 +112,7 @@ $(document).on('click','.row-edit',function (e) {
     renderForm(modalForm,data);
 });
 
+// 常规删除数据
 $(document).on('click','.row-delete',function (e) {
     var _this = $(e.target);
     var uniqueId = $(_this).attr("data-index");
@@ -142,3 +145,21 @@ function queryParams(params) {
     data.sort = params.sort;
     return data;
 }
+
+// 订单详情
+$(document).on('click', '.row-order-info', function (e) {
+    var _this = $(e.target);
+    var uniqueId = $(_this).attr("data-index");
+    pbAjax(_this,'/manager/shop.order/detail',{id:uniqueId},function (res) {
+        $("body").find("#detail").find(".modal-body").html(res);
+    },'post','html')
+});
+
+// 订单发货
+$(document).on('click', '.row-order-send', function (e) {
+    var _this = $(e.target);
+    var uniqueId = $(_this).attr("data-index");
+    var modalForm = $($(_this).attr("data-target")).find("form");
+    var data = {'id':uniqueId};
+    renderForm(modalForm,data);
+});

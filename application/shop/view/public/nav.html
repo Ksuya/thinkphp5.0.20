@@ -31,13 +31,16 @@
         <div class="searchinput fr">
             <!--搜索-->
             <div class="S-bg">
-                <form action="{:url('index/search')}" method="post">
+                <form action="{:url('index/search')}" method="get">
                     <input type="text" class="S-text fl" name="keywords" placeholder="请输入关键词搜索" style="color:#c4c4c4" />
-                    <input type="button" class="S-submit size14 fl" value="搜索">
+                    <input type="submit" class="S-submit size14 fl" value="搜索">
                 </form>
             </div>
             <!--热词-->
             <div class="hot-words">
+                {foreach $his as $k=>$v}
+                <a href="{:url('index/search',['keywords'=>$v['keywords']])}">{$v.keywords}</a>
+                {/foreach}
             </div>
         </div>
     </div>

@@ -8,6 +8,8 @@
 // +----------------------------------------------------------------------
 namespace app\shop\controller;
 use app\common\controller\Base;
+use function Sodium\library_version_major;
+
 class Shopbase extends Base{
 
     public $models = [];
@@ -24,6 +26,8 @@ class Shopbase extends Base{
                 $nav[] = $v;
             }
         }
+        // 获取搜索历史
+        $his = model('ShopSearch')->order('create_time desc')->limit(5)->field('keywords')->select()->toArray();
         // 所有导航
         $allNav = list_to_tree($allNav,'id','parent_id','subNav');
         // 获取底部
@@ -31,7 +35,7 @@ class Shopbase extends Base{
         $catelog = list_to_tree($catelog,'id','parent_id','subLog');
         // 获取商城配置
         $cfg = model('ShopConfig')->getHashConf(1);
-        $publicData = compact('nav','catelog','cfg','allNav');
+        $publicData = compact('nav','catelog','cfg','allNav','his');
         $this->assign($publicData);
     }
 

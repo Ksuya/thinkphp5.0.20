@@ -21,7 +21,7 @@ class Category extends ManagerBase{
     public function index()
     {
         // 获取所有分类
-        $list = $this->model->field('id,name,parent_id')->select();
+        $list = $this->model->field('id,name,parent_id')->select()->toArray();
         $list = getSubs($list,'parent_id');
         array_unshift($list,['id'=>0,'name'=>'顶级分类','parent_id'=>0]);
         return view('',['cates'=>$list]);

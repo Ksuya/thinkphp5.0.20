@@ -53,6 +53,59 @@
 </button>
 {/block}
 {block name="table-script"}
+<div class="modal fade right" id="detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">订单详情</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer modal-my-bottom">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade right" id="send" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal" role="form"  action="{:url('sendExp')}">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel2">发货</h4>
+                </div>
+                <div class="modal-body">
+                    {:token('token_order_actions','shal')}
+                    <input type="hidden" name="id" value="">
+                    {:formSelect('快递公司:','express_id',[
+                        ['id'=>'ems','name'=>'ems快递'],
+                        ['id'=>'shentong','name'=>'申通快递'],
+                        ['id'=>'yuantong','name'=>'圆通速递'],
+                        ['id'=>'shunfeng','name'=>'顺丰速运'],
+                        ['id'=>'tiantian','name'=>'天天快递'],
+                        ['id'=>'yunda','name'=>'韵达快递'],
+                        ['id'=>'zhongtong','name'=>'中通速递'],
+                        ['id'=>'longbanwuliu','name'=>'龙邦物流'],
+                        ['id'=>'zhaijisong','name'=>'宅急送'],
+                        ['id'=>'deppon','name'=>'德邦物流'],
+                    ],'id','name')}
+                    {:formInput('快递单号:','express_code','')}
+                </div>
+                <div class="modal-footer modal-my-bottom">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary form-ajax-submit">发货</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script>
     var tableId = 'tb_departments';
     var url = "{:url('dataList')}";
@@ -76,9 +129,18 @@
         {field: 'create_time', title: '下单时间', sortable: true},
         {
             field: '', title: '操作', formatter: function (value, row, index) {
-                return generateTableAtions(row, 'id');
-            }
-        },
+                if(row.progress.id == 1){
+                    return generateTableAtions(row, 'id',[
+                        {'name':'详情','class':'btn-info row-order-info','modal':"detail"},
+                        {'name':'发货','class':'btn-success row-order-send','modal':"send"}
+                    ]);
+                }else{
+                    return generateTableAtions(row, 'id',[
+                        {'name':'详情','class':'btn-info row-order-info','modal':"detail"}
+                    ]);
+                }
+
+        }}
     ];
     var sortName = 'a.create_time';
     var sortOrder = 'desc';
