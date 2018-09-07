@@ -109,7 +109,7 @@ class Index extends Shopbase{
     public function help($id=12)
     {
         $info = model('ShopCatelog')->field('id,title,content')->where('id',$id)->find();
-        return view('',['info'=>$info,'id'=>$id]);
+        return view('',['info'=>$info,'id'=>$id,'cur_title'=>'帮助中心_'.$info['title']]);
     }
 
     public function search()

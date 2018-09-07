@@ -17,6 +17,6 @@ class ShopProduct extends Base{
 
     public function detail($id)
     {
-        return $this->alias('a')->field('a.id,a.name,a.shop_price,a.market_price,a.stock,a.sale_number,a.details,b.path')->join([['system_file b','a.posters = b.id','left']])->where('a.id',$id)->find()->toArray();
+        return $this->alias('a')->field('a.id,a.name,a.configure,a.shop_price,a.market_price,a.stock,a.sale_number,a.details,b.path')->join([['system_file b','a.posters = b.id','left']])->where('a.id',$id)->find()->toArray();
     }
 }

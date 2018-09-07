@@ -13,7 +13,7 @@ class Product extends Shopbase{
     public function detail($id)
     {
         $info = model('ShopProduct')->detail($id);
-        return view('',['info'=>$info]);
+        return view('',['info'=>$info,'cur_title'=>$info['name']]);
     }
 
     public function cate($id)
