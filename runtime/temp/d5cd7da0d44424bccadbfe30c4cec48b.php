@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/blog\view\index\index.html";i:1536236001;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\header.html";i:1536234191;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\nav.html";i:1536236218;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\footer.html";i:1535621950;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/blog\view\index\index.html";i:1536555515;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\header.html";i:1536234191;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\nav.html";i:1536556187;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\blog\view\public\footer.html";i:1535621950;}*/ ?>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
@@ -21,18 +21,18 @@
                 <ul class="nav navbar-nav">
                     <?php foreach($nav as $k=>$v): if(!empty($v['subNav'])): ?>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                                     <?php echo $v['name']; ?>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <?php foreach($v['subNav'] as $k2=>$v2): ?>
-                                    <li><a href="#"><?php echo $v2['name']; ?></a></li>
+                                    <li><a href="<?php echo url('article/cate',['cid'=>$v2['id']]); ?>"><?php echo $v2['name']; ?></a></li>
                                     <?php endforeach; ?>
                                 </ul>
                             </li>
                         <?php else: ?>
-                            <li><a href="#"><?php echo $v['name']; ?></a></li>
+                            <li><a href="<?php echo url('article/cate',['cid'=>$v['id']]); ?>"><?php echo $v['name']; ?></a></li>
                         <?php endif; endforeach; ?>
                 </ul>
             </div>
@@ -89,15 +89,6 @@
                 </li>
                 <?php endforeach; ?>
             </ul>
-            <!--<ul class="pagination pagination-lg" style="float: right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>-->
         </div>
         <div class="col-sm-4">
             <h2>标签</h2>

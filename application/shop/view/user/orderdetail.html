@@ -45,12 +45,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td height="30" colspan="2">物流公司：{$order.express_id.name} 运单号码：{$order.express_code}</td>
+                    <td height="30" colspan="2">物流公司：{$order.express_id.name} </td>
+                    <td height="30" colspan="2">运单号码：{$order.express_code} </td>
                 </tr>
                 <tr>
                     {foreach $order.route as $k=>$v}
                     <td height="30" colspan="2" style="color:#ff6600">
                         物流跟踪：{$v.time } {$v.context}
+                        <br />
                     </td>
                     <br />
                     {/foreach}
