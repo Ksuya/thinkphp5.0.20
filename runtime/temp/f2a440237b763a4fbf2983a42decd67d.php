@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"D:\phpStudy\PHPTutorial\WWW\payment\public/../application/index\view\index\index.html";i:1536329506;}*/ ?>
 
 <!DOCTYPE html>
 <html lang="cn">
@@ -17,7 +18,7 @@
 </div>
 <script>
     $("#pay").click(function () {
-        var url = "{:url('pay')}";
+        var url = "<?php echo url('pay'); ?>";
         $.post(url,{},function (res) {
             console.log(res)
         });
