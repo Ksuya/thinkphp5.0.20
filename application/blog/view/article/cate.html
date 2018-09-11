@@ -3,21 +3,25 @@
 {include file="blog@public/nav"}
 <div class="container">
     <div class="page-header">
-        <h1>页面标题实例
+        <h1>{$info.name}
             <small>
-                简介
-                <span class="label label-default">默认标签</span>
-                <span class="label label-default">默认标签</span>
+                {$info.description|substr=0,60}
             </small>
         </h1>
     </div>
     <div class="row">
         <div class="col-sm-8">
-            <div class="panel panel-default">
-                <div class="panel-body">
-
-                </div>
-            </div>
+            <ul class="r_box">
+                {foreach $list as $K=>$v}
+                <li style="cursor: pointer"><i><a href="{:url('/blog/article/info',['id'=>$v.id])}" title="{$v.title}"><img
+                        src="http://www.yangqq.com/d/file/blogs/2018-06-18/0daedba8782d1b87dd38d9914d9cee3f.png"
+                        alt="{$v.title}？"></a></i>
+                    <h3>[ 顶 ] <a href="{:url('/blog/article/info',['id'=>$v.id])}">{$v.title}</a></h3>
+                    <p>{$v.description}</p>
+                </li>
+                {/foreach}
+            </ul>
+            {$page}
         </div>
         <div class="col-sm-4">
             <h2>标签</h2>

@@ -9,18 +9,18 @@
                     {foreach $nav as $k=>$v}
                         {if !empty($v['subNav'])}
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                                     {$v.name}
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     {foreach $v.subNav as $k2=>$v2}
-                                    <li><a href="#">{$v2.name}</a></li>
+                                    <li><a href="{:url('article/cate',['cid'=>$v2.id])}">{$v2.name}</a></li>
                                     {/foreach}
                                 </ul>
                             </li>
                         {else}
-                            <li><a href="#">{$v.name}</a></li>
+                            <li><a href="{:url('article/cate',['cid'=>$v.id])}">{$v.name}</a></li>
                         {/if}
                     {/foreach}
                 </ul>
