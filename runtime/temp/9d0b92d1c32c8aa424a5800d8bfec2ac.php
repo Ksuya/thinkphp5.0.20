@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\open\forget.html";i:1536227445;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"D:\phpStudy\PHPTutorial\WWW\payment\public/../application/shop\view\open\login.html";i:1536327106;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -34,60 +34,55 @@
 </div>
 
 
-<!-- 找回密码 -->
+<!-- 登录 -->
 <div class="login-body shadow center">
 
-    <div class="clear center" style=" width:94% ; height:auto ; padding-top:20px; "><span style="display:none"></span>
-        <div class="find-title">
-            <a href="#" id="current">绑定邮箱找回</a>
-        </div>
-    </div>
-    <div class="login-enter zhuceInput center">
-        <form action="<?php echo url('modify'); ?>">
+    <div class="clear center" style=" width:94% ; height:60px ; "><span style="display:none">！</span></div>
+    <div class="login-enter enterInput center">
+        <form action="<?php echo url('check'); ?>">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td width="2%" rowspan="4">&nbsp;</td>
-                    <td width="62%">
-                        <div>输入邮箱</div>
-                        <input type="email" class="login-input-text input-long  box-shadow" id="email" value="" name="email"/>
-                    </td>
-                    <td width="5%" rowspan="4" style="border-left:1px dotted #ccc">&nbsp;</td>
-                    <td width="31%" rowspan="4" valign="top">
-                        <div>
-                            <p>已有美博城账号？</p>
-                            <p><a href="<?php echo url('login'); ?>" class="btn-enter css3bg border-radius"> 现在登录 </a></p>
+                    <td width="67%" rowspan="5">
+                        <div class="login-focus fr" style="border-right:1px dotted #ccc">
+                            <img src="/static/shop/img/other/focus01.jpg" width="450" height="295"/>
                         </div>
-                        <div style="border-top:1px dotted #ccc ; margin-top:40px; padding-bottom:30px; _padding-bottom:10px; width:80%"></div>
+                    </td>
+                    <td width="33%">
+                        <input type="text" class="login-input-text  box-shadow fl" id="user" value=""
+                               placeholder="请输入邮箱/手机" name="username"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div>设置新密码</div>
-                        <input type="password" class="login-input-text login-input-password input-long box-shadow"
-                               value="" name="password"/>
+                        <input type="password" class="login-input-text login-input-password box-shadow fl" id="mima"
+                               placeholder="请输入密码" value="" name="password"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <div>输入验证码</div>
-                        <input type="password" class="login-input-text box-shadow validation fl" placeholder="点击获取验证码,在邮箱获取" value="" name="code"
-                               style=" width:170px"/>
-                        <button class="send border-radius fl getEmailCode" type="button">免费获取验证码</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p style="padding-top:5px ; _padding-top:5px">
-                            <button class="login-input-submit fl shop-submit" type="button">确 认</button>
+                    <td><p style="padding-top:15px ; _padding-top:5px">
+                            <button class="login-input-submit fl shop-submit" type="button">登 录</button>
                         </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="border-bottom:1px dotted #CCCCCC ; width:250px ; padding:7px 0 ; margin-bottom:7px">
+                            <a href="<?php echo url('forget'); ?>">忘了密码？</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="<?php echo url('register'); ?>">注册新帐号</a>&nbsp;&nbsp;
+                        </div>
+
+
                     </td>
                 </tr>
             </table>
         </form>
     </div>
-    <div class="clear center" style=" width:94% ; height:50px ; "><span style="display:none">此DIV起增高作用！</span></div>
+    <div class="clear center" style=" width:94% ; height:60px ; "><span style="display:none"></span></div>
 
 </div>
+
 <!-- 底部 -->
 <div class="login-bottom center">
     <p>

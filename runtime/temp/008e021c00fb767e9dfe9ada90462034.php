@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\user\order.html";i:1536136411;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536321476;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536296161;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\personal-left.html";i:1535975208;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:84:"D:\phpStudy\PHPTutorial\WWW\payment\public/../application/shop\view\index\index.html";i:1536327106;s:76:"D:\phpStudy\PHPTutorial\WWW\payment\application\shop\view\public\header.html";i:1536327106;s:73:"D:\phpStudy\PHPTutorial\WWW\payment\application\shop\view\public\nav.html";i:1536327106;s:76:"D:\phpStudy\PHPTutorial\WWW\payment\application\shop\view\public\footer.html";i:1535978470;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -16,7 +16,6 @@
     <script src="/static/system/core.js"></script>
     <script src="/static/shop/js/members.js"></script>
 </head>
-<link href="/static/shop/css/user.css" rel="stylesheet" type="text/css"/>
 <body>
 <!-- 顶部 -->
 <div class="index-top-box">
@@ -92,82 +91,105 @@
 </div>
 <!--导航结束-->
 <div class="clear"></div>
-<!--位置-->
-<div class="user_here center">所在的位置：中国美博城 > 我的订单</div>
-<!--用户管理中心-->
-<div class="user_center center">
-    <!--左侧-->
-<div class="user_left fl">
-    <div class="user_head"><img src="/static/shop/img/user/user_head.gif" /></div>
-    <div class="user_menu">
-        <ul>
-            <h2><img src="/static/shop/img/user/menu04.jpg" /><span class="" style="display:none">个人信息</span></h2>
-            <li><a href="<?php echo url('user/index'); ?>">&gt;&gt;&nbsp;编辑资料</a></li>
-        </ul>
-        <ul>
-            <h2><img src="/static/shop/img/user/menu03.jpg" /><span class="" style="display:none">账户信息</span></h2>
-            <li><a href="<?php echo url('user/address'); ?>" >&gt;&gt;&nbsp;收货地址</a></li>
-        </ul>
-
-        <ul>
-            <h2><img src="/static/shop/img/user/menu01.jpg" /><span class="" style="display:none">订单查询</span></h2>
-            <li><a href="<?php echo url('user/carts'); ?>">&gt;&gt;&nbsp;我的购物车</a></li>
-            <li><a href="<?php echo url('user/order'); ?>">&gt;&gt;&nbsp;我的订单</a></li>
-        </ul>
-        <ul>
-            <h2><img src="/static/shop/img/user/menu02.jpg" /><span class="" style="display:none">自助服务</span></h2>
-            <li><a href="<?php echo url('index/help'); ?>">&gt;&gt;&nbsp;帮助中心</a></li>
-        </ul>
-    </div>
-</div>
-    <!--右侧-->
-    <div class="user_right fr">
-        <div class="user_dingdan">
-            <span class="fr"><a href=""></a></span>
-            <p>我的订单</p>
+<!--banner 开始-->
+<div class="slideBox center">
+    <script language="javascript" src="/static/shop/js/common.js"></script>
+    <script language="javascript" src="/static/shop/js/nav.js"></script>
+    <div class="menuNav">
+        <h2></h2>
+        <div class="navlist" id="SNmenuNav" >
+            <?php foreach($allNav as $k=>$v): ?>
+            <dl>
+                <dt class="icon03" ><a href="<?php echo url('product/cate',['id'=>$v['id']]); ?>"><?php echo $v['name']; ?> </a></dt>
+                <?php if(!empty($v['subNav'])): ?>
+                <dd class="menv<?php echo $k; ?>">
+                    <div class="menv0<?php echo $k; ?>_left">
+                        <ul>
+                            <?php foreach($v['subNav'] as $k2=>$v2): ?>
+                            <li><a href="<?php echo url('product/cate',['id'=>$v2['id']]); ?>" title="<?php echo $v2['name']; ?>"><h3 style="color:#d51938; float:left;"><?php echo $v2['name']; ?></h3></a>
+                                <br />
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </dd>
+                <?php endif; ?>
+            </dl>
+            <?php endforeach; ?>
         </div>
-        <div class="shopping_list">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-
-                    <td class="table_manu">订单编号</td>
-                    <td class="table_manu" width="100">订单金额</td>
-                    <td class="table_manu" width="100">支付方式</td>
-                    <td class="table_manu" width="100">支付状态</td>
-                    <td class="table_manu" width="100">物流状态</td>
-                    <td class="table_manu" width="100">下单时间</td>
-                    <td class="table_manu" width="100">操作</td>
-                </tr>
-                <?php foreach($orders as $k=>$v): ?>
-                <tr class="goodsbg">
-                    <td><?php echo $v['order_no']; ?></td>
-                    <td><?php echo $v['order_amount']; ?></td>
-                    <td><?php echo $v['pay_type']['name']; ?></td>
-                    <td><?php echo $v['status']['name']; ?></td>
-                    <td><?php echo $v['progress']['name']; ?></td>
-                    <td><?php echo $v['create_time']; ?></td>
-                    <td>
-                        <div class="caozuo">
-                            <?php if($v['progress']['id'] == 0 or $v['progress']['id'] == 3): ?>
-                            <p><a href="javascript:void(0);" class="del-orders" data-id="<?php echo $v['id']; ?>">删除</a></p>
-                            <?php endif; ?>
-                            <p><a href="<?php echo url('orderDetail',['id'=>$v['id']]); ?>" data-id="<?php echo $v['id']; ?>">详情</a></p>
-                            <?php if($v['status']['id'] == 0): ?>
-                            <!--<p><a href="javascript:void(0);" data-id="<?php echo $v['id']; ?>">去支付</a></p>-->
-                            <?php endif; if($v['progress']['id'] == 2): ?>
-                            <p><a href="javascript:void(0);" class="orders-complete" data-id="<?php echo $v['id']; ?>">确认收货</a></p>
-                            <?php endif; ?>
-                        </div>
-                    </td>
-                </tr>
+    </div>
+    <!--幻灯片-->
+    <script type="text/javascript" src="/static/shop/js/jquery.pack.js"></script>
+    <script type="text/javascript" src="/static/shop/js/jquery.SuperSlide.js"></script>
+    <div class="index_slide fr">
+        <div class="hd">
+            <ul>
+                <?php foreach($banner as $k=>$v): ?>
+                <li><?php echo $k+1; ?></li>
                 <?php endforeach; ?>
-            </table>
+            </ul>
+        </div>
+        <div class="bd">
+            <ul>
+                <?php foreach($banner as $k=>$v): ?>
+                <li><img title="<?php echo $v['name']; ?>" src="<?php echo $v['path']; ?>" width="980" height="420" /></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <!--商城公告-->
+        <div class="index-notice" style="display: none;">
+            <div class="notice-title">&nbsp;&nbsp;商城公告</div>
+            <div class="notice-news center">
+                <ul>
+                    <li><a href="#"><img src="/static/shop/img/other/14.gif" /> </a><a href="#"  ><img src="/static/shop/img/other/12.jpg" /> </a></li>
+                </ul>
+            </div>
+        </div>
 
-            <div style="float: right;"></div><?php echo $page; ?>
+    </div>
+    <script type="text/javascript">jQuery(".index_slide").slide( { mainCell:".bd ul",effect:"top",autoPlay:true} );</script>
+</div>
+
+<!--爆品疯抢-->
+<script src="/static/shop/js/tab.js"></script>
+
+<?php foreach($showNav as $k=>$v): ?>
+<div class="Version-world center">
+    <div class="VersionBox fl" style="width: 100%">
+        <div class="Version-hd">
+            <div class="fl here-hd" style=""><?php echo $k+1; ?>F</div><div class="fl size16-b color2">&nbsp;<?php echo $v['name']; ?></div>
+            <div class="fl" style="padding-left:100px;"></div>
+        </div>
+        <div class="Version-bd" style="width: 100%;">
+            <div class="fl Version-bd-left">
+                <dl class="Version-bd-left-text center">
+                    <?php foreach($v['childs'] as $k2=>$v2): ?>
+                    <dd><a href="<?php echo url('product/cate',['id'=>$v2['id']]); ?>"><?php echo $v2['name']; ?></a></dd>
+                    <?php endforeach; ?>
+                </dl>
+                <div class="Version-bd-focus">
+                    <a ><img src="<?php echo $v['path']; ?>" width="190" height="295" /></a>
+                </div>
+            </div>
+            <div class="Version-bd-pro">
+                <ul>
+                    <?php foreach($v['products'] as $k2=>$v2): ?>
+                    <li>
+                        <div align="center" style="padding-top:10px;">
+                            <a href="<?php echo url('product/detail',['id'=>$v2['id']]); ?>" title="<?php echo $v2['name']; ?>"><img src="<?php echo $v2['path']; ?>" width="150" height="150" /></a>
+                        </div>
+                        <div class="Version-bd-pro-text">
+                            <p class="hd"><a href="<?php echo url('product/detail',['id'=>$v2['id']]); ?>" title="<?php echo $v2['name']; ?>"><?php echo $v2['name']; ?></a></p>
+                            <p>价格：<span class="color4 size14">￥<?php echo $v2['shop_price']; ?></span></p>
+                        </div>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
-</div>
+<?php endforeach; ?>
 
 <div class="clear" style="height:30px"></div>
 

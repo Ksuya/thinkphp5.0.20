@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:95:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\shop\config\index.html";i:1536227229;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1536223691;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:93:"D:\phpStudy\PHPTutorial\WWW\payment\public/../application/manager\view\shop\config\index.html";i:1536327106;s:84:"D:\phpStudy\PHPTutorial\WWW\payment\application\common\view\public\admin-header.html";i:1536327106;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>

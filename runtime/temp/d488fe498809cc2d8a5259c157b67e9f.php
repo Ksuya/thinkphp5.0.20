@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:89:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/shop\view\product\detail.html";i:1536321333;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\header.html";i:1536321476;s:75:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\nav.html";i:1536296161;s:78:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\shop\view\public\footer.html";i:1535975239;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:87:"D:\phpStudy\PHPTutorial\WWW\payment\public/../application/shop\view\product\detail.html";i:1536327106;s:76:"D:\phpStudy\PHPTutorial\WWW\payment\application\shop\view\public\header.html";i:1536327106;s:73:"D:\phpStudy\PHPTutorial\WWW\payment\application\shop\view\public\nav.html";i:1536327106;s:76:"D:\phpStudy\PHPTutorial\WWW\payment\application\shop\view\public\footer.html";i:1535978470;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

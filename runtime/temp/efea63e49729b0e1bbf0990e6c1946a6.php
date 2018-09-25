@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:97:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\blog\category\index.html";i:1536228822;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-table.html";i:1536296598;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1536223691;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:93:"D:\phpStudy\PHPTutorial\WWW\payment\public/../application/manager\view\shop\banner\index.html";i:1536327106;s:83:"D:\phpStudy\PHPTutorial\WWW\payment\application\common\view\public\admin-table.html";i:1536327106;s:84:"D:\phpStudy\PHPTutorial\WWW\payment\application\common\view\public\admin-header.html";i:1536327106;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +43,7 @@
     
 <ol class="breadcrumb">
     <li><a>首页</a></li>
-    <li><a>文章管理</a></li>
+    <li><a>商城管理</a></li>
     <li class="active">分类管理</li>
 </ol>
 
@@ -55,30 +55,9 @@
                     <form action="" id="tb_departments_SearchTableForm">
                         
 <div class="my-container">
-    <label class="myLabel-content">分类名称：</label>
+    <label class="myLabel-content">轮播名称：</label>
     <div class="myText-content">
         <input type="text" name="a.name" class="form-control" placeholder="输入分类名称">
-    </div>
-</div>
-<div class="my-container">
-    <label class="myLabel-content">上级分类：</label>
-    <div class="myText-content">
-        <select class="form-control" name="a.parent_id">
-            <option value="">全部</option>
-            <?php if(is_array($cates) || $cates instanceof \think\Collection || $cates instanceof \think\Paginator): $i = 0; $__LIST__ = $cates;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?>
-            <option value="<?php echo $item['id']; ?>"><?php echo $item['name']; ?></option>
-            <?php endforeach; endif; else: echo "" ;endif; ?>
-        </select>
-    </div>
-</div>
-<div class="my-container">
-    <label class="myLabel-content">是否导航：</label>
-    <div class="myText-content">
-        <select class="form-control" name="a.is_menu">
-            <option value="">全部</option>
-            <option value="0">否</option>
-            <option value="1">是</option>
-        </select>
     </div>
 </div>
 <div class="my-container">
@@ -124,13 +103,10 @@
     <h4 class="modal-title" id="myModalLabel">添加分类</h4>
 </div>
 <div class="modal-body">
-    <?php echo token('token_category_actions','shal'); ?>
+    <?php echo token('token_banner_actions','shal'); ?>
     <input type="hidden" name="id" value="">
-    <?php echo formInput('分类名称:','name','','text'); ?>
-    <?php echo formSelect('上级分类:','parent_id',$cates,'id','name'); ?>
-    <?php echo formInput('分类排序:','sort',0,'number'); ?>
-    <?php echo formCheck('radio','导航显示','is_menu',[['id'=>0,'name'=>'否'],['id'=>1,'name'=>'是']],'id','name'); ?>
-
+    <?php echo formInput('轮播名称:','name','','text'); ?>
+    <?php echo formFile('轮播图片','posters',1); ?>
 </div>
 
                 <div class="modal-footer modal-my-bottom">
@@ -149,18 +125,10 @@
     var formModal = 'tb_departments_Modal';
     var fields = [
         {checkbox: true},
-        {field: 'name', title: '分类名称'},
-        {field: 'parent_name', title: '上级分类'},
-        {
-            field: 'is_menu', title: '导航显示', formatter: function (value) {
-                if (value == 1) {
-                    return '是';
-                } else {
-                    return '否';
-                }
-            }
-        },
-        {field: 'sort', title: '分类排序', sortable: true},
+        {field: 'name', title: '轮播名称'},
+        {field: 'type', title: '位置',formatter:function (value) {
+                return value.name;
+            }},
         {field: 'create_time', title: '添加时间', sortable: true},
         {
             field: '', title: '操作', formatter: function (value, row, index) {

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:96:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\shop\product\index.html";i:1536301038;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-table.html";i:1536296598;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1536223691;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:93:"D:\phpStudy\PHPTutorial\WWW\payment\public/../application/manager\view\shop\member\index.html";i:1536327106;s:83:"D:\phpStudy\PHPTutorial\WWW\payment\application\common\view\public\admin-table.html";i:1536327106;s:84:"D:\phpStudy\PHPTutorial\WWW\payment\application\common\view\public\admin-header.html";i:1536327106;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +44,7 @@
 <ol class="breadcrumb">
     <li><a>首页</a></li>
     <li><a>商城管理</a></li>
-    <li class="active">商品管理</li>
+    <li class="active">分类管理</li>
 </ol>
 
     
@@ -55,35 +55,25 @@
                     <form action="" id="tb_departments_SearchTableForm">
                         
 <div class="my-container">
-    <label class="myLabel-content">商品名称：</label>
+    <label class="myLabel-content">用户昵称：</label>
     <div class="myText-content">
-        <input type="text" name="a.name" class="form-control" placeholder="输入商品名称">
+        <input type="text" name="nick_name" class="form-control" placeholder="输入昵称">
     </div>
 </div>
 <div class="my-container">
-    <label class="myLabel-content">所属商品：</label>
+    <label class="myLabel-content">联系电话：</label>
     <div class="myText-content">
-        <select class="form-control" name="a.category_id">
-            <option value="">全部</option>
-            <?php if(is_array($cates) || $cates instanceof \think\Collection || $cates instanceof \think\Paginator): $i = 0; $__LIST__ = $cates;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?>
-            <option value="<?php echo $item['id']; ?>"><?php echo $item['name']; ?></option>
-            <?php endforeach; endif; else: echo "" ;endif; ?>
-        </select>
+        <input type="text" name="phone" class="form-control" placeholder="输入联系电话">
     </div>
 </div>
 <div class="my-container">
-    <label class="myLabel-content">所属品牌：</label>
+    <label class="myLabel-content">电子邮箱：</label>
     <div class="myText-content">
-        <select class="form-control" name="a.brand_id">
-            <option value="">全部</option>
-            <?php if(is_array($brand) || $brand instanceof \think\Collection || $brand instanceof \think\Paginator): $i = 0; $__LIST__ = $brand;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?>
-            <option value="<?php echo $item['id']; ?>"><?php echo $item['name']; ?></option>
-            <?php endforeach; endif; else: echo "" ;endif; ?>
-        </select>
+        <input type="text" name="email" class="form-control" placeholder="输入电子邮箱">
     </div>
 </div>
 <div class="my-container">
-    <label class="myLabel-content">添加时间：</label>
+    <label class="myLabel-content">创建时间：</label>
     <div class="myText-content">
         <input type="text" name="start" class="form-control datepicker" placeholder="输入开始时间">
     </div>
@@ -96,15 +86,13 @@
                             <button type="button" class="btn btn-primary table-btn-search" data-table="tb_departments">搜索</button>
                             <button type="button" class="btn btn-default table-btn-reset" data-table="tb_departments">重置</button>
                             
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#tb_departments_Modal">添加商品</button>
-
+                            
                         </div>
                     </form>
                 </div>
                 <div id="table-btn-moreaction-list" style="display: none;">
                     <span>您选中了 <span id="row-select-total"></span> 行 </span>
                     
-<button type="button" class="btn btn-danger table-more-action" data-callback="merchatWithdraw" data-table="tb_departments" data-status="-1">批量删除</button>
 
                 </div>
             </div>
@@ -118,28 +106,7 @@
         <div class="modal-content">
             <form class="form-horizontal" role="form"  action="<?php echo url('store'); ?>">
                 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="myModalLabel">添加商品</h4>
-</div>
-<div class="modal-body">
-    <?php echo token('token_product_actions','shal'); ?>
-    <input type="hidden" name="id" value="">
-    <?php echo formInput('商品名称:','name','','text'); ?>
-    <?php echo formSelect('所属分类:','category_id',$cates,'id','name'); ?>
-    <?php echo formSelect('所属品牌:','brand_id',$brand,'id','name'); ?>
-    <?php echo formInput('店内价格:','shop_price',0); ?>
-    <?php echo formInput('市场价格:','market_price',0); ?>
-    <?php echo formInput('商品排序:','sort',0,'number'); ?>
-    <?php echo formInput('商品库存:','stock',0,'number'); ?>
-    <?php echo formFile('商品图片','posters',1); ?>
-    <?php echo formEditor('商品详情','details'); ?>
-</div>
-<div class="modal-footer modal-my-bottom">
-    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-    <button type="button" class="btn btn-primary form-ajax-submit">保存</button>
-</div>
-
+                
                 <div class="modal-footer modal-my-bottom">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary form-ajax-submit">保存</button>
@@ -156,19 +123,13 @@
     var formModal = 'tb_departments_Modal';
     var fields = [
         {checkbox: true},
-        {field: 'name', title: '商品名称'},
-        {field: 'shop_price', title: '店内价格'},
-        {field: 'market_price', title: '市场价格'},
-        {field: 'stock', title: '商品库存'},
-        {field: 'cate_name', title: '所属分类'},
-        {field: 'brand_name', title: '所属品牌'},
-        {field: 'sort', title: '商品排序', sortable: true},
-        {field: 'sale_number', title: '商品销量', sortable: true},
-        {field: 'create_time', title: '添加时间', sortable: true},
-        {field: 'update_time', title: '更新时间', sortable: true},
-        {field: '', title: '操作',formatter:function (value,row,index) {
-                return generateTableAtions(row,'id');
-            }},
+        {field: 'email', title: '电子邮箱'},
+        {field: 'phone', title: '联系电话'},
+        {field: 'nick_name', title: '昵称'},
+        {field: 'real_name', title: '真实姓名'},
+        {field: 'region', title: '所在地区'},
+        {field: 'address', title: '详细地址'},
+        {field: 'create_time', title: '创建时间', sortable: true},
     ];
     var sortName = 'a.create_time';
     var sortOrder = 'desc';

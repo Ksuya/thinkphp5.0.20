@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:96:"E:\phpstudy2018\PHPTutorial\WWW\newtp\public/../application/manager\view\blog\article\index.html";i:1536296610;s:85:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-table.html";i:1536296598;s:86:"E:\phpstudy2018\PHPTutorial\WWW\newtp\application\common\view\public\admin-header.html";i:1536223691;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:95:"D:\phpStudy\PHPTutorial\WWW\payment\public/../application/manager\view\shop\category\index.html";i:1536327106;s:83:"D:\phpStudy\PHPTutorial\WWW\payment\application\common\view\public\admin-table.html";i:1536327106;s:84:"D:\phpStudy\PHPTutorial\WWW\payment\application\common\view\public\admin-header.html";i:1536327106;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,29 +43,44 @@
     
 <ol class="breadcrumb">
     <li><a>首页</a></li>
-    <li><a>文章管理</a></li>
-    <li class="active">文章管理</li>
+    <li><a>商城管理</a></li>
+    <li class="active">分类管理</li>
 </ol>
 
     
-<div class="row">
-    <div class="col-sm-2" style="overflow: auto">
-        <div id="tree"></div>
-    </div>
-    <div class="col-sm-10">
-
+    
 
             <div id="toolbar" class="btn-group">
                 <div id="table-btn-list">
                     <form action="" id="tb_departments_SearchTableForm">
                         
 <div class="my-container">
-    <label class="myLabel-content">文章标题：</label>
+    <label class="myLabel-content">分类名称：</label>
     <div class="myText-content">
-        <input type="text" name="a.title" class="form-control" >
+        <input type="text" name="a.name" class="form-control" placeholder="输入分类名称">
     </div>
 </div>
-<input type="hidden" name="a.category_id" id="categoryid">
+<div class="my-container">
+    <label class="myLabel-content">上级分类：</label>
+    <div class="myText-content">
+        <select class="form-control" name="a.parent_id">
+            <option value="">全部</option>
+            <?php if(is_array($cates) || $cates instanceof \think\Collection || $cates instanceof \think\Paginator): $i = 0; $__LIST__ = $cates;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?>
+            <option value="<?php echo $item['id']; ?>"><?php echo $item['name']; ?></option>
+            <?php endforeach; endif; else: echo "" ;endif; ?>
+        </select>
+    </div>
+</div>
+<div class="my-container">
+    <label class="myLabel-content">是否导航：</label>
+    <div class="myText-content">
+        <select class="form-control" name="a.is_menu">
+            <option value="">全部</option>
+            <option value="0">否</option>
+            <option value="1">是</option>
+        </select>
+    </div>
+</div>
 <div class="my-container">
     <label class="myLabel-content">添加时间：</label>
     <div class="myText-content">
@@ -80,7 +95,7 @@
                             <button type="button" class="btn btn-primary table-btn-search" data-table="tb_departments">搜索</button>
                             <button type="button" class="btn btn-default table-btn-reset" data-table="tb_departments">重置</button>
                             
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#tb_departments_Modal">添加文章</button>
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#tb_departments_Modal">添加分类</button>
 
                         </div>
                     </form>
@@ -96,9 +111,7 @@
             </div>
             <table id="tb_departments" class="table table-hover table-striped table-extra"></table>
     
-    </div>
-</div>
-
+    
 </div>
 <div class="modal fade right" id="tb_departments_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -108,18 +121,16 @@
                 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="myModalLabel">添加文章</h4>
+    <h4 class="modal-title" id="myModalLabel">添加分类</h4>
 </div>
 <div class="modal-body">
     <?php echo token('token_category_actions','shal'); ?>
     <input type="hidden" name="id" value="">
-    <?php echo formInput('文章标题:','title','','text'); ?>
-    <?php echo formSelect('所属分类:','category_id',$cates,'nodeId','text'); ?>
-    <?php echo formInput('排序:','sort',0,'number'); ?>
-    <?php echo formCheck('radio','推荐','is_recommend',[['id'=>0,'name'=>'否'],['id'=>1,'name'=>'是']],'id','name'); ?>
-    <?php echo formCheck('radio','置顶','is_top',[['id'=>0,'name'=>'否'],['id'=>1,'name'=>'是']],'id','name'); ?>
-    <?php echo formEditor('文章内容','content'); ?>
-
+    <?php echo formInput('分类名称:','name','','text'); ?>
+    <?php echo formSelect('上级分类:','parent_id',$cates,'id','name'); ?>
+    <?php echo formInput('分类排序:','sort',0,'number'); ?>
+    <?php echo formCheck('radio','导航显示','is_menu',[['id'=>0,'name'=>'否'],['id'=>1,'name'=>'是']],'id','name'); ?>
+    <?php echo formFile('分类图片','posters',1); ?>
 </div>
 
                 <div class="modal-footer modal-my-bottom">
@@ -138,10 +149,10 @@
     var formModal = 'tb_departments_Modal';
     var fields = [
         {checkbox: true},
-        {field: 'title', title: '标题'},
-        {field: 'cate_name', title: '分类名称'},
+        {field: 'name', title: '分类名称'},
+        {field: 'parent_name', title: '上级分类'},
         {
-            field: 'is_menu', title: '是否推荐', formatter: function (value) {
+            field: 'is_menu', title: '导航显示', formatter: function (value) {
                 if (value == 1) {
                     return '是';
                 } else {
@@ -149,16 +160,7 @@
                 }
             }
         },
-        {
-            field: 'is_menu', title: '是否置顶', formatter: function (value) {
-                if (value == 1) {
-                    return '是';
-                } else {
-                    return '否';
-                }
-            }
-        },
-        {field: 'sort', title: '文章排序', sortable: true},
+        {field: 'sort', title: '分类排序', sortable: true},
         {field: 'create_time', title: '添加时间', sortable: true},
         {
             field: '', title: '操作', formatter: function (value, row, index) {
@@ -168,26 +170,6 @@
     ];
     var sortName = 'a.create_time';
     var sortOrder = 'desc';
-    $(document).ready(function () {
-        var data = '<?php echo json_encode($tree,true);?>';
-        data = $.parseJSON(data);
-        $('#tree').treeview({
-            data: data,         // 数据源
-            showCheckbox: false,   //是否显示复选框
-            highlightSelected: true,    //是否高亮选中
-            //nodeIcon: 'glyphicon glyphicon-user',    //节点上的图标
-            //nodeIcon: 'glyphicon glyphicon-file',
-            emptyIcon: '',    //没有子节点的节点图标
-            multiSelect: false,    //多选
-            onNodeChecked: function (event,data) {
-                $("#categoryid").val(data.id);
-            },
-            onNodeSelected: function (event, data) {
-                $("#categoryid").val(data.Id);
-                $(".table-btn-search").click();
-            }
-        });
-    });
 </script>
 
 <script src="/static/system/table.js"></script>
